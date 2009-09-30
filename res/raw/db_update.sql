@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS blackList;
+DROP TABLE IF EXISTS feast;

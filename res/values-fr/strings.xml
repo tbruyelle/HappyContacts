@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="app_name">Happy Contacts</string>
+    <string name="no_contacts">Pas de contacts à afficher!</string>
+<string name="exit">Exit</string>
+<string name="call">Faire plaisir</string>
+<string name="later">Plus tard</string>
+<string name="never">Jamais</string>
+<string name="happyfeast">&quot;C'est la fête de %s !&quot;</string>
+
+<string name="whattodo">Voulez-vous contacter cette personne maintenant \?</string>
+<string name="blacklist_label">Cliquez sur un nom pour le supprimer.</string>
+<string name="pref_test_app">Test de l\'application</string>
+<string name="pref_test_app_summary">Afficher les contacts afin de tester l\'application</string>
+<string name="pref_templates_cat">Modèles</string>
+<string name="pref_template_sms">Modèle SMS</string><string name="pref_template_sms_summary">Contenu du SMS à envoyer</string>
+<string name="pref_template_email">Modèle Email</string><string name="pref_template_email_summary">Contenu de l\'email à envoyer</string>
+<string name="pref_blacklist">Liste noire</string>
+<string name="pref_blacklist_summary">Contacts à qui on ne souhaitera pas la fête !</string>
+<string name="pref_state">Etat</string>
+<string name="pref_state_on">L\'application est lancée</string>
+<string name="pref_state_off">L\'application n\'est pas lancée</string>
+<string name="pref_template_sms_dialog">Entrez le modèle de SMS</string>
+<string name="pref_template_email_dialog">Entrez le modèle d'email</string>
+<string name="toast_contact_blacklisted">Le contact est dans la liste noire !</string>
+<string name="toast_blacklisted">%s a été ajouté à la liste noire</string>
+<string name="toast_later">Cet évènement vous sera rappelé plus tard</string>
+<string name="enter_date">Saisir une journée</string>
+<string name="loading_data">Chargement des données...</string>
+<string name="updating_data">Mise à jour des données...</string>
+<string name="notif_new_event">C\'est la fête de %s !</string>
+</resources>
