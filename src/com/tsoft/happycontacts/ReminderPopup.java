@@ -3,6 +3,9 @@
  */
 package com.tsoft.happycontacts;
 
+import java.util.Iterator;
+import java.util.Map;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.NotificationManager;
@@ -18,6 +21,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.tsoft.happycontacts.dao.DbAdapter;
+import com.tsoft.happycontacts.model.ContactFeast;
 
 /**
  * @author tom
@@ -28,13 +32,17 @@ public class ReminderPopup
 {
   private String TAG = getClass().getSimpleName();
   private DbAdapter mDb;
+  private Context mContext;
+  private Iterator<Map.Entry<Long, String>> contacts;
+  private boolean keepNotif = false;
 
   /**
    * @param context
    */
-  public ReminderPopup(final Context context, final Long contactId, final String contactName)
+  public ReminderPopup(final Context context, final ContactFeast contactFeast)
   {
     super(context);
+    mContext = context;
     setContentView(R.layout.reminder);
 
     // Have the system blur any windows behind this one.
@@ -44,7 +52,39 @@ public class ReminderPopup
     mDb = new DbAdapter(context);
     mDb.open();
 
-    setTitle(context.getString(R.string.happyfeast, contactName));
+    /* boucle sur les contacts a qui il fait souhaiter la fete */
+    contacts = contactFeast.getContactList().entrySet().iterator();
+
+    nextOrExit();
+  }
+
+  /**
+   * 
+   */
+  private void nextOrExit()
+  {
+    Map.Entry<Long, String> contact = contacts.next();
+    if (contact == null)
+    {
+      // plus de contact a traiter on sort
+      exit();
+    }
+    setContentForContact(contact.getKey(), contact.getValue());
+
+    Button exitButton = (Button) findViewById(R.id.nottoday_button);
+    exitButton.setOnClickListener(new View.OnClickListener()
+    {
+      @Override
+      public void onClick(View v)
+      {
+        nextOrExit();
+      }
+    });
+  }
+
+  private void setContentForContact(final Long contactId, final String contactName)
+  {
+    setTitle(mContext.getString(R.string.happyfeast, contactName));
 
     Button callButton = (Button) findViewById(R.id.call_button);
     callButton.setOnClickListener(new View.OnClickListener()
@@ -56,8 +96,9 @@ public class ReminderPopup
         Uri displayContactUri = ContentUris
             .withAppendedId(People.CONTENT_URI, contactId.intValue());
         Intent intent = new Intent(Intent.ACTION_VIEW, displayContactUri);
-        context.startActivity(intent);
-        exit();
+        //FIXME mDb.updateContactFeast(feastId, year)
+        mContext.startActivity(intent);
+        nextOrExit();
       }
     });
 
@@ -67,9 +108,10 @@ public class ReminderPopup
       @Override
       public void onClick(View v)
       {
-        // TODO reminder!
-        Toast.makeText(context, R.string.toast_later, Toast.LENGTH_SHORT).show();
-        exit();
+        // on laisse la notification en place si clique sur later
+        Toast.makeText(mContext, R.string.toast_later, Toast.LENGTH_SHORT).show();
+        keepNotif = true;
+        nextOrExit();
       }
     });
 
@@ -84,18 +126,8 @@ public class ReminderPopup
         {
           Log.e(TAG, "Error insertBlackList " + res);
         }
-        Toast.makeText(context, context.getString(R.string.toast_blacklisted, contactName),
+        Toast.makeText(mContext, mContext.getString(R.string.toast_blacklisted, contactName),
             Toast.LENGTH_SHORT).show();
-        exit();
-      }
-    });
-
-    Button exitButton = (Button) findViewById(R.id.exit_button);
-    exitButton.setOnClickListener(new View.OnClickListener()
-    {
-      @Override
-      public void onClick(View v)
-      {
         exit();
       }
     });
@@ -103,7 +135,6 @@ public class ReminderPopup
 
   private void exit()
   {
-    // FIXME ne pas faire si boutton later
     NotificationManager nm = (NotificationManager) getContext().getSystemService(
         Activity.NOTIFICATION_SERVICE);
     nm.cancel(R.string.app_name);

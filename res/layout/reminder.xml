@@ -26,7 +26,7 @@
 		<Button android:text="@string/never" android:id="@+id/never_button"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:layout_weight="1" />
-		<Button android:text="@string/exit" android:id="@+id/exit_button"
+		<Button android:text="@string/nottoday" android:id="@+id/nottoday_button"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:layout_weight="1" />
 	</LinearLayout>

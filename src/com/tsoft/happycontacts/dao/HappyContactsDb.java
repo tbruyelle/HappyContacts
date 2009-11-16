@@ -10,7 +10,7 @@ package com.tsoft.happycontacts.dao;
 public final class HappyContactsDb
 {
   public static String DATABASE_NAME = "happy_contacts";
-  public static int DATABASE_VERSION = 6;
+  public static int DATABASE_VERSION = 11;
 
   public static final class Feast
   {

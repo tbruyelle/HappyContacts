@@ -4,6 +4,8 @@
     <string name="app_name">Happy Contacts</string>
     <string name="no_contacts">Pas de contacts à afficher!</string>
 <string name="exit">Exit</string>
+<string name="next">Suivant</string>
+<string name="nottoday">Une autre fois</string>
 <string name="call">Faire plaisir</string>
 <string name="later">Plus tard</string>
 <string name="never">Jamais</string>
@@ -30,4 +32,6 @@
 <string name="loading_data">Chargement des données...</string>
 <string name="updating_data">Mise à jour des données...</string>
 <string name="notif_new_event">C\'est la fête de %s !</string>
+<string name="notif_new_event_multi">C\'est la fête de plusieurs de vos contacts !</string>
+<string name="notif_one_or_more">Il y a quelque chose à fêter aujourd'hui !</string>
 </resources>

@@ -141,7 +141,7 @@ public class TestAppActivity
       public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
       {
         // TODO faire la bonne conversion
-        Cursor c = mDb.fetchNamesForDay("01/01");
+        Cursor c = mDb.fetchNamesForDay("01/01", "1999");
         do
         {
           String contactName = c.getString(c.getColumnIndexOrThrow(HappyContactsDb.Feast.NAME));

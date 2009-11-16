@@ -11,7 +11,6 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
-import android.os.SystemClock;
 
 /**
  * Met en place l'alarme toutes les 24h 
@@ -48,6 +47,12 @@ public class AlarmSetterService
     return (pendingIntent != null);
   }
 
+  /**
+   * Retrieve the PendingIntent that will start AlarmReceiver.
+   * @param context
+   * @param flag
+   * @return
+   */
   private static PendingIntent getPendingIntent(Context context, int flag)
   {
     return PendingIntent.getBroadcast(context, 0, new Intent(context, AlarmReceiver.class), flag);
