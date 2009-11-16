@@ -25,14 +25,12 @@ public class ServiceStarterReceiver
   {
     if (Log.DEBUG)
     {
-      Log.v("HappyContactsReceiver: start onReceive()");
+      Log.v("ServiceStarterReceiver: start onReceive()");
     }
-    //    intent.setClass(context, AlarmSetterService.class);
-    //    intent.putExtra("result", getResultCode());
-    AlarmSetterService.startAlarm(context);
+    AlarmController.startAlarm(context);
     if (Log.DEBUG)
     {
-      Log.v("HappyContactsReceiver: end onReceive()");
+      Log.v("ServiceStarterReceiver: end onReceive()");
     }
   }
 

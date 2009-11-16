@@ -31,4 +31,17 @@ public final class AndroidUtils
     // Convert the buffer into a string.
     return new String(buffer);
   }
+
+  public static String pad(int hour, int minute)
+  {
+    return new StringBuilder(pad(hour)).append(":").append(pad(minute)).toString();
+  }
+
+  public static String pad(int c)
+  {
+    if (c >= 10)
+      return String.valueOf(c);
+    else
+      return "0" + String.valueOf(c);
+  }
 }

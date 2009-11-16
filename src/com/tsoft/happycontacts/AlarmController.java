@@ -10,8 +10,15 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
+/**
+ * @author tom
+ *
+ */
 public class AlarmController
 {
+  /** default alarm to 9AM */
+  public static int DEFAULT_ALARM = 9;
+
   public static void startAlarm(Context context)
   {
     if (Log.DEBUG)

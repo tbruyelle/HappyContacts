@@ -11,8 +11,8 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
+import com.tsoft.happycontacts.Log;
 import com.tsoft.happycontacts.R;
 import com.tsoft.utils.AndroidUtils;
 
@@ -22,8 +22,6 @@ import com.tsoft.utils.AndroidUtils;
  */
 public class DbAdapter
 {
-  private static final String TAG = "DbAdapter";
-
   private DatabaseHelper mDbHelper;
 
   private SQLiteDatabase mDb;
@@ -46,7 +44,7 @@ public class DbAdapter
     {
       //      ProgressDialog progressDialog = ProgressDialog.show(mCtx, "", mCtx
       //          .getString(R.string.loading_data));
-      Log.i(TAG, "Creating database start...");
+      Log.v("Creating database start...");
       try
       {
         // get file content
@@ -56,17 +54,17 @@ public class DbAdapter
         {
           db.execSQL(sqlStatements);
         }
-        Log.i(TAG, "Creating database done.");
+        Log.v("Creating database done.");
       }
       catch (IOException e)
       {
         // Should never happen!
-        Log.e(TAG, "Error reading sql file " + e.getMessage(), e);
+        Log.e("Error reading sql file " + e.getMessage(), e);
         throw new RuntimeException(e);
       }
       catch (SQLException e)
       {
-        Log.e(TAG, "Error executing sql code " + e.getMessage(), e);
+        Log.e("Error executing sql code " + e.getMessage(), e);
         throw new RuntimeException(e);
       }
       finally
@@ -80,7 +78,7 @@ public class DbAdapter
     {
       //      ProgressDialog progressDialog = ProgressDialog.show(mCtx, "", mCtx
       //          .getString(R.string.updating_data));
-      Log.i(TAG, "Upgrading database from version " + oldVersion + " to " + newVersion
+      Log.v("Upgrading database from version " + oldVersion + " to " + newVersion
           + ", which will destroy all old data");
       try
       {
@@ -92,17 +90,17 @@ public class DbAdapter
           db.execSQL(sqlStatements);
 
         }
-        Log.i(TAG, "Updating database done.");
+        Log.v("Updating database done.");
       }
       catch (IOException e)
       {
         // Should never happen!
-        Log.e(TAG, "Error reading sql file " + e.getMessage());
+        Log.e("Error reading sql file " + e.getMessage());
         throw new RuntimeException(e);
       }
       catch (SQLException e)
       {
-        Log.e(TAG, "Error executing sql code " + e.getMessage());
+        Log.e("Error executing sql code " + e.getMessage());
         throw new RuntimeException(e);
       }
       finally

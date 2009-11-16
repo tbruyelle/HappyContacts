@@ -17,7 +17,7 @@ import android.os.IBinder;
  * Vérifie déjà si aujourd'hui un des contacts match
  * 
  * @author tom
- * 
+ * @deprecated
  */
 public class AlarmSetterService
     extends Service

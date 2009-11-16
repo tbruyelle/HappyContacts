@@ -6,7 +6,6 @@ package com.tsoft.happycontacts;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -46,7 +45,16 @@ public class DayMatcher
     SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy");
     String year = yearFormat.format(date);
     Cursor c = mDb.fetchNamesForDay(day, year);
-    List<String> names = new ArrayList<String>();
+    if (c.getCount() == 0)
+    {
+      if (Log.DEBUG)
+      {
+        Log.v("DayMatcher: today " + day + " no feast found");
+      }
+      return contactFeastToday;
+    }
+
+    ArrayList<String> names = new ArrayList<String>();
     do
     {
       String name = c.getString(c.getColumnIndexOrThrow(HappyContactsDb.Feast.NAME));
