@@ -7,8 +7,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.tsoft.happycontacts.model.ContactFeast;
-
 /**
  * Lance la recherche dans les contacts par rapport a la date du jour
  * @author tom
@@ -29,22 +27,15 @@ public class AlarmReceiver
     }
 
     /*
-     * Look for names matching today date
+     * direct call a service to minimize time
      */
-    ContactFeast contactFeastToday = DayMatcher.testDayMatch(context);
+    Intent startDayMatcher = new Intent(context, DayMatcherService.class);
+    context.startService(startDayMatcher);
 
-    if (!contactFeastToday.getContactList().isEmpty())
-    {
-      /* lancer les notify event */
-      Notifier.notifyEvent(context);
-    }
-    else
-    {
-      if (Log.DEBUG)
-      {
-        Log.v("AlarmReceiver: no feast contact today");
-      }
-    }
+    /*
+     * schedule next alarm
+     */
+    AlarmController.startAlarm(context);
 
     if (Log.DEBUG)
     {

@@ -138,10 +138,13 @@ public class DbAdapter
   {
     Cursor mCursor =
 
-    mDb.query(HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID,
-        HappyContactsDb.Feast.NAME, HappyContactsDb.Feast.LAST_WISH_YEAR },
-        HappyContactsDb.Feast.DAY + "='" + day + "' and " + HappyContactsDb.Feast.LAST_WISH_YEAR
-            + " != '" + year + "'", null, null, null, null, null);
+      mDb.query(HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID,
+          HappyContactsDb.Feast.NAME, HappyContactsDb.Feast.LAST_WISH_YEAR },
+          HappyContactsDb.Feast.DAY + "='" + day + "'", null, null, null, null, null);
+//    mDb.query(HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID,
+//        HappyContactsDb.Feast.NAME, HappyContactsDb.Feast.LAST_WISH_YEAR },
+//        HappyContactsDb.Feast.DAY + "='" + day + "' and " + HappyContactsDb.Feast.LAST_WISH_YEAR
+//            + " != '" + year + "'", null, null, null, null, null);
     if (mCursor != null)
     {
       mCursor.moveToFirst();

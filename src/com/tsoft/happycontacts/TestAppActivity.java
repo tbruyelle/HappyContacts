@@ -1,37 +1,41 @@
 package com.tsoft.happycontacts;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Map;
 
 import android.app.DatePickerDialog;
 import android.app.ListActivity;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.provider.Contacts.People;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.DatePicker;
-import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import com.tsoft.happycontacts.dao.DbAdapter;
 import com.tsoft.happycontacts.dao.HappyContactsDb;
+import com.tsoft.happycontacts.model.ContactFeast;
 
+/**
+ * @author tom
+ *
+ */
 public class TestAppActivity
     extends ListActivity
 {
   private static final int DAY_MENU_ID = Menu.FIRST;
-
-  private String[] projection = new String[] { People._ID, People.NAME, People.DISPLAY_NAME };
+  private static final int TEST_MENU_ID = Menu.FIRST + 1;
 
   private DbAdapter mDb;
 
+  private SimpleCursorAdapter simpleCursorAdapter;
+
   private Cursor c;
+
+  private String day;
 
   private final Calendar calendar = Calendar.getInstance();
 
@@ -39,80 +43,117 @@ public class TestAppActivity
   @Override
   public void onCreate(Bundle savedInstanceState)
   {
+    if (Log.DEBUG)
+    {
+      Log.v("TestAppActivity: start onCreate");
+    }
     super.onCreate(savedInstanceState);
     setContentView(R.layout.testapp);
-    mDb = new DbAdapter(this);
+    if (Log.DEBUG)
+    {
+      Log.v("TestAppActivity: end onCreate");
+    }
+  }
+
+  @Override
+  protected void onStart()
+  {
+    super.onStart();
+    if (Log.DEBUG)
+    {
+      Log.v("TestAppActivity: start onStart");
+    }
+    if (mDb == null)
+    {
+      mDb = new DbAdapter(this);
+    }
     mDb.open();
     fillList();
+    if (Log.DEBUG)
+    {
+      Log.v("TestAppActivity: end onStart");
+    }
+  }
+
+  @Override
+  protected void onStop()
+  {
+    if (Log.DEBUG)
+    {
+      Log.v("TestAppActivity: start onStop");
+    }
+    super.onStop();
+    if (c != null)
+    {
+      c.close();
+    }
+    if (mDb != null)
+    {
+      mDb.close();
+    }
+    if (Log.DEBUG)
+    {
+      Log.v("TestAppActivity: end onStop");
+    }
+  }
+
+  @Override
+  protected void onRestart()
+  {
+    super.onRestart();
+    if (Log.DEBUG)
+    {
+      Log.v("TestAppActivity: start onRestart");
+    }
+  }
+
+  @Override
+  protected void onResume()
+  {
+    super.onResume();
+    if (Log.DEBUG)
+    {
+      Log.v("TestAppActivity: start onResume");
+    }
   }
 
   private void fillList()
   {
-    c = managedQuery(People.CONTENT_URI, projection, null, null, People.NAME + " ASC");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
+    Date date = new Date();
+    day = dateFormat.format(date);
+    setTitle(getApplicationContext().getString(R.string.test_app_title, day));
+    c = mDb.fetchNamesForDay(day, "0000");
+
     startManagingCursor(c);
-    String[] from = new String[] { People.NAME };
+    String[] from = new String[] { HappyContactsDb.Feast.NAME };
     int[] to = new int[] { android.R.id.text1 };
-    SimpleCursorAdapter simpleCursorAdapter = new SimpleCursorAdapter(this,
-        android.R.layout.simple_list_item_2, c, from, to);
+    simpleCursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, c,
+        from, to);
     setListAdapter(simpleCursorAdapter);
   }
 
-  @Override
-  protected void onListItemClick(ListView l, View v, int position, long id)
-  {
-    super.onListItemClick(l, v, position, id);
-    Long contactId = c.getLong(c.getColumnIndexOrThrow(People._ID));
-    if (mDb.isBlackListed(contactId))
-    {
-      Toast.makeText(this, R.string.toast_contact_blacklisted, Toast.LENGTH_SHORT).show();
-      return;
-    }
-    String contactName = c.getString(c.getColumnIndexOrThrow(People.NAME));
-    notifyEvent(contactId, contactName);
-    // new ReminderDialog(this, contactId, contactName).show();
-  }
-
-  /**
-   * @param contactId
-   * @param contactName
-   */
-  private void notifyEvent(Long contactId, String contactName)
-  {
-    NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-    Intent intent = new Intent(this, ReminderPopupActivity.class);
-    intent.putExtra(People.NAME, contactName);
-    intent.putExtra(People._ID, contactId);
-    PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent,
-        Intent.FLAG_ACTIVITY_NEW_TASK);
-
-    // The ticker text, this uses a formatted string so our message could be
-    // localized
-    String tickerText = getString(R.string.notif_new_event, contactName);
-
-    // construct the Notification object.
-    Notification notif = new Notification(R.drawable.smile, tickerText, System.currentTimeMillis());
-
-    // Set the info for the views that show in the notification panel.
-    notif.setLatestEventInfo(this, getText(R.string.app_name), tickerText, contentIntent);
-
-    // after a 100ms delay, vibrate for 250ms, pause for 100 ms and
-    // then vibrate for 500ms.
-    // notif.vibrate = new long[] { 100, 250, 100, 500};
-
-    // Note that we use R.layout.incoming_message_panel as the ID for
-    // the notification. It could be any integer you want, but we use
-    // the convention of using a resource id for a string related to
-    // the notification. It will always be a unique number within your
-    // application.
-    nm.notify(R.string.app_name, notif);
-  }
+  //  @Override
+  //  protected void onListItemClick(ListView l, View v, int position, long id)
+  //  {
+  //    super.onListItemClick(l, v, position, id);
+  //    Long contactId = c.getLong(c.getColumnIndexOrThrow(People._ID));
+  //    if (mDb.isBlackListed(contactId))
+  //    {
+  //      Toast.makeText(this, R.string.toast_contact_blacklisted, Toast.LENGTH_SHORT).show();
+  //      return;
+  //    }
+  //    String contactName = c.getString(c.getColumnIndexOrThrow(People.NAME));
+  //    notifyEvent(contactId, contactName);
+  //    // new ReminderDialog(this, contactId, contactName).show();
+  //  }
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu)
   {
     super.onCreateOptionsMenu(menu);
     menu.add(0, DAY_MENU_ID, 0, R.string.enter_date);
+    menu.add(0, TEST_MENU_ID, 0, R.string.check_contacts);
     return true;
   }
 
@@ -124,6 +165,38 @@ public class TestAppActivity
     case DAY_MENU_ID:
       displayDateForm();
       return true;
+    case TEST_MENU_ID:
+      /*
+       * Look for names matching today date
+       */
+      ContactFeast contactFeastToday = DayMatcherService.testDayMatch(getApplicationContext(), day,
+          "1999");
+
+      if (!contactFeastToday.getContactList().isEmpty())
+      {
+        /* lancer les notify event */
+        Notifier.notifyEvent(getApplicationContext());
+        StringBuilder sb = new StringBuilder();
+        if (contactFeastToday.getContactList().size() > 1)
+        {
+          sb.append(this.getString(R.string.toast_contact_list));
+        }
+        else
+        {
+          sb.append(this.getString(R.string.toast_contact_one));
+        }
+        for (Map.Entry<Long, String> mapEntry : contactFeastToday.getContactList().entrySet())
+        {
+          sb.append(mapEntry.getValue());
+          sb.append("\n");
+        }
+        Toast.makeText(this, sb.toString(), Toast.LENGTH_LONG).show();
+      }
+      else
+      {
+        Toast.makeText(this, R.string.toast_no_contact, Toast.LENGTH_SHORT).show();
+      }
+      return true;
     }
 
     return super.onMenuItemSelected(featureId, item);
@@ -134,20 +207,23 @@ public class TestAppActivity
    */
   private void displayDateForm()
   {
-
     new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener()
     {
       @Override
       public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
       {
-        // TODO faire la bonne conversion
-        Cursor c = mDb.fetchNamesForDay("01/01", "1999");
-        do
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, monthOfYear, dayOfMonth);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
+        day = dateFormat.format(cal.getTime());
+        if (c != null)
         {
-          String contactName = c.getString(c.getColumnIndexOrThrow(HappyContactsDb.Feast.NAME));
-          Toast.makeText(TestAppActivity.this, contactName, Toast.LENGTH_SHORT).show();
+          c.close();
         }
-        while (c.moveToNext());
+        c = mDb.fetchNamesForDay(day, "1999");
+        simpleCursorAdapter.changeCursor(c);
+
+        setTitle(getApplicationContext().getString(R.string.test_app_title, day));
       }
     }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar
         .get(Calendar.DAY_OF_MONTH)).show();

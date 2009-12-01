@@ -34,6 +34,20 @@ public class BlackListActivity
     fillList();
   }
 
+  @Override
+  protected void onStop()
+  {
+    super.onStop();
+    if (c != null)
+    {
+      c.close();
+    }
+    if (mDb != null)
+    {
+      mDb.close();
+    }
+  }
+
   private void fillList()
   {
     c = mDb.fetchAllBlackList();
