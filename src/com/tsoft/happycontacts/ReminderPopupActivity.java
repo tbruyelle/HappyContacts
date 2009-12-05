@@ -3,6 +3,7 @@
  */
 package com.tsoft.happycontacts;
 
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -19,17 +20,18 @@ import android.widget.Toast;
 
 import com.tsoft.happycontacts.dao.DbAdapter;
 import com.tsoft.happycontacts.model.ContactFeast;
+import com.tsoft.happycontacts.model.ContactFeasts;
 
 /**
  * @author tom
- * 
+ * FIXME this activity musn't appear in recent task display
  */
 public class ReminderPopupActivity
     extends Activity
 {
   private DbAdapter mDb;
 
-  private Iterator<Map.Entry<Long, String>> contacts;
+  private Iterator<Map.Entry<Long, ContactFeast>> contacts;
 
   private boolean keepNotif = false;
 
@@ -51,9 +53,9 @@ public class ReminderPopupActivity
     mDb.open();
 
     /* boucle sur les contacts a qui il fait souhaiter la fete */
-    ContactFeast contactFeast = DayMatcherService.testDayMatch(this);
+    ContactFeasts contactFeasts = DayMatcherService.testDayMatch(this);
     /* boucle sur les contacts a qui il fait souhaiter la fete */
-    contacts = contactFeast.getContactList().entrySet().iterator();
+    contacts = contactFeasts.getContactList().entrySet().iterator();
 
     nextOrExit();
     if (Log.DEBUG)
@@ -81,7 +83,7 @@ public class ReminderPopupActivity
     {
       Log.v("ReminderPopupActivity: next");
     }
-    Map.Entry<Long, String> contact = contacts.next();
+    Map.Entry<Long, ContactFeast> contact = contacts.next();
     if (contact == null)
     {
       // plus de contact a traiter on sort
@@ -101,9 +103,9 @@ public class ReminderPopupActivity
     });
   }
 
-  private void setContentForContact(final Long contactId, final String contactName)
+  private void setContentForContact(final Long contactId, final ContactFeast contactFeast)
   {
-    setTitle(getString(R.string.happyfeast, contactName));
+    setTitle(getString(R.string.happyfeast, contactFeast.getContactName()));
 
     Button callButton = (Button) findViewById(R.id.call_button);
     callButton.setOnClickListener(new View.OnClickListener()
@@ -115,9 +117,9 @@ public class ReminderPopupActivity
         Uri displayContactUri = ContentUris
             .withAppendedId(People.CONTENT_URI, contactId.intValue());
         Intent intent = new Intent(Intent.ACTION_VIEW, displayContactUri);
-        //FIXME mDb.updateContactFeast(feastId, year)
-        startActivity(intent);
-        nextOrExit();
+        String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+        mDb.updateContactFeast(contactId.longValue(), contactFeast.getContactName(), year);
+        startActivityForResult(intent, 0);
       }
     });
 
@@ -128,7 +130,7 @@ public class ReminderPopupActivity
       public void onClick(View v)
       {
         // on laisse la notification en place si clique sur later
-        Toast.makeText(ReminderPopupActivity.this, R.string.toast_later, Toast.LENGTH_SHORT).show();
+        Toast.makeText(ReminderPopupActivity.this, R.string.toast_later, Toast.LENGTH_LONG).show();
         keepNotif = true;
         nextOrExit();
       }
@@ -140,16 +142,29 @@ public class ReminderPopupActivity
       @Override
       public void onClick(View v)
       {
-        long res = mDb.insertBlackList(contactId.longValue(), contactName);
+        long res = mDb.updateContactFeast(contactId.longValue(), contactFeast.getContactName(),
+            null);
         if (res < 1)
         {
           Log.e("Error insertBlackList " + res);
         }
         Toast.makeText(ReminderPopupActivity.this,
-            getString(R.string.toast_blacklisted, contactName), Toast.LENGTH_SHORT).show();
+            getString(R.string.toast_blacklisted, contactFeast.getContactName()),
+            Toast.LENGTH_SHORT).show();
         nextOrExit();
       }
     });
+  }
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data)
+  {
+    if (Log.DEBUG)
+    {
+      Log.v("ReminderPopupActivity: onActivityResult start");
+    }
+    super.onActivityResult(requestCode, resultCode, data);
+    nextOrExit();
   }
 
   private void exit()
@@ -158,6 +173,7 @@ public class ReminderPopupActivity
     {
       Log.v("ReminderPopupActivity: start exit");
     }
+    Toast.makeText(ReminderPopupActivity.this, R.string.toast_finish, Toast.LENGTH_LONG).show();
     if (!keepNotif)
     {
       NotificationManager nm = (NotificationManager) getSystemService(Activity.NOTIFICATION_SERVICE);
@@ -168,10 +184,6 @@ public class ReminderPopupActivity
       mDb.close();
     }
     finish();
-    if (Log.DEBUG)
-    {
-      Log.v("ReminderPopupActivity: end exit");
-    }
   }
 
   @Override
@@ -180,7 +192,7 @@ public class ReminderPopupActivity
     super.onStop();
     if (Log.DEBUG)
     {
-      Log.v("ReminderPopup: start onStop");
+      Log.v("ReminderPopupActivity: start onStop");
     }
     if (mDb != null)
     {
@@ -188,7 +200,7 @@ public class ReminderPopupActivity
     }
     if (Log.DEBUG)
     {
-      Log.v("ReminderPopup: end onStop");
+      Log.v("ReminderPopupActivity: end onStop");
     }
   }
 }

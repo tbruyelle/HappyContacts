@@ -51,8 +51,12 @@ public class BlackListActivity
   private void fillList()
   {
     c = mDb.fetchAllBlackList();
-    String[] from = new String[] { HappyContactsDb.BlackList.CONTACT_NAME };
-    int[] to = new int[] { android.R.id.text1 };
+    String[] from = new String[] { HappyContactsDb.BlackList.CONTACT_NAME,
+        HappyContactsDb.BlackList.LAST_WISH_YEAR };
+    //    int[] to = new int[] { R.id.contact_name, R.id.last_wish_year };
+    //    SimpleCursorAdapter simpleCursorAdapter = new SimpleCursorAdapter(this,
+    //        R.layout.blacklist_element, c, from, to);
+    int[] to = new int[] { android.R.id.text1, android.R.id.text2 };
     SimpleCursorAdapter simpleCursorAdapter = new SimpleCursorAdapter(this,
         android.R.layout.simple_list_item_2, c, from, to);
     setListAdapter(simpleCursorAdapter);

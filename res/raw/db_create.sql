@@ -1,13 +1,13 @@
 create table blackList(
   _id integer primary key autoincrement,
   contactId integer not null,
-  contactName text not null);
+  contactName text not null,
+  lastWishYear char(4) null);
 
 create table feast (
   _id integer primary key autoincrement,
   day char(5) not null,
-  name varchar(64) not null,
-  lastWishYear char(4) null);
+  name varchar(64) not null);
 
 create index idx_feast_day on feast (day);
 create index idx_feast_name on feast (name);

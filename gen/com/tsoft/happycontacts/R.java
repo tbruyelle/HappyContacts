@@ -18,18 +18,21 @@ public final class R {
         public static final int smile=0x7f020001;
     }
     public static final class id {
-        public static final int call_button=0x7f070003;
-        public static final int image=0x7f070001;
-        public static final int later_button=0x7f070004;
-        public static final int layout_root=0x7f070000;
-        public static final int never_button=0x7f070005;
-        public static final int nottoday_button=0x7f070006;
-        public static final int text=0x7f070002;
+        public static final int call_button=0x7f070005;
+        public static final int contact_name=0x7f070000;
+        public static final int image=0x7f070003;
+        public static final int last_wish_year=0x7f070001;
+        public static final int later_button=0x7f070006;
+        public static final int layout_root=0x7f070002;
+        public static final int never_button=0x7f070007;
+        public static final int nottoday_button=0x7f070008;
+        public static final int text=0x7f070004;
     }
     public static final class layout {
         public static final int blacklist=0x7f030000;
-        public static final int reminder=0x7f030001;
-        public static final int testapp=0x7f030002;
+        public static final int blacklist_element=0x7f030001;
+        public static final int reminder=0x7f030002;
+        public static final int testapp=0x7f030003;
     }
     public static final class raw {
         public static final int db_create=0x7f040000;
@@ -39,19 +42,20 @@ public final class R {
         public static final int app_name=0x7f060001;
         public static final int blacklist_label=0x7f06000c;
         public static final int call=0x7f060007;
-        public static final int check_contacts=0x7f060023;
-        public static final int enter_date=0x7f060022;
+        public static final int check_contacts=0x7f060024;
+        public static final int enter_date=0x7f060023;
         public static final int exit=0x7f060004;
         public static final int happyfeast=0x7f06000a;
         public static final int hello=0x7f060002;
+        public static final int last_wish_year=0x7f06002a;
         public static final int later=0x7f060008;
-        public static final int loading_data=0x7f060024;
+        public static final int loading_data=0x7f060025;
         public static final int never=0x7f060009;
         public static final int next=0x7f060005;
         public static final int no_contacts=0x7f060003;
-        public static final int notif_new_event=0x7f060026;
-        public static final int notif_new_event_multi=0x7f060027;
-        public static final int notif_one_or_more=0x7f060028;
+        public static final int notif_new_event=0x7f060027;
+        public static final int notif_new_event_multi=0x7f060028;
+        public static final int notif_one_or_more=0x7f060029;
         public static final int nottoday=0x7f060006;
         public static final int pref_blacklist=0x7f060015;
         public static final int pref_blacklist_summary=0x7f060016;
@@ -72,9 +76,10 @@ public final class R {
         public static final int toast_contact_blacklisted=0x7f06001c;
         public static final int toast_contact_list=0x7f060021;
         public static final int toast_contact_one=0x7f060020;
+        public static final int toast_finish=0x7f060022;
         public static final int toast_later=0x7f06001e;
         public static final int toast_no_contact=0x7f06001f;
-        public static final int updating_data=0x7f060025;
+        public static final int updating_data=0x7f060026;
         public static final int version=0x7f060000;
         public static final int whattodo=0x7f06000b;
     }

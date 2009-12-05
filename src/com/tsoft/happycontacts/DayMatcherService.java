@@ -4,8 +4,9 @@
 package com.tsoft.happycontacts;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.app.Service;
 import android.content.Context;
@@ -17,6 +18,7 @@ import android.provider.Contacts.People;
 import com.tsoft.happycontacts.dao.DbAdapter;
 import com.tsoft.happycontacts.dao.HappyContactsDb;
 import com.tsoft.happycontacts.model.ContactFeast;
+import com.tsoft.happycontacts.model.ContactFeasts;
 
 /**
  * @author tom
@@ -36,7 +38,7 @@ public class DayMatcherService
     /*
      * Look for names matching today date
      */
-    ContactFeast contactFeastToday = DayMatcherService.testDayMatch(getApplicationContext());
+    ContactFeasts contactFeastToday = DayMatcherService.testDayMatch(getApplicationContext());
 
     if (!contactFeastToday.getContactList().isEmpty())
     {
@@ -56,7 +58,7 @@ public class DayMatcherService
    * @param context
    * @return
    */
-  public static ContactFeast testDayMatch(Context context)
+  public static ContactFeasts testDayMatch(Context context)
   {
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
     Date date = new Date();
@@ -73,7 +75,7 @@ public class DayMatcherService
    * @param year
    * @return
    */
-  public static ContactFeast testDayMatch(Context context, String day, String year)
+  public static ContactFeasts testDayMatch(Context context, String day, String year)
   {
     String[] projection = new String[] { People._ID, People.NAME, People.DISPLAY_NAME };
     if (Log.DEBUG)
@@ -90,7 +92,7 @@ public class DayMatcherService
     /*
      * Look for names matching today date
      */
-    ContactFeast contactFeastToday = new ContactFeast();
+    ContactFeasts contactFeastToday = new ContactFeasts(day);
 
     Cursor c = mDb.fetchNamesForDay(day, year);
     if (c.getCount() == 0)
@@ -107,19 +109,21 @@ public class DayMatcherService
       Log.v("DayMatcher: found " + c.getCount() + " feast(s) for today");
     }
 
-    ArrayList<String> names = new ArrayList<String>();
+    Map<String, ContactFeast> names = new HashMap<String, ContactFeast>();
     do
     {
       String name = c.getString(c.getColumnIndexOrThrow(HappyContactsDb.Feast.NAME));
-      names.add(name.toUpperCase());
+      Long feastId = c.getLong(c.getColumnIndexOrThrow(HappyContactsDb.Feast.ID));
+      ContactFeast contactFeast = new ContactFeast(name, feastId, null);
+      names.put(name.toUpperCase(), contactFeast);
+      if (Log.DEBUG)
+      {
+        Log.v("DayMatcher: day " + day + " feast : " + contactFeast.getContactName());
+      }
     }
     while (c.moveToNext());
     c.close();
 
-    if (Log.DEBUG)
-    {
-      Log.v("DayMatcher: day " + day + " feast : " + names.toString());
-    }
     /*
      * now we have to scan contacts
      */
@@ -129,18 +133,32 @@ public class DayMatcherService
     {
       while (c.moveToNext())
       {
+        Long contactId = c.getLong(c.getColumnIndexOrThrow(People._ID));
         String contactName = c.getString(c.getColumnIndexOrThrow(People.NAME));
+
+        if (mDb.isBlackListed(contactId, year))
+        {
+          if (Log.DEBUG)
+          {
+            Log.v("DayMatcher: already wished this year " + contactName + " is ignored");
+          }
+          continue;
+        }
+
         for (String subName : contactName.split(" "))
         {
-          if (names.contains(subName.toUpperCase()))
+          String subNameUpper = subName.toUpperCase();
+          if (names.containsKey(subNameUpper))
           {
             /* find one !! */
-            Long contactId = c.getLong(c.getColumnIndexOrThrow(People._ID));
-            contactFeastToday.addContact(contactId, contactName);
             if (Log.DEBUG)
             {
               Log.v("DayMatcher: day contact feast found for " + contactName);
             }
+            ContactFeast contactFeast = names.get(subNameUpper);
+            // set the real contact name
+            contactFeast.setContactName(contactName);
+            contactFeastToday.addContact(contactId, contactFeast);
           }
         }
         c.close();

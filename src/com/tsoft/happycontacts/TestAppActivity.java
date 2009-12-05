@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.tsoft.happycontacts.dao.DbAdapter;
 import com.tsoft.happycontacts.dao.HappyContactsDb;
 import com.tsoft.happycontacts.model.ContactFeast;
+import com.tsoft.happycontacts.model.ContactFeasts;
 
 /**
  * @author tom
@@ -36,6 +37,10 @@ public class TestAppActivity
   private Cursor c;
 
   private String day;
+  private String currentYear = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+  private int mYear;
+  private int mMonthOfYear;
+  private int mDayOfMonth;
 
   private final Calendar calendar = Calendar.getInstance();
 
@@ -63,6 +68,9 @@ public class TestAppActivity
     {
       Log.v("TestAppActivity: start onStart");
     }
+    mYear = calendar.get(Calendar.YEAR);
+    mMonthOfYear = calendar.get(Calendar.MONTH);
+    mDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
     if (mDb == null)
     {
       mDb = new DbAdapter(this);
@@ -128,7 +136,7 @@ public class TestAppActivity
     startManagingCursor(c);
     String[] from = new String[] { HappyContactsDb.Feast.NAME };
     int[] to = new int[] { android.R.id.text1 };
-    simpleCursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, c,
+    simpleCursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, c,
         from, to);
     setListAdapter(simpleCursorAdapter);
   }
@@ -169,8 +177,8 @@ public class TestAppActivity
       /*
        * Look for names matching today date
        */
-      ContactFeast contactFeastToday = DayMatcherService.testDayMatch(getApplicationContext(), day,
-          "1999");
+      ContactFeasts contactFeastToday = DayMatcherService.testDayMatch(getApplicationContext(),
+          day, currentYear);
 
       if (!contactFeastToday.getContactList().isEmpty())
       {
@@ -185,9 +193,9 @@ public class TestAppActivity
         {
           sb.append(this.getString(R.string.toast_contact_one));
         }
-        for (Map.Entry<Long, String> mapEntry : contactFeastToday.getContactList().entrySet())
+        for (Map.Entry<Long, ContactFeast> mapEntry : contactFeastToday.getContactList().entrySet())
         {
-          sb.append(mapEntry.getValue());
+          sb.append(mapEntry.getValue().getContactName());
           sb.append("\n");
         }
         Toast.makeText(this, sb.toString(), Toast.LENGTH_LONG).show();
@@ -207,26 +215,29 @@ public class TestAppActivity
    */
   private void displayDateForm()
   {
-    new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener()
-    {
-      @Override
-      public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
-      {
-        Calendar cal = Calendar.getInstance();
-        cal.set(year, monthOfYear, dayOfMonth);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
-        day = dateFormat.format(cal.getTime());
-        if (c != null)
+    DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+        new DatePickerDialog.OnDateSetListener()
         {
-          c.close();
-        }
-        c = mDb.fetchNamesForDay(day, "1999");
-        simpleCursorAdapter.changeCursor(c);
+          @Override
+          public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
+          {
+            mYear = year;
+            mMonthOfYear = monthOfYear;
+            mDayOfMonth = dayOfMonth;
+            Calendar cal = Calendar.getInstance();
+            cal.set(year, monthOfYear, dayOfMonth);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
+            day = dateFormat.format(cal.getTime());
+            if (c != null)
+            {
+              c.close();
+            }
+            c = mDb.fetchNamesForDay(day, "1999");
+            simpleCursorAdapter.changeCursor(c);
 
-        setTitle(getApplicationContext().getString(R.string.test_app_title, day));
-      }
-    }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar
-        .get(Calendar.DAY_OF_MONTH)).show();
-
+            setTitle(getApplicationContext().getString(R.string.test_app_title, day));
+          }
+        }, mYear, mMonthOfYear, mDayOfMonth);
+    datePickerDialog.show();
   }
 }

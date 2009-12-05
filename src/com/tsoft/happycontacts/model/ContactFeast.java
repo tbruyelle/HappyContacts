@@ -4,9 +4,6 @@
 package com.tsoft.happycontacts.model;
 
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author tom
@@ -18,47 +15,55 @@ public class ContactFeast
   /**
    * 
    */
-  private static final long serialVersionUID = -6905950633473003602L;
+  private static final long serialVersionUID = 5984664253829892060L;
+
+  private String contactName;
+
+  private Long feastId;
+
+  private String lastWishYear;
+
+  public ContactFeast(String contactName, Long feastId, String lastWishYear)
+  {
+    this.contactName = contactName;
+    this.feastId = feastId;
+    this.setLastWishYear(lastWishYear);
+  }
+
+  public String getContactName()
+  {
+    return contactName;
+  }
+
+  public void setContactName(String contactName)
+  {
+    this.contactName = contactName;
+  }
+
+  public Long getFeastId()
+  {
+    return feastId;
+  }
+
+  public void setFeastId(Long feastId)
+  {
+    this.feastId = feastId;
+  }
 
   /**
-   * key=contactId
-   * value=contact name
+   * @param lastWishYear the lastWishYear to set
    */
-  private Map<Long, String> contactList;
-
-  public ContactFeast()
+  public void setLastWishYear(String lastWishYear)
   {
+    this.lastWishYear = lastWishYear;
   }
 
-  public void addContact(Long id, String name)
+  /**
+   * @return the lastWishYear
+   */
+  public String getLastWishYear()
   {
-    if (contactList == null)
-    {
-      contactList = new HashMap<Long, String>();
-    }
-    contactList.put(id, name);
+    return lastWishYear;
   }
 
-  public String getContact(Long id)
-  {
-    if (contactList == null)
-    {
-      return null;
-    }
-    return contactList.get(id);
-  }
-
-  public Map<Long, String> getContactList()
-  {
-    if (contactList == null)
-    {
-      return Collections.<Long, String> emptyMap();
-    }
-    return contactList;
-  }
-
-  public void setContactList(Map<Long, String> contactList)
-  {
-    this.contactList = contactList;
-  }
 }

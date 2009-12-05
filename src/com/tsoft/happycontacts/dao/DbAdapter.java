@@ -138,13 +138,13 @@ public class DbAdapter
   {
     Cursor mCursor =
 
-      mDb.query(HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID,
-          HappyContactsDb.Feast.NAME, HappyContactsDb.Feast.LAST_WISH_YEAR },
-          HappyContactsDb.Feast.DAY + "='" + day + "'", null, null, null, null, null);
-//    mDb.query(HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID,
-//        HappyContactsDb.Feast.NAME, HappyContactsDb.Feast.LAST_WISH_YEAR },
-//        HappyContactsDb.Feast.DAY + "='" + day + "' and " + HappyContactsDb.Feast.LAST_WISH_YEAR
-//            + " != '" + year + "'", null, null, null, null, null);
+    mDb.query(HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID,
+        HappyContactsDb.Feast.NAME }, HappyContactsDb.Feast.DAY + "='" + day + "'", null, null,
+        null, null, null);
+    //    mDb.query(HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID,
+    //        HappyContactsDb.Feast.NAME, HappyContactsDb.Feast.LAST_WISH_YEAR },
+    //        HappyContactsDb.Feast.DAY + "='" + day + "' and " + HappyContactsDb.Feast.LAST_WISH_YEAR
+    //            + " != '" + year + "'", null, null, null, null, null);
     if (mCursor != null)
     {
       mCursor.moveToFirst();
@@ -165,11 +165,15 @@ public class DbAdapter
     return mCursor;
   }
 
-  public long insertBlackList(long contactId, String contactName)
+  private long insertBlackList(long contactId, String contactName, String year)
   {
     ContentValues initialValues = new ContentValues();
     initialValues.put(HappyContactsDb.BlackList.CONTACT_ID, contactId);
     initialValues.put(HappyContactsDb.BlackList.CONTACT_NAME, contactName);
+    if (year != null)
+    {
+      initialValues.put(HappyContactsDb.BlackList.LAST_WISH_YEAR, year);
+    }
 
     return mDb.insert(HappyContactsDb.BlackList.TABLE_NAME, null, initialValues);
   }
@@ -190,10 +194,9 @@ public class DbAdapter
   public Cursor fetchBlackList(long contactId) throws SQLException
   {
 
-    Cursor mCursor =
-
-    mDb.query(HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS,
-        HappyContactsDb.BlackList.CONTACT_ID + "=" + contactId, null, null, null, null, null);
+    Cursor mCursor = mDb.query(HappyContactsDb.BlackList.TABLE_NAME,
+        HappyContactsDb.BlackList.COLUMNS, HappyContactsDb.BlackList.CONTACT_ID + "=" + contactId,
+        null, null, null, null, null);
     if (mCursor != null)
     {
       mCursor.moveToFirst();
@@ -201,21 +204,39 @@ public class DbAdapter
     return mCursor;
   }
 
-  public boolean isBlackListed(Long contactId) throws SQLException
+  public boolean isBlackListed(long contactId, String year) throws SQLException
   {
     Cursor c = fetchBlackList(contactId);
     if (c == null || c.getCount() == 0)
     {
       return false;
     }
+    if (year != null)
+    {
+      /* check if its black listed for this year only */
+      String lastWishedYear = c.getString(c
+          .getColumnIndexOrThrow(HappyContactsDb.BlackList.LAST_WISH_YEAR));
+      return (lastWishedYear == null || lastWishedYear.equals(year));
+    }
     return true;
   }
 
-  public boolean updateContactFeast(Long feastId, String year)
+  public long updateContactFeast(long contactId, String contactName, String year)
   {
-    ContentValues args = new ContentValues();
-    args.put(HappyContactsDb.Feast.LAST_WISH_YEAR, year);
-    return mDb.update(HappyContactsDb.Feast.TABLE_NAME, args, HappyContactsDb.Feast.ID + "="
-        + feastId, null) > 0;
+    if (Log.DEBUG)
+    {
+      Log.v("start updateContactFeast with year " + year);
+    }
+    if (isBlackListed(contactId, null))
+    {
+      ContentValues args = new ContentValues();
+      args.put(HappyContactsDb.BlackList.LAST_WISH_YEAR, year);
+      return mDb.update(HappyContactsDb.BlackList.TABLE_NAME, args,
+          HappyContactsDb.BlackList.CONTACT_ID + "=" + contactId, null);
+    }
+    else
+    {
+      return insertBlackList(contactId, contactName, year);
+    }
   }
 }
