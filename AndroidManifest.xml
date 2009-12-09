@@ -22,7 +22,8 @@
 		<receiver android:name="AlarmReceiver"></receiver>
 		<service android:name="DayMatcherService"></service>
 		<activity android:name="ReminderPopupActivity"
-			android:taskAffinity="net.tsoft.happycontacts.popup" android:theme="@android:style/Theme.Dialog">
+			android:launchMode="singleInstance" android:excludeFromRecents="true"
+			android:taskAffinity="" android:theme="@android:style/Theme.Dialog">
 
 		</activity>
 	</application>

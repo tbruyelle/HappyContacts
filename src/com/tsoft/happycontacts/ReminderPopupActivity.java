@@ -24,7 +24,6 @@ import com.tsoft.happycontacts.model.ContactFeasts;
 
 /**
  * @author tom
- * FIXME this activity musn't appear in recent task display
  */
 public class ReminderPopupActivity
     extends Activity
@@ -34,6 +33,8 @@ public class ReminderPopupActivity
   private Iterator<Map.Entry<Long, ContactFeast>> contacts;
 
   private boolean keepNotif = false;
+
+  private final String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
 
   @Override
   protected void onCreate(Bundle savedInstanceState)
@@ -50,7 +51,6 @@ public class ReminderPopupActivity
     //        WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
 
     mDb = new DbAdapter(this);
-    mDb.open();
 
     /* boucle sur les contacts a qui il fait souhaiter la fete */
     ContactFeasts contactFeasts = DayMatcherService.testDayMatch(this);
@@ -91,16 +91,6 @@ public class ReminderPopupActivity
       return;
     }
     setContentForContact(contact.getKey(), contact.getValue());
-
-    Button exitButton = (Button) findViewById(R.id.nottoday_button);
-    exitButton.setOnClickListener(new View.OnClickListener()
-    {
-      @Override
-      public void onClick(View v)
-      {
-        nextOrExit();
-      }
-    });
   }
 
   private void setContentForContact(final Long contactId, final ContactFeast contactFeast)
@@ -114,12 +104,19 @@ public class ReminderPopupActivity
       public void onClick(View v)
       {
         // Afficher les données du contacts
+        boolean res = mDb.updateContactFeast(contactId.longValue(), contactFeast.getContactName(),
+            year);
+        if (!res)
+        {
+          Log.e("Error insertBlackList with year " + year);
+        }
+
         Uri displayContactUri = ContentUris
             .withAppendedId(People.CONTENT_URI, contactId.intValue());
         Intent intent = new Intent(Intent.ACTION_VIEW, displayContactUri);
-        String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-        mDb.updateContactFeast(contactId.longValue(), contactFeast.getContactName(), year);
-        startActivityForResult(intent, 0);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        nextOrExit();
       }
     });
 
@@ -142,30 +139,49 @@ public class ReminderPopupActivity
       @Override
       public void onClick(View v)
       {
-        long res = mDb.updateContactFeast(contactId.longValue(), contactFeast.getContactName(),
+        boolean res = mDb.updateContactFeast(contactId.longValue(), contactFeast.getContactName(),
             null);
-        if (res < 1)
+        if (!res)
         {
-          Log.e("Error insertBlackList " + res);
+          Log.e("Error insertBlackList");
         }
-        Toast.makeText(ReminderPopupActivity.this,
-            getString(R.string.toast_blacklisted, contactFeast.getContactName()),
-            Toast.LENGTH_SHORT).show();
+        else
+        {
+          Toast.makeText(ReminderPopupActivity.this,
+              getString(R.string.toast_blacklisted, contactFeast.getContactName()),
+              Toast.LENGTH_LONG).show();
+        }
         nextOrExit();
+      }
+    });
+
+    Button exitButton = (Button) findViewById(R.id.nottoday_button);
+    exitButton.setOnClickListener(new View.OnClickListener()
+    {
+      @Override
+      public void onClick(View v)
+      {
+        boolean res = mDb.updateContactFeast(contactId.longValue(), contactFeast.getContactName(),
+            year);
+        nextOrExit();
+        if (!res)
+        {
+          Log.e("Error insertBlackList with year " + year);
+        }
       }
     });
   }
 
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data)
-  {
-    if (Log.DEBUG)
-    {
-      Log.v("ReminderPopupActivity: onActivityResult start");
-    }
-    super.onActivityResult(requestCode, resultCode, data);
-    nextOrExit();
-  }
+  //  @Override
+  //  protected void onActivityResult(int requestCode, int resultCode, Intent data)
+  //  {
+  //    if (Log.DEBUG)
+  //    {
+  //      Log.v("ReminderPopupActivity: onActivityResult start");
+  //    }
+  //    super.onActivityResult(requestCode, resultCode, data);
+  //    nextOrExit();
+  //  }
 
   private void exit()
   {
@@ -173,17 +189,34 @@ public class ReminderPopupActivity
     {
       Log.v("ReminderPopupActivity: start exit");
     }
-    Toast.makeText(ReminderPopupActivity.this, R.string.toast_finish, Toast.LENGTH_LONG).show();
     if (!keepNotif)
     {
       NotificationManager nm = (NotificationManager) getSystemService(Activity.NOTIFICATION_SERVICE);
       nm.cancel(R.string.app_name);
-    }
-    if (mDb != null)
-    {
-      mDb.close();
+      Toast.makeText(ReminderPopupActivity.this, R.string.toast_finish, Toast.LENGTH_LONG).show();
     }
     finish();
+  }
+
+  @Override
+  protected void onPause()
+  {
+    if (Log.DEBUG)
+    {
+      Log.v("ReminderPopupActivity: onPause()");
+    }
+    super.onPause();
+  }
+
+  @Override
+  protected void onResume()
+  {
+    if (Log.DEBUG)
+    {
+      Log.v("ReminderPopupActivity: onResume()");
+    }
+    super.onResume();
+    mDb.open(false);
   }
 
   @Override

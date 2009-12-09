@@ -113,13 +113,13 @@ public class DbAdapter
 
   public DbAdapter(Context ctx)
   {
-    this.mCtx = ctx;
+    mCtx = ctx;
+    mDbHelper = new DatabaseHelper(mCtx);
   }
 
-  public DbAdapter open() throws SQLException
+  public DbAdapter open(boolean readOnly) throws SQLException
   {
-    mDbHelper = new DatabaseHelper(mCtx);
-    mDb = mDbHelper.getWritableDatabase();
+    mDb = readOnly ? mDbHelper.getReadableDatabase() : mDbHelper.getWritableDatabase();
     return this;
   }
 
@@ -131,10 +131,9 @@ public class DbAdapter
   /**
    * Retourne les lignes pour le jour donné et qui n'ont pas encore ete souhaite
    * @param day format dd/MM
-   * @param year format YYYY
    * @return
    */
-  public Cursor fetchNamesForDay(String day, String year)
+  public Cursor fetchNamesForDay(String day)
   {
     Cursor mCursor =
 
@@ -165,7 +164,7 @@ public class DbAdapter
     return mCursor;
   }
 
-  private long insertBlackList(long contactId, String contactName, String year)
+  private boolean insertBlackList(long contactId, String contactName, String year)
   {
     ContentValues initialValues = new ContentValues();
     initialValues.put(HappyContactsDb.BlackList.CONTACT_ID, contactId);
@@ -175,7 +174,7 @@ public class DbAdapter
       initialValues.put(HappyContactsDb.BlackList.LAST_WISH_YEAR, year);
     }
 
-    return mDb.insert(HappyContactsDb.BlackList.TABLE_NAME, null, initialValues);
+    return mDb.insert(HappyContactsDb.BlackList.TABLE_NAME, null, initialValues) > 0;
   }
 
   public boolean deleteBlackList(long id)
@@ -193,7 +192,6 @@ public class DbAdapter
 
   public Cursor fetchBlackList(long contactId) throws SQLException
   {
-
     Cursor mCursor = mDb.query(HappyContactsDb.BlackList.TABLE_NAME,
         HappyContactsDb.BlackList.COLUMNS, HappyContactsDb.BlackList.CONTACT_ID + "=" + contactId,
         null, null, null, null, null);
@@ -207,8 +205,13 @@ public class DbAdapter
   public boolean isBlackListed(long contactId, String year) throws SQLException
   {
     Cursor c = fetchBlackList(contactId);
-    if (c == null || c.getCount() == 0)
+    if (c == null)
     {
+      return false;
+    }
+    if (c.getCount() == 0)
+    {
+      c.close();
       return false;
     }
     if (year != null)
@@ -216,12 +219,14 @@ public class DbAdapter
       /* check if its black listed for this year only */
       String lastWishedYear = c.getString(c
           .getColumnIndexOrThrow(HappyContactsDb.BlackList.LAST_WISH_YEAR));
+      c.close();
       return (lastWishedYear == null || lastWishedYear.equals(year));
     }
+    c.close();
     return true;
   }
 
-  public long updateContactFeast(long contactId, String contactName, String year)
+  public boolean updateContactFeast(long contactId, String contactName, String year)
   {
     if (Log.DEBUG)
     {
@@ -232,7 +237,7 @@ public class DbAdapter
       ContentValues args = new ContentValues();
       args.put(HappyContactsDb.BlackList.LAST_WISH_YEAR, year);
       return mDb.update(HappyContactsDb.BlackList.TABLE_NAME, args,
-          HappyContactsDb.BlackList.CONTACT_ID + "=" + contactId, null);
+          HappyContactsDb.BlackList.CONTACT_ID + "=" + contactId, null) > 0;
     }
     else
     {

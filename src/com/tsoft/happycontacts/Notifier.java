@@ -26,9 +26,10 @@ public class Notifier
         .getSystemService(Context.NOTIFICATION_SERVICE);
 
     Intent intent = new Intent(context, ReminderPopupActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     //intent.putExtra("contactFeastToday", contactFeastToday);
     PendingIntent contentIntent = PendingIntent.getActivity(context, 0, intent,
-        Intent.FLAG_ACTIVITY_NEW_TASK);
+        PendingIntent.FLAG_CANCEL_CURRENT);
 
     // The ticker text, this uses a formatted string so our message could be
     // localized

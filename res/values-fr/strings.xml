@@ -9,7 +9,7 @@
 	<string name="call">Faire plaisir</string>
 	<string name="later">Plus tard</string>
 	<string name="never">Jamais</string>
-	<string name="happyfeast">&quot;C'est la fête de %s !&quot;</string>
+	<string name="happyfeast">&quot;C\'est la fête de %s !&quot;</string>
 	<string name="whattodo">Voulez-vous contacter cette personne maintenant \?</string>
 	<string name="blacklist_label">Les contacts avec une année ne sont blacklisté que pour l\'année.\n\nCliquez sur un nom pour le supprimer de cette liste noire.</string>
 	<string name="test_app_title">Liste des fêtes du %s</string>
@@ -29,8 +29,8 @@
 	<string name="toast_blacklisted">%s a été ajouté à la liste noire</string>
 	<string name="toast_later">La notification est conservée pour plus tard.</string>
 	<string name="toast_no_contact">Pas de contact trouvés !</string>
-	<string name="toast_contact_one">C'est sa fête :\n</string>
-	<string name="toast_contact_list">C'est leur fête :\n</string>
+	<string name="toast_contact_one">C\'est sa fête :\n</string>
+	<string name="toast_contact_list">C\'est leur fête :\n</string>
 	<string name="toast_finish">Les fêtes du jour ont été traitées</string>
 	<string name="enter_date">Saisir une journée</string>
 	<string name="check_contacts">Verifier les contacts</string>

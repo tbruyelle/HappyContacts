@@ -34,7 +34,7 @@ public class TestAppActivity
 
   private SimpleCursorAdapter simpleCursorAdapter;
 
-  private Cursor c;
+  private Cursor mCursorNamesForDay;
 
   private String day;
   private String currentYear = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
@@ -54,6 +54,7 @@ public class TestAppActivity
     }
     super.onCreate(savedInstanceState);
     setContentView(R.layout.testapp);
+    mDb = new DbAdapter(this);
     if (Log.DEBUG)
     {
       Log.v("TestAppActivity: end onCreate");
@@ -61,25 +62,22 @@ public class TestAppActivity
   }
 
   @Override
-  protected void onStart()
+  protected void onResume()
   {
-    super.onStart();
     if (Log.DEBUG)
     {
-      Log.v("TestAppActivity: start onStart");
+      Log.v("TestAppActivity: start onResume");
     }
+    super.onResume();
     mYear = calendar.get(Calendar.YEAR);
     mMonthOfYear = calendar.get(Calendar.MONTH);
     mDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-    if (mDb == null)
-    {
-      mDb = new DbAdapter(this);
-    }
-    mDb.open();
+
+    mDb.open(true);
     fillList();
     if (Log.DEBUG)
     {
-      Log.v("TestAppActivity: end onStart");
+      Log.v("TestAppActivity: end onResume");
     }
   }
 
@@ -91,10 +89,6 @@ public class TestAppActivity
       Log.v("TestAppActivity: start onStop");
     }
     super.onStop();
-    if (c != null)
-    {
-      c.close();
-    }
     if (mDb != null)
     {
       mDb.close();
@@ -115,29 +109,20 @@ public class TestAppActivity
     }
   }
 
-  @Override
-  protected void onResume()
-  {
-    super.onResume();
-    if (Log.DEBUG)
-    {
-      Log.v("TestAppActivity: start onResume");
-    }
-  }
-
   private void fillList()
   {
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
     Date date = new Date();
     day = dateFormat.format(date);
     setTitle(getApplicationContext().getString(R.string.test_app_title, day));
-    c = mDb.fetchNamesForDay(day, "0000");
+    mCursorNamesForDay = mDb.fetchNamesForDay(day);
+    startManagingCursor(mCursorNamesForDay);
 
-    startManagingCursor(c);
+    startManagingCursor(mCursorNamesForDay);
     String[] from = new String[] { HappyContactsDb.Feast.NAME };
     int[] to = new int[] { android.R.id.text1 };
-    simpleCursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, c,
-        from, to);
+    simpleCursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1,
+        mCursorNamesForDay, from, to);
     setListAdapter(simpleCursorAdapter);
   }
 
@@ -228,12 +213,9 @@ public class TestAppActivity
             cal.set(year, monthOfYear, dayOfMonth);
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
             day = dateFormat.format(cal.getTime());
-            if (c != null)
-            {
-              c.close();
-            }
-            c = mDb.fetchNamesForDay(day, "1999");
-            simpleCursorAdapter.changeCursor(c);
+            mCursorNamesForDay = mDb.fetchNamesForDay(day);
+            startManagingCursor(mCursorNamesForDay);
+            simpleCursorAdapter.changeCursor(mCursorNamesForDay);
 
             setTitle(getApplicationContext().getString(R.string.test_app_title, day));
           }

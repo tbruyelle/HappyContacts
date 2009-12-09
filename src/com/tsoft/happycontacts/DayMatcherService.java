@@ -87,33 +87,34 @@ public class DayMatcherService
      * init and open database
      */
     DbAdapter mDb = new DbAdapter(context);
-    mDb.open();
+    mDb.open(true);
 
     /*
      * Look for names matching today date
      */
     ContactFeasts contactFeastToday = new ContactFeasts(day);
 
-    Cursor c = mDb.fetchNamesForDay(day, year);
-    if (c.getCount() == 0)
+    Cursor cursor = mDb.fetchNamesForDay(day);
+    if (cursor.getCount() == 0)
     {
       if (Log.DEBUG)
       {
         Log.v("DayMatcher: day " + day + " no feast found");
       }
+      cursor.close();
       mDb.close();
       return contactFeastToday;
     }
     if (Log.DEBUG)
     {
-      Log.v("DayMatcher: found " + c.getCount() + " feast(s) for today");
+      Log.v("DayMatcher: found " + cursor.getCount() + " feast(s) for today");
     }
 
     Map<String, ContactFeast> names = new HashMap<String, ContactFeast>();
     do
     {
-      String name = c.getString(c.getColumnIndexOrThrow(HappyContactsDb.Feast.NAME));
-      Long feastId = c.getLong(c.getColumnIndexOrThrow(HappyContactsDb.Feast.ID));
+      String name = cursor.getString(cursor.getColumnIndexOrThrow(HappyContactsDb.Feast.NAME));
+      Long feastId = cursor.getLong(cursor.getColumnIndexOrThrow(HappyContactsDb.Feast.ID));
       ContactFeast contactFeast = new ContactFeast(name, feastId, null);
       names.put(name.toUpperCase(), contactFeast);
       if (Log.DEBUG)
@@ -121,35 +122,35 @@ public class DayMatcherService
         Log.v("DayMatcher: day " + day + " feast : " + contactFeast.getContactName());
       }
     }
-    while (c.moveToNext());
-    c.close();
+    while (cursor.moveToNext());
+    cursor.close();
 
     /*
      * now we have to scan contacts
      */
-    c = context.getContentResolver().query(People.CONTENT_URI, projection, null, null,
+    cursor = context.getContentResolver().query(People.CONTENT_URI, projection, null, null,
         People.NAME + " ASC");
-    if (c != null)
+    if (cursor != null)
     {
-      while (c.moveToNext())
+      while (cursor.moveToNext())
       {
-        Long contactId = c.getLong(c.getColumnIndexOrThrow(People._ID));
-        String contactName = c.getString(c.getColumnIndexOrThrow(People.NAME));
-
-        if (mDb.isBlackListed(contactId, year))
-        {
-          if (Log.DEBUG)
-          {
-            Log.v("DayMatcher: already wished this year " + contactName + " is ignored");
-          }
-          continue;
-        }
+        Long contactId = cursor.getLong(cursor.getColumnIndexOrThrow(People._ID));
+        String contactName = cursor.getString(cursor.getColumnIndexOrThrow(People.NAME));
 
         for (String subName : contactName.split(" "))
         {
           String subNameUpper = subName.toUpperCase();
           if (names.containsKey(subNameUpper))
           {
+            if (mDb.isBlackListed(contactId, year))
+            {
+              if (Log.DEBUG)
+              {
+                Log.v("DayMatcher: already wished this year " + contactName + " is ignored");
+              }
+              continue;
+            }
+
             /* find one !! */
             if (Log.DEBUG)
             {
@@ -161,8 +162,8 @@ public class DayMatcherService
             contactFeastToday.addContact(contactId, contactFeast);
           }
         }
-        c.close();
       }
+      cursor.close();
     }
     if (Log.DEBUG)
     {
