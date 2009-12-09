@@ -5,7 +5,6 @@ package com.tsoft.happycontacts;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,7 +40,8 @@ public class HappyContactsPreferences
       }
       else
       {
-        showDialog(TIME_DIALOG_ID);
+        AlarmController.startAlarm(HappyContactsPreferences.this);
+        preference.setSummary(R.string.pref_state_on);
       }
       return true;
     }
@@ -60,16 +60,14 @@ public class HappyContactsPreferences
       editor.putInt("alarmHour", mAlarmHour);
       editor.putInt("alarmMinute", mAlarmMinute);
       editor.commit();
-
-      AlarmController.startAlarm(HappyContactsPreferences.this);
-      statePref.setSummary(view.getContext().getString(R.string.pref_state_on,
-          AndroidUtils.pad(hourOfDay, minute)));
+      alarmTimePref.setSummary(AndroidUtils.pad(mAlarmHour, mAlarmMinute));
     }
   };
 
   private int mAlarmHour;
   private int mAlarmMinute;
-  private CheckBoxPreference statePref;
+  private CheckBoxPreference alarmStatePref;
+  private Preference alarmTimePref;
 
   /**
    * @see android.app.Activity#onCreateDialog(int)
@@ -81,17 +79,8 @@ public class HappyContactsPreferences
     {
     case TIME_DIALOG_ID:
       TimePickerDialog timePickerDialog = new TimePickerDialog(this, mTimeSetListener,
-          AlarmController.DEFAULT_ALARM_HOUR, AlarmController.DEFAULT_ALARM_MINUTE, true);
+          mAlarmHour, mAlarmMinute, true);
 
-      /* if this dialog is dismissed, the statePref checkbox has to be unchecked */
-      timePickerDialog.setOnCancelListener(new DialogInterface.OnCancelListener()
-      {
-        @Override
-        public void onCancel(DialogInterface dialog)
-        {
-          statePref.setChecked(false);
-        }
-      });
       return timePickerDialog;
     }
     return null;
@@ -117,22 +106,35 @@ public class HappyContactsPreferences
     PreferenceScreen root = getPreferenceManager().createPreferenceScreen(this);
 
     // State
-    statePref = new CheckBoxPreference(this);
+    alarmStatePref = new CheckBoxPreference(this);
+    alarmStatePref.setTitle(R.string.pref_state);
 
-    statePref.setTitle(R.string.pref_state);
     if (AlarmController.isAlarmUp(this))
     {
-      statePref.setSummary(this.getString(R.string.pref_state_on, AndroidUtils.pad(mAlarmHour,
-          mAlarmMinute)));
-      statePref.setChecked(true);
+      alarmStatePref.setSummary(R.string.pref_state_on);
+      alarmStatePref.setChecked(true);
     }
     else
     {
-      statePref.setSummary(R.string.pref_state_off);
-      statePref.setChecked(false);
+      alarmStatePref.setSummary(R.string.pref_state_off);
+      alarmStatePref.setChecked(false);
     }
-    statePref.setOnPreferenceClickListener(mAlarmToggleClickListener);
-    root.addPreference(statePref);
+    alarmStatePref.setOnPreferenceClickListener(mAlarmToggleClickListener);
+    root.addPreference(alarmStatePref);
+
+    alarmTimePref = new Preference(this);
+    alarmTimePref.setTitle(R.string.pref_time);
+    alarmTimePref.setSummary(AndroidUtils.pad(mAlarmHour, mAlarmMinute));
+    alarmTimePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
+    {
+      @Override
+      public boolean onPreferenceClick(Preference preference)
+      {
+        showDialog(TIME_DIALOG_ID);
+        return true;
+      }
+    });
+    root.addItemFromInflater(alarmTimePref);
 
     // test app
     PreferenceScreen testAppPref = getPreferenceManager().createPreferenceScreen(this);
