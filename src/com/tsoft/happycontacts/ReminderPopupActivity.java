@@ -11,11 +11,13 @@ import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.ContentUris;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Contacts.People;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.tsoft.happycontacts.dao.DbAdapter;
@@ -96,6 +98,11 @@ public class ReminderPopupActivity
   private void setContentForContact(final Long contactId, final ContactFeast contactFeast)
   {
     setTitle(getString(R.string.happyfeast, contactFeast.getContactName()));
+
+    Uri contactUri = ContentUris.withAppendedId(People.CONTENT_URI, contactId);
+    Bitmap photo = People.loadContactPhoto(this, contactUri, R.drawable.smile, null);
+    ImageView imageView = (ImageView) findViewById(R.id.contact_photo);
+    imageView.setImageBitmap(photo);
 
     Button callButton = (Button) findViewById(R.id.call_button);
     callButton.setOnClickListener(new View.OnClickListener()

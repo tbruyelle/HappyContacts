@@ -32,7 +32,10 @@ public class AlarmController
 
     Calendar calendar = Calendar.getInstance();
     long currentTimeMillis = calendar.getTimeInMillis();
-
+    if (Log.DEBUG)
+    {
+      Log.v("AlarmController: currentTimeMillis=" + currentTimeMillis);
+    }
     SharedPreferences prefs = context.getSharedPreferences(HappyContactsPreferences.appName, 0);
     int hour = prefs.getInt("alarmHour", DEFAULT_ALARM_HOUR);
     int minute = prefs.getInt("alarmMinute", DEFAULT_ALARM_MINUTE);

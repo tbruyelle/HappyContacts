@@ -32,11 +32,6 @@ public class AlarmReceiver
     Intent startDayMatcher = new Intent(context, DayMatcherService.class);
     context.startService(startDayMatcher);
 
-    /*
-     * schedule next alarm
-     */
-    AlarmController.startAlarm(context);
-
     if (Log.DEBUG)
     {
       Log.v("AlarmReceiver: stop onReceive()");

@@ -46,6 +46,11 @@ public class DayMatcherService
       Notifier.notifyEvent(getApplicationContext());
     }
 
+    /*
+     * schedule next alarm
+     */
+    AlarmController.startAlarm(getApplicationContext());
+
     if (Log.DEBUG)
     {
       Log.v("DayMatcher: end onCreate()");
