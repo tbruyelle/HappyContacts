@@ -36,12 +36,12 @@ public class HappyContactsPreferences
       if (AlarmController.isAlarmUp(HappyContactsPreferences.this))
       {
         AlarmController.cancelAlarm(HappyContactsPreferences.this);
-        preference.setSummary(R.string.pref_state_off);
+        preference.setSummary(R.string.pref_alarm_off);
       }
       else
       {
         AlarmController.startAlarm(HappyContactsPreferences.this);
-        preference.setSummary(R.string.pref_state_on);
+        preference.setSummary(R.string.pref_alarm_on);
       }
       return true;
     }
@@ -78,8 +78,8 @@ public class HappyContactsPreferences
     switch (id)
     {
     case TIME_DIALOG_ID:
-      TimePickerDialog timePickerDialog = new TimePickerDialog(this, mTimeSetListener,
-          mAlarmHour, mAlarmMinute, true);
+      TimePickerDialog timePickerDialog = new TimePickerDialog(this, mTimeSetListener, mAlarmHour,
+          mAlarmMinute, true);
 
       return timePickerDialog;
     }
@@ -107,16 +107,16 @@ public class HappyContactsPreferences
 
     // State
     alarmStatePref = new CheckBoxPreference(this);
-    alarmStatePref.setTitle(R.string.pref_state);
+    alarmStatePref.setTitle(R.string.pref_alarm);
 
     if (AlarmController.isAlarmUp(this))
     {
-      alarmStatePref.setSummary(R.string.pref_state_on);
+      alarmStatePref.setSummary(R.string.pref_alarm_on);
       alarmStatePref.setChecked(true);
     }
     else
     {
-      alarmStatePref.setSummary(R.string.pref_state_off);
+      alarmStatePref.setSummary(R.string.pref_alarm_off);
       alarmStatePref.setChecked(false);
     }
     alarmStatePref.setOnPreferenceClickListener(mAlarmToggleClickListener);

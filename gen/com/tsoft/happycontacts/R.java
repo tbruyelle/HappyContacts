@@ -57,11 +57,11 @@ public final class R {
         public static final int notif_new_event_multi=0x7f060029;
         public static final int notif_one_or_more=0x7f06002a;
         public static final int nottoday=0x7f060006;
+        public static final int pref_alarm=0x7f060017;
+        public static final int pref_alarm_off=0x7f060019;
+        public static final int pref_alarm_on=0x7f060018;
         public static final int pref_blacklist=0x7f060015;
         public static final int pref_blacklist_summary=0x7f060016;
-        public static final int pref_state=0x7f060017;
-        public static final int pref_state_off=0x7f060019;
-        public static final int pref_state_on=0x7f060018;
         public static final int pref_template_email=0x7f060013;
         public static final int pref_template_email_dialog=0x7f06001c;
         public static final int pref_template_email_summary=0x7f060014;
