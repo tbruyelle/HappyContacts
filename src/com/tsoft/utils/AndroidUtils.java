@@ -29,6 +29,8 @@ public final class AndroidUtils
 
         return sb.toString();
     }
+    
+    //FIXME optimize
     private static char processChar( char c )
     {
         switch ( c )
