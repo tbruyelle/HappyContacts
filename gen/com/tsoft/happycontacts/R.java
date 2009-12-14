@@ -39,14 +39,14 @@ public final class R {
         public static final int db_update=0x7f040001;
     }
     public static final class string {
-        public static final int app_name=0x7f060002;
+        public static final int app_name=0x7f060001;
         public static final int blacklist_label=0x7f06000c;
         public static final int call=0x7f060007;
         public static final int check_contacts=0x7f060025;
         public static final int enter_date=0x7f060024;
         public static final int exit=0x7f060004;
         public static final int happyfeast=0x7f06000a;
-        public static final int hello=0x7f060001;
+        public static final int hello=0x7f060002;
         public static final int last_wish_year=0x7f06002b;
         public static final int later=0x7f060008;
         public static final int loading_data=0x7f060026;

@@ -34,7 +34,7 @@
 	<string name="toast_contact_list">C\'est leur fête :\n</string>
 	<string name="toast_finish">Les fêtes du jour ont été traitées</string>
 	<string name="enter_date">Saisir une journée</string>
-	<string name="check_contacts">Vérifier les contacts</string>
+	<string name="check_contacts">Verifier les contacts</string>
 	<string name="loading_data">Chargement des données...</string>
 	<string name="updating_data">Mise à jour des données...</string>
 	<string name="notif_new_event">C\'est la fête de %s !</string>
