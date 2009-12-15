@@ -14,25 +14,36 @@ public final class R {
         public static final int white=0x7f050000;
     }
     public static final class drawable {
-        public static final int icon=0x7f020000;
-        public static final int smile=0x7f020001;
+        public static final int clock=0x7f020000;
+        public static final int cloud=0x7f020001;
+        public static final int happy=0x7f020002;
+        public static final int ic_menu_allfriends=0x7f020003;
+        public static final int ic_menu_delete=0x7f020004;
+        public static final int ic_menu_reminder=0x7f020005;
+        public static final int ic_menu_today=0x7f020006;
+        public static final int icon=0x7f020007;
+        public static final int sad=0x7f020008;
+        public static final int smile=0x7f020009;
+        public static final int umbrella=0x7f02000a;
     }
     public static final class id {
-        public static final int call_button=0x7f070005;
+        public static final int call_button=0x7f070003;
         public static final int contact_name=0x7f070000;
-        public static final int contact_photo=0x7f070003;
+        public static final int contact_photo=0x7f070007;
         public static final int last_wish_year=0x7f070001;
-        public static final int later_button=0x7f070006;
+        public static final int later_button=0x7f070005;
         public static final int layout_root=0x7f070002;
-        public static final int never_button=0x7f070007;
-        public static final int nottoday_button=0x7f070008;
-        public static final int text=0x7f070004;
+        public static final int never_button=0x7f070006;
+        public static final int nottoday_button=0x7f070004;
+        public static final int text=0x7f070008;
     }
     public static final class layout {
         public static final int blacklist=0x7f030000;
         public static final int blacklist_element=0x7f030001;
-        public static final int reminder=0x7f030002;
-        public static final int testapp=0x7f030003;
+        public static final int divider=0x7f030002;
+        public static final int reminder=0x7f030003;
+        public static final int reminder_header=0x7f030004;
+        public static final int testapp=0x7f030005;
     }
     public static final class raw {
         public static final int db_create=0x7f040000;

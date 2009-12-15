@@ -83,7 +83,6 @@ public class DayMatcherService
      */
     public static ContactFeasts testDayMatch( Context context, String day, String year )
     {
-        String[] projection = new String[] { People._ID, People.NAME, People.DISPLAY_NAME };
         if ( Log.DEBUG )
         {
             Log.v( "DayMatcher: start testDayMatch()" );
@@ -139,6 +138,7 @@ public class DayMatcherService
         /*
          * now we have to scan contacts
          */
+        String[] projection = new String[] { People._ID, People.NAME, People.DISPLAY_NAME };
         cursor = context.getContentResolver().query( People.CONTENT_URI, projection, null, null, People.NAME + " ASC" );
 
         if ( cursor != null )
@@ -147,10 +147,12 @@ public class DayMatcherService
             {
                 Long contactId = cursor.getLong( cursor.getColumnIndexOrThrow( People._ID ) );
                 String contactName = cursor.getString( cursor.getColumnIndexOrThrow( People.NAME ) );
+                String displayName = cursor.getString( cursor.getColumnIndexOrThrow( People.DISPLAY_NAME ) );
 
                 if ( contactId == null || contactName == null )
                 {
-                    Log.v( "skipping Contact with name=" + contactName + ", contactId=" + contactId );
+                    Log.v( "skipping Contact with displayName=" + displayName + ", name=" + contactName
+                        + ", contactId=" + contactId );
                     continue;
                 }
 

@@ -20,76 +20,77 @@ import com.tsoft.happycontacts.dao.HappyContactsDb;
 public class BlackListActivity
     extends ListActivity
 {
-  // private static String TAG = "BlackListActivity";
-  private DbAdapter mDb;
-  private Cursor mCursorBlakListed;
+    // private static String TAG = "BlackListActivity";
+    private DbAdapter mDb;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState)
-  {
-    if (Log.DEBUG)
+    private Cursor mCursorBlakListed;
+
+    @Override
+    protected void onCreate( Bundle savedInstanceState )
     {
-      Log.v("BlackListActivity: start onCreate");
+        if ( Log.DEBUG )
+        {
+            Log.v( "BlackListActivity: start onCreate" );
+        }
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.blacklist );
+        mDb = new DbAdapter( this );
+        if ( Log.DEBUG )
+        {
+            Log.v( "BlackListActivity: end onCreate" );
+        }
     }
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.blacklist);
-    mDb = new DbAdapter(this);
-    if (Log.DEBUG)
+
+    @Override
+    protected void onResume()
     {
-      Log.v("BlackListActivity: end onCreate");
+        if ( Log.DEBUG )
+        {
+            Log.v( "BlackListActivity: start onResume" );
+        }
+        super.onResume();
+        mDb.open( false );
+        fillList();
+        if ( Log.DEBUG )
+        {
+            Log.v( "BlackListActivity: end onResume" );
+        }
     }
-  }
 
-  @Override
-  protected void onResume()
-  {
-    if (Log.DEBUG)
+    @Override
+    protected void onStop()
     {
-      Log.v("BlackListActivity: start onResume");
+        super.onStop();
+        if ( mDb != null )
+        {
+            mDb.close();
+        }
     }
-    super.onResume();
-    mDb.open(false);
-    fillList();
-    if (Log.DEBUG)
+
+    private void fillList()
     {
-      Log.v("BlackListActivity: end onResume");
-    }
-  }
+        mCursorBlakListed = mDb.fetchAllBlackList();
+        startManagingCursor( mCursorBlakListed );
 
-  @Override
-  protected void onStop()
-  {
-    super.onStop();
-    if (mDb != null)
+        String[] from =
+            new String[] { HappyContactsDb.BlackList.CONTACT_NAME, HappyContactsDb.BlackList.LAST_WISH_YEAR };
+        //    int[] to = new int[] { R.id.contact_name, R.id.last_wish_year };
+        //    SimpleCursorAdapter simpleCursorAdapter = new SimpleCursorAdapter(this,
+        //        R.layout.blacklist_element, c, from, to);
+        int[] to = new int[] { R.id.contact_name, R.id.last_wish_year };
+        SimpleCursorAdapter simpleCursorAdapter =
+            new SimpleCursorAdapter( this, R.layout.blacklist_element, mCursorBlakListed, from, to );
+        setListAdapter( simpleCursorAdapter );
+    }
+
+    @Override
+    protected void onListItemClick( ListView l, View v, int position, long id )
     {
-      mDb.close();
+        super.onListItemClick( l, v, position, id );
+        Long blackListId =
+            mCursorBlakListed.getLong( mCursorBlakListed.getColumnIndexOrThrow( HappyContactsDb.BlackList.ID ) );
+        mDb.deleteBlackList( blackListId );
+        fillList();
     }
-  }
-
-  private void fillList()
-  {
-    mCursorBlakListed = mDb.fetchAllBlackList();
-    startManagingCursor(mCursorBlakListed);
-
-    String[] from = new String[] { HappyContactsDb.BlackList.CONTACT_NAME,
-        HappyContactsDb.BlackList.LAST_WISH_YEAR };
-    //    int[] to = new int[] { R.id.contact_name, R.id.last_wish_year };
-    //    SimpleCursorAdapter simpleCursorAdapter = new SimpleCursorAdapter(this,
-    //        R.layout.blacklist_element, c, from, to);
-    int[] to = new int[] { android.R.id.text1, android.R.id.text2 };
-    SimpleCursorAdapter simpleCursorAdapter = new SimpleCursorAdapter(this,
-        android.R.layout.simple_list_item_2, mCursorBlakListed, from, to);
-    setListAdapter(simpleCursorAdapter);
-  }
-
-  @Override
-  protected void onListItemClick(ListView l, View v, int position, long id)
-  {
-    super.onListItemClick(l, v, position, id);
-    Long blackListId = mCursorBlakListed.getLong(mCursorBlakListed
-        .getColumnIndexOrThrow(HappyContactsDb.BlackList.ID));
-    mDb.deleteBlackList(blackListId);
-    fillList();
-  }
 
 }
