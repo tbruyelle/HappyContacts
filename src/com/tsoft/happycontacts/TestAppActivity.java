@@ -167,7 +167,7 @@ public class TestAppActivity
 
       if (!contactFeastToday.getContactList().isEmpty())
       {
-        //Notifier.notifyEvent(getApplicationContext());
+        Notifier.notifyEvent(getApplicationContext());
         StringBuilder sb = new StringBuilder();
         if (contactFeastToday.getContactList().size() > 1)
         {

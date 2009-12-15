@@ -230,7 +230,7 @@ public class DbAdapter
   {
     if (Log.DEBUG)
     {
-      Log.v("start updateContactFeast with year " + year);
+      Log.v("start updateContactFeast for contact " + contactName + " with year " + year);
     }
     if (isBlackListed(contactId, null))
     {

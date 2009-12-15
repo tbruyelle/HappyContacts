@@ -5,6 +5,8 @@ package com.tsoft.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.CharacterIterator;
+import java.text.StringCharacterIterator;
 
 import android.content.res.Resources;
 
@@ -27,8 +29,6 @@ public final class AndroidUtils
 
         return sb.toString();
     }
-    
-    //FIXME optimize
     private static char processChar( char c )
     {
         switch ( c )
@@ -156,7 +156,6 @@ public final class AndroidUtils
         }
         return c;
     }
-
   public static String getFileContent(Resources resources, int rawId) throws IOException
   {
     InputStream is = resources.openRawResource(rawId);
