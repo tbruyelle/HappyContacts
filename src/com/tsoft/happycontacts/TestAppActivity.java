@@ -1,5 +1,6 @@
 package com.tsoft.happycontacts;
 
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
