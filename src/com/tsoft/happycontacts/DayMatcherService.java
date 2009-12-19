@@ -126,7 +126,7 @@ public class DayMatcherService
                 continue;
             }
             ContactFeast contactFeast = new ContactFeast( name, feastId, null );
-            names.put( name.toUpperCase(), contactFeast );
+            names.put( AndroidUtils.replaceAccents( name ).toUpperCase(), contactFeast );
             if ( Log.DEBUG )
             {
                 Log.v( "DayMatcher: day " + day + " feast : " + contactFeast.getContactName() );
@@ -158,7 +158,7 @@ public class DayMatcherService
 
                 for ( String subName : contactName.split( " " ) )
                 {
-                    String subNameUpper = AndroidUtils.replaceAccents( subName.toUpperCase() );
+                    String subNameUpper = AndroidUtils.replaceAccents( subName ).toUpperCase();
                     if ( names.containsKey( subNameUpper ) )
                     {
                         if ( mDb.isBlackListed( contactId, year ) )
