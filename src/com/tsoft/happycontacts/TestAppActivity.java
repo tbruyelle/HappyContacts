@@ -1,6 +1,5 @@
 package com.tsoft.happycontacts;
 
-import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -207,7 +206,6 @@ public class TestAppActivity
     {
         DatePickerDialog datePickerDialog = new DatePickerDialog( this, new DatePickerDialog.OnDateSetListener()
         {
-            @Override
             public void onDateSet( DatePicker view, int year, int monthOfYear, int dayOfMonth )
             {
                 mYear = year;

@@ -8,7 +8,10 @@ import java.io.InputStream;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 
 /**
  * @author tom
@@ -16,6 +19,36 @@ import android.content.res.Resources;
  */
 public final class AndroidUtils
 {
+	public static void composeSms(Context context, String phoneNumber, String smsBody)
+	{
+		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:"+phoneNumber)); 
+		intent.putExtra("sms_body", smsBody);
+		context.startActivity(intent); 
+		
+//		Intent intent = new Intent(Intent.ACTION_VIEW);
+//		intent.putExtra("sms_body", smsBody);
+//		
+//		intent.setType("vnd.android-dir/mms-sms");
+//		context.startActivity(intent);  
+		//createChooser pas util ici, util seulement pour par ex le "partager" de picsay pro
+		//context.startActivity(Intent.createChooser(intent, "chooser:");
+	}
+	
+	public static void composeMail(Context context, String emailAddress, String mailSubject, String mailBody)
+	{
+		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:"+emailAddress));
+		intent.putExtra("mail_subject", mailSubject);
+		intent.putExtra("mail_body", mailBody);
+		context.startActivity(intent); 
+	}
+	
+	public static void composeTel(Context context, String phoneNumber)
+	{
+		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:"+phoneNumber));
+		context.startActivity(intent);
+	}
+	
+	
     public static String replaceAccents(String str)
     {
         StringBuilder sb = new StringBuilder( str.length() );

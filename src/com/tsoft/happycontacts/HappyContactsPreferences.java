@@ -33,7 +33,6 @@ public class HappyContactsPreferences
      */
     private OnPreferenceClickListener mAlarmToggleClickListener = new OnPreferenceClickListener()
     {
-        @Override
         public boolean onPreferenceClick( Preference preference )
         {
             if ( AlarmController.isAlarmUp( HappyContactsPreferences.this ) )
@@ -55,7 +54,6 @@ public class HappyContactsPreferences
      */
     private TimePickerDialog.OnTimeSetListener mTimeSetListener = new TimePickerDialog.OnTimeSetListener()
     {
-        @Override
         public void onTimeSet( TimePicker view, int hourOfDay, int minute )
         {
             mAlarmHour = hourOfDay;
@@ -141,7 +139,6 @@ public class HappyContactsPreferences
         alarmTimePref.setSummary( AndroidUtils.pad( mAlarmHour, mAlarmMinute ) );
         alarmTimePref.setOnPreferenceClickListener( new Preference.OnPreferenceClickListener()
         {
-            @Override
             public boolean onPreferenceClick( Preference preference )
             {
                 showDialog( TIME_DIALOG_ID );

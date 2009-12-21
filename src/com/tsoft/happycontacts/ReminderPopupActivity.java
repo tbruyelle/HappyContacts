@@ -108,10 +108,9 @@ public class ReminderPopupActivity
         Button callButton = (Button) findViewById( R.id.call_button );
         callButton.setOnClickListener( new View.OnClickListener()
         {
-            @Override
             public void onClick( View v )
             {
-                // Afficher les donnÃ©es du contacts
+                // Afficher les données du contacts
                 boolean res = mDb.updateContactFeast( contactId.longValue(), contactFeast.getContactName(), year );
                 if ( !res )
                 {
@@ -129,7 +128,6 @@ public class ReminderPopupActivity
         Button laterButton = (Button) findViewById( R.id.later_button );
         laterButton.setOnClickListener( new View.OnClickListener()
         {
-            @Override
             public void onClick( View v )
             {
                 // on laisse la notification en place si clique sur later
@@ -142,7 +140,6 @@ public class ReminderPopupActivity
         Button neverButton = (Button) findViewById( R.id.never_button );
         neverButton.setOnClickListener( new View.OnClickListener()
         {
-            @Override
             public void onClick( View v )
             {
                 boolean res = mDb.updateContactFeast( contactId.longValue(), contactFeast.getContactName(), null );
@@ -163,7 +160,6 @@ public class ReminderPopupActivity
         Button exitButton = (Button) findViewById( R.id.nottoday_button );
         exitButton.setOnClickListener( new View.OnClickListener()
         {
-            @Override
             public void onClick( View v )
             {
                 boolean res = mDb.updateContactFeast( contactId.longValue(), contactFeast.getContactName(), year );
