@@ -21,37 +21,36 @@ import android.net.Uri;
  */
 public final class AndroidUtils
 {
-	public static void composeSms(Context context, String phoneNumber, String smsBody)
-	{
-		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:"+phoneNumber)); 
-		intent.putExtra("sms_body", smsBody);
-		context.startActivity(intent); 
-		
-//		Intent intent = new Intent(Intent.ACTION_VIEW);
-//		intent.putExtra("sms_body", smsBody);
-//		
-//		intent.setType("vnd.android-dir/mms-sms");
-//		context.startActivity(intent);  
-		//createChooser pas util ici, util seulement pour par ex le "partager" de picsay pro
-		//context.startActivity(Intent.createChooser(intent, "chooser:");
-	}
-	
-	public static void composeMail(Context context, String emailAddress, String mailSubject, String mailBody)
-	{
-		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:"+emailAddress));
-		intent.putExtra("mail_subject", mailSubject);
-		intent.putExtra("mail_body", mailBody);
-		context.startActivity(intent); 
-	}
-	
-	public static void composeTel(Context context, String phoneNumber)
-	{
-		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:"+phoneNumber));
-		context.startActivity(intent);
-	}
-	
-	
-    public static String replaceAccents(String str)
+    public static void composeSms( Context context, String phoneNumber, String smsBody )
+    {
+        Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "sms:" + phoneNumber ) );
+        intent.putExtra( "sms_body", smsBody );
+        context.startActivity( intent );
+
+        //		Intent intent = new Intent(Intent.ACTION_VIEW);
+        //		intent.putExtra("sms_body", smsBody);
+        //		
+        //		intent.setType("vnd.android-dir/mms-sms");
+        //		context.startActivity(intent);  
+        //createChooser pas util ici, util seulement pour par ex le "partager" de picsay pro
+        //context.startActivity(Intent.createChooser(intent, "chooser:");
+    }
+
+    public static void composeMail( Context context, String emailAddress, String mailSubject, String mailBody )
+    {
+        Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "mailto:" + emailAddress ) );
+        intent.putExtra( "mail_subject", mailSubject );
+        intent.putExtra( "mail_body", mailBody );
+        context.startActivity( intent );
+    }
+
+    public static void composeTel( Context context, String phoneNumber )
+    {
+        Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "tel:" + phoneNumber ) );
+        context.startActivity( intent );
+    }
+
+    public static String replaceAccents( String str )
     {
         StringBuilder sb = new StringBuilder( str.length() );
 
@@ -64,6 +63,7 @@ public final class AndroidUtils
 
         return sb.toString();
     }
+
     private static char processChar( char c )
     {
         switch ( c )
@@ -191,37 +191,58 @@ public final class AndroidUtils
         }
         return c;
     }
-  public static String getFileContent(Resources resources, int rawId) throws IOException
-  {
-    InputStream is = resources.openRawResource(rawId);
 
-    InputStreamReader isr = new InputStreamReader(is, Charset.forName("UTF-8"));
-    
-    // We guarantee that the available method returns the total
-    // size of the asset... of course, this does mean that a single
-    // asset can't be more than 2 gigs.
-    int size = is.available();
+    public static String getFileContent( Resources resources, int rawId )
+        throws IOException
+    {
+        InputStream is = resources.openRawResource( rawId );
 
-    // Read the entire asset into a local byte buffer.
-    char[] buffer = new char[size];
-    isr.read(buffer);
-    isr.close();
-    is.close();
+        InputStreamReader isr = new InputStreamReader( is, Charset.forName( "ISO-8859-1" ) );
 
-    // Convert the buffer into a string.
-    return new String(buffer);
-  }
+        // We guarantee that the available method returns the total
+        // size of the asset... of course, this does mean that a single
+        // asset can't be more than 2 gigs.
+        int size = is.available();
 
-  public static String pad(int hour, int minute)
-  {
-    return new StringBuilder(pad(hour)).append(":").append(pad(minute)).toString();
-  }
+        // Read the entire asset into a local byte buffer.
+        char[] buffer = new char[size];
+        isr.read( buffer );
+        isr.close();
+        is.close();
 
-  public static String pad(int c)
-  {
-    if (c >= 10)
-      return String.valueOf(c);
-    else
-      return "0" + String.valueOf(c);
-  }
+        // Convert the buffer into a string.
+        return new String( buffer );
+    }
+
+//    public static String getFileContent( Resources resources, int rawId )
+//        throws IOException
+//    {
+//        InputStream is = resources.openRawResource( rawId );
+//
+//        // We guarantee that the available method returns the total
+//        // size of the asset... of course, this does mean that a single
+//        // asset can't be more than 2 gigs.
+//        int size = is.available();
+//
+//        // Read the entire asset into a local byte buffer.
+//        byte[] buffer = new byte[size];
+//        is.read( buffer );
+//        is.close();
+//
+//        // Convert the buffer into a string.
+//        return new String( buffer, "ISO-8859-1" );
+//    }
+
+    public static String pad( int hour, int minute )
+    {
+        return new StringBuilder( pad( hour ) ).append( ":" ).append( pad( minute ) ).toString();
+    }
+
+    public static String pad( int c )
+    {
+        if ( c >= 10 )
+            return String.valueOf( c );
+        else
+            return "0" + String.valueOf( c );
+    }
 }
