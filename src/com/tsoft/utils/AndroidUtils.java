@@ -5,6 +5,8 @@ package com.tsoft.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 
@@ -193,14 +195,17 @@ public final class AndroidUtils
   {
     InputStream is = resources.openRawResource(rawId);
 
+    InputStreamReader isr = new InputStreamReader(is, Charset.forName("UTF-8"));
+    
     // We guarantee that the available method returns the total
     // size of the asset... of course, this does mean that a single
     // asset can't be more than 2 gigs.
     int size = is.available();
 
     // Read the entire asset into a local byte buffer.
-    byte[] buffer = new byte[size];
-    is.read(buffer);
+    char[] buffer = new char[size];
+    isr.read(buffer);
+    isr.close();
     is.close();
 
     // Convert the buffer into a string.
