@@ -70,7 +70,16 @@ public class BlackListActivity
 
     private void fillList()
     {
-        mCursorBlakListed = mDb.fetchAllBlackList();
+        if ( Log.DEBUG )
+        {
+            /* display only in debug mode to avoid user to see them
+             * we display only the black listed setted direclty by the user */
+            mCursorBlakListed = mDb.fetchAllBlackList();
+        }
+        else
+        {
+            mCursorBlakListed = mDb.fetchAllTimeBlackListed();
+        }
         startManagingCursor( mCursorBlakListed );
         setListAdapter( new BlackListCursorAdapter( this, mCursorBlakListed ) );
     }

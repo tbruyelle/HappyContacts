@@ -3,10 +3,10 @@
 	android:orientation="horizontal" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 
-	<TextView android:id="@+id/contact_name" android:text="toto"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:textSize="20sp" android:textStyle="bold"
-		android:layout_alignParentLeft="true" android:layout_alignParentTop="true" />
+	<TextView android:id="@+id/contact_name" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:textSize="20sp"
+		android:textStyle="bold" android:layout_alignParentLeft="true"
+		android:layout_alignParentTop="true" />
 	<TextView android:id="@+id/last_wish_year"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:textStyle="italic" android:layout_alignParentLeft="true"

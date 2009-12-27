@@ -20,27 +20,38 @@ public class BlackListCursorAdapter
 {
     LayoutInflater mInflater;
 
+    Context mContext;
+
     public BlackListCursorAdapter( Context context, Cursor c )
     {
         super( context, c );
+        mContext = context;
         mInflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+    }
+
+    private void setLastWishDate( View view, String lastWishDate )
+    {
+        TextView lastWishDateTextView = (TextView) view.findViewById( R.id.last_wish_year );
+        lastWishDateTextView.setText( mContext.getString( R.string.last_wish_date, lastWishDate ) );
+    }
+
+    private void setContactName( View view, String contactName )
+    {
+        TextView contactNameTextView = (TextView) view.findViewById( R.id.contact_name );
+        contactNameTextView.setText( contactName );
     }
 
     @Override
     public void bindView( View view, Context context, Cursor cursor )
     {
-        // contact name
-        TextView contactNameTextView = (TextView) view.findViewById( R.id.contact_name );
-        String contactName = cursor.getString( cursor.getColumnIndex( HappyContactsDb.BlackList.CONTACT_NAME ) );
-        contactNameTextView.setText( contactName );
-
-        // last wish date
-        TextView lastWishDateTextView = (TextView) view.findViewById( R.id.last_wish_year );
         String lastWishDate = cursor.getString( cursor.getColumnIndex( HappyContactsDb.BlackList.LAST_WISH_DATE ) );
+        String contactName = cursor.getString( cursor.getColumnIndex( HappyContactsDb.BlackList.CONTACT_NAME ) );
+
         if ( lastWishDate != null )
         {
-            lastWishDateTextView.setText( context.getString( R.string.last_wish_date, lastWishDate ) );
+            setLastWishDate( view, lastWishDate );
         }
+        setContactName( view, contactName );
     }
 
     @Override

@@ -196,11 +196,23 @@ public class DbAdapter
         return mDb.delete( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.ID + "=" + id, null ) > 0;
     }
 
+    /**
+     * @return all lines
+     */
     public Cursor fetchAllBlackList()
     {
 
         return mDb.query( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS, null, null, null,
                           null, null );
+    }
+
+    /**
+     * @return only the lines with lastWishDate=null, meaning the contact is black listed all the time.
+     */
+    public Cursor fetchAllTimeBlackListed()
+    {
+        return mDb.query( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS,
+                          HappyContactsDb.BlackList.LAST_WISH_DATE + " = null", null, null, null, null );
     }
 
     public Cursor fetchBlackList( long contactId )
