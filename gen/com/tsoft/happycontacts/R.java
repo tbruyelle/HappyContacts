@@ -59,7 +59,6 @@ public final class R {
         public static final int happyfeast=0x7f06000a;
         public static final int hello=0x7f060001;
         public static final int last_wish_date=0x7f06000d;
-        public static final int last_wish_year=0x7f06002d;
         public static final int later=0x7f060008;
         public static final int loading_data=0x7f060028;
         public static final int never=0x7f060009;

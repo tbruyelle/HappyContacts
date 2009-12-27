@@ -19,6 +19,7 @@ import android.provider.Contacts.People;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tsoft.happycontacts.dao.DbAdapter;
@@ -61,7 +62,7 @@ public class ReminderPopupActivity
         String day = dateFormat.format( date );
         SimpleDateFormat fullDateFormat = new SimpleDateFormat( "dd/MM/yyyy" );
         mDate = fullDateFormat.format( date );
-        
+
         ContactFeasts contactFeasts = DayMatcherService.testDayMatch( this, day, mDate );
         /* boucle sur les contacts a qui il fait souhaiter la fete */
         contacts = contactFeasts.getContactList().entrySet().iterator();
@@ -104,7 +105,10 @@ public class ReminderPopupActivity
 
     private void setContentForContact( final Long contactId, final ContactFeast contactFeast )
     {
-        setTitle( getString( R.string.happyfeast, contactFeast.getContactName() ) );
+        setTitle( R.string.happyfeast );
+
+        TextView contactNameTextView = (TextView) findViewById( R.id.contact_name );
+        contactNameTextView.setText( contactFeast.getContactName() );
 
         Uri contactUri = ContentUris.withAppendedId( People.CONTENT_URI, contactId );
         Bitmap photo = People.loadContactPhoto( this, contactUri, R.drawable.smile, null );

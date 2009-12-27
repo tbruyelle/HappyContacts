@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="version">1.0</string>
-  <string name="hello">Hello World, MainActivity!</string>
-  <string name="app_name">Happy Contacts</string>
-  <string name="no_contacts">Pas de contacts à afficher!</string>
-  <string name="exit">Exit</string>
-  <string name="next">Suivant</string>
-  <string name="nottoday">Une autre fois</string>
-  <string name="call">Faire plaisir</string>
-  <string name="later">Plus tard</string>
-  <string name="never">Jamais</string>
-  <string name="happyfeast">&quot;C\'est la fête de %s !&quot;</string>
-  <string name="whattodo">Voulez-vous contacter cette personne maintenant \?
-  </string>
-  <string name="blacklist_label">Les contacts avec une année ne sont blacklisté que
-    pour l\'année.\n\nCliquez sur un nom pour le supprimer de cette
-    liste noire.</string>
-  <string name="last_wish_date">&quot;Dernière date souhaitée : %s&quot;</string>
-  <string name="test_app_title">Liste des fêtes du %s</string>
-  <string name="pref_test_app">Liste des fêtes</string>
-  <string name="no_feast">Pas de fête ce jour.</string>
-  <string name="pref_test_app_summary">Afficher les fêtes pour un jour donné.</string>
-  <string name="pref_templates_cat">Modèles</string>
-  <string name="pref_template_sms">Modèle SMS</string>
-  <string name="pref_template_sms_summary">Contenu du SMS à envoyer</string>
-  <string name="pref_template_email">Modèle Email</string>
-  <string name="pref_template_email_summary">Contenu de l\'email à envoyer</string>
-  <string name="pref_blacklist">Liste noire</string>
-  <string name="pref_blacklist_summary">Contacts à qui on ne souhaitera pas la fête !
-  </string>
-  <string name="pref_alarm">Alarme</string>
-  <string name="pref_alarm_on">Activée</string>
-  <string name="pref_alarm_off">Désactivée</string>
-  <string name="pref_time">Heure</string>
-  <string name="pref_template_sms_dialog">Entrez le modèle de SMS</string>
-  <string name="pref_template_email_dialog">Entrez le modèle d'email</string>
-  <string name="toast_contact_blacklisted">Le contact est dans la liste noire !</string>
-  <string name="toast_blacklisted">%s a été ajouté à la liste noire</string>
-  <string name="toast_later">La notification est conservée pour plus tard.
-  </string>
-  <string name="toast_no_contact">Pas de contact trouvés !</string>
-  <string name="toast_contact_one">C\'est sa fête :\n</string>
-  <string name="toast_contact_list">C\'est leur fête :\n</string>
-  <string name="toast_finish">Les fêtes du jour ont été traitées</string>
-  <string name="enter_date">Saisir une journée</string>
-  <string name="check_contacts">Verifier les contacts</string>
-  <string name="loading_data">Chargement des données...</string>
-  <string name="updating_data">Mise à jour des données...</string>
-  <string name="notif_new_event">C\'est la fête de %s !</string>
-  <string name="notif_new_event_multi">C\'est la fête de plusieurs de vos contacts !
-  </string>
-  <string name="notif_one_or_more">Il y a quelque chose à fêter aujourd'hui !
+	<string name="version">1.0</string>
+	<string name="hello">Hello World, MainActivity!</string>
+	<string name="app_name">Happy Contacts</string>
+	<string name="no_contacts">Pas de contacts à afficher!</string>
+	<string name="exit">Exit</string>
+	<string name="next">Suivant</string>
+	<string name="nottoday">Une autre fois</string>
+	<string name="call">Faire plaisir</string>
+	<string name="later">Plus tard</string>
+	<string name="never">Jamais</string>
+	<string name="happyfeast">C\'est sa fête !</string>
+	<string name="whattodo">Voulez-vous contacter cette personne maintenant \?
+	</string>
+	<string name="blacklist_label">Les contacts avec une année ne sont blacklisté que
+		pour l\'année.\n\nCliquez sur un nom pour le supprimer de cette
+		liste noire.</string>
+	<string name="last_wish_date">&quot;Dernière date souhaitée : %s&quot;</string>
+	<string name="test_app_title">Liste des fêtes du %s</string>
+	<string name="pref_test_app">Liste des fêtes</string>
+	<string name="no_feast">Pas de fête ce jour.</string>
+	<string name="pref_test_app_summary">Afficher les fêtes pour un jour donné.</string>
+	<string name="pref_templates_cat">Modèles</string>
+	<string name="pref_template_sms">Modèle SMS</string>
+	<string name="pref_template_sms_summary">Contenu du SMS à envoyer</string>
+	<string name="pref_template_email">Modèle Email</string>
+	<string name="pref_template_email_summary">Contenu de l\'email à envoyer</string>
+	<string name="pref_blacklist">Liste noire</string>
+	<string name="pref_blacklist_summary">Contacts à qui on ne souhaitera pas la fête !
+	</string>
+	<string name="pref_alarm">Alarme</string>
+	<string name="pref_alarm_on">Activée</string>
+	<string name="pref_alarm_off">Désactivée</string>
+	<string name="pref_time">Heure</string>
+	<string name="pref_template_sms_dialog">Entrez le modèle de SMS</string>
+	<string name="pref_template_email_dialog">Entrez le modèle d'email</string>
+	<string name="toast_contact_blacklisted">Le contact est dans la liste noire !</string>
+	<string name="toast_blacklisted">%s a été ajouté à la liste noire</string>
+	<string name="toast_later">La notification est conservée pour plus tard.
+	</string>
+	<string name="toast_no_contact">Pas de contact trouvés !</string>
+	<string name="toast_contact_one">C\'est sa fête :\n</string>
+	<string name="toast_contact_list">C\'est leur fête :\n</string>
+	<string name="toast_finish">Les fêtes du jour ont été traitées</string>
+	<string name="enter_date">Saisir une journée</string>
+	<string name="check_contacts">Verifier les contacts</string>
+	<string name="loading_data">Chargement des données...</string>
+	<string name="updating_data">Mise à jour des données...</string>
+	<string name="notif_new_event">C\'est la fête de %s !</string>
+	<string name="notif_new_event_multi">C\'est la fête de plusieurs de vos contacts !
+	</string>
+	<string name="notif_one_or_more">Il y a quelque chose à fêter aujourd'hui !
   </string>
 </resources>
