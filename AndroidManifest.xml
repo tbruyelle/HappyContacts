@@ -19,7 +19,7 @@
 				<data android:scheme="package" />
 			</intent-filter>
 		</receiver>
-		<receiver android:name="AlarmReceiver"></receiver>
+		<receiver android:name=".alarm.AlarmReceiver"></receiver>
 		<service android:name="DayMatcherService"></service>
 		<activity android:name="ReminderPopupActivity"
 			android:launchMode="singleInstance" android:excludeFromRecents="true"

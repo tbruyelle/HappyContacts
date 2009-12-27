@@ -1,9 +1,12 @@
 /**
  * 
  */
-package com.tsoft.happycontacts;
+package com.tsoft.happycontacts.alarm;
 
 import java.util.Calendar;
+
+import com.tsoft.happycontacts.HappyContactsPreferences;
+import com.tsoft.happycontacts.Log;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;

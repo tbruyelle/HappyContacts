@@ -3,6 +3,8 @@
  */
 package com.tsoft.happycontacts;
 
+import com.tsoft.happycontacts.alarm.AlarmController;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;

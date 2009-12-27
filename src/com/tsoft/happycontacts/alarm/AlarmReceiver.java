@@ -1,7 +1,10 @@
 /**
  * 
  */
-package com.tsoft.happycontacts;
+package com.tsoft.happycontacts.alarm;
+
+import com.tsoft.happycontacts.DayMatcherService;
+import com.tsoft.happycontacts.Log;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

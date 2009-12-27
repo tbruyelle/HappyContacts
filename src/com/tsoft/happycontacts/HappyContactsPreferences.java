@@ -15,6 +15,7 @@ import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.widget.TimePicker;
 
+import com.tsoft.happycontacts.alarm.AlarmController;
 import com.tsoft.happycontacts.blacklist.BlackListActivity;
 import com.tsoft.utils.AndroidUtils;
 

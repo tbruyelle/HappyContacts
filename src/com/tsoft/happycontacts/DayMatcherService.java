@@ -15,6 +15,7 @@ import android.database.Cursor;
 import android.os.IBinder;
 import android.provider.Contacts.People;
 
+import com.tsoft.happycontacts.alarm.AlarmController;
 import com.tsoft.happycontacts.dao.DbAdapter;
 import com.tsoft.happycontacts.dao.HappyContactsDb;
 import com.tsoft.happycontacts.model.ContactFeast;
