@@ -2,7 +2,6 @@ package com.tsoft.happycontacts;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Map;
 
 import android.app.DatePickerDialog;
@@ -33,7 +32,7 @@ public class TestAppActivity
 
     private DbAdapter mDb;
 
-    private SimpleCursorAdapter simpleCursorAdapter;
+    private SimpleCursorAdapter mCursorAdapter;
 
     private Cursor mCursorNamesForDay;
 
@@ -47,7 +46,7 @@ public class TestAppActivity
 
     private int mDayOfMonth;
 
-    private final Calendar calendar = Calendar.getInstance();
+    private final Calendar mCalendar = Calendar.getInstance();
 
     /** Called when the activity is first created. */
     @Override
@@ -75,10 +74,13 @@ public class TestAppActivity
         }
         super.onResume();
         SimpleDateFormat fullDateFormat = new SimpleDateFormat( "dd/MM/yyyy" );
-        mDate = fullDateFormat.format( calendar.getTime() );
-        mYear = calendar.get( Calendar.YEAR );
-        mMonthOfYear = calendar.get( Calendar.MONTH );
-        mDayOfMonth = calendar.get( Calendar.DAY_OF_MONTH );
+        mDate = fullDateFormat.format( mCalendar.getTime() );
+        mYear = mCalendar.get( Calendar.YEAR );
+        mMonthOfYear = mCalendar.get( Calendar.MONTH );
+        mDayOfMonth = mCalendar.get( Calendar.DAY_OF_MONTH );
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat( "dd/MM" );
+        mDay = dateFormat.format( mCalendar.getTime() );
 
         mDb.open( true );
         fillList();
@@ -118,19 +120,21 @@ public class TestAppActivity
 
     private void fillList()
     {
-        SimpleDateFormat dateFormat = new SimpleDateFormat( "dd/MM" );
-        Date date = new Date();
-        mDay = dateFormat.format( date );
         setTitle( getApplicationContext().getString( R.string.test_app_title, mDay ) );
         mCursorNamesForDay = mDb.fetchNamesForDay( mDay );
         startManagingCursor( mCursorNamesForDay );
 
-        startManagingCursor( mCursorNamesForDay );
-        String[] from = new String[] { HappyContactsDb.Feast.NAME };
-        int[] to = new int[] { android.R.id.text1 };
-        simpleCursorAdapter = new SimpleCursorAdapter( this, android.R.layout.simple_list_item_1, mCursorNamesForDay,
-                                                       from, to );
-        setListAdapter( simpleCursorAdapter );
+        if ( mCursorAdapter == null )
+        {
+            String[] from = new String[] { HappyContactsDb.Feast.NAME };
+            int[] to = new int[] { R.id.saint_name };
+            mCursorAdapter = new SimpleCursorAdapter( this, R.layout.testapp_element, mCursorNamesForDay, from, to );
+            setListAdapter( mCursorAdapter );
+        }
+        else
+        {
+            mCursorAdapter.changeCursor( mCursorNamesForDay );
+        }
     }
 
     //  @Override
@@ -216,11 +220,7 @@ public class TestAppActivity
                 cal.set( year, monthOfYear, dayOfMonth );
                 SimpleDateFormat dateFormat = new SimpleDateFormat( "dd/MM" );
                 mDay = dateFormat.format( cal.getTime() );
-                mCursorNamesForDay = mDb.fetchNamesForDay( mDay );
-                startManagingCursor( mCursorNamesForDay );
-                simpleCursorAdapter.changeCursor( mCursorNamesForDay );
-
-                setTitle( getApplicationContext().getString( R.string.test_app_title, mDay ) );
+                fillList();
             }
         }, mYear, mMonthOfYear, mDayOfMonth );
         datePickerDialog.show();

@@ -22,9 +22,11 @@ public final class R {
         public static final int ic_menu_reminder=0x7f020005;
         public static final int ic_menu_today=0x7f020006;
         public static final int icon=0x7f020007;
-        public static final int sad=0x7f020008;
-        public static final int smile=0x7f020009;
-        public static final int umbrella=0x7f02000a;
+        public static final int left_deco=0x7f020008;
+        public static final int right_deco=0x7f020009;
+        public static final int sad=0x7f02000a;
+        public static final int smile=0x7f02000b;
+        public static final int umbrella=0x7f02000c;
     }
     public static final class id {
         public static final int call_button=0x7f070003;
@@ -35,6 +37,7 @@ public final class R {
         public static final int layout_root=0x7f070002;
         public static final int never_button=0x7f070006;
         public static final int nottoday_button=0x7f070004;
+        public static final int saint_name=0x7f070009;
         public static final int text=0x7f070008;
     }
     public static final class layout {
@@ -44,6 +47,7 @@ public final class R {
         public static final int reminder=0x7f030003;
         public static final int reminder_header=0x7f030004;
         public static final int testapp=0x7f030005;
+        public static final int testapp_element=0x7f030006;
     }
     public static final class raw {
         public static final int db_create=0x7f040000;

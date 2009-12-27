@@ -145,7 +145,8 @@ public class DbAdapter
 
         mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] {
             HappyContactsDb.Feast.ID,
-            HappyContactsDb.Feast.NAME }, HappyContactsDb.Feast.DAY + "='" + day + "'", null, null, null, null, null );
+            HappyContactsDb.Feast.NAME }, HappyContactsDb.Feast.DAY + "='" + day + "'", null, null, null,
+                   HappyContactsDb.Feast.NAME, null );
         // mDb.query(HappyContactsDb.Feast.TABLE_NAME, new String[] {
         // HappyContactsDb.Feast.ID,
         // HappyContactsDb.Feast.NAME, HappyContactsDb.Feast.LAST_WISH_YEAR },
@@ -164,7 +165,7 @@ public class DbAdapter
         Cursor mCursor =
 
         mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.DAY },
-                   HappyContactsDb.Feast.NAME + " like " + name, null, null, null, null, null );
+                   HappyContactsDb.Feast.NAME + " like " + name, null, null, null, HappyContactsDb.Feast.DAY, null );
         if ( mCursor != null )
         {
             mCursor.moveToFirst();
