@@ -2,7 +2,7 @@ create table blackList(
   _id integer primary key autoincrement,
   contactId integer not null,
   contactName text not null,
-  lastWishYear char(4) null);
+  lastWishDate char(10) null);
 
 create table feast (
   _id integer primary key autoincrement,

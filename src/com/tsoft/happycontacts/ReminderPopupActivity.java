@@ -3,7 +3,8 @@
  */
 package com.tsoft.happycontacts;
 
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -36,7 +37,7 @@ public class ReminderPopupActivity
 
     private boolean keepNotif = false;
 
-    private final String year = String.valueOf( Calendar.getInstance().get( Calendar.YEAR ) );
+    private String mDate;
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -55,7 +56,13 @@ public class ReminderPopupActivity
         mDb = new DbAdapter( this );
 
         /* boucle sur les contacts a qui il fait souhaiter la fete */
-        ContactFeasts contactFeasts = DayMatcherService.testDayMatch( this );
+        SimpleDateFormat dateFormat = new SimpleDateFormat( "dd/MM" );
+        Date date = new Date();
+        String day = dateFormat.format( date );
+        SimpleDateFormat fullDateFormat = new SimpleDateFormat( "dd/MM/yyyy" );
+        mDate = fullDateFormat.format( date );
+        
+        ContactFeasts contactFeasts = DayMatcherService.testDayMatch( this, day, mDate );
         /* boucle sur les contacts a qui il fait souhaiter la fete */
         contacts = contactFeasts.getContactList().entrySet().iterator();
 
@@ -111,10 +118,10 @@ public class ReminderPopupActivity
             public void onClick( View v )
             {
                 // Afficher les données du contacts
-                boolean res = mDb.updateContactFeast( contactId.longValue(), contactFeast.getContactName(), year );
+                boolean res = mDb.updateContactFeast( contactId.longValue(), contactFeast.getContactName(), mDate );
                 if ( !res )
                 {
-                    Log.e( "Error insertBlackList with year " + year );
+                    Log.e( "Error insertBlackList with year " + mDate );
                 }
 
                 Uri displayContactUri = ContentUris.withAppendedId( People.CONTENT_URI, contactId.intValue() );
@@ -162,11 +169,11 @@ public class ReminderPopupActivity
         {
             public void onClick( View v )
             {
-                boolean res = mDb.updateContactFeast( contactId.longValue(), contactFeast.getContactName(), year );
+                boolean res = mDb.updateContactFeast( contactId.longValue(), contactFeast.getContactName(), mDate );
                 nextOrExit();
                 if ( !res )
                 {
-                    Log.e( "Error insertBlackList with year " + year );
+                    Log.e( "Error insertBlackList with year " + mDate );
                 }
             }
         } );

@@ -11,7 +11,7 @@ public final class HappyContactsDb
 {
     public static String DATABASE_NAME = "happy_contacts";
 
-    public static int DATABASE_VERSION = 22;
+    public static int DATABASE_VERSION = 25;
 
     public static final class Feast
     {
@@ -36,8 +36,8 @@ public final class HappyContactsDb
 
         public static String CONTACT_NAME = "contactName";
 
-        public static String LAST_WISH_YEAR = "lastWishYear";
+        public static String LAST_WISH_DATE = "lastWishDate";
 
-        public static String[] COLUMNS = { ID, CONTACT_ID, CONTACT_NAME, LAST_WISH_YEAR };
+        public static String[] COLUMNS = { ID, CONTACT_ID, CONTACT_NAME, LAST_WISH_DATE };
     }
 }

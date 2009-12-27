@@ -70,19 +70,19 @@ public class DayMatcherService
         SimpleDateFormat dateFormat = new SimpleDateFormat( "dd/MM" );
         Date date = new Date();
         String day = dateFormat.format( date );
-        SimpleDateFormat yearFormat = new SimpleDateFormat( "yyyy" );
-        String year = yearFormat.format( date );
-        return testDayMatch( context, day, year );
+        SimpleDateFormat fullDateFormat = new SimpleDateFormat( "dd/MM/yyyy" );
+        String fullDate = fullDateFormat.format( date );
+        return testDayMatch( context, day, fullDate );
     }
 
     /**
      * search for defined date
      * @param context
      * @param day
-     * @param year
+     * @param fullDate
      * @return
      */
-    public static ContactFeasts testDayMatch( Context context, String day, String year )
+    public static ContactFeasts testDayMatch( Context context, String day, String fullDate )
     {
         if ( Log.DEBUG )
         {
@@ -162,7 +162,7 @@ public class DayMatcherService
                     String subNameUpper = AndroidUtils.replaceAccents( subName ).toUpperCase();
                     if ( names.containsKey( subNameUpper ) )
                     {
-                        if ( mDb.isBlackListed( contactId, year ) )
+                        if ( mDb.isBlackListed( contactId, fullDate ) )
                         {
                             if ( Log.DEBUG )
                             {

@@ -55,7 +55,6 @@ public class DbAdapter
                 {
                     db.execSQL( sqlStatements );
                 }
-                db.execSQL( "insert into feast (name, day) values (\"Théa\", \"19/12\")" );
                 Log.v( "Creating database done." );
             }
             catch ( IOException e )
@@ -173,14 +172,20 @@ public class DbAdapter
         return mCursor;
     }
 
-    private boolean insertBlackList( long contactId, String contactName, String year )
+    /**
+     * @param contactId
+     * @param contactName
+     * @param date
+     * @return
+     */
+    private boolean insertBlackList( long contactId, String contactName, String date )
     {
         ContentValues initialValues = new ContentValues();
         initialValues.put( HappyContactsDb.BlackList.CONTACT_ID, contactId );
         initialValues.put( HappyContactsDb.BlackList.CONTACT_NAME, contactName );
-        if ( year != null )
+        if ( date != null )
         {
-            initialValues.put( HappyContactsDb.BlackList.LAST_WISH_YEAR, year );
+            initialValues.put( HappyContactsDb.BlackList.LAST_WISH_DATE, date );
         }
 
         return mDb.insert( HappyContactsDb.BlackList.TABLE_NAME, null, initialValues ) > 0;
@@ -211,7 +216,7 @@ public class DbAdapter
         return mCursor;
     }
 
-    public boolean isBlackListed( long contactId, String year )
+    public boolean isBlackListed( long contactId, String date )
         throws SQLException
     {
         Cursor c = fetchBlackList( contactId );
@@ -224,33 +229,33 @@ public class DbAdapter
             c.close();
             return false;
         }
-        if ( year != null )
+        if ( date != null )
         {
             /* check if its black listed for this year only */
-            String lastWishedYear = c.getString( c.getColumnIndexOrThrow( HappyContactsDb.BlackList.LAST_WISH_YEAR ) );
+            String lastWishedDate = c.getString( c.getColumnIndexOrThrow( HappyContactsDb.BlackList.LAST_WISH_DATE ) );
             c.close();
-            return ( lastWishedYear == null || lastWishedYear.equals( year ) );
+            return ( lastWishedDate == null || lastWishedDate.equals( date ) );
         }
         c.close();
         return true;
     }
 
-    public boolean updateContactFeast( long contactId, String contactName, String year )
+    public boolean updateContactFeast( long contactId, String contactName, String date )
     {
         if ( Log.DEBUG )
         {
-            Log.v( "start updateContactFeast for contact " + contactName + " with year " + year );
+            Log.v( "start updateContactFeast for contact " + contactName + " with date " + date );
         }
         if ( isBlackListed( contactId, null ) )
         {
             ContentValues args = new ContentValues();
-            args.put( HappyContactsDb.BlackList.LAST_WISH_YEAR, year );
+            args.put( HappyContactsDb.BlackList.LAST_WISH_DATE, date );
             return mDb.update( HappyContactsDb.BlackList.TABLE_NAME, args, HappyContactsDb.BlackList.CONTACT_ID + "="
                 + contactId, null ) > 0;
         }
         else
         {
-            return insertBlackList( contactId, contactName, year );
+            return insertBlackList( contactId, contactName, date );
         }
     }
 }

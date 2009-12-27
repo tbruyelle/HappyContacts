@@ -37,9 +37,9 @@ public class TestAppActivity
 
     private Cursor mCursorNamesForDay;
 
-    private String day;
+    private String mDay;
 
-    private String currentYear = String.valueOf( Calendar.getInstance().get( Calendar.YEAR ) );
+    private String mDate;
 
     private int mYear;
 
@@ -74,6 +74,8 @@ public class TestAppActivity
             Log.v( "TestAppActivity: start onResume" );
         }
         super.onResume();
+        SimpleDateFormat fullDateFormat = new SimpleDateFormat( "dd/MM/yyyy" );
+        mDate = fullDateFormat.format( calendar.getTime() );
         mYear = calendar.get( Calendar.YEAR );
         mMonthOfYear = calendar.get( Calendar.MONTH );
         mDayOfMonth = calendar.get( Calendar.DAY_OF_MONTH );
@@ -118,16 +120,16 @@ public class TestAppActivity
     {
         SimpleDateFormat dateFormat = new SimpleDateFormat( "dd/MM" );
         Date date = new Date();
-        day = dateFormat.format( date );
-        setTitle( getApplicationContext().getString( R.string.test_app_title, day ) );
-        mCursorNamesForDay = mDb.fetchNamesForDay( day );
+        mDay = dateFormat.format( date );
+        setTitle( getApplicationContext().getString( R.string.test_app_title, mDay ) );
+        mCursorNamesForDay = mDb.fetchNamesForDay( mDay );
         startManagingCursor( mCursorNamesForDay );
 
         startManagingCursor( mCursorNamesForDay );
         String[] from = new String[] { HappyContactsDb.Feast.NAME };
         int[] to = new int[] { android.R.id.text1 };
-        simpleCursorAdapter =
-            new SimpleCursorAdapter( this, android.R.layout.simple_list_item_1, mCursorNamesForDay, from, to );
+        simpleCursorAdapter = new SimpleCursorAdapter( this, android.R.layout.simple_list_item_1, mCursorNamesForDay,
+                                                       from, to );
         setListAdapter( simpleCursorAdapter );
     }
 
@@ -167,8 +169,7 @@ public class TestAppActivity
                 /*
                  * Look for names matching today date
                  */
-                ContactFeasts contactFeastToday =
-                    DayMatcherService.testDayMatch( getApplicationContext(), day, currentYear );
+                ContactFeasts contactFeastToday = DayMatcherService.testDayMatch( getApplicationContext(), mDay, mDate );
 
                 if ( !contactFeastToday.getContactList().isEmpty() )
                 {
@@ -214,12 +215,12 @@ public class TestAppActivity
                 Calendar cal = Calendar.getInstance();
                 cal.set( year, monthOfYear, dayOfMonth );
                 SimpleDateFormat dateFormat = new SimpleDateFormat( "dd/MM" );
-                day = dateFormat.format( cal.getTime() );
-                mCursorNamesForDay = mDb.fetchNamesForDay( day );
+                mDay = dateFormat.format( cal.getTime() );
+                mCursorNamesForDay = mDb.fetchNamesForDay( mDay );
                 startManagingCursor( mCursorNamesForDay );
                 simpleCursorAdapter.changeCursor( mCursorNamesForDay );
 
-                setTitle( getApplicationContext().getString( R.string.test_app_title, day ) );
+                setTitle( getApplicationContext().getString( R.string.test_app_title, mDay ) );
             }
         }, mYear, mMonthOfYear, mDayOfMonth );
         datePickerDialog.show();

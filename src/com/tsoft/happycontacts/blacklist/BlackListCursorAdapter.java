@@ -36,7 +36,7 @@ public class BlackListCursorAdapter
 
         // last wish date
         TextView lastWishDateTextView = (TextView) view.findViewById( R.id.last_wish_year );
-        String lastWishDate = cursor.getString( cursor.getColumnIndex( HappyContactsDb.BlackList.LAST_WISH_YEAR ) );
+        String lastWishDate = cursor.getString( cursor.getColumnIndex( HappyContactsDb.BlackList.LAST_WISH_DATE ) );
         if ( lastWishDate != null )
         {
             lastWishDateTextView.setText( context.getString( R.string.last_wish_date, lastWishDate ) );
