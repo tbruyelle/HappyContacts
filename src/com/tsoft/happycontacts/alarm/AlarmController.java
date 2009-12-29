@@ -5,25 +5,22 @@ package com.tsoft.happycontacts.alarm;
 
 import java.util.Calendar;
 
-import com.tsoft.happycontacts.HappyContactsPreferences;
-import com.tsoft.happycontacts.Log;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import com.tsoft.happycontacts.Constants;
+import com.tsoft.happycontacts.Log;
+
 /**
  * @author tom
  *
  */
 public class AlarmController
+    implements Constants
 {
-    /** default alarm to 9AM */
-    public static int DEFAULT_ALARM_HOUR = 9;
-
-    public static int DEFAULT_ALARM_MINUTE = 0;
 
     public static void startAlarm( Context context )
     {
@@ -45,16 +42,16 @@ public class AlarmController
         {
             Log.v( "AlarmController: currentTimeMillis=" + currentTimeMillis );
         }
-        SharedPreferences prefs = context.getSharedPreferences( HappyContactsPreferences.appName, 0 );
-        int hour = prefs.getInt( "alarmHour", DEFAULT_ALARM_HOUR );
-        int minute = prefs.getInt( "alarmMinute", DEFAULT_ALARM_MINUTE );
+        SharedPreferences prefs = context.getSharedPreferences( APP_NAME, 0 );
+        int hour = prefs.getInt( PREF_ALARM_HOUR, DEFAULT_ALARM_HOUR );
+        int minute = prefs.getInt( PREF_ALARM_MINUTE, DEFAULT_ALARM_MINUTE );
         calendar.set( Calendar.HOUR_OF_DAY, hour );
         calendar.set( Calendar.MINUTE, minute );
         calendar.set( Calendar.SECOND, 0 );
 
         if ( calendar.getTimeInMillis() <= currentTimeMillis )
         {
-            /* temps deja passe, on incremente d'un jour */
+            /* time elapsed, add a day */
             calendar.add( Calendar.DAY_OF_MONTH, 1 );
         }
 

@@ -18,22 +18,22 @@ public class OnInstallReceiver
     extends BroadcastReceiver
 {
 
-  /**
-   * @see android.content.BroadcastReceiver#onReceive(android.content.Context,
-   *      android.content.Intent)
-   */
-  @Override
-  public void onReceive(Context context, Intent intent)
-  {
-    if (Log.DEBUG)
+    /**
+     * @see android.content.BroadcastReceiver#onReceive(android.content.Context,
+     *      android.content.Intent)
+     */
+    @Override
+    public void onReceive( Context context, Intent intent )
     {
-      Log.v("OnInstallReceiver: start onReceive()");
+        if ( Log.DEBUG )
+        {
+            Log.v( "OnInstallReceiver: start onReceive()" );
+        }
+        AlarmController.startAlarm( context );
+        if ( Log.DEBUG )
+        {
+            Log.v( "OnInstallReceiver: end onReceive()" );
+        }
     }
-    AlarmController.startAlarm(context);
-    if (Log.DEBUG)
-    {
-      Log.v("OnInstallReceiver: end onReceive()");
-    }
-  }
 
 }

@@ -11,7 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 
 /**
- * Lance la recherche dans les contacts par rapport a la date du jour
+ * Launch contact search for current date.
  * @author tom
  *
  */

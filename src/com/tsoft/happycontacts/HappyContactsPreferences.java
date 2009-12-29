@@ -25,9 +25,8 @@ import com.tsoft.utils.AndroidUtils;
  */
 public class HappyContactsPreferences
     extends PreferenceActivity
+    implements Constants
 {
-    public static String appName = "com.tsoft.HappyContacts";
-
     private static final int TIME_DIALOG_ID = 0;
 
     /**
@@ -37,16 +36,20 @@ public class HappyContactsPreferences
     {
         public boolean onPreferenceClick( Preference preference )
         {
+            SharedPreferences.Editor editor = mPrefs.edit();
             if ( AlarmController.isAlarmUp( HappyContactsPreferences.this ) )
             {
                 AlarmController.cancelAlarm( HappyContactsPreferences.this );
                 preference.setSummary( R.string.pref_alarm_off );
+                editor.putBoolean( PREF_ALARM_STATUS, true );
             }
             else
             {
                 AlarmController.startAlarm( HappyContactsPreferences.this );
                 preference.setSummary( R.string.pref_alarm_on );
+                editor.putBoolean( PREF_ALARM_STATUS, false );
             }
+            editor.commit();
             return true;
         }
     };
@@ -61,12 +64,11 @@ public class HappyContactsPreferences
             mAlarmHour = hourOfDay;
             mAlarmMinute = minute;
             /* record prefs */
-            SharedPreferences prefs = getSharedPreferences( appName, 0 );
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putInt( "alarmHour", mAlarmHour );
-            editor.putInt( "alarmMinute", mAlarmMinute );
+            SharedPreferences.Editor editor = mPrefs.edit();
+            editor.putInt( PREF_ALARM_HOUR, mAlarmHour );
+            editor.putInt( PREF_ALARM_MINUTE, mAlarmMinute );
             editor.commit();
-            alarmTimePref.setSummary( AndroidUtils.pad( mAlarmHour, mAlarmMinute ) );
+            mAlarmTimePref.setSummary( AndroidUtils.pad( mAlarmHour, mAlarmMinute ) );
             if ( AlarmController.isAlarmUp( HappyContactsPreferences.this ) )
             {
                 /* if alarm is up, have to change it */
@@ -75,13 +77,15 @@ public class HappyContactsPreferences
         }
     };
 
+    private SharedPreferences mPrefs;
+
     private int mAlarmHour;
 
     private int mAlarmMinute;
 
-    private CheckBoxPreference alarmStatePref;
+    private CheckBoxPreference mAlarmStatePref;
 
-    private Preference alarmTimePref;
+    private Preference mAlarmTimePref;
 
     /**
      * @see android.app.Activity#onCreateDialog(int)
@@ -108,9 +112,10 @@ public class HappyContactsPreferences
         {
             Log.v( "HappyContactsPreferences: start" );
         }
-        SharedPreferences prefs = getSharedPreferences( appName, 0 );
-        mAlarmHour = prefs.getInt( "alarmHour", AlarmController.DEFAULT_ALARM_HOUR );
-        mAlarmMinute = prefs.getInt( "alarmMinute", AlarmController.DEFAULT_ALARM_MINUTE );
+
+        mPrefs = getSharedPreferences( APP_NAME, 0 );
+        mAlarmHour = mPrefs.getInt( PREF_ALARM_HOUR, AlarmController.DEFAULT_ALARM_HOUR );
+        mAlarmMinute = mPrefs.getInt( PREF_ALARM_MINUTE, AlarmController.DEFAULT_ALARM_MINUTE );
         setPreferenceScreen( createPreferenceHierarchy() );
     }
 
@@ -120,26 +125,26 @@ public class HappyContactsPreferences
         PreferenceScreen root = getPreferenceManager().createPreferenceScreen( this );
 
         // State
-        alarmStatePref = new CheckBoxPreference( this );
-        alarmStatePref.setTitle( R.string.pref_alarm );
+        mAlarmStatePref = new CheckBoxPreference( this );
+        mAlarmStatePref.setTitle( R.string.pref_alarm );
 
         if ( AlarmController.isAlarmUp( this ) )
         {
-            alarmStatePref.setSummary( R.string.pref_alarm_on );
-            alarmStatePref.setChecked( true );
+            mAlarmStatePref.setSummary( R.string.pref_alarm_on );
+            mAlarmStatePref.setChecked( true );
         }
         else
         {
-            alarmStatePref.setSummary( R.string.pref_alarm_off );
-            alarmStatePref.setChecked( false );
+            mAlarmStatePref.setSummary( R.string.pref_alarm_off );
+            mAlarmStatePref.setChecked( false );
         }
-        alarmStatePref.setOnPreferenceClickListener( mAlarmToggleClickListener );
-        root.addPreference( alarmStatePref );
+        mAlarmStatePref.setOnPreferenceClickListener( mAlarmToggleClickListener );
+        root.addPreference( mAlarmStatePref );
 
-        alarmTimePref = new Preference( this );
-        alarmTimePref.setTitle( R.string.pref_time );
-        alarmTimePref.setSummary( AndroidUtils.pad( mAlarmHour, mAlarmMinute ) );
-        alarmTimePref.setOnPreferenceClickListener( new Preference.OnPreferenceClickListener()
+        mAlarmTimePref = new Preference( this );
+        mAlarmTimePref.setTitle( R.string.pref_time );
+        mAlarmTimePref.setSummary( AndroidUtils.pad( mAlarmHour, mAlarmMinute ) );
+        mAlarmTimePref.setOnPreferenceClickListener( new Preference.OnPreferenceClickListener()
         {
             public boolean onPreferenceClick( Preference preference )
             {
@@ -147,7 +152,7 @@ public class HappyContactsPreferences
                 return true;
             }
         } );
-        root.addItemFromInflater( alarmTimePref );
+        root.addItemFromInflater( mAlarmTimePref );
 
         // test app
         PreferenceScreen testAppPref = getPreferenceManager().createPreferenceScreen( this );

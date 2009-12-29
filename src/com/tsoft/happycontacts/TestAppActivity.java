@@ -221,6 +221,7 @@ public class TestAppActivity
                 SimpleDateFormat dateFormat = new SimpleDateFormat( "dd/MM" );
                 mDay = dateFormat.format( cal.getTime() );
                 fillList();
+                TestAppActivity.this.getCurrentFocus().scrollTo( 0, 0 );
             }
         }, mYear, mMonthOfYear, mDayOfMonth );
         datePickerDialog.show();
