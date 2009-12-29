@@ -12,6 +12,11 @@
       </intent-filter>
     </activity>
     <activity android:name=".TestAppActivity"></activity>
+    <activity android:name="ReminderPopupActivity"
+      android:launchMode="singleInstance" android:excludeFromRecents="true"
+      android:taskAffinity="" android:theme="@android:style/Theme.Dialog">
+    </activity>
+    <activity android:name=".blacklist.BlackListActivity"></activity>
 
     <receiver android:name=".alarm.OnBootReceiver">
       <intent-filter>
@@ -24,22 +29,14 @@
       </intent-filter>
     </receiver>
     <receiver android:name=".alarm.AlarmReceiver"></receiver>
-    <service android:name="DayMatcherService"></service>
-    <activity android:name="ReminderPopupActivity"
-      android:launchMode="singleInstance" android:excludeFromRecents="true"
-      android:taskAffinity="" android:theme="@android:style/Theme.Dialog">
 
-    </activity>
-    <activity android:name=".blacklist.BlackListActivity"></activity>
+    <service android:name="DayMatcherService"></service>
   </application>
   <uses-sdk android:minSdkVersion="3" />
 
   <uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
-  
-  <supports-screens
-    android:largeScreens="true"
-    android:normalScreens="true"
-    android:smallScreens="true"
-  />
+
+  <supports-screens android:largeScreens="true"
+    android:normalScreens="true" android:smallScreens="true" />
 </manifest> 
