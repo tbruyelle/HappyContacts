@@ -1,5 +1,5 @@
 /**
- * 
+ * copyright tsoft 2009
  */
 package com.tsoft.utils;
 
