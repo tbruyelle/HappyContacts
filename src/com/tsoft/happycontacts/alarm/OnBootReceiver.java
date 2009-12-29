@@ -1,14 +1,15 @@
 /**
  * Copyright - Accor - All Rights Reserved www.accorhotels.com
  */
-package com.tsoft.happycontacts;
+package com.tsoft.happycontacts.alarm;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.tsoft.happycontacts.alarm.AlarmController;
+import com.tsoft.happycontacts.Constants;
+import com.tsoft.happycontacts.Log;
 
 /**
  * Reset the alarm if necessary
