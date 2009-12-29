@@ -22,12 +22,7 @@
       <intent-filter>
         <action android:name="android.intent.action.BOOT_COMPLETED" />
       </intent-filter>
-    </receiver>
-    <receiver android:name=".alarm.OnInstallReceiver">
-      <intent-filter>
-        <action android:name="android.intent.action.PACKAGE_INSTALL" />
-      </intent-filter>
-    </receiver>
+    </receiver>    
     <receiver android:name=".alarm.AlarmReceiver"></receiver>
 
     <service android:name="DayMatcherService"></service>

@@ -23,4 +23,6 @@ public interface Constants
     public static final String PREF_ALARM_MINUTE = "alarmMinute";
 
     public static final String PREF_ALARM_HOUR = "alarmHour";
+
+    public static final String PREF_FIRST_RUN = "firstRun";
 }

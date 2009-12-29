@@ -116,9 +116,20 @@ public class HappyContactsPreferences
         mPrefs = getSharedPreferences( APP_NAME, 0 );
         mAlarmHour = mPrefs.getInt( PREF_ALARM_HOUR, AlarmController.DEFAULT_ALARM_HOUR );
         mAlarmMinute = mPrefs.getInt( PREF_ALARM_MINUTE, AlarmController.DEFAULT_ALARM_MINUTE );
+
+        if ( mPrefs.getBoolean( PREF_FIRST_RUN, true ) )
+        {
+            /* if its the first run, alarm is setted */
+            mPrefs.edit().putBoolean( PREF_FIRST_RUN, false ).commit();
+            AlarmController.startAlarm( this );
+        }
+
         setPreferenceScreen( createPreferenceHierarchy() );
     }
 
+    /**
+     * @return the built preferences
+     */
     private PreferenceScreen createPreferenceHierarchy()
     {
         // Root
