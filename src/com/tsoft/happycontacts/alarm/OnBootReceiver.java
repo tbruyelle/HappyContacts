@@ -29,7 +29,7 @@ public class OnBootReceiver
     {
         if ( Log.DEBUG )
         {
-            Log.v( "OnInstallReceiver: start onReceive()" );
+            Log.v( "OnBootReceiver: start onReceive()" );
         }
         SharedPreferences prefs = context.getSharedPreferences( APP_NAME, 0 );
         if ( prefs.getBoolean( PREF_ALARM_STATUS, true ) )
@@ -38,7 +38,7 @@ public class OnBootReceiver
         }
         if ( Log.DEBUG )
         {
-            Log.v( "OnInstallReceiver: end onReceive()" );
+            Log.v( "OnBootReceiver: end onReceive()" );
         }
 
     }

@@ -119,7 +119,7 @@ public class HappyContactsPreferences
 
         if ( mPrefs.getBoolean( PREF_FIRST_RUN, true ) )
         {
-            /* if its the first run, alarm is setted */
+            /* if its the first run, alarm must be set */
             mPrefs.edit().putBoolean( PREF_FIRST_RUN, false ).commit();
             AlarmController.startAlarm( this );
         }
