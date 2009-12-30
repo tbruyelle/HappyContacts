@@ -77,6 +77,7 @@ public final class R {
         public static final int next=0x7f060005;
         public static final int no_contacts=0x7f060003;
         public static final int no_feast=0x7f060011;
+        public static final int no_feast_for_name=0x7f060031;
         public static final int notif_new_event=0x7f06002b;
         public static final int notif_new_event_multi=0x7f06002c;
         public static final int notif_one_or_more=0x7f06002d;

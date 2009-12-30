@@ -17,7 +17,7 @@
 	<string name="name_list_title">Liste des fêtes du %s</string>
   <string name="date_list_title">Jour(s) de fête pour %s</string>
 	<string name="pref_test_app">Liste des fêtes</string>
-	<string name="no_feast">Pas de fête ce jour.</string>
+	<string name="no_feast">Pas de fête pour ce jour.</string>
 	<string name="pref_test_app_summary">Afficher les fêtes par jour et par prénom.</string>
 	<string name="pref_templates_cat">Modèles</string>
 	<string name="pref_template_sms">Modèle SMS</string>
@@ -49,4 +49,5 @@
 <string name="enter_name">Saisir un prénom</string>
 <string name="ok">Ok</string>
 <string name="cancel">Annuler</string>
+<string name="no_feast_for_name">Pas de fête pour ce prénom.</string>
 </resources>

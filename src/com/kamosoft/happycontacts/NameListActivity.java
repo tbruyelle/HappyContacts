@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kamosoft.happycontacts.dao.DbAdapter;
@@ -63,6 +64,10 @@ public class NameListActivity
         }
         super.onCreate( savedInstanceState );
         setContentView( R.layout.testapp );
+        
+        TextView emptyText = (TextView)findViewById( android.R.id.empty );
+        emptyText.setText( getString( R.string.no_feast ) );
+        
         mDb = new DbAdapter( this );
 
         if ( Log.DEBUG )

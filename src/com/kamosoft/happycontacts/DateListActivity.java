@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.dao.HappyContactsDb;
@@ -41,9 +42,11 @@ public class DateListActivity
         }
         super.onCreate( savedInstanceState );
         setContentView( R.layout.testapp );
-        mDb = new DbAdapter( this );
 
-        mName = getIntent().getExtras().getString( NAME_INTENT_KEY );
+        TextView emptyText = (TextView) findViewById( android.R.id.empty );
+        emptyText.setText( getString( R.string.no_feast_for_name ) );
+
+        mDb = new DbAdapter( this );
 
         if ( Log.DEBUG )
         {
@@ -59,6 +62,7 @@ public class DateListActivity
             Log.v( "DateListActivity: start onResume" );
         }
         super.onResume();
+        mName = getIntent().getExtras().getString( NAME_INTENT_KEY );
         mDb.open( true );
         fillList();
         if ( Log.DEBUG )
