@@ -39,11 +39,14 @@
 	<string name="toast_contact_one">C\'est sa fête :\n</string>
 	<string name="toast_contact_list">C\'est leur fête :\n</string>
 	<string name="toast_finish">Les fêtes du jour ont été traitées</string>
-	<string name="enter_date">Saisir une journée</string>
+	<string name="enter_date">Saisir une date</string>
 	<string name="check_contacts">Verifier les contacts</string>
 	<string name="loading_data">Chargement des données...</string>
 	<string name="updating_data">Mise à jour des données...</string>
 	<string name="notif_new_event">C\'est la fête de %s !</string>
 	<string name="notif_new_event_multi">C\'est la fête de plusieurs de vos contacts !</string>
 	<string name="notif_one_or_more">Il y a quelque chose à fêter aujourd'hui !</string>
+<string name="enter_name">Saisir un prénom</string>
+<string name="ok">Ok</string>
+<string name="cancel">Annuler</string>
 </resources>

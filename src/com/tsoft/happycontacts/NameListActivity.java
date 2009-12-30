@@ -33,7 +33,9 @@ public class NameListActivity
 {
     private static final int DAY_MENU_ID = Menu.FIRST;
 
-    private static final int TEST_MENU_ID = Menu.FIRST + 1;
+    private static final int NAME_MENU_ID = DAY_MENU_ID + 1;
+
+    private static final int TEST_MENU_ID = NAME_MENU_ID + 1;
 
     private DbAdapter mDb;
 
@@ -77,7 +79,7 @@ public class NameListActivity
             Log.v( "NameListActivity: start onResume" );
         }
         super.onResume();
-        
+
         mDay = getIntent().getExtras().getString( DATE_INTENT_KEY );
         Calendar calendar = Calendar.getInstance();
         calendar.set( Calendar.MONTH, Integer.valueOf( mDay.substring( 3, 5 ) ) );
@@ -163,6 +165,7 @@ public class NameListActivity
     {
         super.onCreateOptionsMenu( menu );
         menu.add( 0, DAY_MENU_ID, 0, R.string.enter_date ).setIcon( R.drawable.ic_menu_today );
+        menu.add( 0, NAME_MENU_ID, 0, R.string.enter_name ).setIcon( android.R.drawable.ic_menu_edit );
         menu.add( 0, TEST_MENU_ID, 0, R.string.check_contacts ).setIcon( R.drawable.ic_menu_allfriends );
         return true;
     }
@@ -174,6 +177,9 @@ public class NameListActivity
         {
             case DAY_MENU_ID:
                 displayDateForm();
+                return true;
+            case NAME_MENU_ID:
+                displayNameForm();
                 return true;
             case TEST_MENU_ID:
                 /*
@@ -211,11 +217,19 @@ public class NameListActivity
     }
 
     /**
-     * 
+     * display 
+     */
+    private void displayNameForm()
+    {
+        new EnterNameDialog( this ).show();
+    }
+
+    /**
+     * display a datepicker
      */
     private void displayDateForm()
     {
-        DatePickerDialog datePickerDialog = new DatePickerDialog( this, new DatePickerDialog.OnDateSetListener()
+        new DatePickerDialog( this, new DatePickerDialog.OnDateSetListener()
         {
             public void onDateSet( DatePicker view, int year, int monthOfYear, int dayOfMonth )
             {
@@ -229,7 +243,6 @@ public class NameListActivity
                 fillList();
                 NameListActivity.this.getListView().scrollTo( 0, 0 );
             }
-        }, mYear, mMonthOfYear, mDayOfMonth );
-        datePickerDialog.show();
+        }, mYear, mMonthOfYear, mDayOfMonth ).show();
     }
 }
