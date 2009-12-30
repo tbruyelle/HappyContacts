@@ -11,7 +11,8 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity android:name=".TestAppActivity"></activity>
+    <activity android:name=".NameListActivity" android:noHistory="true"></activity>
+    <activity android:name=".DateListActivity" android:noHistory="true"></activity>
     <activity android:name="ReminderPopupActivity"
       android:launchMode="singleInstance" android:excludeFromRecents="true"
       android:taskAffinity="" android:theme="@android:style/Theme.Dialog">

@@ -6,11 +6,14 @@ import java.util.Map;
 
 import android.app.DatePickerDialog;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.DatePicker;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
@@ -20,11 +23,13 @@ import com.tsoft.happycontacts.model.ContactFeast;
 import com.tsoft.happycontacts.model.ContactFeasts;
 
 /**
+ * Display name list for a date
  * @author tom
  *
  */
-public class TestAppActivity
+public class NameListActivity
     extends ListActivity
+    implements Constants
 {
     private static final int DAY_MENU_ID = Menu.FIRST;
 
@@ -46,22 +51,21 @@ public class TestAppActivity
 
     private int mDayOfMonth;
 
-    private final Calendar mCalendar = Calendar.getInstance();
-
     /** Called when the activity is first created. */
     @Override
     public void onCreate( Bundle savedInstanceState )
     {
         if ( Log.DEBUG )
         {
-            Log.v( "TestAppActivity: start onCreate" );
+            Log.v( "NameListActivity: start onCreate" );
         }
         super.onCreate( savedInstanceState );
         setContentView( R.layout.testapp );
         mDb = new DbAdapter( this );
+
         if ( Log.DEBUG )
         {
-            Log.v( "TestAppActivity: end onCreate" );
+            Log.v( "NameListActivity: end onCreate" );
         }
     }
 
@@ -70,23 +74,26 @@ public class TestAppActivity
     {
         if ( Log.DEBUG )
         {
-            Log.v( "TestAppActivity: start onResume" );
+            Log.v( "NameListActivity: start onResume" );
         }
         super.onResume();
-        SimpleDateFormat fullDateFormat = new SimpleDateFormat( "dd/MM/yyyy" );
-        mDate = fullDateFormat.format( mCalendar.getTime() );
-        mYear = mCalendar.get( Calendar.YEAR );
-        mMonthOfYear = mCalendar.get( Calendar.MONTH );
-        mDayOfMonth = mCalendar.get( Calendar.DAY_OF_MONTH );
+        
+        mDay = getIntent().getExtras().getString( DATE_INTENT_KEY );
+        Calendar calendar = Calendar.getInstance();
+        calendar.set( Calendar.MONTH, Integer.valueOf( mDay.substring( 3, 5 ) ) );
+        calendar.set( Calendar.DAY_OF_MONTH, Integer.valueOf( mDay.substring( 0, 2 ) ) );
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat( "dd/MM" );
-        mDay = dateFormat.format( mCalendar.getTime() );
+        SimpleDateFormat fullDateFormat = new SimpleDateFormat( FULL_DATE_FORMAT );
+        mDate = fullDateFormat.format( calendar.getTime() );
+        mYear = calendar.get( Calendar.YEAR );
+        mMonthOfYear = calendar.get( Calendar.MONTH );
+        mDayOfMonth = calendar.get( Calendar.DAY_OF_MONTH );
 
         mDb.open( true );
         fillList();
         if ( Log.DEBUG )
         {
-            Log.v( "TestAppActivity: end onResume" );
+            Log.v( "NameListActivity: end onResume" );
         }
     }
 
@@ -95,7 +102,7 @@ public class TestAppActivity
     {
         if ( Log.DEBUG )
         {
-            Log.v( "TestAppActivity: start onStop" );
+            Log.v( "NameListActivity: start onStop" );
         }
         super.onStop();
         if ( mDb != null )
@@ -104,7 +111,7 @@ public class TestAppActivity
         }
         if ( Log.DEBUG )
         {
-            Log.v( "TestAppActivity: end onStop" );
+            Log.v( "NameListActivity: end onStop" );
         }
     }
 
@@ -114,20 +121,20 @@ public class TestAppActivity
         super.onRestart();
         if ( Log.DEBUG )
         {
-            Log.v( "TestAppActivity: start onRestart" );
+            Log.v( "NameListActivity: start onRestart" );
         }
     }
 
     private void fillList()
     {
-        setTitle( getApplicationContext().getString( R.string.test_app_title, mDay ) );
+        setTitle( getString( R.string.name_list_title, mDay ) );
         mCursorNamesForDay = mDb.fetchNamesForDay( mDay );
         startManagingCursor( mCursorNamesForDay );
 
         if ( mCursorAdapter == null )
         {
             String[] from = new String[] { HappyContactsDb.Feast.NAME };
-            int[] to = new int[] { R.id.saint_name };
+            int[] to = new int[] { R.id.element };
             mCursorAdapter = new SimpleCursorAdapter( this, R.layout.testapp_element, mCursorNamesForDay, from, to );
             setListAdapter( mCursorAdapter );
         }
@@ -137,20 +144,19 @@ public class TestAppActivity
         }
     }
 
-    //  @Override
-    //  protected void onListItemClick(ListView l, View v, int position, long id)
-    //  {
-    //    super.onListItemClick(l, v, position, id);
-    //    Long contactId = c.getLong(c.getColumnIndexOrThrow(People._ID));
-    //    if (mDb.isBlackListed(contactId))
-    //    {
-    //      Toast.makeText(this, R.string.toast_contact_blacklisted, Toast.LENGTH_SHORT).show();
-    //      return;
-    //    }
-    //    String contactName = c.getString(c.getColumnIndexOrThrow(People.NAME));
-    //    notifyEvent(contactId, contactName);
-    //    // new ReminderDialog(this, contactId, contactName).show();
-    //  }
+    /**
+     * @see android.app.ListActivity#onListItemClick(android.widget.ListView, android.view.View, int, long)
+     */
+    @Override
+    protected void onListItemClick( ListView l, View v, int position, long id )
+    {
+        super.onListItemClick( l, v, position, id );
+        mCursorNamesForDay.moveToPosition( position );
+        Intent intent = new Intent( this, DateListActivity.class );
+        intent.putExtra( NAME_INTENT_KEY,
+                         mCursorNamesForDay.getString( mCursorNamesForDay.getColumnIndex( HappyContactsDb.Feast.NAME ) ) );
+        startActivity( intent );
+    }
 
     @Override
     public boolean onCreateOptionsMenu( Menu menu )
@@ -218,10 +224,10 @@ public class TestAppActivity
                 mDayOfMonth = dayOfMonth;
                 Calendar cal = Calendar.getInstance();
                 cal.set( year, monthOfYear, dayOfMonth );
-                SimpleDateFormat dateFormat = new SimpleDateFormat( "dd/MM" );
+                SimpleDateFormat dateFormat = new SimpleDateFormat( DAY_FORMAT );
                 mDay = dateFormat.format( cal.getTime() );
                 fillList();
-                TestAppActivity.this.getCurrentFocus().scrollTo( 0, 0 );
+                NameListActivity.this.getListView().scrollTo( 0, 0 );
             }
         }, mYear, mMonthOfYear, mDayOfMonth );
         datePickerDialog.show();

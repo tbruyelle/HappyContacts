@@ -3,6 +3,9 @@
  */
 package com.tsoft.happycontacts;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -170,7 +173,10 @@ public class HappyContactsPreferences
         testAppPref.setKey( "testAppPref" );
         testAppPref.setTitle( R.string.pref_test_app );
         testAppPref.setSummary( R.string.pref_test_app_summary );
-        testAppPref.setIntent( new Intent( this, TestAppActivity.class ) );
+        Intent intent = new Intent( this, NameListActivity.class );
+        SimpleDateFormat dateFormat = new SimpleDateFormat( DAY_FORMAT );
+        intent.putExtra( DATE_INTENT_KEY, dateFormat.format( new Date() ) );
+        testAppPref.setIntent( intent );
         root.addPreference( testAppPref );
 
         // blacklist

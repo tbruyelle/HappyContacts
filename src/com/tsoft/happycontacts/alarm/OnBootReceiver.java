@@ -1,6 +1,3 @@
-/**
- * Copyright - Accor - All Rights Reserved www.accorhotels.com
- */
 package com.tsoft.happycontacts.alarm;
 
 import android.content.BroadcastReceiver;

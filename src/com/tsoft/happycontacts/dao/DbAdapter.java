@@ -143,10 +143,9 @@ public class DbAdapter
     {
         Cursor mCursor =
 
-        mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] {
-            HappyContactsDb.Feast.ID,
-            HappyContactsDb.Feast.NAME }, HappyContactsDb.Feast.DAY + "='" + day + "'", null, null, null,
-                   HappyContactsDb.Feast.NAME, null );
+            mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID,
+                HappyContactsDb.Feast.NAME }, HappyContactsDb.Feast.DAY + "='" + day + "'", null, null, null,
+                       HappyContactsDb.Feast.NAME, null );
         // mDb.query(HappyContactsDb.Feast.TABLE_NAME, new String[] {
         // HappyContactsDb.Feast.ID,
         // HappyContactsDb.Feast.NAME, HappyContactsDb.Feast.LAST_WISH_YEAR },
@@ -163,9 +162,10 @@ public class DbAdapter
     public Cursor fetchDayForName( String name )
     {
         Cursor mCursor =
-
-        mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.DAY },
-                   HappyContactsDb.Feast.NAME + " like " + name, null, null, null, HappyContactsDb.Feast.DAY, null );
+            mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID,
+                HappyContactsDb.Feast.DAY }, HappyContactsDb.Feast.NAME + " like '" + name + "'", null, null, null,
+                       "substr(" + HappyContactsDb.Feast.DAY + ",4,2)||substr(" + HappyContactsDb.Feast.DAY + ",1,2)",
+                       null );
         if ( mCursor != null )
         {
             mCursor.moveToFirst();
@@ -219,9 +219,9 @@ public class DbAdapter
     public Cursor fetchBlackList( long contactId )
         throws SQLException
     {
-        Cursor mCursor = mDb.query( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS,
-                                    HappyContactsDb.BlackList.CONTACT_ID + "=" + contactId, null, null, null, null,
-                                    null );
+        Cursor mCursor =
+            mDb.query( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS,
+                       HappyContactsDb.BlackList.CONTACT_ID + "=" + contactId, null, null, null, null, null );
         if ( mCursor != null )
         {
             mCursor.moveToFirst();
