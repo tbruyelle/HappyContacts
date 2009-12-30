@@ -31,25 +31,30 @@ public class DbAdapter
     private static class DatabaseHelper
         extends SQLiteOpenHelper
     {
-        private final Context mCtx;
+        private final Context mContext;
 
         DatabaseHelper( Context context )
         {
             super( context, HappyContactsDb.DATABASE_NAME, null, HappyContactsDb.DATABASE_VERSION );
-            mCtx = context;
+            mContext = context;
+        }
+
+        public boolean needUpgrade()
+        {
+            SQLiteDatabase db = mContext.openOrCreateDatabase( HappyContactsDb.DATABASE_NAME, 0, null );
+            boolean needUpgrade = HappyContactsDb.DATABASE_VERSION > db.getVersion();
+            db.close();
+            return needUpgrade;
         }
 
         @Override
         public void onCreate( SQLiteDatabase db )
         {
-            // ProgressDialog progressDialog = ProgressDialog.show(mCtx, "",
-            // mCtx
-            // .getString(R.string.loading_data));
             Log.v( "Creating database start..." );
             try
             {
                 // get file content
-                String sqlCode = AndroidUtils.getFileContent( mCtx.getResources(), R.raw.db_create );
+                String sqlCode = AndroidUtils.getFileContent( mContext.getResources(), R.raw.db_create );
                 // execute code
                 for ( String sqlStatements : sqlCode.split( ";" ) )
                 {
@@ -68,24 +73,17 @@ public class DbAdapter
                 Log.e( "Error executing sql code " + e.getMessage(), e );
                 throw new RuntimeException( e );
             }
-            finally
-            {
-                // progressDialog.hide();
-            }
         }
 
         @Override
         public void onUpgrade( SQLiteDatabase db, int oldVersion, int newVersion )
         {
-            // ProgressDialog progressDialog = ProgressDialog.show(mCtx, "",
-            // mCtx
-            // .getString(R.string.updating_data));
             Log.v( "Upgrading database from version " + oldVersion + " to " + newVersion
                 + ", which will destroy all old data" );
             try
             {
                 // get file content
-                String sqlCode = AndroidUtils.getFileContent( mCtx.getResources(), R.raw.db_update );
+                String sqlCode = AndroidUtils.getFileContent( mContext.getResources(), R.raw.db_update );
                 // execute code
                 for ( String sqlStatements : sqlCode.split( ";" ) )
                 {
@@ -105,10 +103,6 @@ public class DbAdapter
                 Log.e( "Error executing sql code " + e.getMessage() );
                 throw new RuntimeException( e );
             }
-            finally
-            {
-                // progressDialog.hide();
-            }
             onCreate( db );
         }
     }
@@ -124,6 +118,11 @@ public class DbAdapter
     {
         mDb = readOnly ? mDbHelper.getReadableDatabase() : mDbHelper.getWritableDatabase();
         return this;
+    }
+
+    public boolean needUpgrade()
+    {
+        return mDbHelper.needUpgrade();
     }
 
     public void close()

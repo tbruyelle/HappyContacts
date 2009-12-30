@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,6 +21,7 @@ import android.widget.TimePicker;
 
 import com.kamosoft.happycontacts.alarm.AlarmController;
 import com.kamosoft.happycontacts.blacklist.BlackListActivity;
+import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.utils.AndroidUtils;
 
 /**
@@ -119,15 +121,34 @@ public class HappyContactsPreferences
         mPrefs = getSharedPreferences( APP_NAME, 0 );
         mAlarmHour = mPrefs.getInt( PREF_ALARM_HOUR, AlarmController.DEFAULT_ALARM_HOUR );
         mAlarmMinute = mPrefs.getInt( PREF_ALARM_MINUTE, AlarmController.DEFAULT_ALARM_MINUTE );
-
+        
+        setPreferenceScreen( createPreferenceHierarchy() );
+        
         if ( mPrefs.getBoolean( PREF_FIRST_RUN, true ) )
         {
             /* if its the first run, alarm must be set */
             mPrefs.edit().putBoolean( PREF_FIRST_RUN, false ).commit();
             AlarmController.startAlarm( this );
-        }
 
-        setPreferenceScreen( createPreferenceHierarchy() );
+            /* also we create the database with a random query to display a progress dialog */
+            ProgressDialog progressDialog = ProgressDialog.show( this, "", this.getString( R.string.loading_data ) );
+            DbAdapter dbAdapter = new DbAdapter( this );
+            dbAdapter.open( true );
+            dbAdapter.close();
+            progressDialog.hide();
+        }
+        else
+        {
+            /* check if need upgrade to do it and display a progress dialog */
+            DbAdapter dbAdapter = new DbAdapter( this );
+            if ( dbAdapter.needUpgrade() )
+            {
+                ProgressDialog progressDialog = ProgressDialog.show( this, "", this.getString( R.string.loading_data ) );
+                dbAdapter.open( true );
+                dbAdapter.close();
+                progressDialog.hide();
+            }
+        }
     }
 
     /**

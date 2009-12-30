@@ -222,6 +222,7 @@ public class NameListActivity
     }
 
     /**
+     * FIXME faire du showdialog
      * display 
      */
     private void displayNameForm()
@@ -230,6 +231,7 @@ public class NameListActivity
     }
 
     /**
+     * FIXME faire du showdialog
      * display a datepicker
      */
     private void displayDateForm()
