@@ -5,6 +5,7 @@ package com.kamosoft.happycontacts.dao;
 
 import java.io.IOException;
 
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -12,6 +13,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.kamosoft.happycontacts.DatabaseInitializer;
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
 import com.kamosoft.utils.AndroidUtils;
@@ -51,15 +53,21 @@ public class DbAdapter
         public void onCreate( SQLiteDatabase db )
         {
             Log.v( "Creating database start..." );
+            ProgressDialog progressDialog = new ProgressDialog( mContext );
+            progressDialog.setProgressStyle( ProgressDialog.STYLE_HORIZONTAL );
+            progressDialog.setMessage( mContext.getString( R.string.loading_data ) );
+            progressDialog.setCancelable( false );
+
             try
             {
                 // get file content
                 String sqlCode = AndroidUtils.getFileContent( mContext.getResources(), R.raw.db_create );
                 // execute code
-                for ( String sqlStatements : sqlCode.split( ";" ) )
-                {
-                    db.execSQL( sqlStatements );
-                }
+                new DatabaseInitializer( db, progressDialog ).execute( sqlCode.split( ";" ) );
+//                for ( String sqlStatements : sqlCode.split( ";" ) )
+//                {
+//                    db.execSQL( sqlStatements );
+//                }
                 Log.v( "Creating database done." );
             }
             catch ( IOException e )
@@ -111,6 +119,13 @@ public class DbAdapter
     {
         mCtx = ctx;
         mDbHelper = new DatabaseHelper( mCtx );
+    }
+
+    public void createOrUpdate()
+    {
+        /* a simple call to open() proceed to db create or upgrade */
+        open( true );
+        close();
     }
 
     public DbAdapter open( boolean readOnly )

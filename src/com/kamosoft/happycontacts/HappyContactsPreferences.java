@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -136,11 +135,8 @@ public class HappyContactsPreferences
             mPrefs.edit().putBoolean( PREF_FIRST_RUN, false ).commit();
             AlarmController.startAlarm( this );
 
-            /* also we create the database with a random query to display a progress dialog */
-            ProgressDialog progressDialog =
-                ProgressDialog.show( this, this.getString( R.string.please_wait ),
-                                     this.getString( R.string.loading_data ) );
-            new DatabaseInitializer( this, progressDialog ).start();
+            /* also we create the database with a random query to display a progress dialog */            
+            new DbAdapter( this ).createOrUpdate();
         }
         else
         {
@@ -148,10 +144,11 @@ public class HappyContactsPreferences
             DbAdapter dbAdapter = new DbAdapter( this );
             if ( dbAdapter.needUpgrade() )
             {
-                ProgressDialog progressDialog =
-                    ProgressDialog.show( this, this.getString( R.string.please_wait ),
-                                         this.getString( R.string.updating_data ) );
-                new DatabaseInitializer( this, progressDialog ).start();
+                dbAdapter.createOrUpdate();
+                //                ProgressDialog progressDialog =
+                //                    ProgressDialog.show( this, this.getString( R.string.please_wait ),
+                //                                         this.getString( R.string.updating_data ) );
+                //                new DatabaseInitializer( this, progressDialog ).start();
             }
         }
     }
