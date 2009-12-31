@@ -88,8 +88,6 @@ public class HappyContactsPreferences
 
     private int mAlarmMinute;
 
-    private CheckBoxPreference mAlarmStatePref;
-
     private Preference mAlarmTimePref;
 
     /**
@@ -167,26 +165,27 @@ public class HappyContactsPreferences
         PreferenceScreen root = getPreferenceManager().createPreferenceScreen( this );
 
         // State
-        mAlarmStatePref = new CheckBoxPreference( this );
-        mAlarmStatePref.setTitle( R.string.pref_alarm );
+        CheckBoxPreference alarmStatePref = new CheckBoxPreference( this );
+        alarmStatePref.setTitle( R.string.pref_alarm );
 
         if ( AlarmController.isAlarmUp( this ) )
         {
-            mAlarmStatePref.setSummary( R.string.pref_alarm_on );
-            mAlarmStatePref.setChecked( true );
+            alarmStatePref.setSummary( R.string.pref_alarm_on );
+            alarmStatePref.setChecked( true );
         }
         else
         {
-            mAlarmStatePref.setSummary( R.string.pref_alarm_off );
-            mAlarmStatePref.setChecked( false );
+            alarmStatePref.setSummary( R.string.pref_alarm_off );
+            alarmStatePref.setChecked( false );
         }
-        mAlarmStatePref.setOnPreferenceClickListener( mAlarmToggleClickListener );
-        root.addPreference( mAlarmStatePref );
+        alarmStatePref.setOnPreferenceClickListener( mAlarmToggleClickListener );
+        root.addPreference( alarmStatePref );
 
-        mAlarmTimePref = new Preference( this );
-        mAlarmTimePref.setTitle( R.string.pref_time );
-        mAlarmTimePref.setSummary( AndroidUtils.pad( mAlarmHour, mAlarmMinute ) );
-        mAlarmTimePref.setOnPreferenceClickListener( new Preference.OnPreferenceClickListener()
+        Preference alarmTimePref = new Preference( this );
+        mAlarmTimePref = alarmTimePref;
+        alarmTimePref.setTitle( R.string.pref_time );
+        alarmTimePref.setSummary( AndroidUtils.pad( mAlarmHour, mAlarmMinute ) );
+        alarmTimePref.setOnPreferenceClickListener( new Preference.OnPreferenceClickListener()
         {
             public boolean onPreferenceClick( Preference preference )
             {
@@ -194,11 +193,10 @@ public class HappyContactsPreferences
                 return true;
             }
         } );
-        root.addItemFromInflater( mAlarmTimePref );
+        root.addItemFromInflater( alarmTimePref );
 
         // test app
         PreferenceScreen testAppPref = getPreferenceManager().createPreferenceScreen( this );
-        testAppPref.setKey( "testAppPref" );
         testAppPref.setTitle( R.string.pref_test_app );
         testAppPref.setSummary( R.string.pref_test_app_summary );
         Intent intent = new Intent( this, NameListActivity.class );
@@ -209,7 +207,6 @@ public class HappyContactsPreferences
 
         // blacklist
         PreferenceScreen blackListPref = getPreferenceManager().createPreferenceScreen( this );
-        blackListPref.setKey( "blackListPref" );
         blackListPref.setTitle( R.string.pref_blacklist );
         blackListPref.setSummary( R.string.pref_blacklist_summary );
         blackListPref.setIntent( new Intent( this, BlackListActivity.class ) );
