@@ -119,11 +119,19 @@ public class HappyContactsPreferences
         }
 
         mPrefs = getSharedPreferences( APP_NAME, 0 );
+        checkInit();
         mAlarmHour = mPrefs.getInt( PREF_ALARM_HOUR, AlarmController.DEFAULT_ALARM_HOUR );
         mAlarmMinute = mPrefs.getInt( PREF_ALARM_MINUTE, AlarmController.DEFAULT_ALARM_MINUTE );
-        
+
         setPreferenceScreen( createPreferenceHierarchy() );
-        
+
+    }
+
+    /**
+     * check if some initializations have to be done
+     */
+    private void checkInit()
+    {
         if ( mPrefs.getBoolean( PREF_FIRST_RUN, true ) )
         {
             /* if its the first run, alarm must be set */
@@ -131,11 +139,10 @@ public class HappyContactsPreferences
             AlarmController.startAlarm( this );
 
             /* also we create the database with a random query to display a progress dialog */
-            ProgressDialog progressDialog = ProgressDialog.show( this, "", this.getString( R.string.loading_data ) );
-            DbAdapter dbAdapter = new DbAdapter( this );
-            dbAdapter.open( true );
-            dbAdapter.close();
-            progressDialog.hide();
+            ProgressDialog progressDialog =
+                ProgressDialog.show( this, this.getString( R.string.please_wait ),
+                                     this.getString( R.string.loading_data ) );
+            new DatabaseInitializer( this, progressDialog ).start();
         }
         else
         {
@@ -143,10 +150,10 @@ public class HappyContactsPreferences
             DbAdapter dbAdapter = new DbAdapter( this );
             if ( dbAdapter.needUpgrade() )
             {
-                ProgressDialog progressDialog = ProgressDialog.show( this, "", this.getString( R.string.loading_data ) );
-                dbAdapter.open( true );
-                dbAdapter.close();
-                progressDialog.hide();
+                ProgressDialog progressDialog =
+                    ProgressDialog.show( this, this.getString( R.string.please_wait ),
+                                         this.getString( R.string.updating_data ) );
+                new DatabaseInitializer( this, progressDialog ).start();
             }
         }
     }

@@ -83,6 +83,7 @@ public final class R {
         public static final int notif_one_or_more=0x7f06002d;
         public static final int nottoday=0x7f060006;
         public static final int ok=0x7f06002f;
+        public static final int please_wait=0x7f060032;
         public static final int pref_alarm=0x7f06001a;
         public static final int pref_alarm_off=0x7f06001c;
         public static final int pref_alarm_on=0x7f06001b;

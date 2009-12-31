@@ -11,7 +11,7 @@ public final class HappyContactsDb
 {
     public static String DATABASE_NAME = "happy_contacts";
 
-    public static int DATABASE_VERSION = 29;
+    public static int DATABASE_VERSION = 30;
 
     public static final class Feast
     {
