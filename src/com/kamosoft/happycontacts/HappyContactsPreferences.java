@@ -7,10 +7,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -32,6 +35,8 @@ public class HappyContactsPreferences
     implements Constants
 {
     private static final int TIME_DIALOG_ID = 0;
+
+    private static final int PROGRESS_DIALOG_ID = 1;
 
     /**
      * alarm click action
@@ -89,6 +94,8 @@ public class HappyContactsPreferences
 
     private Preference mAlarmTimePref;
 
+    private ProgressDialog mProgressDialog;
+
     /**
      * @see android.app.Activity#onCreateDialog(int)
      */
@@ -98,10 +105,18 @@ public class HappyContactsPreferences
         switch ( id )
         {
             case TIME_DIALOG_ID:
-                TimePickerDialog timePickerDialog =
-                    new TimePickerDialog( this, mTimeSetListener, mAlarmHour, mAlarmMinute, true );
+                TimePickerDialog timePickerDialog = new TimePickerDialog( this, mTimeSetListener, mAlarmHour,
+                                                                          mAlarmMinute, true );
 
                 return timePickerDialog;
+            case PROGRESS_DIALOG_ID:
+                ProgressDialog progressDialog = new ProgressDialog( this );
+                mProgressDialog = progressDialog;
+                progressDialog.setTitle( R.string.please_wait );
+                progressDialog.setProgressStyle( ProgressDialog.STYLE_HORIZONTAL );
+                progressDialog.setMessage( this.getString( R.string.loading_data ) );
+                progressDialog.setCancelable( false );
+                return progressDialog;
         }
         return null;
     }
@@ -112,7 +127,7 @@ public class HappyContactsPreferences
         super.onCreate( savedInstanceState );
         if ( Log.DEBUG )
         {
-            Log.v( "HappyContactsPreferences: start" );
+            Log.v( "HappyContactsPreferences: start onCreate()" );
         }
 
         mPrefs = getSharedPreferences( APP_NAME, 0 );
@@ -121,7 +136,10 @@ public class HappyContactsPreferences
         mAlarmMinute = mPrefs.getInt( PREF_ALARM_MINUTE, AlarmController.DEFAULT_ALARM_MINUTE );
 
         setPreferenceScreen( createPreferenceHierarchy() );
-
+        if ( Log.DEBUG )
+        {
+            Log.v( "HappyContactsPreferences: end onCreate()" );
+        }
     }
 
     /**
@@ -129,27 +147,38 @@ public class HappyContactsPreferences
      */
     private void checkInit()
     {
+        showDialog( PROGRESS_DIALOG_ID );
+        // Define the Handler that receives messages from the thread and update the progress
+        final Handler handler = new Handler()
+        {
+            public void handleMessage( Message msg )
+            {
+                int percent = msg.getData().getInt( "percent" );
+                Log.v( "handler receiving " + percent );
+                if ( percent < 0 )
+                {
+                    dismissDialog( PROGRESS_DIALOG_ID );
+                }
+                mProgressDialog.setProgress( percent );
+                if ( percent >= 100 )
+                {
+                    dismissDialog( PROGRESS_DIALOG_ID );
+                }
+            }
+        };
         if ( mPrefs.getBoolean( PREF_FIRST_RUN, true ) )
         {
             /* if its the first run, alarm must be set */
             mPrefs.edit().putBoolean( PREF_FIRST_RUN, false ).commit();
             AlarmController.startAlarm( this );
 
-            /* also we create the database with a random query to display a progress dialog */            
-            new DbAdapter( this ).createOrUpdate();
+            /* also we create the database */
+            DbAdapter.createOrUpdate( this, handler, false );
         }
         else
         {
-            /* check if need upgrade to do it and display a progress dialog */
-            DbAdapter dbAdapter = new DbAdapter( this );
-            if ( dbAdapter.needUpgrade() )
-            {
-                dbAdapter.createOrUpdate();
-                //                ProgressDialog progressDialog =
-                //                    ProgressDialog.show( this, this.getString( R.string.please_wait ),
-                //                                         this.getString( R.string.updating_data ) );
-                //                new DatabaseInitializer( this, progressDialog ).start();
-            }
+            /* check if need upgrade to do it */
+            DbAdapter.createOrUpdate( this, handler, true );
         }
     }
 

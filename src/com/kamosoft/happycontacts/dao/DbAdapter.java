@@ -5,15 +5,16 @@ package com.kamosoft.happycontacts.dao;
 
 import java.io.IOException;
 
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 
-import com.kamosoft.happycontacts.DatabaseInitializer;
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
 import com.kamosoft.utils.AndroidUtils;
@@ -35,10 +36,17 @@ public class DbAdapter
     {
         private final Context mContext;
 
-        DatabaseHelper( Context context )
+        /**
+         * Handler for updating a progress dialog while 
+         * creating or updating the database
+         */
+        private Handler mHandler;
+
+        DatabaseHelper( Context context, Handler handler )
         {
             super( context, HappyContactsDb.DATABASE_NAME, null, HappyContactsDb.DATABASE_VERSION );
             mContext = context;
+            mHandler = handler;
         }
 
         public boolean needUpgrade()
@@ -53,21 +61,40 @@ public class DbAdapter
         public void onCreate( SQLiteDatabase db )
         {
             Log.v( "Creating database start..." );
-            ProgressDialog progressDialog = new ProgressDialog( mContext );
-            progressDialog.setProgressStyle( ProgressDialog.STYLE_HORIZONTAL );
-            progressDialog.setMessage( mContext.getString( R.string.loading_data ) );
-            progressDialog.setCancelable( false );
 
             try
             {
-                // get file content
+                /* get file content */
                 String sqlCode = AndroidUtils.getFileContent( mContext.getResources(), R.raw.db_create );
-                // execute code
-                new DatabaseInitializer( db, progressDialog ).execute( sqlCode.split( ";" ) );
-//                for ( String sqlStatements : sqlCode.split( ";" ) )
-//                {
-//                    db.execSQL( sqlStatements );
-//                }
+                /* parsing sql */
+                String[] sqlStatements = sqlCode.split( ";" );
+                int nbStatements = sqlStatements.length;
+                Handler handler = mHandler;
+                int lastPercent = 0;
+                /* execute code */
+                for ( int i = 0; i < nbStatements; i++ )
+                {
+                    db.execSQL( sqlStatements[i] );
+
+                    /* update handler */
+                    int percent = (int) ( ( i / (float) nbStatements ) * 100 );
+                    if ( percent > lastPercent )
+                    {
+                        Log.v( "sending handler " + percent );
+                        Message msg = handler.obtainMessage();
+                        Bundle bundle = new Bundle();
+                        bundle.putInt( "percent", percent );
+                        msg.setData( bundle );
+                        handler.sendMessage( msg );
+                        lastPercent = percent;
+                    }
+                }
+                /* send last message to the handler */
+                Message msg = handler.obtainMessage();
+                Bundle bundle = new Bundle();
+                bundle.putInt( "percent", 100 );
+                msg.setData( bundle );
+                handler.sendMessage( msg );
                 Log.v( "Creating database done." );
             }
             catch ( IOException e )
@@ -90,13 +117,12 @@ public class DbAdapter
                 + ", which will destroy all old data" );
             try
             {
-                // get file content
+                /* get file content */
                 String sqlCode = AndroidUtils.getFileContent( mContext.getResources(), R.raw.db_update );
-                // execute code
+                /* execute code */
                 for ( String sqlStatements : sqlCode.split( ";" ) )
                 {
                     db.execSQL( sqlStatements );
-
                 }
                 Log.v( "Updating database done." );
             }
@@ -118,14 +144,39 @@ public class DbAdapter
     public DbAdapter( Context ctx )
     {
         mCtx = ctx;
-        mDbHelper = new DatabaseHelper( mCtx );
+        mDbHelper = new DatabaseHelper( mCtx, null );
     }
 
-    public void createOrUpdate()
+    /**
+     * Create or update the database in a thread, in order to allow to display a progress bar
+     * @param context
+     * @param handler
+     * @param checkUpgrade
+     */
+    public static void createOrUpdate( final Context context, final Handler handler, final boolean checkUpgrade )
     {
-        /* a simple call to open() proceed to db create or upgrade */
-        open( true );
-        close();
+        Thread thread = new Thread()
+        {
+            @Override
+            public void run()
+            {
+                /* a simple call to getReadableDatabase() proceed to db create or upgrade */
+                DatabaseHelper db = new DatabaseHelper( context, handler );
+                if ( checkUpgrade && !db.needUpgrade() )
+                {
+                    /* no need to upgrade */
+                    Message msg = handler.obtainMessage();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt( "percent", -1 );
+                    msg.setData( bundle );
+                    handler.sendMessage( msg );
+                    return;
+                }
+                db.getReadableDatabase();
+                db.close();
+            }
+        };
+        thread.start();
     }
 
     public DbAdapter open( boolean readOnly )
@@ -157,9 +208,10 @@ public class DbAdapter
     {
         Cursor mCursor =
 
-            mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID,
-                HappyContactsDb.Feast.NAME }, HappyContactsDb.Feast.DAY + "='" + day + "'", null, null, null,
-                       HappyContactsDb.Feast.NAME, null );
+        mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] {
+            HappyContactsDb.Feast.ID,
+            HappyContactsDb.Feast.NAME }, HappyContactsDb.Feast.DAY + "='" + day + "'", null, null, null,
+                   HappyContactsDb.Feast.NAME, null );
         // mDb.query(HappyContactsDb.Feast.TABLE_NAME, new String[] {
         // HappyContactsDb.Feast.ID,
         // HappyContactsDb.Feast.NAME, HappyContactsDb.Feast.LAST_WISH_YEAR },
@@ -175,11 +227,11 @@ public class DbAdapter
 
     public Cursor fetchDayForName( String name )
     {
-        Cursor mCursor =
-            mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID,
-                HappyContactsDb.Feast.DAY }, HappyContactsDb.Feast.NAME + " like '" + name + "'", null, null, null,
-                       "substr(" + HappyContactsDb.Feast.DAY + ",4,2)||substr(" + HappyContactsDb.Feast.DAY + ",1,2)",
-                       null );
+        Cursor mCursor = mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] {
+            HappyContactsDb.Feast.ID,
+            HappyContactsDb.Feast.DAY }, HappyContactsDb.Feast.NAME + " like '" + name + "'", null, null, null,
+                                    "substr(" + HappyContactsDb.Feast.DAY + ",4,2)||substr("
+                                        + HappyContactsDb.Feast.DAY + ",1,2)", null );
         if ( mCursor != null )
         {
             mCursor.moveToFirst();
@@ -233,9 +285,9 @@ public class DbAdapter
     public Cursor fetchBlackList( long contactId )
         throws SQLException
     {
-        Cursor mCursor =
-            mDb.query( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS,
-                       HappyContactsDb.BlackList.CONTACT_ID + "=" + contactId, null, null, null, null, null );
+        Cursor mCursor = mDb.query( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS,
+                                    HappyContactsDb.BlackList.CONTACT_ID + "=" + contactId, null, null, null, null,
+                                    null );
         if ( mCursor != null )
         {
             mCursor.moveToFirst();
