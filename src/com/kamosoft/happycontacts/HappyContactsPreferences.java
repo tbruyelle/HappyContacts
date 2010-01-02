@@ -12,8 +12,6 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -25,6 +23,7 @@ import com.kamosoft.happycontacts.alarm.AlarmController;
 import com.kamosoft.happycontacts.blacklist.BlackListActivity;
 import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.utils.AndroidUtils;
+import com.kamosoft.utils.ProgressDialogHandler;
 
 /**
  * @author tom
@@ -35,8 +34,6 @@ public class HappyContactsPreferences
     implements Constants
 {
     private static final int TIME_DIALOG_ID = 0;
-
-    private static final int PROGRESS_DIALOG_ID = 1;
 
     /**
      * alarm click action
@@ -94,8 +91,6 @@ public class HappyContactsPreferences
 
     private Preference mAlarmTimePref;
 
-    private ProgressDialog mProgressDialog;
-
     /**
      * @see android.app.Activity#onCreateDialog(int)
      */
@@ -109,14 +104,6 @@ public class HappyContactsPreferences
                                                                           mAlarmMinute, true );
 
                 return timePickerDialog;
-            case PROGRESS_DIALOG_ID:
-                ProgressDialog progressDialog = new ProgressDialog( this );
-                mProgressDialog = progressDialog;
-                progressDialog.setTitle( R.string.please_wait );
-                progressDialog.setProgressStyle( ProgressDialog.STYLE_HORIZONTAL );
-                progressDialog.setMessage( this.getString( R.string.loading_data ) );
-                progressDialog.setCancelable( false );
-                return progressDialog;
         }
         return null;
     }
@@ -147,39 +134,21 @@ public class HappyContactsPreferences
      */
     private void checkInit()
     {
-        showDialog( PROGRESS_DIALOG_ID );
-        // Define the Handler that receives messages from the thread and update the progress
-        final Handler handler = new Handler()
-        {
-            public void handleMessage( Message msg )
-            {
-                int percent = msg.getData().getInt( "percent" );
-                Log.v( "handler receiving " + percent );
-                if ( percent < 0 )
-                {
-                    dismissDialog( PROGRESS_DIALOG_ID );
-                }
-                mProgressDialog.setProgress( percent );
-                if ( percent >= 100 )
-                {
-                    dismissDialog( PROGRESS_DIALOG_ID );
-                }
-            }
-        };
         if ( mPrefs.getBoolean( PREF_FIRST_RUN, true ) )
         {
             /* if its the first run, alarm must be set */
             mPrefs.edit().putBoolean( PREF_FIRST_RUN, false ).commit();
             AlarmController.startAlarm( this );
 
-            /* also we create the database */
-            DbAdapter.createOrUpdate( this, handler, false );
         }
-        else
-        {
-            /* check if need upgrade to do it */
-            DbAdapter.createOrUpdate( this, handler, true );
-        }
+
+        final ProgressDialog progressDialog = new ProgressDialog( this );
+        progressDialog.setTitle( R.string.please_wait );
+        progressDialog.setProgressStyle( ProgressDialog.STYLE_HORIZONTAL );
+        progressDialog.setMessage( this.getString( R.string.loading_data ) );
+        progressDialog.setCancelable( false );
+        /* check if need to create or upgrade */
+        DbAdapter.createOrUpdate( this, new ProgressDialogHandler( progressDialog ) );
     }
 
     /**

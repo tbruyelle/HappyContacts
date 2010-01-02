@@ -11,13 +11,11 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
 import com.kamosoft.utils.AndroidUtils;
+import com.kamosoft.utils.ProgressDialogHandler;
 
 /**
  * @author tom
@@ -40,9 +38,9 @@ public class DbAdapter
          * Handler for updating a progress dialog while 
          * creating or updating the database
          */
-        private Handler mHandler;
+        private ProgressDialogHandler mHandler;
 
-        DatabaseHelper( Context context, Handler handler )
+        DatabaseHelper( Context context, ProgressDialogHandler handler )
         {
             super( context, HappyContactsDb.DATABASE_NAME, null, HappyContactsDb.DATABASE_VERSION );
             mContext = context;
@@ -69,33 +67,18 @@ public class DbAdapter
                 /* parsing sql */
                 String[] sqlStatements = sqlCode.split( ";" );
                 int nbStatements = sqlStatements.length;
-                Handler handler = mHandler;
-                int lastPercent = 0;
+                ProgressDialogHandler handler = mHandler;
                 /* execute code */
                 for ( int i = 0; i < nbStatements; i++ )
                 {
                     db.execSQL( sqlStatements[i] );
 
                     /* update handler */
-                    int percent = (int) ( ( i / (float) nbStatements ) * 100 );
-                    if ( percent > lastPercent )
-                    {
-                        Log.v( "sending handler " + percent );
-                        Message msg = handler.obtainMessage();
-                        Bundle bundle = new Bundle();
-                        bundle.putInt( "percent", percent );
-                        msg.setData( bundle );
-                        handler.sendMessage( msg );
-                        lastPercent = percent;
-                    }
+                    handler.updateProgress( i, nbStatements );
                 }
                 /* send last message to the handler */
-                Message msg = handler.obtainMessage();
-                Bundle bundle = new Bundle();
-                bundle.putInt( "percent", 100 );
-                msg.setData( bundle );
-                handler.sendMessage( msg );
-                Log.v( "Creating database done." );
+                handler.updateProgress( 100 );
+                Log.v( "Creating database start..." );
             }
             catch ( IOException e )
             {
@@ -153,7 +136,7 @@ public class DbAdapter
      * @param handler
      * @param checkUpgrade
      */
-    public static void createOrUpdate( final Context context, final Handler handler, final boolean checkUpgrade )
+    public static void createOrUpdate( final Context context, final ProgressDialogHandler handler )
     {
         Thread thread = new Thread()
         {
@@ -162,18 +145,15 @@ public class DbAdapter
             {
                 /* a simple call to getReadableDatabase() proceed to db create or upgrade */
                 DatabaseHelper db = new DatabaseHelper( context, handler );
-                if ( checkUpgrade && !db.needUpgrade() )
+                if ( !db.needUpgrade() )
                 {
                     /* no need to upgrade */
-                    Message msg = handler.obtainMessage();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt( "percent", -1 );
-                    msg.setData( bundle );
-                    handler.sendMessage( msg );
                     return;
                 }
+                handler.startProgress();
                 db.getReadableDatabase();
                 db.close();
+                handler.stopProgress();
             }
         };
         thread.start();
@@ -206,6 +186,10 @@ public class DbAdapter
      */
     public Cursor fetchNamesForDay( String day )
     {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start fetchNameForDay()" );
+        }
         Cursor mCursor =
 
         mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] {
@@ -222,11 +206,19 @@ public class DbAdapter
         {
             mCursor.moveToFirst();
         }
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: end fetchNameForDay()" );
+        }
         return mCursor;
     }
 
     public Cursor fetchDayForName( String name )
     {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start fetchDayForName()" );
+        }
         Cursor mCursor = mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] {
             HappyContactsDb.Feast.ID,
             HappyContactsDb.Feast.DAY }, HappyContactsDb.Feast.NAME + " like '" + name + "'", null, null, null,
@@ -235,6 +227,10 @@ public class DbAdapter
         if ( mCursor != null )
         {
             mCursor.moveToFirst();
+        }
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: end fetchDayForName()" );
         }
         return mCursor;
     }
@@ -260,6 +256,10 @@ public class DbAdapter
 
     public boolean deleteBlackList( long id )
     {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: call deleteBlackList()" );
+        }
         return mDb.delete( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.ID + "=" + id, null ) > 0;
     }
 
@@ -268,7 +268,10 @@ public class DbAdapter
      */
     public Cursor fetchAllBlackList()
     {
-
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: call fetchAllBlackList()" );
+        }
         return mDb.query( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS, null, null, null,
                           null, null );
     }
@@ -278,6 +281,10 @@ public class DbAdapter
      */
     public Cursor fetchAllTimeBlackListed()
     {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: call fetchAllTimeBlackListed()" );
+        }
         return mDb.query( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS,
                           HappyContactsDb.BlackList.LAST_WISH_DATE + " = null", null, null, null, null );
     }
@@ -285,6 +292,10 @@ public class DbAdapter
     public Cursor fetchBlackList( long contactId )
         throws SQLException
     {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start fetchBlackList()" );
+        }
         Cursor mCursor = mDb.query( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS,
                                     HappyContactsDb.BlackList.CONTACT_ID + "=" + contactId, null, null, null, null,
                                     null );
@@ -292,12 +303,20 @@ public class DbAdapter
         {
             mCursor.moveToFirst();
         }
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: end fetchBlackList()" );
+        }
         return mCursor;
     }
 
     public boolean isBlackListed( long contactId, String date )
         throws SQLException
     {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start isBlackListed()" );
+        }
         Cursor c = fetchBlackList( contactId );
         if ( c == null )
         {
@@ -316,6 +335,10 @@ public class DbAdapter
             return ( lastWishedDate == null || lastWishedDate.equals( date ) );
         }
         c.close();
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: end isBlackListed()" );
+        }
         return true;
     }
 
@@ -323,7 +346,7 @@ public class DbAdapter
     {
         if ( Log.DEBUG )
         {
-            Log.v( "start updateContactFeast for contact " + contactName + " with date " + date );
+            Log.v( "Dbadapter: call updateContactFeast for contact " + contactName + " with date " + date );
         }
         if ( isBlackListed( contactId, null ) )
         {
