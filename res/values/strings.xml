@@ -51,4 +51,10 @@
 <string name="cancel">Annuler</string>
 <string name="no_feast_for_name">Pas de fête pour ce prénom.</string>
 <string name="please_wait">Veuillez patienter</string>
+<string name="contact_method_dialog_title">%s peut être joint(e) par</string>
+<string-array name="contactmethods_items"><item>Appel</item>
+<item>SMS</item>
+<item>Email</item>
+</string-array>
+<string name="contact_method_not_supported">Aucune méthode de contact supportée n'a été trouvée pour ce contact.</string>
 </resources>

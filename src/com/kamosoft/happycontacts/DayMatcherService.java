@@ -152,8 +152,11 @@ public class DayMatcherService
 
                 if ( contactId == null || contactName == null )
                 {
-                    Log.v( "skipping Contact with displayName=" + displayName + ", name=" + contactName
-                        + ", contactId=" + contactId );
+                    if ( Log.DEBUG )
+                    {
+                        Log.v( "DayMatcher: skipping Contact with displayName=" + displayName + ", name=" + contactName
+                            + ", contactId=" + contactId );
+                    }
                     continue;
                 }
 
@@ -174,12 +177,13 @@ public class DayMatcherService
                         /* find one !! */
                         if ( Log.DEBUG )
                         {
-                            Log.v( "DayMatcher: day contact feast found for " + contactName );
+                            Log.v( "DayMatcher: day contact feast found for \"" + contactName + "\", id=\"" + contactId
+                                + "\"" );
                         }
                         ContactFeast contactFeast = names.get( subNameUpper );
                         //duplicate the contact fest and set the name
-                        ContactFeast newContactFeast =
-                            new ContactFeast( contactName, contactFeast.getFeastId(), contactFeast.getLastWishYear() );
+                        ContactFeast newContactFeast = new ContactFeast( contactName, contactFeast.getFeastId(),
+                                                                         contactFeast.getLastWishYear() );
                         contactFeastToday.addContact( contactId, newContactFeast );
                     }
                 }

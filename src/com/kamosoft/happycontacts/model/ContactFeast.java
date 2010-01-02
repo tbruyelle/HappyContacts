@@ -4,6 +4,7 @@
 package com.kamosoft.happycontacts.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * @author tom
@@ -12,58 +13,127 @@ import java.io.Serializable;
 public class ContactFeast
     implements Serializable
 {
-  /**
-   * 
-   */
-  private static final long serialVersionUID = 5984664253829892060L;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 5984664253829892060L;
 
-  private String contactName;
+    private String contactName;
 
-  private Long feastId;
+    private Long contactId;
 
-  private String lastWishYear;
+    private ArrayList<String> phones;
 
-  public ContactFeast(String contactName, Long feastId, String lastWishYear)
-  {
-    this.contactName = contactName;
-    this.feastId = feastId;
-    this.setLastWishYear(lastWishYear);
-  }
+    private ArrayList<String> emails;
 
-  public String getContactName()
-  {
-    return contactName;
-  }
+    private Long feastId;
 
-  public void setContactName(String contactName)
-  {
-    this.contactName = contactName;
-  }
+    private String lastWishYear;
 
-  public Long getFeastId()
-  {
-    return feastId;
-  }
+    public ContactFeast( String contactName, Long feastId, String lastWishYear )
+    {
+        this.contactName = contactName;
+        this.feastId = feastId;
+        this.setLastWishYear( lastWishYear );
+    }
 
-  public void setFeastId(Long feastId)
-  {
-    this.feastId = feastId;
-  }
+    public boolean isContactable()
+    {
+        return ( hasEmail() || hasPhone() );
+    }
 
-  /**
-   * @param lastWishYear the lastWishYear to set
-   */
-  public void setLastWishYear(String lastWishYear)
-  {
-    this.lastWishYear = lastWishYear;
-  }
+    public boolean hasEmail()
+    {
+        return getEmails() != null && !getEmails().isEmpty();
+    }
 
-  /**
-   * @return the lastWishYear
-   */
-  public String getLastWishYear()
-  {
-    return lastWishYear;
-  }
+    public boolean hasPhone()
+    {
+        return getPhones() != null && !getPhones().isEmpty();
+    }
+
+    public void addPhone( String phone )
+    {
+        if ( phones == null )
+        {
+            phones = new ArrayList<String>();
+        }
+        phones.add( phone );
+    }
+
+    public void addEmail( String email )
+    {
+        if ( emails == null )
+        {
+            emails = new ArrayList<String>();
+        }
+        emails.add( email );
+    }
+
+    public ArrayList<String> getPhones()
+    {
+        return phones;
+    }
+
+    public void setPhones( ArrayList<String> phones )
+    {
+        this.phones = phones;
+    }
+
+    public ArrayList<String> getEmails()
+    {
+        return emails;
+    }
+
+    public void setEmails( ArrayList<String> emails )
+    {
+        this.emails = emails;
+    }
+
+    public String getContactName()
+    {
+        return contactName;
+    }
+
+    public void setContactName( String contactName )
+    {
+        this.contactName = contactName;
+    }
+
+    public Long getFeastId()
+    {
+        return feastId;
+    }
+
+    public void setFeastId( Long feastId )
+    {
+        this.feastId = feastId;
+    }
+
+    /**
+     * @param lastWishYear the lastWishYear to set
+     */
+    public void setLastWishYear( String lastWishYear )
+    {
+        this.lastWishYear = lastWishYear;
+    }
+
+    /**
+     * @return the lastWishYear
+     */
+    public String getLastWishYear()
+    {
+        return lastWishYear;
+    }
+
+    public void setContactId( Long contactId )
+    {
+        this.contactId = contactId;
+    }
+
+    public Long getContactId()
+    {
+        return contactId;
+    }
 
 }

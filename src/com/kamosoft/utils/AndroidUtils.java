@@ -39,8 +39,8 @@ public final class AndroidUtils
     public static void composeMail( Context context, String emailAddress, String mailSubject, String mailBody )
     {
         Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "mailto:" + emailAddress ) );
-        intent.putExtra( "mail_subject", mailSubject );
-        intent.putExtra( "mail_body", mailBody );
+        intent.putExtra( "subject", mailSubject );
+        intent.putExtra( "body", mailBody );
         context.startActivity( intent );
     }
 
