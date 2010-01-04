@@ -1,0 +1,17 @@
+path=../../tmp
+file=$path/$1$2.day
+log=$path/$1$2.log
+echo "processing $file"
+wget http://www.ephemeride.name/index.php?jourR=$1-$2 -O $file -o $log
+perl -ne '/galement les\.\.\.<.*?>\.(.*?)\./ && print "$1\n"' $file > $file.tmp
+perl -i -pe 's/\s//g'  $file.tmp
+perl -i -pe 's/-/\n/g' $file.tmp
+mv $file.tmp $file.ok
+nb=`wc -l $file.ok`
+echo "extracted $nb names..."
+for name in `cat $file.ok`
+do
+        echo "insert into feast (name, day) values (\"$name\", \"$1/$2\");" >> $ath/names.sql
+done
+rm $path/*.bak
+exit 0
