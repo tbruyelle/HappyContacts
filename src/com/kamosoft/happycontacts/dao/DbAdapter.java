@@ -4,10 +4,12 @@
 package com.kamosoft.happycontacts.dao;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -78,7 +80,7 @@ public class DbAdapter
                 }
                 /* send last message to the handler */
                 handler.updateProgress( 100 );
-                Log.v( "Creating database start..." );
+                Log.v( "Creating database done..." );
             }
             catch ( IOException e )
             {
@@ -177,11 +179,8 @@ public class DbAdapter
     }
 
     /**
-     * Retourne les lignes pour le jour donné et qui n'ont pas encore ete
-     * souhaite
-     * 
-     * @param day
-     *            format dd/MM
+     * Return the names for a given day
+     * @param day format dd/MM
      * @return
      */
     public Cursor fetchNamesForDay( String day )
@@ -190,49 +189,79 @@ public class DbAdapter
         {
             Log.v( "DbAdapter: start fetchNameForDay()" );
         }
-        Cursor mCursor =
+        /* use order by name */
+        Cursor cursor =
+            mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID,
+                HappyContactsDb.Feast.NAME }, HappyContactsDb.Feast.DAY + "='" + day + "'", null, null, null,
+                       HappyContactsDb.Feast.NAME );
 
-        mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] {
-            HappyContactsDb.Feast.ID,
-            HappyContactsDb.Feast.NAME }, HappyContactsDb.Feast.DAY + "='" + day + "'", null, null, null,
-                   HappyContactsDb.Feast.NAME, null );
-        // mDb.query(HappyContactsDb.Feast.TABLE_NAME, new String[] {
-        // HappyContactsDb.Feast.ID,
-        // HappyContactsDb.Feast.NAME, HappyContactsDb.Feast.LAST_WISH_YEAR },
-        // HappyContactsDb.Feast.DAY + "='" + day + "' and " +
-        // HappyContactsDb.Feast.LAST_WISH_YEAR
-        // + " != '" + year + "'", null, null, null, null, null);
-        if ( mCursor != null )
+        if ( cursor != null )
         {
-            mCursor.moveToFirst();
+            cursor = avoidDuplicate( cursor, HappyContactsDb.Feast.NAME );
         }
         if ( Log.DEBUG )
         {
             Log.v( "DbAdapter: end fetchNameForDay()" );
         }
-        return mCursor;
+        return cursor;
     }
 
+    /**
+     * Returns the days for a given name
+     * @param name
+     * @return
+     */
     public Cursor fetchDayForName( String name )
     {
         if ( Log.DEBUG )
         {
             Log.v( "DbAdapter: start fetchDayForName()" );
         }
-        Cursor mCursor = mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] {
-            HappyContactsDb.Feast.ID,
-            HappyContactsDb.Feast.DAY }, HappyContactsDb.Feast.NAME + " like '" + name + "'", null, null, null,
-                                    "substr(" + HappyContactsDb.Feast.DAY + ",4,2)||substr("
-                                        + HappyContactsDb.Feast.DAY + ",1,2)", null );
-        if ( mCursor != null )
+        /* 
+         * order by date 
+         * tips use substr() to have month then day
+         */
+        Cursor cursor =
+            mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID,
+                HappyContactsDb.Feast.DAY }, HappyContactsDb.Feast.NAME + " like '" + name + "'", null, null, null,
+                       "substr(" + HappyContactsDb.Feast.DAY + ",4,2)||substr(" + HappyContactsDb.Feast.DAY + ",1,2)" );
+        if ( cursor != null )
         {
-            mCursor.moveToFirst();
+            cursor = avoidDuplicate( cursor, HappyContactsDb.Feast.DAY );
         }
         if ( Log.DEBUG )
         {
             Log.v( "DbAdapter: end fetchDayForName()" );
         }
-        return mCursor;
+        return cursor;
+    }
+
+    /**
+     * use a matrixCursor to avoid duplicate names (due to multiple source for the database)
+     * @param cursor
+     * @return
+     */
+    private Cursor avoidDuplicate( Cursor cursor, String columnName )
+    {
+        ArrayList<String> columns = new ArrayList<String>();
+        MatrixCursor matrixCursor = new MatrixCursor( new String[] { HappyContactsDb.Feast.ID, columnName } );
+        int columnIndex = cursor.getColumnIndex( columnName );
+        int idColumnIndex = cursor.getColumnIndex( HappyContactsDb.Feast.ID );
+        cursor.moveToFirst();
+        do
+        {
+            String columnValue = cursor.getString( columnIndex );
+            if ( columns.contains( columnValue ) )
+            {
+                continue;
+            }
+            Long id = cursor.getLong( idColumnIndex );
+            matrixCursor.newRow().add( id ).add( columnValue );
+            columns.add( columnValue );
+        }
+        while ( cursor.moveToNext() );
+        cursor.close();
+        return matrixCursor;
     }
 
     /**
@@ -296,9 +325,9 @@ public class DbAdapter
         {
             Log.v( "DbAdapter: start fetchBlackList()" );
         }
-        Cursor mCursor = mDb.query( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS,
-                                    HappyContactsDb.BlackList.CONTACT_ID + "=" + contactId, null, null, null, null,
-                                    null );
+        Cursor mCursor =
+            mDb.query( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS,
+                       HappyContactsDb.BlackList.CONTACT_ID + "=" + contactId, null, null, null, null, null );
         if ( mCursor != null )
         {
             mCursor.moveToFirst();

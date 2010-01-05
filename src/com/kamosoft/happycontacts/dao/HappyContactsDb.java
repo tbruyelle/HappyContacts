@@ -23,7 +23,9 @@ public final class HappyContactsDb
 
         public static String NAME = "name";
 
-        public static String[] COLUMNS = { ID, DAY, NAME };
+        public static String SOURCE = "source";
+
+        public static String[] COLUMNS = { ID, DAY, NAME, SOURCE };
     }
 
     public static final class BlackList

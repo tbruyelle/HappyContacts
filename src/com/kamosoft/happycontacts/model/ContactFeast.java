@@ -26,14 +26,11 @@ public class ContactFeast
 
     private ArrayList<String> emails;
 
-    private Long feastId;
-
     private String lastWishYear;
 
-    public ContactFeast( String contactName, Long feastId, String lastWishYear )
+    public ContactFeast( String contactName, String lastWishYear )
     {
         this.contactName = contactName;
-        this.feastId = feastId;
         this.setLastWishYear( lastWishYear );
     }
 
@@ -98,16 +95,6 @@ public class ContactFeast
     public void setContactName( String contactName )
     {
         this.contactName = contactName;
-    }
-
-    public Long getFeastId()
-    {
-        return feastId;
-    }
-
-    public void setFeastId( Long feastId )
-    {
-        this.feastId = feastId;
     }
 
     /**

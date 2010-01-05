@@ -120,13 +120,12 @@ public class DayMatcherService
         do
         {
             String name = cursor.getString( cursor.getColumnIndexOrThrow( HappyContactsDb.Feast.NAME ) );
-            Long feastId = cursor.getLong( cursor.getColumnIndexOrThrow( HappyContactsDb.Feast.ID ) );
-            if ( name == null || feastId == null )
+            if ( name == null )
             {
-                Log.e( "skipping mDb.fetchNamesForDay(" + day + ") returned name=" + name + ", feastId=" + feastId );
+                Log.e( "skipping mDb.fetchNamesForDay(" + day + ") returned name=" + name );
                 continue;
             }
-            ContactFeast contactFeast = new ContactFeast( name, feastId, null );
+            ContactFeast contactFeast = new ContactFeast( name, null );
             names.put( AndroidUtils.replaceAccents( name ).toUpperCase(), contactFeast );
             if ( Log.DEBUG )
             {
@@ -182,8 +181,7 @@ public class DayMatcherService
                         }
                         ContactFeast contactFeast = names.get( subNameUpper );
                         //duplicate the contact fest and set the name
-                        ContactFeast newContactFeast = new ContactFeast( contactName, contactFeast.getFeastId(),
-                                                                         contactFeast.getLastWishYear() );
+                        ContactFeast newContactFeast = new ContactFeast( contactName, contactFeast.getLastWishYear() );
                         contactFeastToday.addContact( contactId, newContactFeast );
                     }
                 }

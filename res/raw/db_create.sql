@@ -7,7 +7,7 @@ create table blackList(
 create table feast (
   _id integer primary key autoincrement,
   day char(5) not null,
-  name varchar(64) not null
+  name varchar(64) not null,
   source varchar(64) not null);
 
 create index idx_feast_day on feast (day);
