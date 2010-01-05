@@ -117,7 +117,7 @@ public class DayMatcherService
         }
 
         Map<String, ContactFeast> names = new HashMap<String, ContactFeast>();
-        do
+        while (cursor.moveToNext())
         {
             String name = cursor.getString( cursor.getColumnIndexOrThrow( HappyContactsDb.Feast.NAME ) );
             if ( name == null )
@@ -132,7 +132,6 @@ public class DayMatcherService
                 Log.v( "DayMatcher: day " + day + " feast : " + contactFeast.getContactName() );
             }
         }
-        while ( cursor.moveToNext() );
         cursor.close();
 
         /*

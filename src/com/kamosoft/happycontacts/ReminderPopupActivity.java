@@ -16,6 +16,7 @@ import android.app.NotificationManager;
 import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -58,6 +59,14 @@ public class ReminderPopupActivity
 
     private ContactFeast mCurrentContactFeast;
 
+    private SharedPreferences mPrefs;
+
+    private String mMailBody;
+
+    private String mMailSubject;
+
+    private String mSmsBody;
+
     @Override
     protected void onCreate( Bundle savedInstanceState )
     {
@@ -73,6 +82,8 @@ public class ReminderPopupActivity
         //        WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
 
         mDb = new DbAdapter( this );
+
+        mPrefs = getSharedPreferences( APP_NAME, 0 );
 
         /* boucle sur les contacts a qui il fait souhaiter la fete */
         SimpleDateFormat dateFormat = new SimpleDateFormat( "dd/MM" );
@@ -97,13 +108,18 @@ public class ReminderPopupActivity
     {
         switch ( id )
         {
+            /* First dialog which show the available methods to contact */
             case HOW_TO_CONTACT_DIALOG_ID:
                 AlertDialog.Builder builder = new AlertDialog.Builder( this );
                 builder.setTitle( getString( R.string.contact_method_dialog_title, mCurrentContactFeast
                     .getContactName() ) );
 
                 String[] contactMethods = getResources().getStringArray( R.array.contactmethods_items );
+                /* need to determine the available contacts method from the contact */
                 final ArrayList<String> availableContactMethods = new ArrayList<String>();
+                /* FIXME the available contact method change the order of the items so the switch case in onclick is
+                 * not good if e.g. contact has only a email.
+                 */
                 if ( mCurrentContactFeast.hasPhone() )
                 {
                     availableContactMethods.add( contactMethods[0] );
@@ -121,11 +137,11 @@ public class ReminderPopupActivity
                                           switch ( item )
                                           {
                                               case CALL_ITEM_INDEX:
+                                                  /* if contact has only one phone number, 
+                                                   * we direct launch the compose tel activity */
                                                   if ( mCurrentContactFeast.getPhones().size() == 1 )
                                                   {
-                                                      AndroidUtils
-                                                          .composeTel( ReminderPopupActivity.this, mCurrentContactFeast
-                                                              .getPhones().get( 0 ) );
+                                                      composeTel( mCurrentContactFeast.getPhones().get( 0 ) );
                                                       updateCurrentContactFeast();
                                                       nextOrExit();
                                                   }
@@ -135,11 +151,11 @@ public class ReminderPopupActivity
                                                   }
                                                   break;
                                               case SMS_ITEM_INDEX:
+                                                  /* if contact has only one phone number, 
+                                                   * we direct launch the compose sms activity */
                                                   if ( mCurrentContactFeast.getPhones().size() == 1 )
                                                   {
-                                                      AndroidUtils
-                                                          .composeSms( ReminderPopupActivity.this, mCurrentContactFeast
-                                                              .getPhones().get( 0 ), "yeah" );
+                                                      composeSms( mCurrentContactFeast.getPhones().get( 0 ) );
                                                       updateCurrentContactFeast();
                                                       nextOrExit();
                                                   }
@@ -149,11 +165,11 @@ public class ReminderPopupActivity
                                                   }
                                                   break;
                                               case EMAIL_ITEM_INDEX:
+                                                  /* if contact has only one email, 
+                                                   * we direct launch the mail app */
                                                   if ( mCurrentContactFeast.getEmails().size() == 1 )
                                                   {
-                                                      AndroidUtils.composeMail( ReminderPopupActivity.this,
-                                                                                mCurrentContactFeast.getEmails()
-                                                                                    .get( 0 ), "yeah", "fuck" );
+                                                      composeMail( mCurrentContactFeast.getEmails().get( 0 ) );
                                                       updateCurrentContactFeast();
                                                       nextOrExit();
                                                   }
@@ -167,23 +183,23 @@ public class ReminderPopupActivity
                                   } );
                 return builder.create();
 
+                /* dialog which show the available phone number of the contact */
             case TEL_CHOOSER_DIALOG_ID:
                 builder = new AlertDialog.Builder( this );
                 builder.setItems( mCurrentContactFeast.getPhones().toArray( new String[] {} ),
                                   new DialogInterface.OnClickListener()
                                   {
-
                                       @Override
                                       public void onClick( DialogInterface dialog, int item )
                                       {
-                                          AndroidUtils.composeTel( ReminderPopupActivity.this, mCurrentContactFeast
-                                              .getPhones().get( item ) );
+                                          composeTel( mCurrentContactFeast.getPhones().get( item ) );
                                           updateCurrentContactFeast();
                                           nextOrExit();
                                       }
                                   } );
                 return builder.create();
 
+                /* dialog which show the available email adress of the contact */
             case SMS_CHOOSER_DIALOG_ID:
                 builder = new AlertDialog.Builder( this );
                 builder.setItems( mCurrentContactFeast.getPhones().toArray( new String[] {} ),
@@ -193,8 +209,7 @@ public class ReminderPopupActivity
                                       @Override
                                       public void onClick( DialogInterface dialog, int item )
                                       {
-                                          AndroidUtils.composeSms( ReminderPopupActivity.this, mCurrentContactFeast
-                                              .getPhones().get( item ), "yeah" );
+                                          composeSms( mCurrentContactFeast.getPhones().get( item ) );
                                           updateCurrentContactFeast();
                                           nextOrExit();
                                       }
@@ -210,8 +225,7 @@ public class ReminderPopupActivity
                                       @Override
                                       public void onClick( DialogInterface dialog, int item )
                                       {
-                                          AndroidUtils.composeMail( ReminderPopupActivity.this, mCurrentContactFeast
-                                              .getEmails().get( item ), "yeah", "fuck" );
+                                          composeMail( mCurrentContactFeast.getEmails().get( item ) );
                                           updateCurrentContactFeast();
                                           nextOrExit();
                                       }
@@ -219,6 +233,49 @@ public class ReminderPopupActivity
                 return builder.create();
         }
         return null;
+    }
+
+    private String getMailBody()
+    {
+        if ( mMailBody == null )
+        {
+            mMailBody = mPrefs.getString( PREF_MAIL_BODY_TEMPLATE, getString( R.string.default_mail_body_template ) );
+        }
+        return mMailBody;
+    }
+
+    private String getMailSubject()
+    {
+        if ( mMailSubject == null )
+        {
+            mMailSubject = mPrefs.getString( PREF_MAIL_SUBJECT_TEMPLATE,
+                                             getString( R.string.default_mail_subject_tempate ) );
+        }
+        return mMailSubject;
+    }
+
+    private String getSmsBody()
+    {
+        if ( mSmsBody == null )
+        {
+            mSmsBody = mPrefs.getString( PREF_SMS_BODY_TEMPLATE, getString( R.string.default_sms_body_template ) );
+        }
+        return mSmsBody;
+    }
+
+    private void composeMail( String emailAddress )
+    {
+        AndroidUtils.composeMail( this, emailAddress, getMailSubject(), getMailBody() );
+    }
+
+    private void composeSms( String phoneNumber )
+    {
+        AndroidUtils.composeSms( this, phoneNumber, getSmsBody() );
+    }
+
+    private void composeTel( String phoneNumber )
+    {
+        AndroidUtils.composeTel( this, phoneNumber );
     }
 
     /**
@@ -292,8 +349,6 @@ public class ReminderPopupActivity
                     {
                         Log.v( "ReminderPopup: " + contactFeast.getContactName() + " is contactable" );
                     }
-                    // FIXME don't forget to insert blacklist
-                    // FIXME direct display to email dialog if only email
                     showDialog( HOW_TO_CONTACT_DIALOG_ID );
                 }
                 else

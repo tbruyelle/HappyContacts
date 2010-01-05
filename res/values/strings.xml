@@ -57,4 +57,7 @@
 <item>Email</item>
 </string-array>
 <string name="contact_method_not_supported">Aucune méthode de contact supportée n'a été trouvée pour ce contact.</string>
+<string name="default_mail_subject_tempate">Il y a quelque chose à fêter aujourd'hui...</string>
+<string name="default_mail_body_template">On dirait que c'est ton jour %s, alors bonne fête !</string>
+<string name="default_sms_body_template">C'est ta fête aujourd'hui %s... Bonne fête !</string>
 </resources>

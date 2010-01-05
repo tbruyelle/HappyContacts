@@ -69,6 +69,9 @@ public final class R {
         public static final int contact_method_dialog_title=0x7f060033;
         public static final int contact_method_not_supported=0x7f060034;
         public static final int date_list_title=0x7f06000f;
+        public static final int default_mail_body_template=0x7f060036;
+        public static final int default_mail_subject_tempate=0x7f060035;
+        public static final int default_sms_body_template=0x7f060037;
         public static final int enter_date=0x7f060027;
         public static final int enter_name=0x7f06002e;
         public static final int exit=0x7f060004;

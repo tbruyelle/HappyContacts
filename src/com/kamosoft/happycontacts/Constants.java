@@ -27,6 +27,12 @@ public interface Constants
 
     public static final String PREF_FIRST_RUN = "firstRun";
 
+    public static final String PREF_MAIL_SUBJECT_TEMPLATE = "mailSubjectTemplate";
+
+    public static final String PREF_MAIL_BODY_TEMPLATE = "mailBodyTemplate";
+
+    public static final String PREF_SMS_BODY_TEMPLATE = "smsSubjectTemplate";
+
     /* intents data keys */
     public static final String NAME_INTENT_KEY = "name";
 
