@@ -1,6 +1,5 @@
 package com.kamosoft.happycontacts;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -16,11 +15,10 @@ import com.kamosoft.happycontacts.dao.HappyContactsDb;
  * Display date list for a name
  * @author Tom
  *
- * @since 30 déc. 2009
+ * @since 30 dec. 2009
  */
 public class DateListActivity
-    extends ListActivity
-    implements Constants
+    extends DateNameListOptionsMenu
 {
     private DbAdapter mDb;
 
@@ -99,10 +97,7 @@ public class DateListActivity
         }
     }
 
-    /**
-     * 
-     */
-    private void fillList()
+    protected void fillList()
     {
         setTitle( getString( R.string.date_list_title, mName ) );
         mCursorDaysForName = mDb.fetchDayForName( mName );

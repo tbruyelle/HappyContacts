@@ -60,29 +60,6 @@ public class HappyContactsPreferences
         }
     };
 
-    /**
-     * hour click action
-     */
-    private TimePickerDialog.OnTimeSetListener mTimeSetListener = new TimePickerDialog.OnTimeSetListener()
-    {
-        public void onTimeSet( TimePicker view, int hourOfDay, int minute )
-        {
-            mAlarmHour = hourOfDay;
-            mAlarmMinute = minute;
-            /* record prefs */
-            SharedPreferences.Editor editor = mPrefs.edit();
-            editor.putInt( PREF_ALARM_HOUR, mAlarmHour );
-            editor.putInt( PREF_ALARM_MINUTE, mAlarmMinute );
-            editor.commit();
-            mAlarmTimePref.setSummary( AndroidUtils.pad( mAlarmHour, mAlarmMinute ) );
-            if ( AlarmController.isAlarmUp( HappyContactsPreferences.this ) )
-            {
-                /* if alarm is up, have to change it */
-                AlarmController.startAlarm( HappyContactsPreferences.this );
-            }
-        }
-    };
-
     private SharedPreferences mPrefs;
 
     private int mAlarmHour;
@@ -100,8 +77,27 @@ public class HappyContactsPreferences
         switch ( id )
         {
             case TIME_DIALOG_ID:
-                TimePickerDialog timePickerDialog = new TimePickerDialog( this, mTimeSetListener, mAlarmHour,
-                                                                          mAlarmMinute, true );
+                TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener()
+                {
+                    public void onTimeSet( TimePicker view, int hourOfDay, int minute )
+                    {
+                        mAlarmHour = hourOfDay;
+                        mAlarmMinute = minute;
+                        /* record prefs */
+                        SharedPreferences.Editor editor = mPrefs.edit();
+                        editor.putInt( PREF_ALARM_HOUR, mAlarmHour );
+                        editor.putInt( PREF_ALARM_MINUTE, mAlarmMinute );
+                        editor.commit();
+                        mAlarmTimePref.setSummary( AndroidUtils.pad( mAlarmHour, mAlarmMinute ) );
+                        if ( AlarmController.isAlarmUp( HappyContactsPreferences.this ) )
+                        {
+                            /* if alarm is up, have to change it */
+                            AlarmController.startAlarm( HappyContactsPreferences.this );
+                        }
+                    }
+                };
+                TimePickerDialog timePickerDialog =
+                    new TimePickerDialog( this, timeSetListener, mAlarmHour, mAlarmMinute, true );
 
                 return timePickerDialog;
         }

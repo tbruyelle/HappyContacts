@@ -4,15 +4,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Map;
 
-import android.app.DatePickerDialog;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -29,30 +26,15 @@ import com.kamosoft.happycontacts.model.ContactFeasts;
  *
  */
 public class NameListActivity
-    extends ListActivity
-    implements Constants
+    extends DateNameListOptionsMenu
 {
-    private static final int DAY_MENU_ID = Menu.FIRST;
-
-    private static final int NAME_MENU_ID = DAY_MENU_ID + 1;
-
-    private static final int TEST_MENU_ID = NAME_MENU_ID + 1;
-
     private DbAdapter mDb;
 
     private SimpleCursorAdapter mCursorAdapter;
 
     private Cursor mCursorNamesForDay;
 
-    private String mDay;
-
     private String mDate;
-
-    private int mYear;
-
-    private int mMonthOfYear;
-
-    private int mDayOfMonth;
 
     /** Called when the activity is first created. */
     @Override
@@ -64,10 +46,10 @@ public class NameListActivity
         }
         super.onCreate( savedInstanceState );
         setContentView( R.layout.testapp );
-        
-        TextView emptyText = (TextView)findViewById( android.R.id.empty );
+
+        TextView emptyText = (TextView) findViewById( android.R.id.empty );
         emptyText.setText( getString( R.string.no_feast ) );
-        
+
         mDb = new DbAdapter( this );
 
         if ( Log.DEBUG )
@@ -93,7 +75,7 @@ public class NameListActivity
         SimpleDateFormat fullDateFormat = new SimpleDateFormat( FULL_DATE_FORMAT );
         mDate = fullDateFormat.format( calendar.getTime() );
         mYear = calendar.get( Calendar.YEAR );
-        mMonthOfYear = calendar.get( Calendar.MONTH );
+        mMonthOfYear = calendar.get( Calendar.MONTH ) - 1;
         mDayOfMonth = calendar.get( Calendar.DAY_OF_MONTH );
 
         mDb.open( true );
@@ -132,7 +114,7 @@ public class NameListActivity
         }
     }
 
-    private void fillList()
+    protected void fillList()
     {
         setTitle( getString( R.string.name_list_title, mDay ) );
         mCursorNamesForDay = mDb.fetchNamesForDay( mDay );
@@ -170,7 +152,6 @@ public class NameListActivity
     {
         super.onCreateOptionsMenu( menu );
         menu.add( 0, DAY_MENU_ID, 0, R.string.enter_date ).setIcon( R.drawable.ic_menu_today );
-        menu.add( 0, NAME_MENU_ID, 0, R.string.enter_name ).setIcon( android.R.drawable.ic_menu_edit );
         menu.add( 0, TEST_MENU_ID, 0, R.string.check_contacts ).setIcon( R.drawable.ic_menu_allfriends );
         return true;
     }
@@ -180,12 +161,6 @@ public class NameListActivity
     {
         switch ( item.getItemId() )
         {
-            case DAY_MENU_ID:
-                displayDateForm();
-                return true;
-            case NAME_MENU_ID:
-                displayNameForm();
-                return true;
             case TEST_MENU_ID:
                 /*
                  * Look for names matching today date
@@ -221,35 +196,4 @@ public class NameListActivity
         return super.onMenuItemSelected( featureId, item );
     }
 
-    /**
-     * FIXME faire du showdialog
-     * display 
-     */
-    private void displayNameForm()
-    {
-        new EnterNameDialog( this ).show();
-    }
-
-    /**
-     * FIXME faire du showdialog
-     * display a datepicker
-     */
-    private void displayDateForm()
-    {
-        new DatePickerDialog( this, new DatePickerDialog.OnDateSetListener()
-        {
-            public void onDateSet( DatePicker view, int year, int monthOfYear, int dayOfMonth )
-            {
-                mYear = year;
-                mMonthOfYear = monthOfYear;
-                mDayOfMonth = dayOfMonth;
-                Calendar cal = Calendar.getInstance();
-                cal.set( year, monthOfYear, dayOfMonth );
-                SimpleDateFormat dateFormat = new SimpleDateFormat( DAY_FORMAT );
-                mDay = dateFormat.format( cal.getTime() );
-                fillList();
-                NameListActivity.this.getListView().scrollTo( 0, 0 );
-            }
-        }, mYear, mMonthOfYear, mDayOfMonth ).show();
-    }
 }
