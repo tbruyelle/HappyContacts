@@ -17,6 +17,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.text.format.DateFormat;
 import android.widget.TimePicker;
 
 import com.kamosoft.happycontacts.alarm.AlarmController;
@@ -97,7 +98,7 @@ public class HappyContactsPreferences
                     }
                 };
                 TimePickerDialog timePickerDialog =
-                    new TimePickerDialog( this, timeSetListener, mAlarmHour, mAlarmMinute, true );
+                    new TimePickerDialog( this, timeSetListener, mAlarmHour, mAlarmMinute, DateFormat.is24HourFormat(this) );
 
                 return timePickerDialog;
         }
