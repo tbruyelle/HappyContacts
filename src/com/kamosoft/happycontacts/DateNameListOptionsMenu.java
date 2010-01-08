@@ -92,8 +92,24 @@ public abstract class DateNameListOptionsMenu
                         mDay = dateFormat.format( cal.getTime() );
                         fillList();
                     }
-                }, mYear, mMonthOfYear, mDayOfMonth );
+                }, 0, 0, 0 );
         }
         return null;
+    }
+
+    /**
+     * @see android.app.Activity#onPrepareDialog(int, android.app.Dialog)
+     */
+    @Override
+    protected void onPrepareDialog( int id, Dialog dialog )
+    {
+        super.onPrepareDialog( id, dialog );
+        switch ( id )
+        {
+            case DATE_FORM_DIALOG_ID:
+                DatePickerDialog datePickerDialog = (DatePickerDialog) dialog;
+                datePickerDialog.updateDate( mYear, mMonthOfYear, mDayOfMonth );
+                break;
+        }
     }
 }
