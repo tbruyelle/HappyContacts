@@ -22,14 +22,16 @@ public final class R {
         public static final int happy=0x7f020002;
         public static final int ic_menu_allfriends=0x7f020003;
         public static final int ic_menu_delete=0x7f020004;
-        public static final int ic_menu_reminder=0x7f020005;
-        public static final int ic_menu_today=0x7f020006;
-        public static final int icon=0x7f020007;
-        public static final int left_deco=0x7f020008;
-        public static final int right_deco=0x7f020009;
-        public static final int sad=0x7f02000a;
-        public static final int smile=0x7f02000b;
-        public static final int umbrella=0x7f02000c;
+        public static final int ic_menu_edit=0x7f020005;
+        public static final int ic_menu_home=0x7f020006;
+        public static final int ic_menu_reminder=0x7f020007;
+        public static final int ic_menu_today=0x7f020008;
+        public static final int icon=0x7f020009;
+        public static final int left_deco=0x7f02000a;
+        public static final int right_deco=0x7f02000b;
+        public static final int sad=0x7f02000c;
+        public static final int smile=0x7f02000d;
+        public static final int umbrella=0x7f02000e;
     }
     public static final class id {
         public static final int button_name_cancel=0x7f080004;
@@ -62,6 +64,7 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f060002;
+        public static final int back_to_main=0x7f060038;
         public static final int blacklist_label=0x7f06000c;
         public static final int call=0x7f060007;
         public static final int cancel=0x7f060030;

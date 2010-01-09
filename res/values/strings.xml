@@ -60,4 +60,5 @@
 <string name="default_mail_subject_tempate">Il y a quelque chose à fêter aujourd'hui...</string>
 <string name="default_mail_body_template">On dirait que c'est ton jour %s, alors bonne fête !</string>
 <string name="default_sms_body_template">C'est ta fête aujourd'hui %s... Bonne fête !</string>
+<string name="back_to_main">Retour au menu principal</string>
 </resources>

@@ -9,6 +9,7 @@ import java.util.Calendar;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.DatePicker;
@@ -23,7 +24,9 @@ public abstract class DateNameListOptionsMenu
     extends ListActivity
     implements Constants
 {
-    protected static final int DAY_MENU_ID = Menu.FIRST;
+    protected static final int BACK_MENU_ID = Menu.FIRST;
+
+    protected static final int DAY_MENU_ID = BACK_MENU_ID + 1;
 
     protected static final int NAME_MENU_ID = DAY_MENU_ID + 1;
 
@@ -47,7 +50,8 @@ public abstract class DateNameListOptionsMenu
     public boolean onCreateOptionsMenu( Menu menu )
     {
         super.onCreateOptionsMenu( menu );
-        menu.add( 0, NAME_MENU_ID, 0, R.string.enter_name ).setIcon( android.R.drawable.ic_menu_edit );
+        menu.add( 0, BACK_MENU_ID, 0, R.string.back_to_main ).setIcon( R.drawable.ic_menu_home );
+        menu.add( 0, NAME_MENU_ID, 0, R.string.enter_name ).setIcon( R.drawable.ic_menu_edit );
         return true;
     }
 
@@ -56,6 +60,12 @@ public abstract class DateNameListOptionsMenu
     {
         switch ( item.getItemId() )
         {
+            case BACK_MENU_ID:
+                Intent intent = new Intent( this, HappyContactsPreferences.class );
+                intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                startActivity( intent );
+                break;
+
             case DAY_MENU_ID:
                 showDialog( DATE_FORM_DIALOG_ID );
                 return true;
