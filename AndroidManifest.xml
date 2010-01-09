@@ -26,6 +26,8 @@
 		<receiver android:name=".alarm.AlarmReceiver" />
 
 		<service android:name="DayMatcherService" />
+		<activity android:name=".template.SmsTemplateActivity" />
+		<activity android:name=".template.MailTemplateActivity" />
 	</application>
 	<uses-sdk android:minSdkVersion="3" />
 

@@ -36,27 +36,36 @@ public final class R {
     public static final class id {
         public static final int button_name_cancel=0x7f080004;
         public static final int button_name_ok=0x7f080003;
-        public static final int call_button=0x7f080006;
+        public static final int call_button=0x7f08000b;
+        public static final int cancel_button=0x7f080009;
         public static final int contact_name=0x7f080000;
-        public static final int contact_photo=0x7f08000a;
+        public static final int contact_photo=0x7f08000f;
         public static final int edittext_name=0x7f080002;
-        public static final int element=0x7f08000c;
+        public static final int element=0x7f080012;
         public static final int last_wish_year=0x7f080001;
-        public static final int later_button=0x7f080008;
-        public static final int layout_root=0x7f080005;
-        public static final int never_button=0x7f080009;
-        public static final int nottoday_button=0x7f080007;
-        public static final int text=0x7f08000b;
+        public static final int later_button=0x7f08000d;
+        public static final int layout_root=0x7f08000a;
+        public static final int mail_template_body=0x7f080006;
+        public static final int mail_template_subject=0x7f080005;
+        public static final int never_button=0x7f08000e;
+        public static final int nottoday_button=0x7f08000c;
+        public static final int ok_button=0x7f080007;
+        public static final int reset_button=0x7f080008;
+        public static final int sms_template_content=0x7f080011;
+        public static final int text=0x7f080010;
     }
     public static final class layout {
         public static final int blacklist=0x7f030000;
         public static final int blacklist_element=0x7f030001;
         public static final int divider=0x7f030002;
         public static final int enter_name_popup=0x7f030003;
-        public static final int reminder=0x7f030004;
-        public static final int reminder_header=0x7f030005;
-        public static final int testapp=0x7f030006;
-        public static final int testapp_element=0x7f030007;
+        public static final int mail_template=0x7f030004;
+        public static final int okcancel_buttons=0x7f030005;
+        public static final int reminder=0x7f030006;
+        public static final int reminder_header=0x7f030007;
+        public static final int sms_template=0x7f030008;
+        public static final int testapp=0x7f030009;
+        public static final int testapp_element=0x7f03000a;
     }
     public static final class raw {
         public static final int db_create=0x7f040000;
@@ -83,6 +92,8 @@ public final class R {
         public static final int last_wish_date=0x7f06000d;
         public static final int later=0x7f060008;
         public static final int loading_data=0x7f060029;
+        public static final int mail_template_subject=0x7f06003a;
+        public static final int mail_template_text=0x7f06003b;
         public static final int name_list_title=0x7f06000e;
         public static final int never=0x7f060009;
         public static final int next=0x7f060005;
@@ -110,13 +121,17 @@ public final class R {
         public static final int pref_test_app=0x7f060010;
         public static final int pref_test_app_summary=0x7f060012;
         public static final int pref_time=0x7f06001d;
+        public static final int reset_button=0x7f06003c;
+        public static final int sms_template_text=0x7f060039;
         public static final int toast_blacklisted=0x7f060021;
         public static final int toast_contact_blacklisted=0x7f060020;
         public static final int toast_contact_list=0x7f060025;
         public static final int toast_contact_one=0x7f060024;
         public static final int toast_finish=0x7f060026;
         public static final int toast_later=0x7f060022;
+        public static final int toast_mail_template_saved=0x7f06003d;
         public static final int toast_no_contact=0x7f060023;
+        public static final int toast_sms_template_saved=0x7f06003e;
         public static final int updating_data=0x7f06002a;
         public static final int version=0x7f060000;
         public static final int whattodo=0x7f06000b;

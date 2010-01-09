@@ -61,12 +61,6 @@ public class ReminderPopupActivity
 
     private SharedPreferences mPrefs;
 
-    private String mMailBody;
-
-    private String mMailSubject;
-
-    private String mSmsBody;
-
     @Override
     protected void onCreate( Bundle savedInstanceState )
     {
@@ -237,30 +231,17 @@ public class ReminderPopupActivity
 
     private String getMailBody()
     {
-        if ( mMailBody == null )
-        {
-            mMailBody = mPrefs.getString( PREF_MAIL_BODY_TEMPLATE, getString( R.string.default_mail_body_template ) );
-        }
-        return mMailBody;
+        return mPrefs.getString( PREF_MAIL_BODY_TEMPLATE, getString( R.string.default_mail_body_template ) );
     }
 
     private String getMailSubject()
     {
-        if ( mMailSubject == null )
-        {
-            mMailSubject = mPrefs.getString( PREF_MAIL_SUBJECT_TEMPLATE,
-                                             getString( R.string.default_mail_subject_tempate ) );
-        }
-        return mMailSubject;
+        return mPrefs.getString( PREF_MAIL_SUBJECT_TEMPLATE, getString( R.string.default_mail_subject_tempate ) );
     }
 
     private String getSmsBody()
     {
-        if ( mSmsBody == null )
-        {
-            mSmsBody = mPrefs.getString( PREF_SMS_BODY_TEMPLATE, getString( R.string.default_sms_body_template ) );
-        }
-        return mSmsBody;
+        return mPrefs.getString( PREF_SMS_BODY_TEMPLATE, getString( R.string.default_sms_body_template ) );
     }
 
     private void composeMail( String emailAddress )
@@ -310,6 +291,7 @@ public class ReminderPopupActivity
             return;
         }
         /* have to remove the dialogs because their content can change between different contacts */
+        /* FIXME try with onPrepareDialog */
         removeDialog( EMAIL_CHOOSER_DIALOG_ID );
         removeDialog( HOW_TO_CONTACT_DIALOG_ID );
         removeDialog( TEL_CHOOSER_DIALOG_ID );

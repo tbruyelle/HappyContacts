@@ -57,8 +57,18 @@
 <item>Email</item>
 </string-array>
 <string name="contact_method_not_supported">Aucune méthode de contact supportée n'a été trouvée pour ce contact.</string>
-<string name="default_mail_subject_tempate">Il y a quelque chose à fêter aujourd'hui...</string>
-<string name="default_mail_body_template">On dirait que c'est ton jour %s, alors bonne fête !</string>
-<string name="default_sms_body_template">C'est ta fête aujourd'hui %s... Bonne fête !</string>
+<string name="default_mail_subject_tempate">Il y a quelque chose à fêter aujourd\'hui...</string>
+<string name="default_mail_body_template">On dirait que c\'est ton jour, alors bonne fête !</string>
+<string name="default_sms_body_template">C\'est ta fête aujourd\'hui... Bonne fête !</string>
 <string name="back_to_main">Retour au menu principal</string>
+<string name="sms_template_text">Editer ici votre modèle de SMS</string>
+
+
+<string name="mail_template_subject">Objet : </string>
+
+<string name="mail_template_text">Editer ici votre modèle de mail</string>
+
+<string name="reset_button">Par défaut</string>
+<string name="toast_mail_template_saved">Modèle d\'email sauvegardé</string>
+<string name="toast_sms_template_saved">Modèle de SMS sauvegardé</string>
 </resources>

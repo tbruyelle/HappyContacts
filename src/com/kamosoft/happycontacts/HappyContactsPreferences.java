@@ -1,5 +1,5 @@
 /**
- * 
+ * Copyright (C) Kamosoft 2010
  */
 package com.kamosoft.happycontacts;
 
@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.text.format.DateFormat;
@@ -23,6 +24,8 @@ import android.widget.TimePicker;
 import com.kamosoft.happycontacts.alarm.AlarmController;
 import com.kamosoft.happycontacts.blacklist.BlackListActivity;
 import com.kamosoft.happycontacts.dao.DbAdapter;
+import com.kamosoft.happycontacts.template.MailTemplateActivity;
+import com.kamosoft.happycontacts.template.SmsTemplateActivity;
 import com.kamosoft.utils.AndroidUtils;
 import com.kamosoft.utils.ProgressDialogHandler;
 
@@ -32,7 +35,7 @@ import com.kamosoft.utils.ProgressDialogHandler;
  */
 public class HappyContactsPreferences
     extends PreferenceActivity
-    implements Constants
+    implements Constants, TimePickerDialog.OnTimeSetListener
 {
     private static final int TIME_DIALOG_ID = 0;
 
@@ -70,41 +73,65 @@ public class HappyContactsPreferences
     private Preference mAlarmTimePref;
 
     /**
+     * @see android.app.Activity#onPrepareDialog(int, android.app.Dialog)
+     */
+    @Override
+    protected void onPrepareDialog( int id, Dialog dialog )
+    {
+        super.onPrepareDialog( id, dialog );
+        switch ( id )
+        {
+            case TIME_DIALOG_ID:
+                TimePickerDialog timePicker = (TimePickerDialog) dialog;
+                timePicker.updateTime( mAlarmHour, mAlarmMinute );
+                break;
+        }
+    }
+
+    /**
      * @see android.app.Activity#onCreateDialog(int)
      */
     @Override
     protected Dialog onCreateDialog( int id )
     {
+        Dialog dialog;
         switch ( id )
         {
             case TIME_DIALOG_ID:
-                TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener()
-                {
-                    public void onTimeSet( TimePicker view, int hourOfDay, int minute )
-                    {
-                        mAlarmHour = hourOfDay;
-                        mAlarmMinute = minute;
-                        /* record prefs */
-                        SharedPreferences.Editor editor = mPrefs.edit();
-                        editor.putInt( PREF_ALARM_HOUR, mAlarmHour );
-                        editor.putInt( PREF_ALARM_MINUTE, mAlarmMinute );
-                        editor.commit();
-                        mAlarmTimePref.setSummary( AndroidUtils.pad( mAlarmHour, mAlarmMinute ) );
-                        if ( AlarmController.isAlarmUp( HappyContactsPreferences.this ) )
-                        {
-                            /* if alarm is up, have to change it */
-                            AlarmController.startAlarm( HappyContactsPreferences.this );
-                        }
-                    }
-                };
-                TimePickerDialog timePickerDialog =
-                    new TimePickerDialog( this, timeSetListener, mAlarmHour, mAlarmMinute, DateFormat.is24HourFormat(this) );
-
-                return timePickerDialog;
+                dialog = new TimePickerDialog( HappyContactsPreferences.this, this, 0, 0, DateFormat
+                    .is24HourFormat( this ) );
+                break;
+            default:
+                dialog = null;
         }
-        return null;
+        return dialog;
     }
 
+    /**
+     * @see android.app.TimePickerDialog.OnTimeSetListener#onTimeSet(android.widget.TimePicker, int, int)
+     */
+    @Override
+    public void onTimeSet( TimePicker view, int hourOfDay, int minute )
+    {
+        mAlarmHour = hourOfDay;
+        mAlarmMinute = minute;
+        /* record prefs */
+        SharedPreferences.Editor editor = mPrefs.edit();
+        editor.putInt( PREF_ALARM_HOUR, mAlarmHour );
+        editor.putInt( PREF_ALARM_MINUTE, mAlarmMinute );
+        editor.commit();
+        mAlarmTimePref.setSummary( AndroidUtils.pad( mAlarmHour, mAlarmMinute ) );
+        if ( AlarmController.isAlarmUp( HappyContactsPreferences.this ) )
+        {
+            /* if alarm is up, have to change it */
+            /* FIXME force enable alarm, but have to update the checkbox and the summary */
+            AlarmController.startAlarm( HappyContactsPreferences.this );
+        }
+    }
+
+    /**
+     * @see android.preference.PreferenceActivity#onCreate(android.os.Bundle)
+     */
     @Override
     protected void onCreate( Bundle savedInstanceState )
     {
@@ -136,7 +163,6 @@ public class HappyContactsPreferences
             /* if its the first run, alarm must be set */
             mPrefs.edit().putBoolean( PREF_FIRST_RUN, false ).commit();
             AlarmController.startAlarm( this );
-
         }
 
         final ProgressDialog progressDialog = new ProgressDialog( this );
@@ -188,7 +214,7 @@ public class HappyContactsPreferences
         root.addItemFromInflater( alarmTimePref );
 
         // test app
-        PreferenceScreen testAppPref = getPreferenceManager().createPreferenceScreen( this );
+        Preference testAppPref = new Preference( this );
         testAppPref.setTitle( R.string.pref_test_app );
         testAppPref.setSummary( R.string.pref_test_app_summary );
         Intent intent = new Intent( this, NameListActivity.class );
@@ -198,30 +224,30 @@ public class HappyContactsPreferences
         root.addPreference( testAppPref );
 
         // blacklist
-        PreferenceScreen blackListPref = getPreferenceManager().createPreferenceScreen( this );
+        Preference blackListPref = new Preference( this );
         blackListPref.setTitle( R.string.pref_blacklist );
         blackListPref.setSummary( R.string.pref_blacklist_summary );
         blackListPref.setIntent( new Intent( this, BlackListActivity.class ) );
         root.addPreference( blackListPref );
 
-        // templates
-        //    PreferenceCategory templatesPrefCat = new PreferenceCategory(this);
-        //    templatesPrefCat.setTitle(R.string.pref_templates_cat);
-        //    root.addPreference(templatesPrefCat);
-        //
-        //    EditTextPreference templateSmsPref = new EditTextPreference(this);
-        //    templateSmsPref.setDialogTitle(R.string.pref_template_sms_dialog);
-        //    templateSmsPref.setKey("templateSmsPref");
-        //    templateSmsPref.setTitle(R.string.pref_template_sms);
-        //    templateSmsPref.setSummary(R.string.pref_template_sms_summary);
-        //    templatesPrefCat.addPreference(templateSmsPref);
-        //
-        //    EditTextPreference templateEmailPref = new EditTextPreference(this);
-        //    templateEmailPref.setDialogTitle(R.string.pref_template_email_dialog);
-        //    templateEmailPref.setKey("templateEmailPref");
-        //    templateEmailPref.setTitle(R.string.pref_template_email);
-        //    templateEmailPref.setSummary(R.string.pref_template_email_summary);
-        //    templatesPrefCat.addPreference(templateEmailPref);
+        /* templates */
+        PreferenceCategory templatesPrefCat = new PreferenceCategory( this );
+        templatesPrefCat.setTitle( R.string.pref_templates_cat );
+        root.addPreference( templatesPrefCat );
+
+        Preference templateSmsPref = new Preference( this );
+        //templateSmsPref.setKey( "templateSmsPref" );
+        templateSmsPref.setTitle( R.string.pref_template_sms );
+        templateSmsPref.setSummary( R.string.pref_template_sms_summary );
+        templateSmsPref.setIntent( new Intent( this, SmsTemplateActivity.class ) );
+        templatesPrefCat.addPreference( templateSmsPref );
+
+        Preference templateEmailPref = new Preference( this );
+        //templateEmailPref.setKey( "templateEmailPref" );
+        templateEmailPref.setTitle( R.string.pref_template_email );
+        templateEmailPref.setSummary( R.string.pref_template_email_summary );
+        templateEmailPref.setIntent( new Intent( this, MailTemplateActivity.class ) );
+        templatesPrefCat.addPreference( templateEmailPref );
 
         return root;
     }
