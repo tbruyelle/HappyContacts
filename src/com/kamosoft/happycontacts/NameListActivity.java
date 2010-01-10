@@ -2,7 +2,6 @@ package com.kamosoft.happycontacts;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Map;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -17,7 +16,6 @@ import android.widget.Toast;
 
 import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.dao.HappyContactsDb;
-import com.kamosoft.happycontacts.model.ContactFeast;
 import com.kamosoft.happycontacts.model.ContactFeasts;
 
 /**
@@ -142,8 +140,8 @@ public class NameListActivity
         super.onListItemClick( l, v, position, id );
         mCursorNamesForDay.moveToPosition( position );
         Intent intent = new Intent( this, DateListActivity.class );
-        intent.putExtra( NAME_INTENT_KEY,
-                         mCursorNamesForDay.getString( mCursorNamesForDay.getColumnIndex( HappyContactsDb.Feast.NAME ) ) );
+        intent.putExtra( NAME_INTENT_KEY, mCursorNamesForDay.getString( mCursorNamesForDay
+            .getColumnIndex( HappyContactsDb.Feast.NAME ) ) );
         startActivity( intent );
     }
 
@@ -170,21 +168,24 @@ public class NameListActivity
                 if ( !contactFeastToday.getContactList().isEmpty() )
                 {
                     Notifier.notifyEvent( getApplicationContext() );
-                    StringBuilder sb = new StringBuilder();
-                    if ( contactFeastToday.getContactList().size() > 1 )
-                    {
-                        sb.append( this.getString( R.string.toast_contact_list ) );
-                    }
-                    else
-                    {
-                        sb.append( this.getString( R.string.toast_contact_one ) );
-                    }
-                    for ( Map.Entry<Long, ContactFeast> mapEntry : contactFeastToday.getContactList().entrySet() )
-                    {
-                        sb.append( mapEntry.getValue().getContactName() );
-                        sb.append( "\n" );
-                    }
-                    Toast.makeText( this, sb.toString(), Toast.LENGTH_LONG ).show();
+                    //                    StringBuilder sb = new StringBuilder();
+                    //                    if ( contactFeastToday.getContactList().size() > 1 )
+                    //                    {
+                    //                        sb.append( this.getString( R.string.toast_contact_list ) );
+                    //                    }
+                    //                    else
+                    //                    {
+                    //                        sb.append( this.getString( R.string.toast_contact_one ) );
+                    //                    }
+                    //                    for ( Map.Entry<Long, ContactFeast> mapEntry : contactFeastToday.getContactList().entrySet() )
+                    //                    {
+                    //                        sb.append( mapEntry.getValue().getContactName() );
+                    //                        sb.append( "\n" );
+                    //                    }
+                    //                    Toast.makeText( this, sb.toString(), Toast.LENGTH_LONG ).show();
+                    Intent intent = new Intent( this, ContactFeastPopupActivity.class );
+                    intent.putExtra( CONTACTFEAST_INTENT_KEY, contactFeastToday );
+                    startActivity( intent );
                 }
                 else
                 {

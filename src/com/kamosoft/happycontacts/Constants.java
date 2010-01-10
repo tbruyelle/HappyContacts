@@ -45,4 +45,6 @@ public interface Constants
 
     public static final int EMAIL_ITEM_INDEX = 2;
 
+    public static final String CONTACTFEAST_INTENT_KEY = "ContactFeasts";
+
 }
