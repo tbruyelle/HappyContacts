@@ -108,7 +108,8 @@ public class ReminderPopupActivity
                 builder.setTitle( getString( R.string.contact_method_dialog_title, mCurrentContactFeast
                     .getContactName() ) );
 
-                String[] contactMethods = getResources().getStringArray( R.array.contactmethods_items );
+                final String[] contactMethods = getResources().getStringArray( R.array.contactmethods_items );
+
                 /* need to determine the available contacts method from the contact */
                 final ArrayList<String> availableContactMethods = new ArrayList<String>();
                 /* FIXME the available contact method change the order of the items so the switch case in onclick is
@@ -116,62 +117,63 @@ public class ReminderPopupActivity
                  */
                 if ( mCurrentContactFeast.hasPhone() )
                 {
-                    availableContactMethods.add( contactMethods[0] );
-                    availableContactMethods.add( contactMethods[1] );
+                    availableContactMethods.add( contactMethods[CALL_ITEM_INDEX] );
+                    availableContactMethods.add( contactMethods[SMS_ITEM_INDEX] );
                 }
                 if ( mCurrentContactFeast.hasEmail() )
                 {
-                    availableContactMethods.add( contactMethods[2] );
+                    availableContactMethods.add( contactMethods[EMAIL_ITEM_INDEX] );
                 }
                 builder.setItems( availableContactMethods.toArray( new String[] {} ),
                                   new DialogInterface.OnClickListener()
                                   {
                                       public void onClick( DialogInterface dialog, int item )
                                       {
-                                          switch ( item )
+                                          String contactMethod = availableContactMethods.get( item );
+                                          if ( contactMethod.equals( contactMethods[CALL_ITEM_INDEX] ) )
                                           {
-                                              case CALL_ITEM_INDEX:
-                                                  /* if contact has only one phone number, 
-                                                   * we direct launch the compose tel activity */
-                                                  if ( mCurrentContactFeast.getPhones().size() == 1 )
-                                                  {
-                                                      composeTel( mCurrentContactFeast.getPhones().get( 0 ) );
-                                                      updateCurrentContactFeast();
-                                                      nextOrExit();
-                                                  }
-                                                  else
-                                                  {
-                                                      showDialog( TEL_CHOOSER_DIALOG_ID );
-                                                  }
-                                                  break;
-                                              case SMS_ITEM_INDEX:
-                                                  /* if contact has only one phone number, 
-                                                   * we direct launch the compose sms activity */
-                                                  if ( mCurrentContactFeast.getPhones().size() == 1 )
-                                                  {
-                                                      composeSms( mCurrentContactFeast.getPhones().get( 0 ) );
-                                                      updateCurrentContactFeast();
-                                                      nextOrExit();
-                                                  }
-                                                  else
-                                                  {
-                                                      showDialog( TEL_CHOOSER_DIALOG_ID );
-                                                  }
-                                                  break;
-                                              case EMAIL_ITEM_INDEX:
-                                                  /* if contact has only one email, 
-                                                   * we direct launch the mail app */
-                                                  if ( mCurrentContactFeast.getEmails().size() == 1 )
-                                                  {
-                                                      composeMail( mCurrentContactFeast.getEmails().get( 0 ) );
-                                                      updateCurrentContactFeast();
-                                                      nextOrExit();
-                                                  }
-                                                  else
-                                                  {
-                                                      showDialog( EMAIL_CHOOSER_DIALOG_ID );
-                                                  }
-                                                  break;
+                                              /* if contact has only one phone number, 
+                                               * we direct launch the compose tel activity */
+                                              if ( mCurrentContactFeast.getPhones().size() == 1 )
+                                              {
+                                                  composeTel( mCurrentContactFeast.getPhones().get( 0 ) );
+                                                  updateCurrentContactFeast();
+                                                  nextOrExit();
+                                              }
+                                              else
+                                              {
+                                                  showDialog( TEL_CHOOSER_DIALOG_ID );
+                                              }
+                                          }
+                                          else if ( contactMethod.equals( contactMethods[SMS_ITEM_INDEX] ) )
+                                          {
+                                              /* if contact has only one phone number, 
+                                               * we direct launch the compose sms activity */
+                                              if ( mCurrentContactFeast.getPhones().size() == 1 )
+                                              {
+                                                  composeSms( mCurrentContactFeast.getPhones().get( 0 ) );
+                                                  updateCurrentContactFeast();
+                                                  nextOrExit();
+                                              }
+                                              else
+                                              {
+                                                  showDialog( TEL_CHOOSER_DIALOG_ID );
+                                              }
+                                          }
+                                          else if ( contactMethod.equals( contactMethods[EMAIL_ITEM_INDEX] ) )
+                                          {
+                                              /* if contact has only one email, 
+                                               * we direct launch the mail app */
+                                              if ( mCurrentContactFeast.getEmails().size() == 1 )
+                                              {
+                                                  composeMail( mCurrentContactFeast.getEmails().get( 0 ) );
+                                                  updateCurrentContactFeast();
+                                                  nextOrExit();
+                                              }
+                                              else
+                                              {
+                                                  showDialog( EMAIL_CHOOSER_DIALOG_ID );
+                                              }
                                           }
                                       }
                                   } );

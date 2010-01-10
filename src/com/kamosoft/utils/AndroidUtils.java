@@ -38,6 +38,7 @@ public final class AndroidUtils
 
     public static void composeMail( Context context, String emailAddress, String mailSubject, String mailBody )
     {
+        //FIXME not working any more
         Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "mailto:" + emailAddress ) );
         intent.putExtra( "subject", mailSubject );
         intent.putExtra( "body", mailBody );
@@ -214,24 +215,24 @@ public final class AndroidUtils
         return new String( buffer );
     }
 
-//    public static String getFileContent( Resources resources, int rawId )
-//        throws IOException
-//    {
-//        InputStream is = resources.openRawResource( rawId );
-//
-//        // We guarantee that the available method returns the total
-//        // size of the asset... of course, this does mean that a single
-//        // asset can't be more than 2 gigs.
-//        int size = is.available();
-//
-//        // Read the entire asset into a local byte buffer.
-//        byte[] buffer = new byte[size];
-//        is.read( buffer );
-//        is.close();
-//
-//        // Convert the buffer into a string.
-//        return new String( buffer, "ISO-8859-1" );
-//    }
+    //    public static String getFileContent( Resources resources, int rawId )
+    //        throws IOException
+    //    {
+    //        InputStream is = resources.openRawResource( rawId );
+    //
+    //        // We guarantee that the available method returns the total
+    //        // size of the asset... of course, this does mean that a single
+    //        // asset can't be more than 2 gigs.
+    //        int size = is.available();
+    //
+    //        // Read the entire asset into a local byte buffer.
+    //        byte[] buffer = new byte[size];
+    //        is.read( buffer );
+    //        is.close();
+    //
+    //        // Convert the buffer into a string.
+    //        return new String( buffer, "ISO-8859-1" );
+    //    }
 
     public static String pad( int hour, int minute )
     {
