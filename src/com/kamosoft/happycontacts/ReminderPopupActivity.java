@@ -61,6 +61,12 @@ public class ReminderPopupActivity
 
     private SharedPreferences mPrefs;
 
+    private TextView mFeastCounter;
+
+    private ContactFeasts mContactFeasts;
+
+    private int mIndex;
+
     @Override
     protected void onCreate( Bundle savedInstanceState )
     {
@@ -86,9 +92,15 @@ public class ReminderPopupActivity
         SimpleDateFormat fullDateFormat = new SimpleDateFormat( "dd/MM/yyyy" );
         mDate = fullDateFormat.format( date );
 
-        ContactFeasts contactFeasts = DayMatcherService.testDayMatch( this, day, mDate );
+        mContactFeasts = DayMatcherService.testDayMatch( this, day, mDate );
         /* boucle sur les contacts a qui il fait souhaiter la fete */
-        contacts = contactFeasts.getContactList().entrySet().iterator();
+        contacts = mContactFeasts.getContactList().entrySet().iterator();
+
+        mFeastCounter = (TextView) findViewById( R.id.feast_counter );
+        if ( mContactFeasts.getContactList().size() <= 1 )
+        {
+            mFeastCounter.setVisibility( View.GONE );
+        }
 
         nextOrExit();
         if ( Log.DEBUG )
@@ -112,9 +124,7 @@ public class ReminderPopupActivity
 
                 /* need to determine the available contacts method from the contact */
                 final ArrayList<String> availableContactMethods = new ArrayList<String>();
-                /* FIXME the available contact method change the order of the items so the switch case in onclick is
-                 * not good if e.g. contact has only a email.
-                 */
+
                 if ( mCurrentContactFeast.hasPhone() )
                 {
                     availableContactMethods.add( contactMethods[CALL_ITEM_INDEX] );
@@ -261,6 +271,15 @@ public class ReminderPopupActivity
         AndroidUtils.composeTel( this, phoneNumber );
     }
 
+    private void updateFeastCounter()
+    {
+        if ( mContactFeasts.getContactList().size() > 1 )
+        {
+            mFeastCounter
+                .setText( getString( R.string.feast_counter, ++mIndex, mContactFeasts.getContactList().size() ) );
+        }
+    }
+
     /**
      * Boucle sur les contacts a afficher
      */
@@ -292,8 +311,10 @@ public class ReminderPopupActivity
             exit();
             return;
         }
+
+        updateFeastCounter();
+
         /* have to remove the dialogs because their content can change between different contacts */
-        /* FIXME try with onPrepareDialog */
         removeDialog( EMAIL_CHOOSER_DIALOG_ID );
         removeDialog( HOW_TO_CONTACT_DIALOG_ID );
         removeDialog( TEL_CHOOSER_DIALOG_ID );
@@ -369,7 +390,7 @@ public class ReminderPopupActivity
                     Log.v( "ReminderPopup: later clicked" );
                 }
                 // we keep notification in place if 'later' is clicked
-                Toast.makeText( ReminderPopupActivity.this, R.string.toast_later, Toast.LENGTH_LONG ).show();
+                //Toast.makeText( ReminderPopupActivity.this, R.string.toast_later, Toast.LENGTH_LONG ).show();
                 keepNotif = true;
                 nextOrExit();
             }

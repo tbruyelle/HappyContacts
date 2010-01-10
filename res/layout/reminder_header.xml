@@ -2,13 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_gravity="center_vertical|center_horizontal"
 	android:orientation="horizontal" android:layout_width="fill_parent"
-	android:layout_height="wrap_content" android:padding="5sp">
+	android:layout_height="wrap_content" android:padding="5dp">
 	<ImageView android:id="@+id/contact_photo"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:layout_marginRight="10sp" android:layout_marginLeft="10sp" />
+		android:layout_marginRight="10sp" android:layout_marginLeft="10dp" />
 	<LinearLayout android:orientation="vertical"
 		android:layout_width="fill_parent" android:layout_height="wrap_content">
-		<TextView android:id="@+id/contact_name" android:text="toto" android:textSize="18sp" android:textStyle="bold"
+		<TextView android:id="@+id/contact_name" android:text="toto"
+			android:textSize="18dp" android:textStyle="bold"
 			android:layout_gravity="center_vertical" android:layout_width="fill_parent"
 			android:layout_height="wrap_content" android:textColor="@color/white" />
 		<TextView android:id="@+id/text" android:layout_gravity="center_vertical"

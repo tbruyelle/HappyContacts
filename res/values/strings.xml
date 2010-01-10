@@ -71,4 +71,5 @@
 <string name="reset_button">Par défaut</string>
 <string name="toast_mail_template_saved">Modèle d\'email sauvegardé</string>
 <string name="toast_sms_template_saved">Modèle de SMS sauvegardé</string>
+<string name="feast_counter">%d/%d fêtes à souhaiter aujourd\'hui</string>
 </resources>
