@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_gravity="center_vertical|center_horizontal"
 	android:orientation="horizontal" android:layout_width="fill_parent"
 	android:layout_height="wrap_content" android:padding="5dp">
-	<ImageView android:id="@+id/contact_photo"
+
+	<ImageView android:id="@+id/contact_photo" android:src="@drawable/happy"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:layout_marginRight="10sp" android:layout_marginLeft="10dp" />
+		android:padding="5sp" android:layout_gravity="center" />
+
 	<LinearLayout android:orientation="vertical"
-		android:layout_width="fill_parent" android:layout_height="wrap_content">
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:gravity="center_vertical|center_horizontal">
+
+		<TextView android:text="@string/happyfeast_name"
+			android:gravity="center" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:paddingBottom="2dp" />
+
 		<TextView android:id="@+id/contact_name" android:text="toto"
-			android:textSize="18dp" android:textStyle="bold"
-			android:layout_gravity="center_vertical" android:layout_width="fill_parent"
-			android:layout_height="wrap_content" android:textColor="@color/white" />
-		<TextView android:id="@+id/text" android:layout_gravity="center_vertical"
-			android:layout_width="fill_parent" android:layout_height="wrap_content"
-			android:textColor="@color/white" android:text="@string/whattodo" />
+			android:gravity="center" android:textSize="18dp" android:textStyle="bold"
+			android:paddingTop="2dp" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:textColor="@color/white"
+			android:ellipsize="end" />
+
 	</LinearLayout>
+
 </LinearLayout>

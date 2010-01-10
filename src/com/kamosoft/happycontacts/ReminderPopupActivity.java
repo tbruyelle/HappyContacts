@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.provider.Contacts;
 import android.provider.Contacts.People;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -70,6 +71,8 @@ public class ReminderPopupActivity
     @Override
     protected void onCreate( Bundle savedInstanceState )
     {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        
         super.onCreate( savedInstanceState );
         if ( Log.DEBUG )
         {
@@ -327,7 +330,6 @@ public class ReminderPopupActivity
     {
         mCurrentContactFeast = contactFeast;
         contactFeast.setContactId( contactId );
-        setTitle( R.string.happyfeast );
 
         TextView contactNameTextView = (TextView) findViewById( R.id.contact_name );
         contactNameTextView.setText( contactFeast.getContactName() );

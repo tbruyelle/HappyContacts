@@ -41,7 +41,7 @@ public final class R {
         public static final int contact_name=0x7f080000;
         public static final int contact_photo=0x7f080010;
         public static final int edittext_name=0x7f080002;
-        public static final int element=0x7f080013;
+        public static final int element=0x7f080012;
         public static final int feast_counter=0x7f080005;
         public static final int last_wish_year=0x7f080001;
         public static final int later_button=0x7f08000e;
@@ -52,8 +52,7 @@ public final class R {
         public static final int nottoday_button=0x7f08000d;
         public static final int ok_button=0x7f080008;
         public static final int reset_button=0x7f080009;
-        public static final int sms_template_content=0x7f080012;
-        public static final int text=0x7f080011;
+        public static final int sms_template_content=0x7f080011;
     }
     public static final class layout {
         public static final int blacklist=0x7f030000;
@@ -91,6 +90,7 @@ public final class R {
         public static final int exit=0x7f060004;
         public static final int feast_counter=0x7f06003f;
         public static final int happyfeast=0x7f06000a;
+        public static final int happyfeast_name=0x7f060040;
         public static final int hello=0x7f060001;
         public static final int last_wish_date=0x7f06000d;
         public static final int later=0x7f060008;

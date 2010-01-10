@@ -3,8 +3,12 @@
 	android:id="@+id/layout_root" android:orientation="vertical"
 	android:layout_width="fill_parent" android:layout_height="fill_parent">
 
-	<include layout="@layout/divider" />
 	<include layout="@layout/reminder_header" />
+	<include layout="@layout/divider" />
+
+	<TextView android:gravity="center" android:paddingTop="4dp"
+		android:paddingBottom="4dp" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="@string/whattodo" />
 
 	<LinearLayout android:layout_gravity="center_vertical|center_horizontal"
 		android:orientation="vertical" android:layout_width="fill_parent"

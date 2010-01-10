@@ -11,7 +11,7 @@
 	<string name="later">Plus tard</string>
 	<string name="never">Jamais</string>
 	<string name="happyfeast">C\'est sa fête !</string>
-	<string name="whattodo">Voulez-vous contacter cette personne maintenant \?</string>
+	<string name="whattodo">Que voulez-vous faire \?</string>
 	<string name="blacklist_label">Cliquez sur un élément pour supprimer le contact de la liste noire.</string>
 	<string name="last_wish_date">&quot;Dernière date souhaitée : %s&quot;</string>
 	<string name="name_list_title">Liste des fêtes du %s</string>
@@ -71,5 +71,6 @@
 <string name="reset_button">Par défaut</string>
 <string name="toast_mail_template_saved">Modèle d\'email sauvegardé</string>
 <string name="toast_sms_template_saved">Modèle de SMS sauvegardé</string>
-<string name="feast_counter">%d/%d fêtes à souhaiter aujourd\'hui</string>
+<string name="feast_counter">%d/%d</string>
+<string name="happyfeast_name">C\'est la fête de</string>
 </resources>
