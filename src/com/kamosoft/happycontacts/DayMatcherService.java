@@ -40,23 +40,28 @@ public class DayMatcherService
         /*
          * Look for names matching today date
          */
-        ContactFeasts contactFeastToday = DayMatcherService.testDayMatch( getApplicationContext() );
+        ContactFeasts contactFeastToday = DayMatcherService.testDayMatch( this );
 
         if ( !contactFeastToday.getContactList().isEmpty() )
         {
             /* lancer les notify event */
-            Notifier.notifyEvent( getApplicationContext() );
+            Notifier.notifyEvent( this );
         }
 
         /*
          * schedule next alarm
          */
-        AlarmController.startAlarm( getApplicationContext() );
+        AlarmController.startAlarm( this );
 
         if ( Log.DEBUG )
         {
             Log.v( "DayMatcher: end onCreate()" );
         }
+        /*
+         * release the wake lock
+         */
+        AlarmController.releaseStaticLock( this );
+
         stopSelf();
     }
 
@@ -117,7 +122,7 @@ public class DayMatcherService
         }
 
         Map<String, ContactFeast> names = new HashMap<String, ContactFeast>();
-        while (cursor.moveToNext())
+        while ( cursor.moveToNext() )
         {
             String name = cursor.getString( cursor.getColumnIndexOrThrow( HappyContactsDb.Feast.NAME ) );
             if ( name == null )
