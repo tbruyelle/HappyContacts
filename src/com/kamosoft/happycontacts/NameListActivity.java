@@ -2,6 +2,7 @@ package com.kamosoft.happycontacts;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Map;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.dao.HappyContactsDb;
+import com.kamosoft.happycontacts.model.ContactFeast;
 import com.kamosoft.happycontacts.model.ContactFeasts;
 
 /**
@@ -150,7 +152,10 @@ public class NameListActivity
     {
         super.onCreateOptionsMenu( menu );
         menu.add( 0, DAY_MENU_ID, 0, R.string.enter_date ).setIcon( R.drawable.ic_menu_today );
-        menu.add( 0, TEST_MENU_ID, 0, R.string.check_contacts ).setIcon( R.drawable.ic_menu_allfriends );
+        if ( Log.DEBUG )
+        {
+            menu.add( 0, TEST_MENU_ID, 0, R.string.check_contacts ).setIcon( R.drawable.ic_menu_allfriends );
+        }
         return true;
     }
 
@@ -168,24 +173,24 @@ public class NameListActivity
                 if ( !contactFeastToday.getContactList().isEmpty() )
                 {
                     Notifier.notifyEvent( getApplicationContext() );
-                    //                    StringBuilder sb = new StringBuilder();
-                    //                    if ( contactFeastToday.getContactList().size() > 1 )
-                    //                    {
-                    //                        sb.append( this.getString( R.string.toast_contact_list ) );
-                    //                    }
-                    //                    else
-                    //                    {
-                    //                        sb.append( this.getString( R.string.toast_contact_one ) );
-                    //                    }
-                    //                    for ( Map.Entry<Long, ContactFeast> mapEntry : contactFeastToday.getContactList().entrySet() )
-                    //                    {
-                    //                        sb.append( mapEntry.getValue().getContactName() );
-                    //                        sb.append( "\n" );
-                    //                    }
-                    //                    Toast.makeText( this, sb.toString(), Toast.LENGTH_LONG ).show();
-                    Intent intent = new Intent( this, ContactFeastPopupActivity.class );
-                    intent.putExtra( CONTACTFEAST_INTENT_KEY, contactFeastToday );
-                    startActivity( intent );
+                    StringBuilder sb = new StringBuilder();
+                    if ( contactFeastToday.getContactList().size() > 1 )
+                    {
+                        sb.append( this.getString( R.string.toast_contact_list ) );
+                    }
+                    else
+                    {
+                        sb.append( this.getString( R.string.toast_contact_one ) );
+                    }
+                    for ( Map.Entry<Long, ContactFeast> mapEntry : contactFeastToday.getContactList().entrySet() )
+                    {
+                        sb.append( mapEntry.getValue().getContactName() );
+                        sb.append( "\n" );
+                    }
+                    Toast.makeText( this, sb.toString(), Toast.LENGTH_LONG ).show();
+                    //                    Intent intent = new Intent( this, ContactsPopupActivity.class );
+                    //                    intent.putExtra( CONTACTFEAST_INTENT_KEY, contactFeastToday );
+                    //                    startActivity( intent );
                 }
                 else
                 {
