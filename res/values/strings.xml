@@ -30,6 +30,7 @@
 	<string name="pref_alarm_on">Activée</string>
 	<string name="pref_alarm_off">Désactivée</string>
 	<string name="pref_time">Heure</string>
+  <string name="pref_time_summary">L'application cherchera les fêtes de vos contacts tous les jours à %s</string>
 	<string name="pref_template_sms_dialog">Entrez le modèle de SMS</string>
 	<string name="pref_template_email_dialog">Entrez le modèle d'email</string>
 	<string name="toast_contact_blacklisted">Le contact est dans la liste noire !</string>

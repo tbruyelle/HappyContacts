@@ -98,8 +98,8 @@ public class HappyContactsPreferences
         switch ( id )
         {
             case TIME_DIALOG_ID:
-                dialog = new TimePickerDialog( HappyContactsPreferences.this, this, 0, 0, DateFormat
-                    .is24HourFormat( this ) );
+                dialog =
+                    new TimePickerDialog( HappyContactsPreferences.this, this, 0, 0, DateFormat.is24HourFormat( this ) );
                 break;
             default:
                 dialog = null;
@@ -120,7 +120,7 @@ public class HappyContactsPreferences
         editor.putInt( PREF_ALARM_HOUR, mAlarmHour );
         editor.putInt( PREF_ALARM_MINUTE, mAlarmMinute );
         editor.commit();
-        mAlarmTimePref.setSummary( AndroidUtils.pad( mAlarmHour, mAlarmMinute ) );
+        mAlarmTimePref.setSummary( getString( R.string.pref_time_summary, AndroidUtils.pad( mAlarmHour, mAlarmMinute ) ) );
         if ( AlarmController.isAlarmUp( HappyContactsPreferences.this ) )
         {
             /* if alarm is up, have to change it */
@@ -202,7 +202,7 @@ public class HappyContactsPreferences
         Preference alarmTimePref = new Preference( this );
         mAlarmTimePref = alarmTimePref;
         alarmTimePref.setTitle( R.string.pref_time );
-        alarmTimePref.setSummary( AndroidUtils.pad( mAlarmHour, mAlarmMinute ) );
+        alarmTimePref.setSummary( getString( R.string.pref_time_summary, AndroidUtils.pad( mAlarmHour, mAlarmMinute ) ) );
         alarmTimePref.setOnPreferenceClickListener( new Preference.OnPreferenceClickListener()
         {
             public boolean onPreferenceClick( Preference preference )
