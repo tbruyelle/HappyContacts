@@ -38,7 +38,7 @@ public class ContactsPopupActivity
         super.onCreate( savedInstanceState );
         mContactFeasts = (ContactFeasts) getIntent().getExtras().getSerializable( CONTACTFEAST_INTENT_KEY );
 
-        setTitle( getString( R.string.contact_feast_popup_title, mContactFeasts.getDay() ) );
+        //setTitle( getString( R.string.contact_feast_popup_title, mContactFeasts.getDay() ) );
 
         fillList();
 

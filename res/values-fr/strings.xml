@@ -5,7 +5,7 @@
     <string name="exit">Exit</string>
     <string name="next">Suivant</string>
     <string name="nottoday">Une autre fois</string>
-    <string name="call">Faire plaisir</string>
+    <string name="call">Contacter</string>
     <string name="later">Plus tard</string>
     <string name="never">Jamais</string>
     <string name="happyfeast">C\'est sa fête !</string>
@@ -23,12 +23,12 @@
     <string name="pref_template_email">Modèle Email</string>
     <string name="pref_template_email_summary">Contenu de l\'email à envoyer</string>
     <string name="pref_blacklist">Liste noire</string>
-    <string name="pref_blacklist_summary">Contacts à qui on ne souhaitera pas la fête !</string>
+    <string name="pref_blacklist_summary">Liste des contacts ignorés</string>
     <string name="pref_alarm">Alarme</string>
     <string name="pref_alarm_on">Activée</string>
     <string name="pref_alarm_off">Désactivée</string>
     <string name="pref_time">Heure</string>
-  <string name="pref_time_summary">L'application cherchera les fêtes de vos contacts tous les jours à %s</string>
+  <string name="pref_time_summary">Recherche des fêtes de vos contacts tous les jours à %s</string>
     <string name="pref_template_sms_dialog">Entrez le modèle de SMS</string>
     <string name="pref_template_email_dialog">Entrez le modèle d'email</string>
     <string name="toast_contact_blacklisted">Le contact est dans la liste noire !</string>
@@ -72,5 +72,4 @@
 <string name="toast_sms_template_saved">Modèle de SMS sauvegardé</string>
 <string name="feast_counter">%d/%d</string>
 <string name="happyfeast_name">C\'est la fête de</string>
-<string name="contact_feast_popup_title">Contact(s) qui ont leur fête le %s</string>
 </resources>

@@ -79,7 +79,6 @@ public final class R {
         public static final int call=0x7f060006;
         public static final int cancel=0x7f060030;
         public static final int check_contacts=0x7f060028;
-        public static final int contact_feast_popup_title=0x7f060041;
         public static final int contact_method_dialog_title=0x7f060033;
         public static final int contact_method_not_supported=0x7f060034;
         public static final int date_list_title=0x7f06000e;

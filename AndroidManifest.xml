@@ -13,8 +13,10 @@
 		</activity>
 		<activity android:name=".NameListActivity" />
 		<activity android:name=".DateListActivity" />
-		<activity android:name="ContactsPopupActivity"
-			android:theme="@android:style/Theme.Dialog" />
+		<!--
+			activity android:name="ContactsPopupActivity"
+			android:theme="@android:style/Theme.Dialog" /
+		-->
 		<activity android:name="ReminderPopupActivity"
 			android:launchMode="singleInstance" android:excludeFromRecents="true"
 			android:taskAffinity="" android:theme="@android:style/Theme.Dialog" />
