@@ -15,9 +15,9 @@
 	<string name="last_wish_date">&quot;Last wished date : %s&quot;</string>
 	<string name="name_list_title">Feasts list on %s</string>
   <string name="date_list_title">Feast day(s) for %s</string>
-	<string name="pref_test_app">Feasts list</string>
+	<string name="pref_feast_list">Feasts list</string>
 	<string name="no_feast">No feast this day</string>
-	<string name="pref_test_app_summary">Display the feast per name or per day.</string>
+	<string name="pref_feast_list_summary">Display the feast per name or per day.</string>
 	<string name="pref_templates_cat">Templates</string>
 	<string name="pref_template_sms">SMS templates</string>
 	<string name="pref_template_sms_summary">SMS body to send.</string>

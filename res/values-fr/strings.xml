@@ -14,9 +14,9 @@
     <string name="last_wish_date">&quot;Dernière date souhaitée : %s&quot;</string>
     <string name="name_list_title">Liste des fêtes du %s</string>
   <string name="date_list_title">Jour(s) de fête pour %s</string>
-    <string name="pref_test_app">Liste des fêtes</string>
+    <string name="pref_feast_list">Liste des fêtes</string>
     <string name="no_feast">Pas de fête pour ce jour.</string>
-    <string name="pref_test_app_summary">Afficher les fêtes par jour et par prénom.</string>
+    <string name="pref_feast_list_summary">Afficher les fêtes par jour et par prénom.</string>
     <string name="pref_templates_cat">Modèles</string>
     <string name="pref_template_sms">Modèle SMS</string>
     <string name="pref_template_sms_summary">Contenu du SMS à envoyer</string>

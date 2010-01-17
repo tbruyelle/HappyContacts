@@ -113,6 +113,8 @@ public final class R {
         public static final int pref_alarm_on=0x7f06001a;
         public static final int pref_blacklist=0x7f060017;
         public static final int pref_blacklist_summary=0x7f060018;
+        public static final int pref_feast_list=0x7f06000f;
+        public static final int pref_feast_list_summary=0x7f060011;
         public static final int pref_template_email=0x7f060015;
         public static final int pref_template_email_dialog=0x7f06001f;
         public static final int pref_template_email_summary=0x7f060016;
@@ -120,8 +122,6 @@ public final class R {
         public static final int pref_template_sms_dialog=0x7f06001e;
         public static final int pref_template_sms_summary=0x7f060014;
         public static final int pref_templates_cat=0x7f060012;
-        public static final int pref_test_app=0x7f06000f;
-        public static final int pref_test_app_summary=0x7f060011;
         public static final int pref_time=0x7f06001c;
         public static final int pref_time_summary=0x7f06001d;
         public static final int reset_button=0x7f06003c;

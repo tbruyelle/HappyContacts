@@ -98,8 +98,8 @@ public class HappyContactsPreferences
         switch ( id )
         {
             case TIME_DIALOG_ID:
-                dialog =
-                    new TimePickerDialog( HappyContactsPreferences.this, this, 0, 0, DateFormat.is24HourFormat( this ) );
+                dialog = new TimePickerDialog( HappyContactsPreferences.this, this, 0, 0, DateFormat
+                    .is24HourFormat( this ) );
                 break;
             default:
                 dialog = null;
@@ -120,7 +120,8 @@ public class HappyContactsPreferences
         editor.putInt( PREF_ALARM_HOUR, mAlarmHour );
         editor.putInt( PREF_ALARM_MINUTE, mAlarmMinute );
         editor.commit();
-        mAlarmTimePref.setSummary( getString( R.string.pref_time_summary, AndroidUtils.pad( mAlarmHour, mAlarmMinute ) ) );
+        mAlarmTimePref
+            .setSummary( getString( R.string.pref_time_summary, AndroidUtils.pad( mAlarmHour, mAlarmMinute ) ) );
         if ( AlarmController.isAlarmUp( HappyContactsPreferences.this ) )
         {
             /* if alarm is up, have to change it */
@@ -202,7 +203,8 @@ public class HappyContactsPreferences
         Preference alarmTimePref = new Preference( this );
         mAlarmTimePref = alarmTimePref;
         alarmTimePref.setTitle( R.string.pref_time );
-        alarmTimePref.setSummary( getString( R.string.pref_time_summary, AndroidUtils.pad( mAlarmHour, mAlarmMinute ) ) );
+        alarmTimePref
+            .setSummary( getString( R.string.pref_time_summary, AndroidUtils.pad( mAlarmHour, mAlarmMinute ) ) );
         alarmTimePref.setOnPreferenceClickListener( new Preference.OnPreferenceClickListener()
         {
             public boolean onPreferenceClick( Preference preference )
@@ -213,15 +215,15 @@ public class HappyContactsPreferences
         } );
         root.addItemFromInflater( alarmTimePref );
 
-        // test app
-        Preference testAppPref = new Preference( this );
-        testAppPref.setTitle( R.string.pref_test_app );
-        testAppPref.setSummary( R.string.pref_test_app_summary );
+        // feast list
+        Preference nameListPref = new Preference( this );
+        nameListPref.setTitle( R.string.pref_feast_list );
+        nameListPref.setSummary( R.string.pref_feast_list_summary );
         Intent intent = new Intent( this, NameListActivity.class );
         SimpleDateFormat dateFormat = new SimpleDateFormat( DAY_FORMAT );
         intent.putExtra( DATE_INTENT_KEY, dateFormat.format( new Date() ) );
-        testAppPref.setIntent( intent );
-        root.addPreference( testAppPref );
+        nameListPref.setIntent( intent );
+        root.addPreference( nameListPref );
 
         // blacklist
         Preference blackListPref = new Preference( this );
