@@ -115,9 +115,12 @@ public class AlarmController
             Log.v( "AlarmController: start cancelAlarm()" );
         }
         AlarmManager alarmManager = (AlarmManager) context.getSystemService( Context.ALARM_SERVICE );
-        alarmManager.cancel( getPendingIntent( context, PendingIntent.FLAG_CANCEL_CURRENT ) );
-        //        PendingIntent pendingIntent = getPendingIntent( context, PendingIntent.FLAG_CANCEL_CURRENT );
-        //        pendingIntent.cancel();
+        PendingIntent pendingIntent = getPendingIntent( context, PendingIntent.FLAG_NO_CREATE );
+        if ( pendingIntent != null )
+        {
+            alarmManager.cancel( pendingIntent );
+            pendingIntent.cancel();
+        }
         if ( Log.DEBUG )
         {
             Log.v( "AlarmController: end cancelAlarm()" );
