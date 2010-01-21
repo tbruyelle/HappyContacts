@@ -25,6 +25,7 @@ import android.provider.Contacts;
 import android.provider.Contacts.People;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -71,8 +72,8 @@ public class ReminderPopupActivity
     @Override
     protected void onCreate( Bundle savedInstanceState )
     {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        
+        requestWindowFeature( Window.FEATURE_NO_TITLE );
+
         super.onCreate( savedInstanceState );
         if ( Log.DEBUG )
         {
@@ -81,8 +82,7 @@ public class ReminderPopupActivity
         setContentView( R.layout.reminder );
 
         // Have the system blur any windows behind this one.
-        //    getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,
-        //        WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
+        getWindow().setFlags( WindowManager.LayoutParams.FLAG_BLUR_BEHIND, WindowManager.LayoutParams.FLAG_BLUR_BEHIND );
 
         mDb = new DbAdapter( this );
 
@@ -335,7 +335,7 @@ public class ReminderPopupActivity
         contactNameTextView.setText( contactFeast.getContactName() );
 
         Uri contactUri = ContentUris.withAppendedId( People.CONTENT_URI, contactId );
-        Bitmap photo = People.loadContactPhoto( this, contactUri, R.drawable.smile, null );
+        Bitmap photo = People.loadContactPhoto( this, contactUri, R.drawable.nophoto, null );
         ImageView imageView = (ImageView) findViewById( R.id.contact_photo );
         imageView.setBackgroundResource( android.R.drawable.picture_frame );
         imageView.setImageBitmap( photo );

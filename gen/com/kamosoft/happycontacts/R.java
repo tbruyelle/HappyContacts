@@ -28,11 +28,12 @@ public final class R {
         public static final int ic_menu_today=0x7f020008;
         public static final int icon=0x7f020009;
         public static final int left_deco=0x7f02000a;
-        public static final int notif=0x7f02000b;
-        public static final int right_deco=0x7f02000c;
-        public static final int sad=0x7f02000d;
-        public static final int smile=0x7f02000e;
-        public static final int umbrella=0x7f02000f;
+        public static final int nophoto=0x7f02000b;
+        public static final int notif=0x7f02000c;
+        public static final int right_deco=0x7f02000d;
+        public static final int sad=0x7f02000e;
+        public static final int smile=0x7f02000f;
+        public static final int umbrella=0x7f020010;
     }
     public static final class id {
         public static final int button_name_cancel=0x7f080004;
