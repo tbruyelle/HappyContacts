@@ -12,7 +12,7 @@
 	<string name="happyfeast">It\'s his(her) feast !</string>
 	<string name="whattodo">What do you want to do \?</string>
 	<string name="blacklist_label">Click on an item to delete the contact from black list.</string>
-	<string name="last_wish_date">&quot;Last wished date : %s&quot;</string>
+	<string name="last_wish_date">Last wished date : %s</string>
 	<string name="name_list_title">Feasts list on %s</string>
   <string name="date_list_title">Feast day(s) for %s</string>
 	<string name="pref_feast_list">Feasts list</string>
@@ -38,7 +38,7 @@
 	<string name="toast_no_contact">No contact found !</string>
 	<string name="toast_contact_one">It\'s his(her) feast :\n</string>
 	<string name="toast_contact_list">It\'s their feast :\n</string>
-	<string name="toast_finish">Today's feasts have been completed.</string>
+	<string name="toast_finish">Today\'s feasts have been completed.</string>
 	<string name="enter_date">Enter a date</string>
 	<string name="check_contacts">Check the contacts</string>
 	<string name="loading_data">The database is being created...</string>

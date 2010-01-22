@@ -7,6 +7,7 @@ import java.util.Map;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,6 +37,13 @@ public class NameListActivity
 
     private String mDate;
 
+    /**
+     * formatted date according to used locale
+     */
+    private String mDateTitle;
+
+    private java.text.DateFormat mDateFormat;
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate( Bundle savedInstanceState )
@@ -49,6 +57,8 @@ public class NameListActivity
 
         TextView emptyText = (TextView) findViewById( android.R.id.empty );
         emptyText.setText( getString( R.string.no_feast ) );
+
+        mDateFormat = DateFormat.getDateFormat( this );
 
         mDb = new DbAdapter( this );
 
@@ -77,6 +87,8 @@ public class NameListActivity
         mYear = calendar.get( Calendar.YEAR );
         mMonthOfYear = calendar.get( Calendar.MONTH ) - 1;
         mDayOfMonth = calendar.get( Calendar.DAY_OF_MONTH );
+
+        mDateTitle = mDateFormat.format( calendar.getTime() );
 
         mDb.open( true );
         fillList();
@@ -116,7 +128,7 @@ public class NameListActivity
 
     protected void fillList()
     {
-        setTitle( getString( R.string.name_list_title, mDay ) );
+        setTitle( getString( R.string.name_list_title, mDateTitle ) );
         mCursorNamesForDay = mDb.fetchNamesForDay( mDay );
         startManagingCursor( mCursorNamesForDay );
 
@@ -142,8 +154,8 @@ public class NameListActivity
         super.onListItemClick( l, v, position, id );
         mCursorNamesForDay.moveToPosition( position );
         Intent intent = new Intent( this, DateListActivity.class );
-        intent.putExtra( NAME_INTENT_KEY, mCursorNamesForDay.getString( mCursorNamesForDay
-            .getColumnIndex( HappyContactsDb.Feast.NAME ) ) );
+        intent.putExtra( NAME_INTENT_KEY,
+                         mCursorNamesForDay.getString( mCursorNamesForDay.getColumnIndex( HappyContactsDb.Feast.NAME ) ) );
         startActivity( intent );
     }
 

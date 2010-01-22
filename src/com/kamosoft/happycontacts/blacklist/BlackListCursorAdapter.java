@@ -18,9 +18,9 @@ import com.kamosoft.happycontacts.dao.HappyContactsDb;
 public class BlackListCursorAdapter
     extends CursorAdapter
 {
-    LayoutInflater mInflater;
+    private LayoutInflater mInflater;
 
-    Context mContext;
+    private Context mContext;
 
     public BlackListCursorAdapter( Context context, Cursor c )
     {
