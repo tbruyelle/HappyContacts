@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.kamosoft.happycontacts.dao.DbAdapter;
@@ -22,7 +21,7 @@ public class DateListActivity
 {
     private DbAdapter mDb;
 
-    private SimpleCursorAdapter mCursorAdapter;
+    private DateListCursorAdapter mCursorAdapter;
 
     private Cursor mCursorDaysForName;
 
@@ -105,9 +104,7 @@ public class DateListActivity
 
         if ( mCursorAdapter == null )
         {
-            String[] from = new String[] { HappyContactsDb.Feast.DAY };
-            int[] to = new int[] { R.id.element };
-            mCursorAdapter = new SimpleCursorAdapter( this, R.layout.testapp_element, mCursorDaysForName, from, to );
+            mCursorAdapter = new DateListCursorAdapter( this, mCursorDaysForName );
             setListAdapter( mCursorAdapter );
         }
         else

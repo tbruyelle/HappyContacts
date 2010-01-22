@@ -12,7 +12,7 @@
 	<string name="happyfeast">It\'s his(her) name day !</string>
 	<string name="whattodo">What do you want to do \?</string>
 	<string name="blacklist_label">Click on an item to delete the contact from black list.</string>
-	<string name="last_wish_date">&quot;Last wished date : %s&quot;</string>
+	<string name="last_wish_date">Last wished date : %s</string>
 	<string name="name_list_title">Name days list on %s</string>
   <string name="date_list_title">Name day(s) for %s</string>
 	<string name="pref_feast_list">name days list</string>
