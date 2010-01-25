@@ -47,20 +47,22 @@ public class HappyContactsPreferences
     {
         public boolean onPreferenceClick( Preference preference )
         {
-            SharedPreferences.Editor editor = mPrefs.edit();
-            if ( AlarmController.isAlarmUp( HappyContactsPreferences.this ) )
+            boolean isChecked = ( (CheckBoxPreference) preference ).isChecked();
+            mPrefs.edit().putBoolean( PREF_ALARM_STATUS, isChecked ).commit();
+            if ( Log.DEBUG )
             {
-                AlarmController.cancelAlarm( HappyContactsPreferences.this );
-                preference.setSummary( R.string.pref_alarm_off );
-                editor.putBoolean( PREF_ALARM_STATUS, false );
+                Log.v( "HappyContactsPreferences : alarm checked = " + isChecked );
             }
-            else
+            if ( isChecked )
             {
                 AlarmController.startAlarm( HappyContactsPreferences.this );
                 preference.setSummary( R.string.pref_alarm_on );
-                editor.putBoolean( PREF_ALARM_STATUS, true );
             }
-            editor.commit();
+            else
+            {
+                AlarmController.cancelAlarm( HappyContactsPreferences.this );
+                preference.setSummary( R.string.pref_alarm_off );
+            }
             return true;
         }
     };
@@ -161,8 +163,12 @@ public class HappyContactsPreferences
      */
     private void checkInit()
     {
-        if ( mPrefs.getBoolean( PREF_FIRST_RUN, true ) )
+        if ( !mPrefs.contains( PREF_FIRST_RUN ) )
         {
+            if ( Log.DEBUG )
+            {
+                Log.v( "HappyContactsPreferences: first run detected" );
+            }
             /* if its the first run, alarm must be set */
             Editor editor = mPrefs.edit();
             editor.putBoolean( PREF_FIRST_RUN, false );
@@ -188,19 +194,27 @@ public class HappyContactsPreferences
         // Root
         PreferenceScreen root = getPreferenceManager().createPreferenceScreen( this );
 
-        // State
+        /* the alarm state */
         mAlarmStatePref = new CheckBoxPreference( this );
         mAlarmStatePref.setTitle( R.string.pref_alarm );
 
-        if ( AlarmController.isAlarmUp( this ) )
+        if ( mPrefs.getBoolean( PREF_ALARM_STATUS, false ) )
         {
             mAlarmStatePref.setSummary( R.string.pref_alarm_on );
             mAlarmStatePref.setChecked( true );
+            if ( !AlarmController.isAlarmUp( this ) )
+            {
+                Log.v( "HappyContactsPreferences : error alarm disabled" );
+            }
         }
         else
         {
             mAlarmStatePref.setSummary( R.string.pref_alarm_off );
             mAlarmStatePref.setChecked( false );
+            if ( AlarmController.isAlarmUp( this ) )
+            {
+                Log.v( "HappyContactsPreferences : error alarm enabled" );
+            }
         }
         mAlarmStatePref.setOnPreferenceClickListener( mAlarmToggleClickListener );
         root.addPreference( mAlarmStatePref );
@@ -219,7 +233,7 @@ public class HappyContactsPreferences
         } );
         root.addItemFromInflater( alarmTimePref );
 
-        // feast list
+        /* name days list */
         Preference nameListPref = new Preference( this );
         nameListPref.setTitle( R.string.pref_feast_list );
         nameListPref.setSummary( R.string.pref_feast_list_summary );

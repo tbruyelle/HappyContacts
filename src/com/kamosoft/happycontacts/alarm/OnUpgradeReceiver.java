@@ -1,3 +1,6 @@
+/**
+ * Copyright (C) Kamosoft 2010
+ */
 package com.kamosoft.happycontacts.alarm;
 
 import android.content.BroadcastReceiver;
@@ -9,15 +12,15 @@ import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.Log;
 
 /**
- * Reset the alarm if necessary
+ * Triggered when application is being upgraded in order to reset the alarm if necessary
  * @author tom
- *
- * @since 29 déc. 2009
+ * 
  */
-public class OnBootReceiver
+public class OnUpgradeReceiver
     extends BroadcastReceiver
     implements Constants
 {
+    
     /**
      * @see android.content.BroadcastReceiver#onReceive(android.content.Context, android.content.Intent)
      */
@@ -26,7 +29,7 @@ public class OnBootReceiver
     {
         if ( Log.DEBUG )
         {
-            Log.v( "OnBootReceiver: start onReceive()" );
+            Log.v( "OnUpgradeReceiver: start onReceive()" );
         }
         SharedPreferences prefs = context.getSharedPreferences( APP_NAME, 0 );
         if ( prefs.getBoolean( PREF_ALARM_STATUS, true ) )
@@ -35,7 +38,8 @@ public class OnBootReceiver
         }
         if ( Log.DEBUG )
         {
-            Log.v( "OnBootReceiver: end onReceive()" );
+            Log.v( "OnUpgradeReceiver: end onReceive()" );
         }
     }
+
 }
