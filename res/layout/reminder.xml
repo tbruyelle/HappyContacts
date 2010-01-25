@@ -1,46 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical"
-	android:layout_width="fill_parent" android:layout_height="fill_parent">
+  android:orientation="vertical" android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
 
-	<include layout="@layout/reminder_header" />
-	<include layout="@layout/divider" />
+  <include layout="@layout/reminder_header" />
+  <include layout="@layout/divider" />
 
-	<TextView android:gravity="center" android:paddingTop="4dp"
-		android:paddingBottom="4dp" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:text="@string/whattodo" />
+  <TextView android:gravity="center" android:paddingTop="4dp"
+    android:paddingBottom="4dp" android:layout_width="fill_parent"
+    android:layout_height="wrap_content" android:text="@string/whattodo" />
+  <!--
+    <TableLayout android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:background="@android:color/darker_gray"
+    android:paddingLeft="2dp" android:paddingTop="5dp"
+    android:paddingRight="2dp"> <TableRow> <Button
+    android:drawableLeft="@drawable/happy" android:text="@string/call"
+    android:id="@+id/call_button" android:layout_width="fill_parent"
+    android:layout_height="wrap_content" /> <Button
+    android:drawableRight="@drawable/umbrella"
+    android:text="@string/nottoday" android:id="@+id/nottoday_button"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" /> </TableRow> <TableRow>
+    <Button android:drawableLeft="@drawable/ic_menu_reminder"
+    android:text="@string/later" android:id="@+id/later_button"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" /> <Button
+    android:drawableRight="@drawable/sad" android:text="@string/never"
+    android:id="@+id/never_button" android:layout_width="fill_parent"
+    android:layout_height="wrap_content" /> </TableRow> </TableLayout>
+  -->
 
-	<LinearLayout android:layout_gravity="center_vertical|center_horizontal"
-		android:orientation="vertical" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:paddingLeft="5dp"
-		android:paddingTop="5dp" android:paddingRight="5dp"
-		android:background="@android:color/darker_gray">
-		<LinearLayout android:layout_gravity="center_vertical|center_horizontal"
-			android:orientation="horizontal" android:layout_width="fill_parent"
-			android:layout_height="wrap_content">
-			<Button android:drawableLeft="@drawable/happy" android:text="@string/call"
-				android:id="@+id/call_button" android:layout_width="fill_parent"
-				android:layout_height="wrap_content" android:layout_weight="1" />
-			<Button android:drawableRight="@drawable/umbrella"
-				android:text="@string/nottoday" android:id="@+id/nottoday_button"
-				android:layout_width="fill_parent" android:layout_height="wrap_content"
-				android:layout_weight="1" />
-		</LinearLayout>
-		<LinearLayout android:layout_gravity="center_vertical|center_horizontal"
-			android:orientation="vertical" android:layout_width="fill_parent"
-			android:layout_height="fill_parent" android:gravity="center">
-			<LinearLayout android:layout_gravity="center_vertical|center_horizontal"
-				android:orientation="horizontal" android:layout_width="fill_parent"
-				android:layout_height="wrap_content">
-				<Button android:drawableLeft="@drawable/ic_menu_reminder"
-					android:text="@string/later" android:id="@+id/later_button"
-					android:layout_width="fill_parent" android:layout_height="wrap_content"
-					android:layout_weight="1" />
-				<Button android:drawableRight="@drawable/sad" android:text="@string/never"
-					android:id="@+id/never_button" android:layout_width="fill_parent"
-					android:layout_height="wrap_content" android:layout_weight="1" />
-			</LinearLayout>
-		</LinearLayout>
-	</LinearLayout>
-	<include layout="@layout/feast_counter" />
+  <LinearLayout android:orientation="vertical"
+    android:layout_width="fill_parent" android:layout_height="wrap_content"
+    android:paddingLeft="0dp" android:paddingTop="5dp"
+    android:paddingRight="0dp" android:background="@android:color/darker_gray">
+    <LinearLayout android:orientation="horizontal"
+      android:layout_width="fill_parent" android:layout_height="wrap_content">
+      <Button android:drawableLeft="@drawable/happy"
+        android:text="@string/call" android:id="@+id/call_button"
+        android:layout_width="fill_parent" android:layout_height="wrap_content"
+        android:layout_weight="1" />
+      <Button android:drawableRight="@drawable/umbrella"
+        android:text="@string/nottoday" android:id="@+id/nottoday_button"
+        android:layout_width="fill_parent" android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal"
+      android:layout_width="fill_parent" android:layout_height="wrap_content">
+      <Button android:drawableLeft="@drawable/ic_menu_reminder"
+        android:text="@string/later" android:id="@+id/later_button"
+        android:layout_width="fill_parent" android:layout_height="wrap_content"
+        android:layout_weight="1" />
+      <Button android:drawableRight="@drawable/sad" android:text="@string/never"
+        android:id="@+id/never_button" android:layout_width="fill_parent"
+        android:layout_height="wrap_content" android:layout_weight="1" />
+    </LinearLayout>
+  </LinearLayout>
+
+  <include layout="@layout/feast_counter" />
 </LinearLayout>

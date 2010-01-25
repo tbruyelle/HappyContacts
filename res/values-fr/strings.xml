@@ -4,12 +4,12 @@
     <string name="no_contacts">Pas de contacts à afficher!</string>
     <string name="exit">Exit</string>
     <string name="next">Suivant</string>
-    <string name="nottoday">Une autre fois</string>
-    <string name="call">Contacter</string>
+    <string name="nottoday">Non</string>
+    <string name="call">Oui</string>
     <string name="later">Plus tard</string>
     <string name="never">Jamais</string>
     <string name="happyfeast">C\'est sa fête !</string>
-    <string name="whattodo">Que voulez-vous faire \?</string>
+    <string name="whattodo">Voulez-vous contacter cette personne \?</string>
     <string name="blacklist_label">Cliquez sur un élément pour supprimer le contact de la liste noire.</string>
     <string name="last_wish_date">Dernière date souhaitée : %s</string>
     <string name="name_list_title">Liste des fêtes du %s</string>

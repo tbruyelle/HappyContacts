@@ -5,17 +5,17 @@
 	<string name="no_contacts">No contacts found !</string>
 	<string name="exit">Exit</string>
 	<string name="next">Next</string>
-	<string name="nottoday">An other time</string>
-	<string name="call">Contact</string>
+	<string name="nottoday">No</string>
+	<string name="call">Yes</string>
 	<string name="later">Later</string>
 	<string name="never">Never</string>
-	<string name="happyfeast">It\'s his(her) name day !</string>
-	<string name="whattodo">What do you want to do \?</string>
+	<string name="happyfeast">It\'s his/her name day !</string>
+	<string name="whattodo">Do you want contact this person \?</string>
 	<string name="blacklist_label">Click on an item to delete the contact from black list.</string>
 	<string name="last_wish_date">Last wished date : %s</string>
 	<string name="name_list_title">Name days list on %s</string>
   <string name="date_list_title">Name day(s) for %s</string>
-	<string name="pref_feast_list">name days list</string>
+	<string name="pref_feast_list">Name days list</string>
 	<string name="no_feast">No name day this day</string>
 	<string name="pref_feast_list_summary">Display the name days per name or per day.</string>
 	<string name="pref_templates_cat">Templates</string>
@@ -36,12 +36,12 @@
 	<string name="toast_blacklisted">%s has been added to the black list</string>
 	<string name="toast_later">The notification is kept for later.</string>
 	<string name="toast_no_contact">No contact found !</string>
-	<string name="toast_contact_one">It\'s his(her) name day :\n</string>
+	<string name="toast_contact_one">It\'s his/her name day :\n</string>
 	<string name="toast_contact_list">It\'s their name day :\n</string>
 	<string name="toast_finish">Today's name days have been completed.</string>
 	<string name="enter_date">Enter a date</string>
 	<string name="check_contacts">Check the contacts</string>
-	<string name="loading_data">The database is being created...</string>
+	<string name="loading_data">The database is being created, this will occurs only one time...</string>
 	<string name="updating_data">The database is being updated...</string>
 	<string name="notif_new_event">It\'s %s\'s name day !</string>
 	<string name="notif_new_event_multi">There is some name days to wish today !</string>
@@ -68,5 +68,5 @@
 <string name="toast_mail_template_saved">Email template saved</string>
 <string name="toast_sms_template_saved">SMS template saved</string>
 <string name="feast_counter">%d/%d</string>
-<string name="happyfeast_name">It\'s his(her) name day :</string>
+<string name="happyfeast_name">It\'s his/her name day :</string>
 </resources>
