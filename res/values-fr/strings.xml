@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Happy Contacts</string>
-    <string name="no_contacts">Pas de fêtes à souhaiter parmi vos contacts aujourd\'hui !</string>
+    <string name="no_contacts">Pas de contacts</string>
     <string name="exit">Exit</string>
     <string name="next">Suivant</string>
     <string name="nottoday">Non</string>

@@ -2,7 +2,7 @@
 <resources>
 	<string name="version">1.0</string>
 	<string name="app_name">Happy Contacts</string>
-	<string name="no_contacts">No name days found in your contacts today !</string>
+	<string name="no_contacts">No contacts</string>
 	<string name="exit">Exit</string>
 	<string name="next">Next</string>
 	<string name="nottoday">No</string>
