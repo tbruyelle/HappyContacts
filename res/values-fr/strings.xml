@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Happy Contacts</string>
-    <string name="no_contacts">Pas de contacts à afficher!</string>
+    <string name="no_contacts">Pas de fêtes à souhaiter parmi vos contacts aujourd\'hui !</string>
     <string name="exit">Exit</string>
     <string name="next">Suivant</string>
     <string name="nottoday">Non</string>
@@ -14,9 +14,9 @@
     <string name="last_wish_date">Dernière date souhaitée : %s</string>
     <string name="name_list_title">Liste des fêtes du %s</string>
   <string name="date_list_title">Jour(s) de fête pour %s</string>
-    <string name="pref_feast_list">Liste des fêtes</string>
+    <string name="pref_feast_list">Parcourir les fêtes</string>
     <string name="no_feast">Pas de fête pour ce jour.</string>
-    <string name="pref_feast_list_summary">Afficher les fêtes par jour et par prénom.</string>
+    <string name="pref_feast_list_summary">Afficher les fêtes par jour et par prénom</string>
     <string name="pref_templates_cat">Modèles</string>
     <string name="pref_template_sms">Modèle SMS</string>
     <string name="pref_template_sms_summary">Contenu du SMS à envoyer</string>
@@ -34,7 +34,7 @@
     <string name="toast_contact_blacklisted">Le contact est dans la liste noire !</string>
     <string name="toast_blacklisted">%s a été ajouté à la liste noire</string>
     <string name="toast_later">La notification est conservée pour plus tard.</string>
-    <string name="toast_no_contact">Pas de contact trouvés !</string>
+    <string name="toast_no_contact">Pas de fêtes à souhaiter parmi vos contacts aujourd\'hui !</string>
     <string name="toast_contact_one">C\'est sa fête :\n</string>
     <string name="toast_contact_list">C\'est leur fête :\n</string>
     <string name="toast_finish">Les fêtes du jour ont été traitées</string>
@@ -72,4 +72,7 @@
 <string name="toast_sms_template_saved">Modèle de SMS sauvegardé</string>
 <string name="feast_counter">%d/%d</string>
 <string name="happyfeast_name">C\'est la fête de</string>
+<string name="pref_check_name_days">Vérifier les fêtes du jour</string>
+<string name="pref_check_name_days_summary">Recherche les fêtes de vos contacts</string>
+<string name="pref_data_cat">Base de données</string>
 </resources>

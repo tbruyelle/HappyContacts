@@ -1,5 +1,5 @@
 /**
- * Copyright - Accor - All Rights Reserved www.accorhotels.com
+ * Copyright (C) Kamosoft 2010
  */
 package com.kamosoft.happycontacts;
 
@@ -51,7 +51,7 @@ public class DateListCursorAdapter
     public void bindView( View view, Context context, Cursor cursor )
     {
         String date = cursor.getString( cursor.getColumnIndex( HappyContactsDb.Feast.DAY ) );
-        mCalendar.set( Calendar.MONTH, Integer.valueOf( date.substring( 3, 5 ) ) );
+        mCalendar.set( Calendar.MONTH, Integer.valueOf( date.substring( 3, 5 ) ) - 1 );
         mCalendar.set( Calendar.DAY_OF_MONTH, Integer.valueOf( date.substring( 0, 2 ) ) );
         TextView dateElement = (TextView) view.findViewById( R.id.element );
         dateElement.setText( mDateFormat.format( mCalendar.getTime() ) );

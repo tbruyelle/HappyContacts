@@ -1,5 +1,5 @@
 /**
- * Copyright - Accor - All Rights Reserved www.accorhotels.com
+ * Copyright (C) Kamosoft 2010
  */
 package com.kamosoft.happycontacts;
 
@@ -42,7 +42,10 @@ public abstract class DateNameListOptionsMenu
 
     protected int mDayOfMonth;
 
-    protected String mDay;
+    /**
+     * formatted date according to used locale
+     */
+    protected String mDateTitle;
 
     protected abstract void fillList();
 
@@ -52,6 +55,7 @@ public abstract class DateNameListOptionsMenu
         super.onCreateOptionsMenu( menu );
         menu.add( 0, BACK_MENU_ID, 0, R.string.back_to_main ).setIcon( R.drawable.ic_menu_home );
         menu.add( 0, NAME_MENU_ID, 0, R.string.enter_name ).setIcon( R.drawable.ic_menu_edit );
+        menu.add( 0, DAY_MENU_ID, 0, R.string.enter_date ).setIcon( R.drawable.ic_menu_today );
         return true;
     }
 
@@ -89,20 +93,22 @@ public abstract class DateNameListOptionsMenu
                 return new EnterNameDialog( this );
 
             case DATE_FORM_DIALOG_ID:
-                return new DatePickerDialog( this, new DatePickerDialog.OnDateSetListener()
-                {
-                    public void onDateSet( DatePicker view, int year, int monthOfYear, int dayOfMonth )
+                DatePickerDialog datePickerDialog =
+                    new DatePickerDialog( this, new DatePickerDialog.OnDateSetListener()
                     {
-                        mYear = year;
-                        mMonthOfYear = monthOfYear;
-                        mDayOfMonth = dayOfMonth;
-                        Calendar cal = Calendar.getInstance();
-                        cal.set( year, monthOfYear, dayOfMonth );
-                        SimpleDateFormat dateFormat = new SimpleDateFormat( DAY_FORMAT );
-                        mDay = dateFormat.format( cal.getTime() );
-                        fillList();
-                    }
-                }, 0, 0, 0 );
+                        public void onDateSet( DatePicker view, int year, int monthOfYear, int dayOfMonth )
+                        {
+                            Calendar cal = Calendar.getInstance();
+                            cal.set( year, monthOfYear, dayOfMonth );
+                            SimpleDateFormat dateFormat = new SimpleDateFormat( DAY_FORMAT );
+                            String day = dateFormat.format( cal.getTime() );
+                            Intent intent = new Intent( DateNameListOptionsMenu.this, NameListActivity.class );
+                            intent.putExtra( DATE_INTENT_KEY, day );
+                            startActivity( intent );
+                        }
+                    }, 0, 0, 0 );
+                datePickerDialog.setTitle( R.string.enter_date );
+                return datePickerDialog;
         }
         return null;
     }

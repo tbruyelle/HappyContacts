@@ -2,7 +2,7 @@
 <resources>
 	<string name="version">1.0</string>
 	<string name="app_name">Happy Contacts</string>
-	<string name="no_contacts">No contacts found !</string>
+	<string name="no_contacts">No name days found in your contacts today !</string>
 	<string name="exit">Exit</string>
 	<string name="next">Next</string>
 	<string name="nottoday">No</string>
@@ -15,14 +15,14 @@
 	<string name="last_wish_date">Last wished date : %s</string>
 	<string name="name_list_title">Name days list on %s</string>
   <string name="date_list_title">Name day(s) for %s</string>
-	<string name="pref_feast_list">Name days list</string>
+	<string name="pref_feast_list">Browse name days</string>
 	<string name="no_feast">No name day this day</string>
-	<string name="pref_feast_list_summary">Display the name days per name or per day.</string>
+	<string name="pref_feast_list_summary">Display the name days per name or per day</string>
 	<string name="pref_templates_cat">Templates</string>
 	<string name="pref_template_sms">SMS templates</string>
-	<string name="pref_template_sms_summary">SMS body to send.</string>
+	<string name="pref_template_sms_summary">SMS body to send</string>
 	<string name="pref_template_email">Email template</string>
-	<string name="pref_template_email_summary">Email subject and body to send.</string>
+	<string name="pref_template_email_summary">Email subject and body to send</string>
 	<string name="pref_blacklist">Black list</string>
 	<string name="pref_blacklist_summary">Contacts list which are ignored</string>
 	<string name="pref_alarm">Alarm</string>
@@ -35,7 +35,7 @@
 	<string name="toast_contact_blacklisted">Contact is blacklisted</string>
 	<string name="toast_blacklisted">%s has been added to the black list</string>
 	<string name="toast_later">The notification is kept for later.</string>
-	<string name="toast_no_contact">No contact found !</string>
+	<string name="toast_no_contact">No name days found in your contacts today !</string>
 	<string name="toast_contact_one">It\'s his/her name day :\n</string>
 	<string name="toast_contact_list">It\'s their name day :\n</string>
 	<string name="toast_finish">Today's name days have been completed.</string>
@@ -69,4 +69,7 @@
 <string name="toast_sms_template_saved">SMS template saved</string>
 <string name="feast_counter">%d/%d</string>
 <string name="happyfeast_name">It\'s his/her name day :</string>
+<string name="pref_check_name_days">Check name days today</string>
+<string name="pref_check_name_days_summary">Search if name days today match with your contacts</string>
+<string name="pref_data_cat">Database</string>
 </resources>

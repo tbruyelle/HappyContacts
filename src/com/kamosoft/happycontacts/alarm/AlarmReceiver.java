@@ -1,5 +1,5 @@
 /**
- * 
+ * Copyright (C) Kamosoft 2010
  */
 package com.kamosoft.happycontacts.alarm;
 

@@ -1,3 +1,6 @@
+/**
+ * Copyright (C) Kamosoft 2010
+ */
 package com.kamosoft.happycontacts;
 
 import java.text.SimpleDateFormat;
@@ -36,11 +39,8 @@ public class NameListActivity
     private Cursor mCursorNamesForDay;
 
     private String mDate;
-
-    /**
-     * formatted date according to used locale
-     */
-    private String mDateTitle;
+    
+    private String mDay;
 
     private java.text.DateFormat mDateFormat;
 
@@ -79,13 +79,13 @@ public class NameListActivity
 
         mDay = getIntent().getExtras().getString( DATE_INTENT_KEY );
         Calendar calendar = Calendar.getInstance();
-        calendar.set( Calendar.MONTH, Integer.valueOf( mDay.substring( 3, 5 ) ) );
+        calendar.set( Calendar.MONTH, Integer.valueOf( mDay.substring( 3, 5 ) ) - 1 );
         calendar.set( Calendar.DAY_OF_MONTH, Integer.valueOf( mDay.substring( 0, 2 ) ) );
 
         SimpleDateFormat fullDateFormat = new SimpleDateFormat( FULL_DATE_FORMAT );
         mDate = fullDateFormat.format( calendar.getTime() );
         mYear = calendar.get( Calendar.YEAR );
-        mMonthOfYear = calendar.get( Calendar.MONTH ) - 1;
+        mMonthOfYear = calendar.get( Calendar.MONTH );
         mDayOfMonth = calendar.get( Calendar.DAY_OF_MONTH );
 
         mDateTitle = mDateFormat.format( calendar.getTime() );
@@ -162,8 +162,7 @@ public class NameListActivity
     @Override
     public boolean onCreateOptionsMenu( Menu menu )
     {
-        super.onCreateOptionsMenu( menu );
-        menu.add( 0, DAY_MENU_ID, 0, R.string.enter_date ).setIcon( R.drawable.ic_menu_today );
+        super.onCreateOptionsMenu( menu );        
         if ( Log.DEBUG )
         {
             menu.add( 0, TEST_MENU_ID, 0, R.string.check_contacts ).setIcon( R.drawable.ic_menu_allfriends );
@@ -184,7 +183,6 @@ public class NameListActivity
 
                 if ( !contactFeastToday.getContactList().isEmpty() )
                 {
-                    Notifier.notifyEvent( getApplicationContext() );
                     StringBuilder sb = new StringBuilder();
                     if ( contactFeastToday.getContactList().size() > 1 )
                     {

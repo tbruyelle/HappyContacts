@@ -1,4 +1,9 @@
+/**
+ * Copyright (C) Kamosoft 2010
+ */
 package com.kamosoft.happycontacts;
+
+import java.util.Calendar;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -61,6 +66,10 @@ public class DateListActivity
         super.onResume();
         mName = getIntent().getExtras().getString( NAME_INTENT_KEY );
         mDb.open( true );
+        Calendar calendar = Calendar.getInstance();
+        mYear = calendar.get( Calendar.YEAR );
+        mMonthOfYear = calendar.get( Calendar.MONTH );
+        mDayOfMonth = calendar.get( Calendar.DAY_OF_MONTH );
         fillList();
         if ( Log.DEBUG )
         {

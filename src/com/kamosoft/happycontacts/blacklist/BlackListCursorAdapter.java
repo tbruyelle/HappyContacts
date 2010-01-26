@@ -1,3 +1,6 @@
+/**
+ * Copyright (C) Kamosoft 2010
+ */
 package com.kamosoft.happycontacts.blacklist;
 
 import android.content.Context;

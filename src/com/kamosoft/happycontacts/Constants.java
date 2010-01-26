@@ -1,9 +1,12 @@
+/**
+ * Copyright (C) Kamosoft 2010
+ */
 package com.kamosoft.happycontacts;
 
 /**
  * @author tom
  *
- * @since 29 dÃ©c. 2009
+ * @since 29 déc. 2009
  * @version $Id$
  */
 public interface Constants

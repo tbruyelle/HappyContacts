@@ -1,5 +1,5 @@
 /**
- * 
+ * Copyright (C) Kamosoft 2010
  */
 package com.kamosoft.happycontacts;
 
@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.IBinder;
 import android.provider.Contacts.People;
+import android.widget.Toast;
 
 import com.kamosoft.happycontacts.alarm.AlarmController;
 import com.kamosoft.happycontacts.dao.DbAdapter;
@@ -63,6 +64,41 @@ public class DayMatcherService
         AlarmController.releaseStaticLock( this );
 
         stopSelf();
+    }
+
+    public static void displayDayMatch( Context context )
+    {
+        /*
+         * Look for names matching today date
+         */
+        ContactFeasts contactFeastToday = DayMatcherService.testDayMatch( context );
+
+        if ( !contactFeastToday.getContactList().isEmpty() )
+        {
+            Notifier.notifyEvent( context );
+            StringBuilder sb = new StringBuilder();
+            if ( contactFeastToday.getContactList().size() > 1 )
+            {
+                sb.append( context.getString( R.string.toast_contact_list ) );
+            }
+            else
+            {
+                sb.append( context.getString( R.string.toast_contact_one ) );
+            }
+            for ( Map.Entry<Long, ContactFeast> mapEntry : contactFeastToday.getContactList().entrySet() )
+            {
+                sb.append( mapEntry.getValue().getContactName() );
+                sb.append( "\n" );
+            }
+            Toast.makeText( context, sb.toString(), Toast.LENGTH_LONG ).show();
+            //                    Intent intent = new Intent( this, ContactsPopupActivity.class );
+            //                    intent.putExtra( CONTACTFEAST_INTENT_KEY, contactFeastToday );
+            //                    startActivity( intent );
+        }
+        else
+        {
+            Toast.makeText( context, R.string.toast_no_contact, Toast.LENGTH_LONG ).show();
+        }
     }
 
     /**

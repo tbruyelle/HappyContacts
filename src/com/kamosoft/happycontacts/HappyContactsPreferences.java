@@ -204,7 +204,7 @@ public class HappyContactsPreferences
             mAlarmStatePref.setChecked( true );
             if ( !AlarmController.isAlarmUp( this ) )
             {
-                Log.v( "HappyContactsPreferences : error alarm disabled" );
+                Log.e( "HappyContactsPreferences : error alarm disabled" );
             }
         }
         else
@@ -213,7 +213,7 @@ public class HappyContactsPreferences
             mAlarmStatePref.setChecked( false );
             if ( AlarmController.isAlarmUp( this ) )
             {
-                Log.v( "HappyContactsPreferences : error alarm enabled" );
+                Log.e( "HappyContactsPreferences : error alarm enabled" );
             }
         }
         mAlarmStatePref.setOnPreferenceClickListener( mAlarmToggleClickListener );
@@ -233,6 +233,26 @@ public class HappyContactsPreferences
         } );
         root.addItemFromInflater( alarmTimePref );
 
+        /* database category */
+        PreferenceCategory databasePrefCat = new PreferenceCategory( this );
+        databasePrefCat.setTitle( R.string.pref_data_cat );
+        root.addPreference( databasePrefCat );
+
+        /* check todays name days */
+        Preference checkNameDayPref = new Preference( this );
+        checkNameDayPref.setTitle( R.string.pref_check_name_days );
+        checkNameDayPref.setSummary( R.string.pref_check_name_days_summary );
+        checkNameDayPref.setOnPreferenceClickListener( new OnPreferenceClickListener()
+        {
+            @Override
+            public boolean onPreferenceClick( Preference arg0 )
+            {
+                DayMatcherService.displayDayMatch( HappyContactsPreferences.this );
+                return true;
+            }
+        } );
+        databasePrefCat.addItemFromInflater( checkNameDayPref );
+
         /* name days list */
         Preference nameListPref = new Preference( this );
         nameListPref.setTitle( R.string.pref_feast_list );
@@ -241,14 +261,14 @@ public class HappyContactsPreferences
         SimpleDateFormat dateFormat = new SimpleDateFormat( DAY_FORMAT );
         intent.putExtra( DATE_INTENT_KEY, dateFormat.format( new Date() ) );
         nameListPref.setIntent( intent );
-        root.addPreference( nameListPref );
+        databasePrefCat.addPreference( nameListPref );
 
         // blacklist
         Preference blackListPref = new Preference( this );
         blackListPref.setTitle( R.string.pref_blacklist );
         blackListPref.setSummary( R.string.pref_blacklist_summary );
         blackListPref.setIntent( new Intent( this, BlackListActivity.class ) );
-        root.addPreference( blackListPref );
+        databasePrefCat.addPreference( blackListPref );
 
         /* templates */
         PreferenceCategory templatesPrefCat = new PreferenceCategory( this );

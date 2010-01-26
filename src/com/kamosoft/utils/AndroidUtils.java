@@ -1,5 +1,5 @@
 /**
- * copyright tsoft 2009
+ * Copyright (C) Kamosoft 2010
  */
 package com.kamosoft.utils;
 
