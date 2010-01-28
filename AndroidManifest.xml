@@ -43,7 +43,9 @@
 
   <uses-permission android:name="android.permission.READ_CONTACTS" />
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
+  
   <supports-screens android:largeScreens="true"
     android:normalScreens="true" android:smallScreens="true" />
+
 </manifest> 
