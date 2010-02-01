@@ -170,7 +170,7 @@ public class ReminderPopupActivity
                                               }
                                               else
                                               {
-                                                  showDialog( TEL_CHOOSER_DIALOG_ID );
+                                                  showDialog( SMS_CHOOSER_DIALOG_ID );
                                               }
                                           }
                                           else if ( contactMethod.equals( contactMethods[EMAIL_ITEM_INDEX] ) )
