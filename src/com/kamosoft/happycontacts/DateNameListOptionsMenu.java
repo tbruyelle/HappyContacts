@@ -30,8 +30,6 @@ public abstract class DateNameListOptionsMenu
 
     protected static final int NAME_MENU_ID = DAY_MENU_ID + 1;
 
-    protected static final int TEST_MENU_ID = NAME_MENU_ID + 1;
-
     private static final int NAME_FORM_DIALOG_ID = 1;
 
     private static final int DATE_FORM_DIALOG_ID = 2;

@@ -289,6 +289,23 @@ public class HappyContactsPreferences
         templateEmailPref.setIntent( new Intent( this, MailTemplateActivity.class ) );
         templatesPrefCat.addPreference( templateEmailPref );
 
+        /* about preference */
+        PreferenceCategory aboutPrefCat = new PreferenceCategory( this );
+        aboutPrefCat.setTitle( R.string.about );
+        root.addPreference( aboutPrefCat );
+        Preference aboutPref = new Preference( this );
+        aboutPrefCat.addPreference( aboutPref );
+        aboutPref.setTitle( R.string.about );
+        aboutPref.setOnPreferenceClickListener( new OnPreferenceClickListener()
+        {
+            @Override
+            public boolean onPreferenceClick( Preference arg0 )
+            {
+                new AboutDialog( HappyContactsPreferences.this ).show();
+                return true;
+            }
+        } );
+
         return root;
     }
 }

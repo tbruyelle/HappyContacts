@@ -3,26 +3,19 @@
  */
 package com.kamosoft.happycontacts;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Map;
 
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.format.DateFormat;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.dao.HappyContactsDb;
-import com.kamosoft.happycontacts.model.ContactFeast;
-import com.kamosoft.happycontacts.model.ContactFeasts;
 
 /**
  * Display name list for a date
@@ -38,8 +31,6 @@ public class NameListActivity
 
     private Cursor mCursorNamesForDay;
 
-    private String mDate;
-    
     private String mDay;
 
     private java.text.DateFormat mDateFormat;
@@ -81,9 +72,6 @@ public class NameListActivity
         Calendar calendar = Calendar.getInstance();
         calendar.set( Calendar.MONTH, Integer.valueOf( mDay.substring( 3, 5 ) ) - 1 );
         calendar.set( Calendar.DAY_OF_MONTH, Integer.valueOf( mDay.substring( 0, 2 ) ) );
-
-        SimpleDateFormat fullDateFormat = new SimpleDateFormat( FULL_DATE_FORMAT );
-        mDate = fullDateFormat.format( calendar.getTime() );
         mYear = calendar.get( Calendar.YEAR );
         mMonthOfYear = calendar.get( Calendar.MONTH );
         mDayOfMonth = calendar.get( Calendar.DAY_OF_MONTH );
@@ -158,58 +146,4 @@ public class NameListActivity
                          mCursorNamesForDay.getString( mCursorNamesForDay.getColumnIndex( HappyContactsDb.Feast.NAME ) ) );
         startActivity( intent );
     }
-
-    @Override
-    public boolean onCreateOptionsMenu( Menu menu )
-    {
-        super.onCreateOptionsMenu( menu );        
-        if ( Log.DEBUG )
-        {
-            menu.add( 0, TEST_MENU_ID, 0, R.string.check_contacts ).setIcon( R.drawable.ic_menu_allfriends );
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onMenuItemSelected( int featureId, MenuItem item )
-    {
-        switch ( item.getItemId() )
-        {
-            case TEST_MENU_ID:
-                /*
-                 * Look for names matching today date
-                 */
-                ContactFeasts contactFeastToday = DayMatcherService.testDayMatch( getApplicationContext(), mDay, mDate );
-
-                if ( !contactFeastToday.getContactList().isEmpty() )
-                {
-                    StringBuilder sb = new StringBuilder();
-                    if ( contactFeastToday.getContactList().size() > 1 )
-                    {
-                        sb.append( this.getString( R.string.toast_contact_list ) );
-                    }
-                    else
-                    {
-                        sb.append( this.getString( R.string.toast_contact_one ) );
-                    }
-                    for ( Map.Entry<Long, ContactFeast> mapEntry : contactFeastToday.getContactList().entrySet() )
-                    {
-                        sb.append( mapEntry.getValue().getContactName() );
-                        sb.append( "\n" );
-                    }
-                    Toast.makeText( this, sb.toString(), Toast.LENGTH_LONG ).show();
-                    //                    Intent intent = new Intent( this, ContactsPopupActivity.class );
-                    //                    intent.putExtra( CONTACTFEAST_INTENT_KEY, contactFeastToday );
-                    //                    startActivity( intent );
-                }
-                else
-                {
-                    Toast.makeText( this, R.string.toast_no_contact, Toast.LENGTH_SHORT ).show();
-                }
-                return true;
-        }
-
-        return super.onMenuItemSelected( featureId, item );
-    }
-
 }

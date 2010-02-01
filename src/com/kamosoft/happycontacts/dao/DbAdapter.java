@@ -4,12 +4,10 @@
 package com.kamosoft.happycontacts.dao;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.MatrixCursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -243,25 +241,28 @@ public class DbAdapter
      */
     private Cursor avoidDuplicate( Cursor cursor, String columnName )
     {
-        ArrayList<String> columns = new ArrayList<String>();
-        MatrixCursor matrixCursor = new MatrixCursor( new String[] { HappyContactsDb.Feast.ID, columnName } );
-        int columnIndex = cursor.getColumnIndex( columnName );
-        int idColumnIndex = cursor.getColumnIndex( HappyContactsDb.Feast.ID );
-        cursor.moveToFirst();
-        do
-        {
-            String columnValue = cursor.getString( columnIndex );
-            if ( columns.contains( columnValue ) )
-            {
-                continue;
-            }
-            Long id = cursor.getLong( idColumnIndex );
-            matrixCursor.newRow().add( id ).add( columnValue );
-            columns.add( columnValue );
-        }
-        while ( cursor.moveToNext() );
-        cursor.close();
-        return matrixCursor;
+        /* use only one source for name day, so no duplicate */
+        return cursor;
+
+        //        ArrayList<String> columns = new ArrayList<String>();
+        //        MatrixCursor matrixCursor = new MatrixCursor( new String[] { HappyContactsDb.Feast.ID, columnName } );
+        //        int columnIndex = cursor.getColumnIndex( columnName );
+        //        int idColumnIndex = cursor.getColumnIndex( HappyContactsDb.Feast.ID );
+        //        cursor.moveToFirst();
+        //        do
+        //        {
+        //            String columnValue = cursor.getString( columnIndex );
+        //            if ( columns.contains( columnValue ) )
+        //            {
+        //                continue;
+        //            }
+        //            Long id = cursor.getLong( idColumnIndex );
+        //            matrixCursor.newRow().add( id ).add( columnValue );
+        //            columns.add( columnValue );
+        //        }
+        //        while ( cursor.moveToNext() );
+        //        cursor.close();
+        //        return matrixCursor;
     }
 
     /**

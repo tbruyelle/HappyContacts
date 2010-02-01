@@ -72,4 +72,6 @@
 <string name="pref_check_name_days">Check name days today</string>
 <string name="pref_check_name_days_summary">Search if name days today match with your contacts</string>
 <string name="pref_data_cat">Database</string>
+<string name="about_content">Kamosoft (c) 2010</string>
+<string name="about">About</string>
 </resources>

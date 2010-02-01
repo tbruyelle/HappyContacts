@@ -75,7 +75,6 @@ public class DayMatcherService
 
         if ( !contactFeastToday.getContactList().isEmpty() )
         {
-            Notifier.notifyEvent( context );
             StringBuilder sb = new StringBuilder();
             if ( contactFeastToday.getContactList().size() > 1 )
             {
@@ -94,6 +93,7 @@ public class DayMatcherService
             //                    Intent intent = new Intent( this, ContactsPopupActivity.class );
             //                    intent.putExtra( CONTACTFEAST_INTENT_KEY, contactFeastToday );
             //                    startActivity( intent );
+            Notifier.notifyEvent( context );
         }
         else
         {
