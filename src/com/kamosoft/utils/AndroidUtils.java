@@ -15,6 +15,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 
+import com.kamosoft.happycontacts.R;
+
 /**
  * @author tom
  * 
@@ -23,32 +25,25 @@ public final class AndroidUtils
 {
     public static void composeSms( Context context, String phoneNumber, String smsBody )
     {
-        Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "sms:" + phoneNumber ) );
+        Intent intent = new Intent( Intent.ACTION_VIEW );
         intent.putExtra( "sms_body", smsBody );
+        intent.putExtra( "address", phoneNumber );
+        intent.setType( "vnd.android-dir/mms-sms" );
         context.startActivity( intent );
-
-        //		Intent intent = new Intent(Intent.ACTION_VIEW);
-        //		intent.putExtra("sms_body", smsBody);
-        //		
-        //		intent.setType("vnd.android-dir/mms-sms");
-        //		context.startActivity(intent);  
-        //createChooser pas util ici, util seulement pour par ex le "partager" de picsay pro
-        //context.startActivity(Intent.createChooser(intent, "chooser:");
     }
 
     public static void composeMail( Context context, String emailAddress, String mailSubject, String mailBody )
     {
-        //FIXME not working any more
         //        Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "mailto:" + emailAddress ) );
         //        intent.putExtra( "subject", mailSubject );
         //        intent.putExtra( "body", mailBody );
         //        context.startActivity( intent );
-        final Intent emailIntent = new Intent( android.content.Intent.ACTION_SEND );
+        final Intent emailIntent = new Intent( Intent.ACTION_SEND );
         emailIntent.setType( "plain/text" );
-        emailIntent.putExtra( android.content.Intent.EXTRA_EMAIL, new String[] { emailAddress } );
-        emailIntent.putExtra( android.content.Intent.EXTRA_SUBJECT, mailSubject );
-        emailIntent.putExtra( android.content.Intent.EXTRA_TEXT, mailBody );
-        context.startActivity( emailIntent );
+        emailIntent.putExtra( Intent.EXTRA_EMAIL, new String[] { emailAddress } );
+        emailIntent.putExtra( Intent.EXTRA_SUBJECT, mailSubject );
+        emailIntent.putExtra( Intent.EXTRA_TEXT, mailBody );
+        context.startActivity( Intent.createChooser( emailIntent, context.getString( R.string.sendmail ) ) );
     }
 
     public static void composeTel( Context context, String phoneNumber )

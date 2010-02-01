@@ -133,6 +133,7 @@ public final class R {
         public static final int pref_time=0x7f06001c;
         public static final int pref_time_summary=0x7f06001d;
         public static final int reset_button=0x7f06003c;
+        public static final int sendmail=0x7f060046;
         public static final int sms_template_text=0x7f060039;
         public static final int toast_blacklisted=0x7f060021;
         public static final int toast_contact_blacklisted=0x7f060020;

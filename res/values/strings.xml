@@ -74,4 +74,5 @@
 <string name="pref_data_cat">Database</string>
 <string name="about_content">Kamosoft (c) 2010</string>
 <string name="about">About</string>
+<string name="sendmail">Send mail with...</string>
 </resources>

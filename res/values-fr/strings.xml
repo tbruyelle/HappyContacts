@@ -76,4 +76,5 @@
 <string name="pref_check_name_days_summary">Recherche les fêtes de vos contacts</string>
 <string name="pref_data_cat">Base de données</string>
 <string name="about">A propos</string>
+<string name="sendmail">Envoyer l'email avec...</string>
 </resources>
