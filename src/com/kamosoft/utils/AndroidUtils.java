@@ -39,10 +39,16 @@ public final class AndroidUtils
     public static void composeMail( Context context, String emailAddress, String mailSubject, String mailBody )
     {
         //FIXME not working any more
-        Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "mailto:" + emailAddress ) );
-        intent.putExtra( "subject", mailSubject );
-        intent.putExtra( "body", mailBody );
-        context.startActivity( intent );
+        //        Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "mailto:" + emailAddress ) );
+        //        intent.putExtra( "subject", mailSubject );
+        //        intent.putExtra( "body", mailBody );
+        //        context.startActivity( intent );
+        final Intent emailIntent = new Intent( android.content.Intent.ACTION_SEND );
+        emailIntent.setType( "plain/text" );
+        emailIntent.putExtra( android.content.Intent.EXTRA_EMAIL, new String[] { emailAddress } );
+        emailIntent.putExtra( android.content.Intent.EXTRA_SUBJECT, mailSubject );
+        emailIntent.putExtra( android.content.Intent.EXTRA_TEXT, mailBody );
+        context.startActivity( emailIntent );
     }
 
     public static void composeTel( Context context, String phoneNumber )
