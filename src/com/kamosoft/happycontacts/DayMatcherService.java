@@ -175,9 +175,6 @@ public class DayMatcherService
         }
         cursor.close();
 
-        /* FIXME pour le screenshot */
-        names.put( "JESSICA", new ContactFeast( "Jessica", null ) );
-
         /*
          * now we have to scan contacts
          */

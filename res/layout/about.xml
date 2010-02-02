@@ -8,17 +8,16 @@
     <ImageView android:src="@drawable/icon"
       android:layout_width="wrap_content" android:layout_height="wrap_content"
       android:layout_marginRight="10dp" android:maxWidth="2dp"
-      android:maxHeight="2dp" android:minWidth="2dp"
-      android:minHeight="2dp"/>
+      android:maxHeight="2dp" android:minWidth="2dp" android:minHeight="2dp" />
     <LinearLayout android:orientation="vertical"
       android:layout_gravity="center_vertical|center_horizontal"
       android:layout_width="fill_parent" android:layout_height="wrap_content">
       <TextView android:text="@string/about_content"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:textColor="#FFF" />
+        android:id="@+id/about_content" android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:textColor="#FFF" />
     </LinearLayout>
   </LinearLayout>
-  <include layout="@layout/divider" />
+
   <Button android:text="@string/ok" android:id="@+id/ok_button"
     android:layout_width="fill_parent" android:layout_height="wrap_content"
     android:layout_marginTop="15dp" />

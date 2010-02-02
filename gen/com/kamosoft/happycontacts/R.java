@@ -36,25 +36,26 @@ public final class R {
         public static final int umbrella=0x7f020010;
     }
     public static final class id {
-        public static final int button_name_cancel=0x7f080006;
-        public static final int button_name_ok=0x7f080005;
-        public static final int call_button=0x7f08000c;
-        public static final int cancel_button=0x7f08000b;
-        public static final int contact_name=0x7f080002;
-        public static final int contact_photo=0x7f080010;
-        public static final int edittext_name=0x7f080004;
-        public static final int element=0x7f080012;
-        public static final int feast_counter=0x7f080007;
-        public static final int last_wish_year=0x7f080003;
-        public static final int later_button=0x7f08000e;
+        public static final int about_content=0x7f080001;
+        public static final int button_name_cancel=0x7f080007;
+        public static final int button_name_ok=0x7f080006;
+        public static final int call_button=0x7f08000d;
+        public static final int cancel_button=0x7f08000c;
+        public static final int contact_name=0x7f080003;
+        public static final int contact_photo=0x7f080011;
+        public static final int edittext_name=0x7f080005;
+        public static final int element=0x7f080013;
+        public static final int feast_counter=0x7f080008;
+        public static final int last_wish_year=0x7f080004;
+        public static final int later_button=0x7f08000f;
         public static final int layout_root=0x7f080000;
-        public static final int mail_template_body=0x7f080009;
-        public static final int mail_template_subject=0x7f080008;
-        public static final int never_button=0x7f08000f;
-        public static final int nottoday_button=0x7f08000d;
-        public static final int ok_button=0x7f080001;
-        public static final int reset_button=0x7f08000a;
-        public static final int sms_template_content=0x7f080011;
+        public static final int mail_template_body=0x7f08000a;
+        public static final int mail_template_subject=0x7f080009;
+        public static final int never_button=0x7f080010;
+        public static final int nottoday_button=0x7f08000e;
+        public static final int ok_button=0x7f080002;
+        public static final int reset_button=0x7f08000b;
+        public static final int sms_template_content=0x7f080012;
     }
     public static final class layout {
         public static final int about=0x7f030000;
