@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -30,6 +31,11 @@ public class EnterNameDialog
         mContext = context;
         setContentView( R.layout.enter_name_popup );
         setTitle( R.string.enter_name );
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.width = WindowManager.LayoutParams.FILL_PARENT;
+        lp.height = getWindow().getAttributes().height;
+        getWindow().setAttributes( lp );
 
         final EditText editText = (EditText) findViewById( R.id.edittext_name );
 
