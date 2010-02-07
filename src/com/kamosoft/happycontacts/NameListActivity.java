@@ -3,6 +3,7 @@
  */
 package com.kamosoft.happycontacts;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import android.content.Intent;
@@ -10,9 +11,10 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
 
 import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.dao.HappyContactsDb;
@@ -24,6 +26,7 @@ import com.kamosoft.happycontacts.dao.HappyContactsDb;
  */
 public class NameListActivity
     extends DateNameListOptionsMenu
+    implements OnClickListener
 {
     private DbAdapter mDb;
 
@@ -33,7 +36,24 @@ public class NameListActivity
 
     private String mDay;
 
-    private java.text.DateFormat mDateFormat;
+    private SimpleDateFormat df = new SimpleDateFormat( "dd/MM" );
+
+    @Override
+    public void onClick( View v )
+    {
+        switch ( v.getId() )
+        {
+            case R.id.dateback:
+                updateDate( mDay, -1 );
+                fillList();
+                break;
+
+            case R.id.datenext:
+                updateDate( mDay, 1 );
+                fillList();
+                break;
+        }
+    }
 
     /** Called when the activity is first created. */
     @Override
@@ -44,12 +64,12 @@ public class NameListActivity
             Log.v( "NameListActivity: start onCreate" );
         }
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.testapp );
+        setContentView( R.layout.namelist );
 
-        TextView emptyText = (TextView) findViewById( android.R.id.empty );
-        emptyText.setText( getString( R.string.no_feast ) );
-
-        mDateFormat = DateFormat.getDateFormat( this );
+        Button dateBackButton = (Button) findViewById( R.id.dateback );
+        dateBackButton.setOnClickListener( this );
+        Button dateNextButton = (Button) findViewById( R.id.datenext );
+        dateNextButton.setOnClickListener( this );
 
         mDb = new DbAdapter( this );
 
@@ -57,6 +77,26 @@ public class NameListActivity
         {
             Log.v( "NameListActivity: end onCreate" );
         }
+    }
+
+    protected void updateDate( String day, int nb )
+    {
+        Calendar calendar = Calendar.getInstance();
+        if ( day != null )
+        {
+            calendar.set( Calendar.MONTH, Integer.valueOf( day.substring( 3, 5 ) ) - 1 );
+            calendar.set( Calendar.DAY_OF_MONTH, Integer.valueOf( day.substring( 0, 2 ) ) );
+            if ( nb != 0 )
+            {
+                calendar.add( Calendar.DAY_OF_MONTH, nb );
+                mDay = df.format( calendar.getTime() );
+            }
+        }
+        mYear = calendar.get( Calendar.YEAR );
+        mMonthOfYear = calendar.get( Calendar.MONTH );
+        mDayOfMonth = calendar.get( Calendar.DAY_OF_MONTH );
+        mDateFormat = DateFormat.getDateFormat( this );
+        mDateTitle = mDateFormat.format( calendar.getTime() );
     }
 
     @Override
@@ -69,14 +109,7 @@ public class NameListActivity
         super.onResume();
 
         mDay = getIntent().getExtras().getString( DATE_INTENT_KEY );
-        Calendar calendar = Calendar.getInstance();
-        calendar.set( Calendar.MONTH, Integer.valueOf( mDay.substring( 3, 5 ) ) - 1 );
-        calendar.set( Calendar.DAY_OF_MONTH, Integer.valueOf( mDay.substring( 0, 2 ) ) );
-        mYear = calendar.get( Calendar.YEAR );
-        mMonthOfYear = calendar.get( Calendar.MONTH );
-        mDayOfMonth = calendar.get( Calendar.DAY_OF_MONTH );
-
-        mDateTitle = mDateFormat.format( calendar.getTime() );
+        updateDate( mDay );
 
         mDb.open( true );
         fillList();
@@ -124,7 +157,7 @@ public class NameListActivity
         {
             String[] from = new String[] { HappyContactsDb.Feast.NAME };
             int[] to = new int[] { R.id.element };
-            mCursorAdapter = new SimpleCursorAdapter( this, R.layout.testapp_element, mCursorNamesForDay, from, to );
+            mCursorAdapter = new SimpleCursorAdapter( this, R.layout.datename_element, mCursorNamesForDay, from, to );
             setListAdapter( mCursorAdapter );
         }
         else
@@ -142,8 +175,9 @@ public class NameListActivity
         super.onListItemClick( l, v, position, id );
         mCursorNamesForDay.moveToPosition( position );
         Intent intent = new Intent( this, DateListActivity.class );
-        intent.putExtra( NAME_INTENT_KEY,
-                         mCursorNamesForDay.getString( mCursorNamesForDay.getColumnIndex( HappyContactsDb.Feast.NAME ) ) );
+        intent.putExtra( NAME_INTENT_KEY, mCursorNamesForDay.getString( mCursorNamesForDay
+            .getColumnIndex( HappyContactsDb.Feast.NAME ) ) );
         startActivity( intent );
     }
+
 }

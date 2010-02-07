@@ -63,7 +63,7 @@ public class DateListCursorAdapter
     @Override
     public View newView( Context context, Cursor cursor, ViewGroup viewGroup )
     {
-        View view = mInflater.inflate( R.layout.testapp_element, null );
+        View view = mInflater.inflate( R.layout.datename_element, null );
         bindView( view, context, cursor );
         return view;
     }

@@ -10,6 +10,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.DatePicker;
@@ -40,12 +41,29 @@ public abstract class DateNameListOptionsMenu
 
     protected int mDayOfMonth;
 
+    protected java.text.DateFormat mDateFormat;
+
     /**
      * formatted date according to used locale
      */
     protected String mDateTitle;
 
     protected abstract void fillList();
+
+    protected void updateDate( String day )
+    {
+        Calendar calendar = Calendar.getInstance();
+        if ( day != null )
+        {
+            calendar.set( Calendar.MONTH, Integer.valueOf( day.substring( 3, 5 ) ) - 1 );
+            calendar.set( Calendar.DAY_OF_MONTH, Integer.valueOf( day.substring( 0, 2 ) ) );
+        }
+        mYear = calendar.get( Calendar.YEAR );
+        mMonthOfYear = calendar.get( Calendar.MONTH );
+        mDayOfMonth = calendar.get( Calendar.DAY_OF_MONTH );
+        mDateFormat = DateFormat.getDateFormat( this );
+        mDateTitle = mDateFormat.format( calendar.getTime() );
+    }
 
     @Override
     public boolean onCreateOptionsMenu( Menu menu )
@@ -91,20 +109,29 @@ public abstract class DateNameListOptionsMenu
                 return new EnterNameDialog( this );
 
             case DATE_FORM_DIALOG_ID:
-                DatePickerDialog datePickerDialog =
-                    new DatePickerDialog( this, new DatePickerDialog.OnDateSetListener()
-                    {
-                        public void onDateSet( DatePicker view, int year, int monthOfYear, int dayOfMonth )
-                        {
-                            Calendar cal = Calendar.getInstance();
-                            cal.set( year, monthOfYear, dayOfMonth );
-                            SimpleDateFormat dateFormat = new SimpleDateFormat( DAY_FORMAT );
-                            String day = dateFormat.format( cal.getTime() );
-                            Intent intent = new Intent( DateNameListOptionsMenu.this, NameListActivity.class );
-                            intent.putExtra( DATE_INTENT_KEY, day );
-                            startActivity( intent );
-                        }
-                    }, 0, 0, 0 );
+                DatePickerDialog datePickerDialog = new DatePickerDialog( this,
+                                                                          new DatePickerDialog.OnDateSetListener()
+                                                                          {
+                                                                              public void onDateSet( DatePicker view,
+                                                                                                     int year,
+                                                                                                     int monthOfYear,
+                                                                                                     int dayOfMonth )
+                                                                              {
+                                                                                  Calendar cal = Calendar.getInstance();
+                                                                                  cal.set( year, monthOfYear,
+                                                                                           dayOfMonth );
+                                                                                  SimpleDateFormat dateFormat = new SimpleDateFormat(
+                                                                                                                                      DAY_FORMAT );
+                                                                                  String day = dateFormat.format( cal
+                                                                                      .getTime() );
+                                                                                  Intent intent = new Intent(
+                                                                                                              DateNameListOptionsMenu.this,
+                                                                                                              NameListActivity.class );
+                                                                                  intent
+                                                                                      .putExtra( DATE_INTENT_KEY, day );
+                                                                                  startActivity( intent );
+                                                                              }
+                                                                          }, 0, 0, 0 );
                 datePickerDialog.setTitle( R.string.enter_date );
                 return datePickerDialog;
         }

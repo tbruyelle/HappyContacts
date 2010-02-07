@@ -10,7 +10,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.dao.HappyContactsDb;
@@ -43,10 +42,7 @@ public class DateListActivity
             Log.v( "DateListActivity: start onCreate" );
         }
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.testapp );
-
-        TextView emptyText = (TextView) findViewById( android.R.id.empty );
-        emptyText.setText( getString( R.string.no_feast_for_name ) );
+        setContentView( R.layout.datelist );
 
         mDb = new DbAdapter( this );
 

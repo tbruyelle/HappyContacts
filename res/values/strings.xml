@@ -75,4 +75,6 @@
 <string name="about_content"><a href="http://kamosoft.wordpress.com">Kamosoft</a> (c) 2010</string>
 <string name="about">About</string>
 <string name="sendmail">Send mail with...</string>
+<string name="dateback">&lt;</string>
+<string name="datenext">&gt;</string>
 </resources>
