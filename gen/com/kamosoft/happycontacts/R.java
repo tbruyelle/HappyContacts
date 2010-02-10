@@ -74,6 +74,8 @@ public final class R {
         public static final int reminder=0x7f03000b;
         public static final int reminder_header=0x7f03000c;
         public static final int sms_template=0x7f03000d;
+        public static final int testapp=0x7f03000e;
+        public static final int testapp_element=0x7f03000f;
     }
     public static final class raw {
         public static final int db_create=0x7f040000;

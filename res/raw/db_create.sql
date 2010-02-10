@@ -102,11 +102,9 @@ insert into feast (name, day, source) values ("Jasper", "06/01", "ephemeride.nam
 insert into feast (name, day, source) values ("Kaspar", "06/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Kasper", "06/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Macre", "06/01", "ephemeride.name");
-insert into feast (name, day, source) values ("Mélaine", "06/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Melen", "06/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Peranig", "06/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Petran", "06/01", "ephemeride.name");
-insert into feast (name, day, source) values ("Raphaëlle", "06/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Marie", "06/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Wiltrud", "06/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Raymond(e)", "07/01", "ephemeride.name");
@@ -390,7 +388,6 @@ insert into feast (name, day, source) values ("Lomer", "19/01", "ephemeride.name
 insert into feast (name, day, source) values ("Maire", "19/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Mario", "19/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Maris", "19/01", "ephemeride.name");
-insert into feast (name, day, source) values ("Marius", "19/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Pontien", "19/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Pontus", "19/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Wulstan", "19/01", "ephemeride.name");
@@ -419,7 +416,6 @@ insert into feast (name, day, source) values ("Patrocle", "21/01", "ephemeride.n
 insert into feast (name, day, source) values ("Publius", "21/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Vimin", "21/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Wynnin", "21/01", "ephemeride.name");
-insert into feast (name, day, source) values ("Vincent", "22/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Brithwold", "22/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Manoël", "22/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Manoëlle", "22/01", "ephemeride.name");
@@ -429,8 +425,6 @@ insert into feast (name, day, source) values ("Oronce", "22/01", "ephemeride.nam
 insert into feast (name, day, source) values ("Oulph", "22/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Vince", "22/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Vincent", "22/01", "ephemeride.name");
-insert into feast (name, day, source) values ("Marie", "22/01", "ephemeride.name");
-insert into feast (name, day, source) values ("Vincente", "22/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Vincente", "22/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Marie", "22/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Vincentia", "22/01", "ephemeride.name");
@@ -685,7 +679,6 @@ insert into feast (name, day, source) values ("Jérémie", "16/02", "ephemeride.na
 insert into feast (name, day, source) values ("Iana", "16/02", "ephemeride.name");
 insert into feast (name, day, source) values ("Iérémie", "16/02", "ephemeride.name");
 insert into feast (name, day, source) values ("Jeremiah", "16/02", "ephemeride.name");
-insert into feast (name, day, source) values ("Jérémie", "16/02", "ephemeride.name");
 insert into feast (name, day, source) values ("Jérémy", "16/02", "ephemeride.name");
 insert into feast (name, day, source) values ("Juliana", "16/02", "ephemeride.name");
 insert into feast (name, day, source) values ("Juliane", "16/02", "ephemeride.name");
@@ -762,7 +755,6 @@ insert into feast (name, day, source) values ("Bolcan", "20/02", "ephemeride.nam
 insert into feast (name, day, source) values ("Éleuthère", "20/02", "ephemeride.name");
 insert into feast (name, day, source) values ("Éleuthèria", "20/02", "ephemeride.name");
 insert into feast (name, day, source) values ("Louise", "20/02", "ephemeride.name");
-insert into feast (name, day, source) values ("Aimée", "20/02", "ephemeride.name");
 insert into feast (name, day, source) values ("Maya", "20/02", "ephemeride.name");
 insert into feast (name, day, source) values ("Olkan", "20/02", "ephemeride.name");
 insert into feast (name, day, source) values ("Volcan", "20/02", "ephemeride.name");
@@ -785,7 +777,6 @@ insert into feast (name, day, source) values ("Isabeau", "22/02", "ephemeride.na
 insert into feast (name, day, source) values ("Isabel", "22/02", "ephemeride.name");
 insert into feast (name, day, source) values ("Isabelette", "22/02", "ephemeride.name");
 insert into feast (name, day, source) values ("Isabella", "22/02", "ephemeride.name");
-insert into feast (name, day, source) values ("Isabelle", "22/02", "ephemeride.name");
 insert into feast (name, day, source) values ("Isabet", "22/02", "ephemeride.name");
 insert into feast (name, day, source) values ("Isabeth", "22/02", "ephemeride.name");
 insert into feast (name, day, source) values ("Isabey", "22/02", "ephemeride.name");
@@ -890,7 +881,6 @@ insert into feast (name, day, source) values ("Chad", "02/03", "ephemeride.name"
 insert into feast (name, day, source) values ("Jaoua", "02/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Jaoven", "02/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Joéva", "02/03", "ephemeride.name");
-insert into feast (name, day, source) values ("Joévin", "02/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Joévina", "02/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Jouan", "02/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Jova", "02/03", "ephemeride.name");
@@ -984,7 +974,6 @@ insert into feast (name, day, source) values ("Franchette", "09/03", "ephemeride
 insert into feast (name, day, source) values ("Francine", "09/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Francisca", "09/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Françoise", "09/03", "ephemeride.name");
-insert into feast (name, day, source) values ("Françoise", "09/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Anne", "09/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Molly", "09/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Pacian", "09/03", "ephemeride.name");
@@ -1034,7 +1023,6 @@ insert into feast (name, day, source) values ("Chang", "11/03", "ephemeride.name
 insert into feast (name, day, source) values ("Chong", "11/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Chung", "11/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Gloria", "11/03", "ephemeride.name");
-insert into feast (name, day, source) values ("Rosine", "11/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Vindicien", "11/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Bodmaël", "12/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Bodvaël", "12/03", "ephemeride.name");
@@ -1048,8 +1036,6 @@ insert into feast (name, day, source) values ("Maximilienne", "12/03", "ephemeri
 insert into feast (name, day, source) values ("Paul", "12/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Aurélien", "12/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Pol", "12/03", "ephemeride.name");
-insert into feast (name, day, source) values ("Pol", "12/03", "ephemeride.name");
-insert into feast (name, day, source) values ("Aurélien", "12/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Polig", "12/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Théophane", "12/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Théophanée", "12/03", "ephemeride.name");
@@ -1110,7 +1096,6 @@ insert into feast (name, day, source) values ("Lolita", "15/03", "ephemeride.nam
 insert into feast (name, day, source) values ("Lossa", "15/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Louella", "15/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Louisa", "15/03", "ephemeride.name");
-insert into feast (name, day, source) values ("Louise", "15/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Louise", "15/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Marie", "15/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Louisette", "15/03", "ephemeride.name");
@@ -1174,17 +1159,13 @@ insert into feast (name, day, source) values ("Joseph", "19/03", "ephemeride.nam
 insert into feast (name, day, source) values ("Iossif", "19/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Isnard", "19/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Jean", "19/03", "ephemeride.name");
-insert into feast (name, day, source) values ("Joseph", "19/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Jef", "19/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Jos", "19/03", "ephemeride.name");
-insert into feast (name, day, source) values ("José", "19/03", "ephemeride.name");
 insert into feast (name, day, source) values ("José", "19/03", "ephemeride.name");
 insert into feast (name, day, source) values ("María", "19/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Josef", "19/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Joséfa", "19/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Josèfe", "19/03", "ephemeride.name");
-insert into feast (name, day, source) values ("Joseph", "19/03", "ephemeride.name");
-insert into feast (name, day, source) values ("Joseph", "19/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Marie", "19/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Josépha", "19/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Josèphe", "19/03", "ephemeride.name");
@@ -1203,8 +1184,6 @@ insert into feast (name, day, source) values ("Josyane", "19/03", "ephemeride.na
 insert into feast (name, day, source) values ("Jousé", "19/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Jozsef", "19/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Landoald", "19/03", "ephemeride.name");
-insert into feast (name, day, source) values ("Marie", "19/03", "ephemeride.name");
-insert into feast (name, day, source) values ("Josèphe", "19/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Osip", "19/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Ossip", "19/03", "ephemeride.name");
 insert into feast (name, day, source) values ("Sibylline", "19/03", "ephemeride.name");
@@ -1523,7 +1502,6 @@ insert into feast (name, day, source) values ("Jouli", "12/04", "ephemeride.name
 insert into feast (name, day, source) values ("Juanita", "12/04", "ephemeride.name");
 insert into feast (name, day, source) values ("Jule", "12/04", "ephemeride.name");
 insert into feast (name, day, source) values ("Jules", "12/04", "ephemeride.name");
-insert into feast (name, day, source) values ("Jules", "12/04", "ephemeride.name");
 insert into feast (name, day, source) values ("César", "12/04", "ephemeride.name");
 insert into feast (name, day, source) values ("Julia", "12/04", "ephemeride.name");
 insert into feast (name, day, source) values ("Julio", "12/04", "ephemeride.name");
@@ -1815,9 +1793,7 @@ insert into feast (name, day, source) values ("Marie", "23/04", "ephemeride.name
 insert into feast (name, day, source) values ("Gabrielle", "23/04", "ephemeride.name");
 insert into feast (name, day, source) values ("Marole", "23/04", "ephemeride.name");
 insert into feast (name, day, source) values ("Pierre", "23/04", "ephemeride.name");
-insert into feast (name, day, source) values ("Georges", "23/04", "ephemeride.name");
 insert into feast (name, day, source) values ("Séverin", "23/04", "ephemeride.name");
-insert into feast (name, day, source) values ("Georges", "23/04", "ephemeride.name");
 insert into feast (name, day, source) values ("Vojtech", "23/04", "ephemeride.name");
 insert into feast (name, day, source) values ("Yorgo", "23/04", "ephemeride.name");
 insert into feast (name, day, source) values ("Youra", "23/04", "ephemeride.name");
@@ -1851,7 +1827,6 @@ insert into feast (name, day, source) values ("Héribald", "25/04", "ephemeride.n
 insert into feast (name, day, source) values ("Hermogène", "25/04", "ephemeride.name");
 insert into feast (name, day, source) values ("Ion", "25/04", "ephemeride.name");
 insert into feast (name, day, source) values ("Jean", "25/04", "ephemeride.name");
-insert into feast (name, day, source) values ("Marc", "25/04", "ephemeride.name");
 insert into feast (name, day, source) values ("Marc", "25/04", "ephemeride.name");
 insert into feast (name, day, source) values ("Marcan", "25/04", "ephemeride.name");
 insert into feast (name, day, source) values ("Marcia", "25/04", "ephemeride.name");
@@ -2004,10 +1979,8 @@ insert into feast (name, day, source) values ("Philippe", "03/05", "ephemeride.n
 insert into feast (name, day, source) values ("Felipe", "03/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Filippo", "03/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Jean", "03/05", "ephemeride.name");
-insert into feast (name, day, source) values ("Philippe", "03/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Philip", "03/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Philippa", "03/05", "ephemeride.name");
-insert into feast (name, day, source) values ("Philippe", "03/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Philippine", "03/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Philis", "03/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Phyllis", "03/05", "ephemeride.name");
@@ -2210,7 +2183,6 @@ insert into feast (name, day, source) values ("Paskal", "17/05", "ephemeride.nam
 insert into feast (name, day, source) values ("Pasquale", "17/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Pasquier", "17/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Pierre", "17/05", "ephemeride.name");
-insert into feast (name, day, source) values ("Pascal", "17/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Dioscora", "18/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Dioscore", "18/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Éric", "18/05", "ephemeride.name");
@@ -2288,12 +2260,10 @@ insert into feast (name, day, source) values ("Émile", "22/05", "ephemeride.name
 insert into feast (name, day, source) values ("Émilia", "22/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Émilian", "22/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Émiliane", "22/05", "ephemeride.name");
-insert into feast (name, day, source) values ("Émilien", "22/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Émilienne", "22/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Émilion", "22/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Foulques", "22/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Jean", "22/05", "ephemeride.name");
-insert into feast (name, day, source) values ("Émile", "22/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Jérôme", "22/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Émilien", "22/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Mila", "22/05", "ephemeride.name");
@@ -2304,7 +2274,6 @@ insert into feast (name, day, source) values ("Milon", "22/05", "ephemeride.name
 insert into feast (name, day, source) values ("Milos", "22/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Milou", "22/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Paul", "22/05", "ephemeride.name");
-insert into feast (name, day, source) values ("Émile", "22/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Quitère", "22/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Quiterie", "22/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Quitterie", "22/05", "ephemeride.name");
@@ -2358,7 +2327,6 @@ insert into feast (name, day, source) values ("Sohnie", "25/05", "ephemeride.nam
 insert into feast (name, day, source) values ("Sonia", "25/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Sonja", "25/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Sophia", "25/05", "ephemeride.name");
-insert into feast (name, day, source) values ("Sophie", "25/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Sophus", "25/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Zophia", "25/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Béranger", "26/05", "ephemeride.name");
@@ -2392,11 +2360,8 @@ insert into feast (name, day, source) values ("Fernande", "30/05", "ephemeride.n
 insert into feast (name, day, source) values ("Ferrand", "30/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Ferrante", "30/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Jeanne", "30/05", "ephemeride.name");
-insert into feast (name, day, source) values ("Jeanne", "30/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Antide", "30/05", "ephemeride.name");
-insert into feast (name, day, source) values ("Jeanne", "30/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Marie", "30/05", "ephemeride.name");
-insert into feast (name, day, source) values ("Jeanne", "30/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Régine", "30/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Jeannette", "30/05", "ephemeride.name");
 insert into feast (name, day, source) values ("Jeannice", "30/05", "ephemeride.name");
@@ -2775,7 +2740,6 @@ insert into feast (name, day, source) values ("Cerise", "29/06", "ephemeride.nam
 insert into feast (name, day, source) values ("Chouchane", "29/06", "ephemeride.name");
 insert into feast (name, day, source) values ("Jean", "29/06", "ephemeride.name");
 insert into feast (name, day, source) values ("Pierre", "29/06", "ephemeride.name");
-insert into feast (name, day, source) values ("Paul", "29/06", "ephemeride.name");
 insert into feast (name, day, source) values ("Pedro", "29/06", "ephemeride.name");
 insert into feast (name, day, source) values ("Peer", "29/06", "ephemeride.name");
 insert into feast (name, day, source) values ("Peeter", "29/06", "ephemeride.name");
@@ -2807,20 +2771,11 @@ insert into feast (name, day, source) values ("Pier", "29/06", "ephemeride.name"
 insert into feast (name, day, source) values ("Pierina", "29/06", "ephemeride.name");
 insert into feast (name, day, source) values ("Pierius", "29/06", "ephemeride.name");
 insert into feast (name, day, source) values ("Piero", "29/06", "ephemeride.name");
-insert into feast (name, day, source) values ("Pierre", "29/06", "ephemeride.name");
-insert into feast (name, day, source) values ("Pierre", "29/06", "ephemeride.name");
 insert into feast (name, day, source) values ("Baptiste", "29/06", "ephemeride.name");
-insert into feast (name, day, source) values ("Pierre", "29/06", "ephemeride.name");
 insert into feast (name, day, source) values ("Célestin", "29/06", "ephemeride.name");
-insert into feast (name, day, source) values ("Pierre", "29/06", "ephemeride.name");
 insert into feast (name, day, source) values ("François", "29/06", "ephemeride.name");
-insert into feast (name, day, source) values ("Pierre", "29/06", "ephemeride.name");
-insert into feast (name, day, source) values ("Jean", "29/06", "ephemeride.name");
-insert into feast (name, day, source) values ("Pierre", "29/06", "ephemeride.name");
 insert into feast (name, day, source) values ("Marie", "29/06", "ephemeride.name");
-insert into feast (name, day, source) values ("Pierre", "29/06", "ephemeride.name");
 insert into feast (name, day, source) values ("Paul", "29/06", "ephemeride.name");
-insert into feast (name, day, source) values ("Pierre", "29/06", "ephemeride.name");
 insert into feast (name, day, source) values ("Philibert", "29/06", "ephemeride.name");
 insert into feast (name, day, source) values ("Pierretta", "29/06", "ephemeride.name");
 insert into feast (name, day, source) values ("Pierrette", "29/06", "ephemeride.name");
@@ -2832,8 +2787,6 @@ insert into feast (name, day, source) values ("Pietro", "29/06", "ephemeride.nam
 insert into feast (name, day, source) values ("Piotr", "29/06", "ephemeride.name");
 insert into feast (name, day, source) values ("Rick", "29/06", "ephemeride.name");
 insert into feast (name, day, source) values ("Simon", "29/06", "ephemeride.name");
-insert into feast (name, day, source) values ("Simon", "29/06", "ephemeride.name");
-insert into feast (name, day, source) values ("Pierre", "29/06", "ephemeride.name");
 insert into feast (name, day, source) values ("Simonetta", "29/06", "ephemeride.name");
 insert into feast (name, day, source) values ("Simoun", "29/06", "ephemeride.name");
 insert into feast (name, day, source) values ("Erentrude", "30/06", "ephemeride.name");
@@ -3029,7 +2982,6 @@ insert into feast (name, day, source) values ("Bennet", "11/07", "ephemeride.nam
 insert into feast (name, day, source) values ("Benniged", "11/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Bennon", "11/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Benny", "11/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Benoît", "11/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Benoîte", "11/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Elga", "11/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Joseph", "11/07", "ephemeride.name");
@@ -3050,9 +3002,6 @@ insert into feast (name, day, source) values ("Galbert", "12/07", "ephemeride.na
 insert into feast (name, day, source) values ("Gualbert", "12/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Jason", "12/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Jean", "12/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Galbert", "12/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Jean", "12/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Gualbert", "12/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Livie", "12/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Olier", "12/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Oliver", "12/07", "ephemeride.name");
@@ -3071,7 +3020,6 @@ insert into feast (name, day, source) values ("Harry", "13/07", "ephemeride.name
 insert into feast (name, day, source) values ("Heinrich", "13/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Heinz", "13/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Hendrik", "13/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Henri", "13/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Henrielle", "13/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Henrietta", "13/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Henriette", "13/07", "ephemeride.name");
@@ -3087,7 +3035,6 @@ insert into feast (name, day, source) values ("Jody", "13/07", "ephemeride.name"
 insert into feast (name, day, source) values ("Joe", "13/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Joë", "13/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Joel", "13/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Joël", "13/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Joëlle", "13/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Joëlliane", "13/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Joëly", "13/07", "ephemeride.name");
@@ -3097,9 +3044,7 @@ insert into feast (name, day, source) values ("Maitin", "13/07", "ephemeride.nam
 insert into feast (name, day, source) values ("Mildred", "13/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Mildrède", "13/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Paul", "13/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Henri", "13/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Pierre", "13/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Henri", "13/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Riquet", "13/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Silas", "13/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Thurian", "13/07", "ephemeride.name");
@@ -3256,7 +3201,6 @@ insert into feast (name, day, source) values ("Maddly", "22/07", "ephemeride.nam
 insert into feast (name, day, source) values ("Maddy", "22/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Madé", "22/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Madée", "22/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Madeleine", "22/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Madeline", "22/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Madelon", "22/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Madelonnette", "22/07", "ephemeride.name");
@@ -3307,9 +3251,6 @@ insert into feast (name, day, source) values ("Cristine", "24/07", "ephemeride.n
 insert into feast (name, day, source) values ("Gleb", "24/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Marie", "24/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Angèle", "24/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Marie", "24/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Christine", "24/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Marie", "24/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Pilar", "24/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Melio", "24/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Même", "24/07", "ephemeride.name");
@@ -3328,9 +3269,7 @@ insert into feast (name, day, source) values ("Jacek", "25/07", "ephemeride.name
 insert into feast (name, day, source) values ("Jacky", "25/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Jacmé", "25/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Jacquemin", "25/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Jacques", "25/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Désiré", "25/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Jacques", "25/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Léonor", "25/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Jacquou", "25/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Jaime", "25/07", "ephemeride.name");
@@ -3340,7 +3279,6 @@ insert into feast (name, day, source) values ("James", "25/07", "ephemeride.name
 insert into feast (name, day, source) values ("Jaque", "25/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Jaume", "25/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Jean", "25/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Jacques", "25/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Jim", "25/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Jimi", "25/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Jimmy", "25/07", "ephemeride.name");
@@ -3373,20 +3311,12 @@ insert into feast (name, day, source) values ("Annabelle", "26/07", "ephemeride.
 insert into feast (name, day, source) values ("Annaïc", "26/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Annaïck", "26/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Annaïg", "26/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Anne", "26/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Aymone", "26/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Anne", "26/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Eugénie", "26/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Anne", "26/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Félix", "26/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Anne", "26/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Françoise", "26/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Anne", "26/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Josèphe", "26/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Anne", "26/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Line", "26/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Anne", "26/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Marie", "26/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Annet", "26/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Annetta", "26/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Annette", "26/07", "ephemeride.name");
@@ -3403,7 +3333,6 @@ insert into feast (name, day, source) values ("Anouta", "26/07", "ephemeride.nam
 insert into feast (name, day, source) values ("Arabelle", "26/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Bartholomea", "26/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Élisabeth", "26/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Anne", "26/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Éraste", "26/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Gioacchino", "26/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Hanna", "26/07", "ephemeride.name");
@@ -3416,7 +3345,6 @@ insert into feast (name, day, source) values ("Loéva", "26/07", "ephemeride.name
 insert into feast (name, day, source) values ("Loève", "26/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Marianne", "26/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Marie", "26/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Anne", "26/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Naïg", "26/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Naïk", "26/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Naïs", "26/07", "ephemeride.name");
@@ -3488,7 +3416,6 @@ insert into feast (name, day, source) values ("Simplicie", "29/07", "ephemeride.
 insert into feast (name, day, source) values ("Viatrix", "29/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Juliette", "30/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Abdon", "30/07", "ephemeride.name");
-insert into feast (name, day, source) values ("Chrysologue", "30/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Donatilla", "30/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Donatille", "30/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Giulietta", "30/07", "ephemeride.name");
@@ -3506,7 +3433,6 @@ insert into feast (name, day, source) values ("Alphonse", "01/08", "ephemeride.n
 insert into feast (name, day, source) values ("Almeda", "01/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Alonso", "01/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Alphonsa", "01/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Alphonse", "01/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Marie", "01/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Alphonsie", "01/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Alphonsine", "01/08", "ephemeride.name");
@@ -3520,7 +3446,6 @@ insert into feast (name, day, source) values ("Friard", "01/08", "ephemeride.nam
 insert into feast (name, day, source) values ("Jonat", "01/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Ourrias", "01/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Spire", "01/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Julien", "02/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Berthaire", "02/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Béthaire", "02/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Giuliano", "02/08", "ephemeride.name");
@@ -3616,7 +3541,6 @@ insert into feast (name, day, source) values ("Hugoline", "08/08", "ephemeride.n
 insert into feast (name, day, source) values ("Léobald", "08/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Liébaut", "08/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Marie", "08/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Dominique", "08/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Mini", "08/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Minig", "08/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Minna", "08/08", "ephemeride.name");
@@ -3645,7 +3569,6 @@ insert into feast (name, day, source) values ("Laur", "10/08", "ephemeride.name"
 insert into feast (name, day, source) values ("Laure", "10/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Laurence", "10/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Laurèns", "10/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Laurent", "10/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Maurice", "10/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Laurentia", "10/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Laurentin", "10/08", "ephemeride.name");
@@ -3752,13 +3675,9 @@ insert into feast (name, day, source) values ("Malika", "15/08", "ephemeride.nam
 insert into feast (name, day, source) values ("Manick", "15/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Mari", "15/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Maria", "15/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Marie", "15/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Catherine", "15/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Marie", "15/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Clémentine", "15/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Marie", "15/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Françoise", "15/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Marie", "15/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Jeanne", "15/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Mariel", "15/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Mariella", "15/08", "ephemeride.name");
@@ -3879,7 +3798,6 @@ insert into feast (name, day, source) values ("Lenny", "18/08", "ephemeride.name
 insert into feast (name, day, source) values ("Leno", "18/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Loana", "18/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Marie", "18/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Hélène", "18/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Marilène", "18/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Marla", "18/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Marlaine", "18/08", "ephemeride.name");
@@ -3911,11 +3829,8 @@ insert into feast (name, day, source) values ("Ézéquiel", "19/08", "ephemeride.n
 insert into feast (name, day, source) values ("Guerric", "19/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Gwennin", "19/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Ninenn", "19/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Bernard", "20/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Art", "20/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Barnard", "20/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Bernard", "20/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Marie", "20/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Bernarde", "20/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Bernardy", "20/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Bernart", "20/08", "ephemeride.name");
@@ -3931,11 +3846,9 @@ insert into feast (name, day, source) values ("Goberta", "20/08", "ephemeride.na
 insert into feast (name, day, source) values ("Goberte", "20/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Gobertie", "20/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Jean", "20/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Bernard", "20/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Louis", "20/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Bernard", "20/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Marie", "20/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Bernard", "20/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Mesme", "20/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Oswin", "20/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Oswy", "20/08", "ephemeride.name");
@@ -4014,16 +3927,12 @@ insert into feast (name, day, source) values ("Asceline", "23/08", "ephemeride.n
 insert into feast (name, day, source) values ("Exupérantia", "23/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Gildard", "23/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Hilarin", "23/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Marie", "23/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Rose", "23/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Osée", "23/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Romie", "23/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Romy", "23/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Rosa", "23/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Rosala", "23/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Rose", "23/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Marie", "23/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Rose", "23/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Virginie", "23/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Rosée", "23/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Rosella", "23/08", "ephemeride.name");
@@ -4083,15 +3992,11 @@ insert into feast (name, day, source) values ("Gino", "25/08", "ephemeride.name"
 insert into feast (name, day, source) values ("Gurloès", "25/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Hunégonde", "25/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Jean", "25/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Louis", "25/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Jeanne", "25/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Louise", "25/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Lewis", "25/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Loïc", "25/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Loïck", "25/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Loïg", "25/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Louis", "25/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Louis", "25/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Zéphirin", "25/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Louiset", "25/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Louison", "25/08", "ephemeride.name");
@@ -4146,7 +4051,6 @@ insert into feast (name, day, source) values ("Adelinde", "28/08", "ephemeride.n
 insert into feast (name, day, source) values ("Almira", "28/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Aoustin", "28/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Augustina", "28/08", "ephemeride.name");
-insert into feast (name, day, source) values ("Augustine", "28/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Austen", "28/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Austin", "28/08", "ephemeride.name");
 insert into feast (name, day, source) values ("Elmer", "28/08", "ephemeride.name");
@@ -4402,7 +4306,6 @@ insert into feast (name, day, source) values ("Aymé", "13/09", "ephemeride.name"
 insert into feast (name, day, source) values ("Bienaimé", "13/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Chrysostome", "13/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Jean", "13/09", "ephemeride.name");
-insert into feast (name, day, source) values ("Chrysostome", "13/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Lidoire", "13/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Ermemburge", "14/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Materne", "14/09", "ephemeride.name");
@@ -4598,7 +4501,6 @@ insert into feast (name, day, source) values ("Ermann", "25/09", "ephemeride.nam
 insert into feast (name, day, source) values ("Ermanno", "25/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Harmenszoon", "25/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Herman", "25/09", "ephemeride.name");
-insert into feast (name, day, source) values ("Hermann", "25/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Hermant", "25/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Heymann", "25/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Min", "25/09", "ephemeride.name");
@@ -4639,7 +4541,6 @@ insert into feast (name, day, source) values ("Maleine", "26/09", "ephemeride.na
 insert into feast (name, day, source) values ("Maléna", "26/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Maugan", "26/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Pierre", "26/09", "ephemeride.name");
-insert into feast (name, day, source) values ("Damien", "26/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Yona", "26/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Yonie", "26/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Youna", "26/09", "ephemeride.name");
@@ -4674,11 +4575,9 @@ insert into feast (name, day, source) values ("Ljuben", "28/09", "ephemeride.nam
 insert into feast (name, day, source) values ("Loona", "28/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Louba", "28/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Salonius", "28/09", "ephemeride.name");
-insert into feast (name, day, source) values ("Venceslas", "28/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Wenceslas", "28/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Wenzel", "28/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Yoba", "28/09", "ephemeride.name");
-insert into feast (name, day, source) values ("Michel", "29/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Adalric", "29/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Alar", "29/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Alara", "29/09", "ephemeride.name");
@@ -4698,7 +4597,6 @@ insert into feast (name, day, source) values ("Gabriel", "29/09", "ephemeride.na
 insert into feast (name, day, source) values ("Gabriele", "29/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Gaby", "29/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Jean", "29/09", "ephemeride.name");
-insert into feast (name, day, source) values ("Michel", "29/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Lô", "29/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Micaël", "29/09", "ephemeride.name");
 insert into feast (name, day, source) values ("Micha", "29/09", "ephemeride.name");
@@ -4783,12 +4681,10 @@ insert into feast (name, day, source) values ("Sulio", "01/10", "ephemeride.name
 insert into feast (name, day, source) values ("Uriell", "01/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Urielle", "01/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Léger", "02/10", "ephemeride.name");
-insert into feast (name, day, source) values ("Léger", "02/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Ligella", "02/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Ligelle", "02/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Ligier", "02/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Lycomède", "02/10", "ephemeride.name");
-insert into feast (name, day, source) values ("Gérard", "03/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Bianca", "03/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Blanche", "03/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Candice", "03/10", "ephemeride.name");
@@ -4843,17 +4739,11 @@ insert into feast (name, day, source) values ("Francis", "04/10", "ephemeride.na
 insert into feast (name, day, source) values ("Francisco", "04/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Franck", "04/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Franco", "04/10", "ephemeride.name");
-insert into feast (name, day, source) values ("François", "04/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Antoine", "04/10", "ephemeride.name");
-insert into feast (name, day, source) values ("François", "04/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Isidore", "04/10", "ephemeride.name");
-insert into feast (name, day, source) values ("François", "04/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Joseph", "04/10", "ephemeride.name");
-insert into feast (name, day, source) values ("François", "04/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Louis", "04/10", "ephemeride.name");
-insert into feast (name, day, source) values ("François", "04/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Marie", "04/10", "ephemeride.name");
-insert into feast (name, day, source) values ("François", "04/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Régis", "04/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Francon", "04/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Francoun", "04/10", "ephemeride.name");
@@ -4924,8 +4814,6 @@ insert into feast (name, day, source) values ("Léopardin", "07/10", "ephemeride.
 insert into feast (name, day, source) values ("Osith", "07/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Palais", "07/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Paul", "07/10", "ephemeride.name");
-insert into feast (name, day, source) values ("Serge", "07/10", "ephemeride.name");
-insert into feast (name, day, source) values ("Serge", "07/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Sergia", "07/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Sergiana", "07/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Sergiane", "07/10", "ephemeride.name");
@@ -4934,7 +4822,6 @@ insert into feast (name, day, source) values ("Sergios", "07/10", "ephemeride.na
 insert into feast (name, day, source) values ("Sergueï", "07/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Serlana", "07/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Serlane", "07/10", "ephemeride.name");
-insert into feast (name, day, source) values ("Pélagie", "08/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Aethère", "08/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Bertilie", "08/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Calétric", "08/10", "ephemeride.name");
@@ -5052,8 +4939,6 @@ insert into feast (name, day, source) values ("Aurélie", "15/10", "ephemeride.na
 insert into feast (name, day, source) values ("Euthyme", "15/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Louise", "15/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Thérèse", "15/10", "ephemeride.name");
-insert into feast (name, day, source) values ("Marie", "15/10", "ephemeride.name");
-insert into feast (name, day, source) values ("Thérèse", "15/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Rafqa", "15/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Rébecca", "15/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Rivka", "15/10", "ephemeride.name");
@@ -5063,8 +4948,6 @@ insert into feast (name, day, source) values ("Térèse", "15/10", "ephemeride.nam
 insert into feast (name, day, source) values ("Teresina", "15/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Tereso", "15/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Thérésa", "15/10", "ephemeride.name");
-insert into feast (name, day, source) values ("Thérèse", "15/10", "ephemeride.name");
-insert into feast (name, day, source) values ("Thérèse", "15/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Marie", "15/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Thérésina", "15/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Thérèsitta", "15/10", "ephemeride.name");
@@ -5111,7 +4994,6 @@ insert into feast (name, day, source) values ("Gwenna", "18/10", "ephemeride.nam
 insert into feast (name, day, source) values ("Gwennaïg", "18/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Gwennan", "18/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Jean", "18/10", "ephemeride.name");
-insert into feast (name, day, source) values ("Luc", "18/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Luca", "18/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Lucain", "18/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Lucas", "18/10", "ephemeride.name");
@@ -5124,7 +5006,6 @@ insert into feast (name, day, source) values ("Mabel", "18/10", "ephemeride.name
 insert into feast (name, day, source) values ("Mabelle", "18/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Mabile", "18/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Martin", "18/10", "ephemeride.name");
-insert into feast (name, day, source) values ("Luc", "18/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Mavel", "18/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Maveline", "18/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Mavelle", "18/10", "ephemeride.name");
@@ -5141,13 +5022,11 @@ insert into feast (name, day, source) values ("Laurana", "19/10", "ephemeride.na
 insert into feast (name, day, source) values ("Laureen", "19/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Laurelle", "19/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Pierre", "19/10", "ephemeride.name");
-insert into feast (name, day, source) values ("René", "19/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Ptolémée", "19/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Reinie", "19/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Renat", "19/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Renata", "19/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Renato", "19/10", "ephemeride.name");
-insert into feast (name, day, source) values ("Renée", "19/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Renée", "19/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Marie", "19/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Vérain", "19/10", "ephemeride.name");
@@ -5226,7 +5105,6 @@ insert into feast (name, day, source) values ("Pèlerin", "22/10", "ephemeride.na
 insert into feast (name, day, source) values ("Pellegrin", "22/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Ruaud", "22/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Rugwald", "22/10", "ephemeride.name");
-insert into feast (name, day, source) values ("Salomé", "22/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Sévère", "22/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Séverilla", "22/10", "ephemeride.name");
 insert into feast (name, day, source) values ("Séverille", "22/10", "ephemeride.name");
@@ -5395,7 +5273,6 @@ insert into feast (name, day, source) values ("Allaire", "03/11", "ephemeride.na
 insert into feast (name, day, source) values ("Alpais", "03/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Alpaïs", "03/11", "ephemeride.name");
 insert into feast (name, day, source) values ("André", "03/11", "ephemeride.name");
-insert into feast (name, day, source) values ("Hubert", "03/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Bertie", "03/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Bertin", "03/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Bomer", "03/11", "ephemeride.name");
@@ -5438,17 +5315,13 @@ insert into feast (name, day, source) values ("Aimery", "04/11", "ephemeride.nam
 insert into feast (name, day, source) values ("Amance", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Amans", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("André", "04/11", "ephemeride.name");
-insert into feast (name, day, source) values ("Charles", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Arlette", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Aymeri", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Aymeric", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Carel", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Carl", "04/11", "ephemeride.name");
-insert into feast (name, day, source) values ("Carl", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Maria", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Carlo", "04/11", "ephemeride.name");
-insert into feast (name, day, source) values ("Carlo", "04/11", "ephemeride.name");
-insert into feast (name, day, source) values ("Maria", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Carlos", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Carol", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Carole", "04/11", "ephemeride.name");
@@ -5456,12 +5329,8 @@ insert into feast (name, day, source) values ("Caroline", "04/11", "ephemeride.n
 insert into feast (name, day, source) values ("Caroll", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Cary", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Charbel", "04/11", "ephemeride.name");
-insert into feast (name, day, source) values ("Charles", "04/11", "ephemeride.name");
-insert into feast (name, day, source) values ("Charles", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("François", "04/11", "ephemeride.name");
-insert into feast (name, day, source) values ("Charles", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Marie", "04/11", "ephemeride.name");
-insert into feast (name, day, source) values ("Charles", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Régis", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Charlet", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Charlette", "04/11", "ephemeride.name");
@@ -5481,7 +5350,6 @@ insert into feast (name, day, source) values ("Fleuret", "04/11", "ephemeride.na
 insert into feast (name, day, source) values ("Flour", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Girart", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Jean", "04/11", "ephemeride.name");
-insert into feast (name, day, source) values ("Charles", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Karel", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Karelle", "04/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Karl", "04/11", "ephemeride.name");
@@ -5579,7 +5447,6 @@ insert into feast (name, day, source) values ("Adéodat", "08/11", "ephemeride.na
 insert into feast (name, day, source) values ("Austremoine", "08/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Castor", "08/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Geoffroi", "08/11", "ephemeride.name");
-insert into feast (name, day, source) values ("Geoffroy", "08/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Gioffredo", "08/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Jaffrez", "08/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Jaufret", "08/11", "ephemeride.name");
@@ -5591,7 +5458,6 @@ insert into feast (name, day, source) values ("Nicostrate", "08/11", "ephemeride
 insert into feast (name, day, source) values ("Willa", "08/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Willard", "08/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Willehad", "08/11", "ephemeride.name");
-insert into feast (name, day, source) values ("Théodore", "09/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Dorian", "09/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Doron", "09/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Étienne", "09/11", "ephemeride.name");
@@ -5623,13 +5489,11 @@ insert into feast (name, day, source) values ("Baudolin", "10/11", "ephemeride.n
 insert into feast (name, day, source) values ("Ide", "10/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Ionel", "10/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Léo", "10/11", "ephemeride.name");
-insert into feast (name, day, source) values ("Léon", "10/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Ignace", "10/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Léone", "10/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Léonella", "10/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Léonidas", "10/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Léonide", "10/11", "ephemeride.name");
-insert into feast (name, day, source) values ("Léonie", "10/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Léonien", "10/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Léonille", "10/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Léontine", "10/11", "ephemeride.name");
@@ -5821,10 +5685,7 @@ insert into feast (name, day, source) values ("Margerie", "16/11", "ephemeride.n
 insert into feast (name, day, source) values ("Margherita", "16/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Margie", "16/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Margot", "16/11", "ephemeride.name");
-insert into feast (name, day, source) values ("Marguerite", "16/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Marie", "16/11", "ephemeride.name");
-insert into feast (name, day, source) values ("Marie", "16/11", "ephemeride.name");
-insert into feast (name, day, source) values ("Marguerite", "16/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Marjorie", "16/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Meg", "16/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Meigge", "16/11", "ephemeride.name");
@@ -5881,7 +5742,6 @@ insert into feast (name, day, source) values ("Lizzy", "17/11", "ephemeride.name
 insert into feast (name, day, source) values ("Lysa", "17/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Namase", "17/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Paule", "17/11", "ephemeride.name");
-insert into feast (name, day, source) values ("Élisabeth", "17/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Sissi", "17/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Victoria", "17/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Vittoria", "17/11", "ephemeride.name");
@@ -6009,7 +5869,6 @@ insert into feast (name, day, source) values ("Shirley", "22/11", "ephemeride.na
 insert into feast (name, day, source) values ("Tigridia", "22/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Clément", "23/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Clemens", "23/11", "ephemeride.name");
-insert into feast (name, day, source) values ("Clément", "23/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Marie", "23/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Clémentiane", "23/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Clémentin", "23/11", "ephemeride.name");
@@ -6057,7 +5916,6 @@ insert into feast (name, day, source) values ("Cathel", "25/11", "ephemeride.nam
 insert into feast (name, day, source) values ("Cathelin", "25/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Catheline", "25/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Cathelle", "25/11", "ephemeride.name");
-insert into feast (name, day, source) values ("Catherine", "25/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Marie", "25/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Cathy", "25/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Catia", "25/11", "ephemeride.name");
@@ -6153,11 +6011,9 @@ insert into feast (name, day, source) values ("Andrès", "30/11", "ephemeride.nam
 insert into feast (name, day, source) values ("Andréu", "30/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Andrev", "30/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Jean", "30/11", "ephemeride.name");
-insert into feast (name, day, source) values ("André", "30/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Joscio", "30/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Pabu", "30/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Pierre", "30/11", "ephemeride.name");
-insert into feast (name, day, source) values ("André", "30/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Trojan", "30/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Tual", "30/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Tudual", "30/11", "ephemeride.name");
@@ -6185,7 +6041,6 @@ insert into feast (name, day, source) values ("Naoum", "01/12", "ephemeride.name
 insert into feast (name, day, source) values ("Naum", "01/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Noam", "01/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Papinien", "01/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Viviane", "02/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Bibiane", "02/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Cléophas", "02/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Clopas", "02/12", "ephemeride.name");
@@ -6202,7 +6057,6 @@ insert into feast (name, day, source) values ("Viviane", "02/12", "ephemeride.na
 insert into feast (name, day, source) values ("Winca", "02/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Winka", "02/12", "ephemeride.name");
 insert into feast (name, day, source) values ("François", "03/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Xavier", "03/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Galgan", "03/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Galgano", "03/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Sophonie", "03/12", "ephemeride.name");
@@ -6220,7 +6074,6 @@ insert into feast (name, day, source) values ("Cyrane", "04/12", "ephemeride.nam
 insert into feast (name, day, source) values ("Cyriane", "04/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Damascène", "04/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Jean", "04/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Damascène", "04/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Osmond", "04/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Osmund", "04/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Siran", "04/12", "ephemeride.name");
@@ -6239,7 +6092,6 @@ insert into feast (name, day, source) values ("Géraldy", "05/12", "ephemeride.na
 insert into feast (name, day, source) values ("Gérold", "05/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Gerwald", "05/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Niels", "05/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Nicolas", "06/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Aselle", "06/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Azeline", "06/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Claus", "06/12", "ephemeride.name");
@@ -6282,7 +6134,6 @@ insert into feast (name, day, source) values ("Ambroisine", "07/12", "ephemeride
 insert into feast (name, day, source) values ("Eutychien", "07/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Marie", "07/12", "ephemeride.name");
 insert into feast (name, day, source) values ("José", "07/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Marie", "07/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Josée", "07/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Polycrate", "07/12", "ephemeride.name");
 insert into feast (name, day, source) values ("ImmaculéConception", "08/12", "ephemeride.name");
@@ -6292,7 +6143,6 @@ insert into feast (name, day, source) values ("Concetta", "08/12", "ephemeride.n
 insert into feast (name, day, source) values ("Conchita", "08/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Édèse", "08/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Hildeman", "08/12", "ephemeride.name");
-insert into feast (name, day, source) values ("P", "09/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Romaric", "10/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Couleth", "10/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Coulitz", "10/12", "ephemeride.name");
@@ -6404,7 +6254,6 @@ insert into feast (name, day, source) values ("Alaïdo", "16/12", "ephemeride.nam
 insert into feast (name, day, source) values ("Alais", "16/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Alaïs", "16/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Aleyde", "16/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Alice", "16/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Aliocha", "16/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Allais", "16/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Ananias", "16/12", "ephemeride.name");
@@ -6499,7 +6348,6 @@ insert into feast (name, day, source) values ("Xavière", "22/12", "ephemeride.na
 insert into feast (name, day, source) values ("Gratien", "22/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Xaveria", "22/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Xaverine", "22/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Xavière", "22/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Armand", "23/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Agathopos", "23/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Anatolia", "23/12", "ephemeride.name");
@@ -6547,7 +6395,6 @@ insert into feast (name, day, source) values ("Nedelek", "25/12", "ephemeride.na
 insert into feast (name, day, source) values ("Nélie", "25/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Nello", "25/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Noal", "25/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Noël", "25/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Noelia", "25/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Noëlie", "25/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Noëlla", "25/12", "ephemeride.name");
@@ -6629,33 +6476,19 @@ insert into feast (name, day, source) values ("Janot", "27/12", "ephemeride.name
 insert into feast (name, day, source) values ("Janou", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Jans", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Jany", "27/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Jean", "27/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Jean", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Berchmans", "27/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Jean", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Cassien", "27/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Jean", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Christophe", "27/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Jean", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("De", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Dieu", "27/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Jean", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Eudes", "27/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Jean", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Évangéliste", "27/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Jean", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Gabriel", "27/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Jean", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Léonard", "27/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Jean", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Loup", "27/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Jean", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Martin", "27/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Jean", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Paul", "27/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Jean", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Théophane", "27/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Jean", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Vladimir", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Jeannequin", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Jeannou", "27/12", "ephemeride.name");
@@ -6674,7 +6507,6 @@ insert into feast (name, day, source) values ("John", "27/12", "ephemeride.name"
 insert into feast (name, day, source) values ("Johnny", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Jonathan", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Jovan", "27/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Juan", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Juan", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Diego", "27/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Nans", "27/12", "ephemeride.name");

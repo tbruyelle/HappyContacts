@@ -163,7 +163,10 @@ public class DayMatcherService
             String name = cursor.getString( cursor.getColumnIndexOrThrow( HappyContactsDb.Feast.NAME ) );
             if ( name == null )
             {
-                Log.e( "skipping mDb.fetchNamesForDay(" + day + ") returned name=" + name );
+                if ( Log.DEBUG )
+                {
+                    Log.v( "skipping mDb.fetchNamesForDay(" + day + ") returned name=" + name );
+                }
                 continue;
             }
             ContactFeast contactFeast = new ContactFeast( name, null );

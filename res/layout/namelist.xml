@@ -4,7 +4,8 @@
 	android:layout_height="fill_parent">
 
 	<LinearLayout android:layout_height="wrap_content"
-		android:layout_width="fill_parent" android:orientation="horizontal">
+		android:layout_width="fill_parent" android:orientation="horizontal"
+    android:background="@android:color/darker_gray" android:paddingTop="3dp">
 
 		<Button android:id="@+id/dateback" android:text="@string/dateback"
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
