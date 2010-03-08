@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.kamosoft.happycontacts" android:versionCode="2"
   android:versionName="1.1">
-  <application android:debuggable="false" android:icon="@drawable/icon"
-    android:label="@string/app_name">
+  <application android:icon="@drawable/icon"
+    android:label="@string/app_name" android:debuggable="true">
     <activity android:name=".HappyContactsPreferences"
       android:label="@string/app_name">
       <intent-filter>
@@ -38,7 +38,10 @@
         <data android:scheme="package" android:path="com.kamosoft.happycontacts"/>
       </intent-filter>
     </receiver>
-  </application>
+  <activity android:name="WhiteListActivity"></activity>
+  <activity android:name="PickContactsListActivity"></activity>
+  <activity android:name="PickNameDayListActivity"></activity>
+</application>
   <uses-sdk android:minSdkVersion="3" android:targetSdkVersion="4" />
 
   <uses-permission android:name="android.permission.READ_CONTACTS" />

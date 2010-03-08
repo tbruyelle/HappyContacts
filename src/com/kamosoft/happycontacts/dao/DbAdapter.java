@@ -8,9 +8,11 @@ import java.io.IOException;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.Contacts.People;
 
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
@@ -181,6 +183,33 @@ public class DbAdapter
      * @param day format dd/MM
      * @return
      */
+    public Cursor fetchAllNameDay()
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start fetchAllNameDay()" );
+        }
+        /* use order by name */
+        Cursor cursor = mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] {
+            HappyContactsDb.Feast.ID,
+            HappyContactsDb.Feast.NAME }, null, null, null, null, HappyContactsDb.Feast.NAME );
+
+        if ( cursor != null )
+        {
+            cursor = avoidDuplicate( cursor, HappyContactsDb.Feast.NAME );
+        }
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: end fetchAllNameDay()" );
+        }
+        return cursor;
+    }
+
+    /**
+     * Return the names for a given day
+     * @param day format dd/MM
+     * @return
+     */
     public Cursor fetchNamesForDay( String day )
     {
         if ( Log.DEBUG )
@@ -188,10 +217,10 @@ public class DbAdapter
             Log.v( "DbAdapter: start fetchNameForDay()" );
         }
         /* use order by name */
-        Cursor cursor =
-            mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID,
-                HappyContactsDb.Feast.NAME }, HappyContactsDb.Feast.DAY + "='" + day + "'", null, null, null,
-                       HappyContactsDb.Feast.NAME );
+        Cursor cursor = mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] {
+            HappyContactsDb.Feast.ID,
+            HappyContactsDb.Feast.NAME }, HappyContactsDb.Feast.DAY + "='" + day + "'", null, null, null,
+                                   HappyContactsDb.Feast.NAME );
 
         if ( cursor != null )
         {
@@ -219,10 +248,11 @@ public class DbAdapter
          * order by date 
          * tips use substr() to have month then day
          */
-        Cursor cursor =
-            mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID,
-                HappyContactsDb.Feast.DAY }, HappyContactsDb.Feast.NAME + " like '" + name + "'", null, null, null,
-                       "substr(" + HappyContactsDb.Feast.DAY + ",4,2)||substr(" + HappyContactsDb.Feast.DAY + ",1,2)" );
+        Cursor cursor = mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] {
+            HappyContactsDb.Feast.ID,
+            HappyContactsDb.Feast.DAY }, HappyContactsDb.Feast.NAME + " like '" + name + "'", null, null, null,
+                                   "substr(" + HappyContactsDb.Feast.DAY + ",4,2)||substr(" + HappyContactsDb.Feast.DAY
+                                       + ",1,2)" );
         if ( cursor != null )
         {
             cursor = avoidDuplicate( cursor, HappyContactsDb.Feast.DAY );
@@ -233,6 +263,8 @@ public class DbAdapter
         }
         return cursor;
     }
+
+    
 
     /**
      * use a matrixCursor to avoid duplicate names (due to multiple source for the database)
@@ -306,6 +338,35 @@ public class DbAdapter
                           null, null );
     }
 
+    public boolean insertWhiteList( String contactName )
+    {
+        ContentValues initialValues = new ContentValues();
+        initialValues.put( HappyContactsDb.BlackList.CONTACT_NAME, contactName );
+        return mDb.insert( HappyContactsDb.WhiteList.TABLE_NAME, null, initialValues ) > 0;
+    }
+
+    public boolean deleteWhiteList( long id )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: call deleteWhiteList()" );
+        }
+        return mDb.delete( HappyContactsDb.WhiteList.TABLE_NAME, HappyContactsDb.WhiteList.ID + "=" + id, null ) > 0;
+    }
+
+    /**
+     * @return all lines
+     */
+    public Cursor fetchAllWhiteList()
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: call fetchAllWhiteList()" );
+        }
+        return mDb.query( HappyContactsDb.WhiteList.TABLE_NAME, HappyContactsDb.WhiteList.COLUMNS, null, null, null,
+                          null, null );
+    }
+
     /**
      * @return only the lines with lastWishDate=null, meaning the contact is black listed all the time.
      */
@@ -326,9 +387,9 @@ public class DbAdapter
         {
             Log.v( "DbAdapter: start fetchBlackList()" );
         }
-        Cursor mCursor =
-            mDb.query( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS,
-                       HappyContactsDb.BlackList.CONTACT_ID + "=" + contactId, null, null, null, null, null );
+        Cursor mCursor = mDb.query( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS,
+                                    HappyContactsDb.BlackList.CONTACT_ID + "=" + contactId, null, null, null, null,
+                                    null );
         if ( mCursor != null )
         {
             mCursor.moveToFirst();

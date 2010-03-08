@@ -77,4 +77,12 @@
 <string name="sendmail">Send mail with...</string>
 <string name="dateback">&lt;</string>
 <string name="datenext">&gt;</string>
+<string name="add">Add</string>
+<string name="whitelist_label">Enter a name to add it in the white list :</string>
+<string name="pref_whitelist">White list</string>
+<string name="pref_whitelist_summary">Names always whished (usefull if you use nickname in your contacts)</string>
+<string name="empty_name">Please enter a name</string>
+<string name="whitelist_added">%s has been added to white list</string>
+<string name="pick_contact">Pick a contact with a nickname :</string>
+<string name="pick_nameday">Pick a name day for %s</string>
 </resources>

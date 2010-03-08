@@ -103,8 +103,8 @@ public class HappyContactsPreferences
         switch ( id )
         {
             case TIME_DIALOG_ID:
-                dialog =
-                    new TimePickerDialog( HappyContactsPreferences.this, this, 0, 0, DateFormat.is24HourFormat( this ) );
+                dialog = new TimePickerDialog( HappyContactsPreferences.this, this, 0, 0, DateFormat
+                    .is24HourFormat( this ) );
                 break;
             default:
                 dialog = null;
@@ -125,7 +125,8 @@ public class HappyContactsPreferences
         editor.putInt( PREF_ALARM_HOUR, mAlarmHour );
         editor.putInt( PREF_ALARM_MINUTE, mAlarmMinute );
         editor.commit();
-        mAlarmTimePref.setSummary( getString( R.string.pref_time_summary, AndroidUtils.pad( mAlarmHour, mAlarmMinute ) ) );
+        mAlarmTimePref
+            .setSummary( getString( R.string.pref_time_summary, AndroidUtils.pad( mAlarmHour, mAlarmMinute ) ) );
 
         /* start the alarm */
         mAlarmStatePref.setSummary( R.string.pref_alarm_on );
@@ -222,7 +223,8 @@ public class HappyContactsPreferences
         Preference alarmTimePref = new Preference( this );
         mAlarmTimePref = alarmTimePref;
         alarmTimePref.setTitle( R.string.pref_time );
-        alarmTimePref.setSummary( getString( R.string.pref_time_summary, AndroidUtils.pad( mAlarmHour, mAlarmMinute ) ) );
+        alarmTimePref
+            .setSummary( getString( R.string.pref_time_summary, AndroidUtils.pad( mAlarmHour, mAlarmMinute ) ) );
         alarmTimePref.setOnPreferenceClickListener( new Preference.OnPreferenceClickListener()
         {
             public boolean onPreferenceClick( Preference preference )
@@ -262,6 +264,13 @@ public class HappyContactsPreferences
         intent.putExtra( DATE_INTENT_KEY, dateFormat.format( new Date() ) );
         nameListPref.setIntent( intent );
         databasePrefCat.addPreference( nameListPref );
+
+        /* white list */
+        Preference whiteListPref = new Preference( this );
+        whiteListPref.setTitle( R.string.pref_whitelist );
+        whiteListPref.setSummary( R.string.pref_whitelist_summary );
+        whiteListPref.setIntent( new Intent( this, WhiteListActivity.class ) );
+        databasePrefCat.addPreference( whiteListPref );
 
         // blacklist
         Preference blackListPref = new Preference( this );

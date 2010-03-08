@@ -41,6 +41,10 @@ public interface Constants
 
     public static final String DATE_INTENT_KEY = "date";
 
+    public static final String CONTACTNAME_INTENT_KEY = "contactName";
+
+    public static final String CONTACTID_INTENT_KEY = "contactId";
+
     /* contact methods in the string array 'contactmethods_items' */
     public static final int CALL_ITEM_INDEX = 0;
 

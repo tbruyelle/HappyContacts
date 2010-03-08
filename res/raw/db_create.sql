@@ -9,6 +9,11 @@ create table feast (
   day char(5) not null,
   name varchar(64) not null,
   source varchar(64) not null);
+  
+ create table whitelist(
+ _id integer primary key autoincrement,
+ contactName text not null);
+ 
 
 create index idx_feast_day on feast (day);
 create index idx_feast_name on feast (name);

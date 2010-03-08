@@ -231,6 +231,25 @@ public class DayMatcherService
             }
             cursor.close();
         }
+        /* scan the white list */
+        cursor = mDb.fetchAllWhiteList();
+        while ( cursor.moveToNext() )
+        {
+            String contactName = cursor.getString( cursor
+                .getColumnIndexOrThrow( HappyContactsDb.WhiteList.CONTACT_NAME ) );
+            String nameUpper = AndroidUtils.replaceAccents( contactName ).toUpperCase();
+            if ( names.containsKey( nameUpper ) )
+            {
+                /* find one from white list! */
+                if ( Log.DEBUG )
+                {
+                    Log.v( "DayMatcher: day contact feast found for white listed \"" + contactName + "\"" );
+                }
+                /* id = -1 for contact from white list */
+                contactFeastToday.addContact( Long.valueOf( -1 ), new ContactFeast( contactName, null ) );
+            }
+        }
+        cursor.close();
         if ( Log.DEBUG )
         {
             if ( contactFeastToday.getContactList().isEmpty() )
