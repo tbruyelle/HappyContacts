@@ -172,6 +172,7 @@ public final class R {
         public static final int toast_mail_template_saved=0x7f06003d;
         public static final int toast_no_contact=0x7f060023;
         public static final int toast_sms_template_saved=0x7f06003e;
+        public static final int type_to_filter=0x7f060055;
         public static final int updating_data=0x7f06002a;
         public static final int version=0x7f060000;
         public static final int whattodo=0x7f06000a;

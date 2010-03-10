@@ -7,9 +7,11 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -26,7 +28,7 @@ import com.kamosoft.happycontacts.dao.HappyContactsDb;
  */
 public class PickNameDayListActivity
     extends ListActivity
-    implements Constants, OnItemClickListener
+    implements Constants, OnItemClickListener, TextWatcher
 {
     private DbAdapter mDb;
 
@@ -36,7 +38,7 @@ public class PickNameDayListActivity
 
     private Cursor mCursor;
 
-    private AutoCompleteTextView mAutoCompleteTextView;
+    private EditText mEditText;
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -54,14 +56,13 @@ public class PickNameDayListActivity
         TextView pickNameDayTextView = (TextView) findViewById( R.id.pick_nameday );
         pickNameDayTextView.setText( getString( R.string.pick_nameday, mContactName ) );
 
-        mAutoCompleteTextView = (AutoCompleteTextView) findViewById( R.id.autocomplete );
-        mAutoCompleteTextView.setThreshold( 1 );
-        mAutoCompleteTextView.setOnItemClickListener( this );
+        mEditText = (EditText) findViewById( R.id.autocomplete );
+        mEditText.addTextChangedListener( this );
 
         mDb = new DbAdapter( this );
         mDb.open( false );
 
-        fillList();
+        fillList( null );
         if ( Log.DEBUG )
         {
             Log.v( "PickNameDayListActivity: start onCreate" );
@@ -86,18 +87,22 @@ public class PickNameDayListActivity
         }
     }
 
-    private void fillList()
+    private void fillList( String text )
     {
-        mCursor = mDb.fetchAllNameDay();
+        if ( text == null || text.length() == 0 )
+        {
+            mCursor = mDb.fetchAllNameDay();
+        }
+        else
+        {
+            mCursor = mDb.fetchNameDayLike( text );
+        }
 
         String[] from = { HappyContactsDb.Feast.NAME };
         int[] to = { android.R.id.text1 };
         SimpleCursorAdapter simpleAdapter =
             new SimpleCursorAdapter( this, android.R.layout.simple_list_item_1, mCursor, from, to );
         setListAdapter( simpleAdapter );
-        SimpleCursorAdapter dropDowCursorAdapter =
-            new SimpleCursorAdapter( this, android.R.layout.simple_dropdown_item_1line, mCursor, from, to );
-        mAutoCompleteTextView.setAdapter( dropDowCursorAdapter );
     }
 
     @Override
@@ -125,5 +130,33 @@ public class PickNameDayListActivity
     public void onItemClick( AdapterView<?> adapterView, View view, int position, long id )
     {
         onNameDayClick( position );
+    }
+
+    /**
+     * @see android.text.TextWatcher#afterTextChanged(android.text.Editable)
+     */
+    @Override
+    public void afterTextChanged( Editable arg0 )
+    {
+        //nothing
+    }
+
+    /**
+     * @see android.text.TextWatcher#beforeTextChanged(java.lang.CharSequence, int, int, int)
+     */
+    @Override
+    public void beforeTextChanged( CharSequence arg0, int arg1, int arg2, int arg3 )
+    {
+        //nothing
+    }
+
+    /**
+     * @see android.text.TextWatcher#onTextChanged(java.lang.CharSequence, int, int, int)
+     */
+    @Override
+    public void onTextChanged( CharSequence arg0, int arg1, int arg2, int arg3 )
+    {
+        String text = mEditText.getText().toString();
+        fillList( text );
     }
 }

@@ -89,4 +89,5 @@
 <string name="confirm_delete_blacklist">Are you sure you want to delete %s from blacklist ?</string>
 <string name="deleteall">Delete all</string>
 <string name="confirm_deleteall">Do you really want to delete all ?</string>
+<string name="type_to_filter">Type to filter</string>
 </resources>

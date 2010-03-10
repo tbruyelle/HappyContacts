@@ -194,11 +194,34 @@ public class DbAdapter
 
         if ( cursor != null )
         {
-            cursor = avoidDuplicate( cursor, HappyContactsDb.Feast.NAME );
+            cursor = avoidDuplicate( cursor, HappyContactsDb.Feast.ID, HappyContactsDb.Feast.NAME );
         }
         if ( Log.DEBUG )
         {
             Log.v( "DbAdapter: end fetchAllNameDay()" );
+        }
+        return cursor;
+    }
+
+    public Cursor fetchNameDayLike( String constraint )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start fetchNameDayLike()" );
+        }
+        /* use order by name */
+        Cursor cursor =
+            mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID,
+                HappyContactsDb.Feast.NAME }, HappyContactsDb.Feast.NAME + " like \"" + constraint + "%\"", null, null,
+                       null, HappyContactsDb.Feast.NAME );
+
+        if ( cursor != null )
+        {
+            cursor = avoidDuplicate( cursor, HappyContactsDb.Feast.ID, HappyContactsDb.Feast.NAME );
+        }
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: end fetchNameDayLike()" );
         }
         return cursor;
     }
@@ -222,7 +245,7 @@ public class DbAdapter
 
         if ( cursor != null )
         {
-            cursor = avoidDuplicate( cursor, HappyContactsDb.Feast.NAME );
+            cursor = avoidDuplicate( cursor, HappyContactsDb.Feast.ID, HappyContactsDb.Feast.NAME );
         }
         if ( Log.DEBUG )
         {
@@ -252,7 +275,7 @@ public class DbAdapter
                        "substr(" + HappyContactsDb.Feast.DAY + ",4,2)||substr(" + HappyContactsDb.Feast.DAY + ",1,2)" );
         if ( cursor != null )
         {
-            cursor = avoidDuplicate( cursor, HappyContactsDb.Feast.DAY );
+            cursor = avoidDuplicate( cursor, HappyContactsDb.Feast.ID, HappyContactsDb.Feast.DAY );
         }
         if ( Log.DEBUG )
         {
@@ -266,30 +289,28 @@ public class DbAdapter
      * @param cursor
      * @return
      */
-    private Cursor avoidDuplicate( Cursor cursor, String columnName )
+    private Cursor avoidDuplicate( Cursor cursor, String idColumnName, String columnName )
     {
-        /* use only one source for name day, so no duplicate */
         return cursor;
-
-        //        ArrayList<String> columns = new ArrayList<String>();
-        //        MatrixCursor matrixCursor = new MatrixCursor( new String[] { HappyContactsDb.Feast.ID, columnName } );
-        //        int columnIndex = cursor.getColumnIndex( columnName );
-        //        int idColumnIndex = cursor.getColumnIndex( HappyContactsDb.Feast.ID );
-        //        cursor.moveToFirst();
-        //        do
-        //        {
-        //            String columnValue = cursor.getString( columnIndex );
-        //            if ( columns.contains( columnValue ) )
-        //            {
-        //                continue;
-        //            }
-        //            Long id = cursor.getLong( idColumnIndex );
-        //            matrixCursor.newRow().add( id ).add( columnValue );
-        //            columns.add( columnValue );
-        //        }
-        //        while ( cursor.moveToNext() );
-        //        cursor.close();
-        //        return matrixCursor;
+//        ArrayList<String> columns = new ArrayList<String>();
+//        MatrixCursor matrixCursor = new MatrixCursor( new String[] { idColumnName, columnName } );
+//        int columnIndex = cursor.getColumnIndex( columnName );
+//        int idColumnIndex = cursor.getColumnIndex( idColumnName );
+//        cursor.moveToFirst();
+//        do
+//        {
+//            String columnValue = cursor.getString( columnIndex );
+//            if ( columns.contains( columnValue ) )
+//            {
+//                continue;
+//            }
+//            Long id = cursor.getLong( idColumnIndex );
+//            matrixCursor.newRow().add( id ).add( columnValue );
+//            columns.add( columnValue );
+//        }
+//        while ( cursor.moveToNext() );
+//        cursor.close();
+//        return matrixCursor;
     }
 
     /**

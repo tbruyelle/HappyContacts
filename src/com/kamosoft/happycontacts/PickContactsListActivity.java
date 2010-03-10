@@ -8,9 +8,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.Contacts.People;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.AdapterView.OnItemClickListener;
@@ -24,11 +26,13 @@ import com.kamosoft.utils.AndroidUtils;
  */
 public class PickContactsListActivity
     extends ListActivity
-    implements Constants, OnItemClickListener
+    implements Constants, OnItemClickListener, TextWatcher
 {
     private Cursor mCursor;
 
-    private AutoCompleteTextView mAutoCompleteTextView;
+    private EditText mEditText;
+
+    private String[] mProjection = new String[] { People._ID, People.NAME };
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -39,10 +43,9 @@ public class PickContactsListActivity
         }
         super.onCreate( savedInstanceState );
         setContentView( R.layout.contactlist );
-        mAutoCompleteTextView = (AutoCompleteTextView) findViewById( R.id.autocomplete );
-        mAutoCompleteTextView.setThreshold( 1 );        
-        mAutoCompleteTextView.setOnItemClickListener( this );
-        fillList();
+        mEditText = (EditText) findViewById( R.id.autocomplete );
+        mEditText.addTextChangedListener( this );
+        fillList( null );
 
         if ( Log.DEBUG )
         {
@@ -50,22 +53,26 @@ public class PickContactsListActivity
         }
     }
 
-    private void fillList()
+    private void fillList( String text )
     {
-        String[] projection = new String[] { People._ID, People.NAME };
-        mCursor =
-            AndroidUtils.avoidEmptyName( this.getContentResolver().query( People.CONTENT_URI, projection, null, null,
-                                                                          People.NAME + " ASC" ) );
+        if ( text == null || text.length() == 0 )
+        {
+            mCursor =
+                AndroidUtils.avoidEmptyName( this.getContentResolver().query( People.CONTENT_URI, mProjection, null,
+                                                                              null, People.NAME + " ASC" ) );
+        }
+        else
+        {
+            mCursor =
+                getContentResolver().query( People.CONTENT_URI, mProjection, People.NAME + " like \"" + text + "%\"",
+                                            null, People.NAME + " ASC" );
+        }
 
         String[] from = { People.NAME };
         int[] to = { android.R.id.text1 };
         SimpleCursorAdapter simpleAdapter =
             new SimpleCursorAdapter( this, android.R.layout.simple_list_item_1, mCursor, from, to );
-        setListAdapter( simpleAdapter );
-
-        SimpleCursorAdapter dropDowCursorAdapter =
-            new SimpleCursorAdapter( this, android.R.layout.simple_dropdown_item_1line, mCursor, from, to );
-        mAutoCompleteTextView.setAdapter( dropDowCursorAdapter );
+        setListAdapter( simpleAdapter );     
     }
 
     @Override
@@ -78,7 +85,7 @@ public class PickContactsListActivity
     private void onContactClick( int position )
     {
         mCursor.moveToPosition( position );
-        Intent intent = new Intent( this, PickNameDayListActivity.class );        
+        Intent intent = new Intent( this, PickNameDayListActivity.class );
         intent.putExtra( CONTACTID_INTENT_KEY, mCursor.getLong( mCursor.getColumnIndex( People._ID ) ) );
         intent.putExtra( CONTACTNAME_INTENT_KEY, mCursor.getString( mCursor.getColumnIndex( People.NAME ) ) );
         startActivity( intent );
@@ -92,4 +99,33 @@ public class PickContactsListActivity
     {
         onContactClick( position );
     }
+
+    /**
+     * @see android.text.TextWatcher#afterTextChanged(android.text.Editable)
+     */
+    @Override
+    public void afterTextChanged( Editable arg0 )
+    {
+        //nothing
+    }
+
+    /**
+     * @see android.text.TextWatcher#beforeTextChanged(java.lang.CharSequence, int, int, int)
+     */
+    @Override
+    public void beforeTextChanged( CharSequence arg0, int arg1, int arg2, int arg3 )
+    {
+        //nothing
+    }
+
+    /**
+     * @see android.text.TextWatcher#onTextChanged(java.lang.CharSequence, int, int, int)
+     */
+    @Override
+    public void onTextChanged( CharSequence arg0, int arg1, int arg2, int arg3 )
+    {
+        String text = mEditText.getText().toString();
+        fillList( text );
+    }
+
 }
