@@ -113,7 +113,9 @@ public class PickNameDayListActivity
         String nameDay = mCursor.getString( mCursor.getColumnIndex( HappyContactsDb.Feast.NAME ) );
         mDb.insertWhiteList( mContactId, mContactName, nameDay );
         Toast.makeText( this, getString( R.string.whitelist_added, mContactName, nameDay ), Toast.LENGTH_SHORT ).show();
-        startActivity( new Intent( this, WhiteListActivity.class ) );
+        Intent intent = new Intent( this, WhiteListActivity.class );
+        intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+        startActivity( intent );
     }
 
     /**
