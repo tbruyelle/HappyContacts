@@ -78,10 +78,15 @@
 <string name="about">A propos</string>
 <string name="sendmail">Envoyer l'email avec...</string>
 <string name="add">Ajout</string>
-<string name="whitelist_label">Entrez un prénom pour l\'ajouter à la liste blanche :</string>
+<string name="no_whitelist">Pas de contact en liste blanche</string>
 <string name="pref_whitelist">Liste blanche</string>
 <string name="pref_whitelist_summary">Prénoms toujours souhaités (utile si vous utilisez des surnoms pour vos contacts)</string>
 <string name="empty_name">Veuillez entrer un prénom</string>
 <string name="whitelist_added">%s ajouté à la liste blanche</string>
 <string name="pick_nameday">Choissisez le prénom pour %s</string>
+<string name="confirm_delete_whitelist">Etes-vous sûr de vouloir supprimer le lien entre %s et %s ?</string>
+<string name="confirm_delete_blacklist">Etes-vous sûr de vouloir supprimer %s de la liste noire ?</string>
+<string name="deleteall">Supprimer tout</string>
+<string name="confirm_deleteall">Voulez-vous vraiment tout supprimer ?</string>
+<string name="pick_contact">Choississez un contact avec un surnom</string>
 </resources>

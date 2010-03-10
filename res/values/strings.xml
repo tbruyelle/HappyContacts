@@ -78,11 +78,15 @@
 <string name="dateback">&lt;</string>
 <string name="datenext">&gt;</string>
 <string name="add">Add</string>
-<string name="whitelist_label">Enter a name to add it in the white list :</string>
+<string name="no_whitelist">No white listed contact</string>
 <string name="pref_whitelist">White list</string>
 <string name="pref_whitelist_summary">Names always whished (usefull if you use nickname in your contacts)</string>
 <string name="empty_name">Please enter a name</string>
 <string name="whitelist_added">%s has been added to white list</string>
-<string name="pick_contact">Pick a contact with a nickname :</string>
+<string name="pick_contact">Pick a contact with a nickname</string>
 <string name="pick_nameday">Pick a name day for %s</string>
+<string name="confirm_delete_whitelist">Are you sure you want to delete link between %s and %s ?</string>
+<string name="confirm_delete_blacklist">Are you sure you want to delete %s from blacklist ?</string>
+<string name="deleteall">Delete all</string>
+<string name="confirm_deleteall">Do you really want to delete all ?</string>
 </resources>
