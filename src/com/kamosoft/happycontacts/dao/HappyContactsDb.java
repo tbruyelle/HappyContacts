@@ -11,7 +11,7 @@ public final class HappyContactsDb
 {
     public static String DATABASE_NAME = "happy_contacts";
 
-    public static int DATABASE_VERSION = 40;
+    public static int DATABASE_VERSION = 41;
 
     public static final class Feast
     {
@@ -26,6 +26,20 @@ public final class HappyContactsDb
         public static String SOURCE = "source";
 
         public static String[] COLUMNS = { ID, DAY, NAME, SOURCE };
+    }
+
+    /**
+     * this table is only usefull to have a distinct name day list (improve app perf)
+     */
+    public static final class NameDay
+    {
+        public static String TABLE_NAME = "nameDay";
+
+        public static String ID = "_id";
+
+        public static String NAME_DAY = "nameDay";
+
+        public static String[] COLUMNS = { ID, NAME_DAY };
     }
 
     public static final class BlackList

@@ -189,13 +189,9 @@ public class DbAdapter
         }
         /* use order by name */
         Cursor cursor =
-            mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID,
-                HappyContactsDb.Feast.NAME }, null, null, null, null, HappyContactsDb.Feast.NAME );
+            mDb.query( HappyContactsDb.NameDay.TABLE_NAME, new String[] { HappyContactsDb.NameDay.ID,
+                HappyContactsDb.NameDay.NAME_DAY }, null, null, null, null, HappyContactsDb.NameDay.NAME_DAY );
 
-        if ( cursor != null )
-        {
-            cursor = avoidDuplicate( cursor, HappyContactsDb.Feast.ID, HappyContactsDb.Feast.NAME );
-        }
         if ( Log.DEBUG )
         {
             Log.v( "DbAdapter: end fetchAllNameDay()" );
@@ -211,14 +207,10 @@ public class DbAdapter
         }
         /* use order by name */
         Cursor cursor =
-            mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID,
-                HappyContactsDb.Feast.NAME }, HappyContactsDb.Feast.NAME + " like \"" + constraint + "%\"", null, null,
-                       null, HappyContactsDb.Feast.NAME );
+            mDb.query( HappyContactsDb.NameDay.TABLE_NAME, new String[] { HappyContactsDb.NameDay.ID,
+                HappyContactsDb.NameDay.NAME_DAY }, HappyContactsDb.NameDay.NAME_DAY + " like \"" + constraint + "%\"",
+                       null, null, null, HappyContactsDb.NameDay.NAME_DAY );
 
-        if ( cursor != null )
-        {
-            cursor = avoidDuplicate( cursor, HappyContactsDb.Feast.ID, HappyContactsDb.Feast.NAME );
-        }
         if ( Log.DEBUG )
         {
             Log.v( "DbAdapter: end fetchNameDayLike()" );
@@ -243,10 +235,6 @@ public class DbAdapter
                 HappyContactsDb.Feast.NAME }, HappyContactsDb.Feast.DAY + "='" + day + "'", null, null, null,
                        HappyContactsDb.Feast.NAME );
 
-        if ( cursor != null )
-        {
-            cursor = avoidDuplicate( cursor, HappyContactsDb.Feast.ID, HappyContactsDb.Feast.NAME );
-        }
         if ( Log.DEBUG )
         {
             Log.v( "DbAdapter: end fetchNameForDay()" );
@@ -273,10 +261,6 @@ public class DbAdapter
             mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID,
                 HappyContactsDb.Feast.DAY }, HappyContactsDb.Feast.NAME + " like '" + name + "'", null, null, null,
                        "substr(" + HappyContactsDb.Feast.DAY + ",4,2)||substr(" + HappyContactsDb.Feast.DAY + ",1,2)" );
-        if ( cursor != null )
-        {
-            cursor = avoidDuplicate( cursor, HappyContactsDb.Feast.ID, HappyContactsDb.Feast.DAY );
-        }
         if ( Log.DEBUG )
         {
             Log.v( "DbAdapter: end fetchDayForName()" );
@@ -289,29 +273,36 @@ public class DbAdapter
      * @param cursor
      * @return
      */
-    private Cursor avoidDuplicate( Cursor cursor, String idColumnName, String columnName )
-    {
-        return cursor;
-//        ArrayList<String> columns = new ArrayList<String>();
-//        MatrixCursor matrixCursor = new MatrixCursor( new String[] { idColumnName, columnName } );
-//        int columnIndex = cursor.getColumnIndex( columnName );
-//        int idColumnIndex = cursor.getColumnIndex( idColumnName );
-//        cursor.moveToFirst();
-//        do
-//        {
-//            String columnValue = cursor.getString( columnIndex );
-//            if ( columns.contains( columnValue ) )
-//            {
-//                continue;
-//            }
-//            Long id = cursor.getLong( idColumnIndex );
-//            matrixCursor.newRow().add( id ).add( columnValue );
-//            columns.add( columnValue );
-//        }
-//        while ( cursor.moveToNext() );
-//        cursor.close();
-//        return matrixCursor;
-    }
+    //    private Cursor avoidDuplicate( Cursor cursor, String idColumnName, String columnName )
+    //    {
+    //        if ( Log.DEBUG )
+    //        {
+    //            Log.v( "DbAdapter: start avoidDuplicate()" );
+    //        }
+    //        ArrayList<String> columns = new ArrayList<String>();
+    //        MatrixCursor matrixCursor = new MatrixCursor( new String[] { idColumnName, columnName } );
+    //        int columnIndex = cursor.getColumnIndex( columnName );
+    //        int idColumnIndex = cursor.getColumnIndex( idColumnName );
+    //        cursor.moveToFirst();
+    //        do
+    //        {
+    //            String columnValue = cursor.getString( columnIndex );
+    //            if ( columns.contains( columnValue ) )
+    //            {
+    //                continue;
+    //            }
+    //            Long id = cursor.getLong( idColumnIndex );
+    //            matrixCursor.newRow().add( id ).add( columnValue );
+    //            columns.add( columnValue );
+    //        }
+    //        while ( cursor.moveToNext() );
+    //        cursor.close();
+    //        if ( Log.DEBUG )
+    //        {
+    //            Log.v( "DbAdapter: end avoidDuplicate()" );
+    //        }
+    //        return matrixCursor;
+    //    }
 
     /**
      * @param contactId

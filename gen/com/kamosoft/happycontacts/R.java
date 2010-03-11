@@ -94,6 +94,7 @@ public final class R {
         public static final int about=0x7f060045;
         public static final int about_content=0x7f060044;
         public static final int add=0x7f060049;
+        public static final int add_whitelist=0x7f060056;
         public static final int app_name=0x7f060001;
         public static final int back_to_main=0x7f060038;
         public static final int blacklist_label=0x7f06000b;

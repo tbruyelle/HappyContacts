@@ -97,8 +97,9 @@ public class PickNameDayListActivity
         {
             mCursor = mDb.fetchNameDayLike( text );
         }
+        startManagingCursor( mCursor );
 
-        String[] from = { HappyContactsDb.Feast.NAME };
+        String[] from = { HappyContactsDb.NameDay.NAME_DAY };
         int[] to = { android.R.id.text1 };
         SimpleCursorAdapter simpleAdapter =
             new SimpleCursorAdapter( this, android.R.layout.simple_list_item_1, mCursor, from, to );
@@ -115,7 +116,7 @@ public class PickNameDayListActivity
     private void onNameDayClick( int position )
     {
         mCursor.moveToPosition( position );
-        String nameDay = mCursor.getString( mCursor.getColumnIndex( HappyContactsDb.Feast.NAME ) );
+        String nameDay = mCursor.getString( mCursor.getColumnIndexOrThrow( HappyContactsDb.NameDay.NAME_DAY ) );
         mDb.insertWhiteList( mContactId, mContactName, nameDay );
         Toast.makeText( this, getString( R.string.whitelist_added, mContactName, nameDay ), Toast.LENGTH_SHORT ).show();
         Intent intent = new Intent( this, WhiteListActivity.class );

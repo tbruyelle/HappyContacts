@@ -10,6 +10,10 @@ create table feast (
   name varchar(64) not null,
   source varchar(64) not null);
   
+create table nameDay (
+  _id integer primary key autoincrement,
+  nameDay varchar(64) not null);
+  
  create table whitelist(
  _id integer primary key autoincrement,
  contactId integer not null,
@@ -6603,4 +6607,6 @@ insert into feast (name, day, source) values ("Silvestar", "31/12", "ephemeride.
 insert into feast (name, day, source) values ("Silvester", "31/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Silvestre", "31/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Sylvester", "31/12", "ephemeride.name");
-insert into feast (name, day, source) values ("Yônah", "31/12", "ephemeride.name")
+insert into feast (name, day, source) values ("Yônah", "31/12", "ephemeride.name");
+
+insert into nameDay (nameDay) select distinct name from feast

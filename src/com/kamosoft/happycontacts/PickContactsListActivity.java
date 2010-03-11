@@ -39,7 +39,7 @@ public class PickContactsListActivity
     {
         if ( Log.DEBUG )
         {
-            Log.v( "ContactFeastPopupActivity: start onCreate" );
+            Log.v( "PickContactsListActivity: start onCreate" );
         }
         super.onCreate( savedInstanceState );
         setContentView( R.layout.contactlist );
@@ -49,7 +49,7 @@ public class PickContactsListActivity
 
         if ( Log.DEBUG )
         {
-            Log.v( "ContactFeastPopupActivity: end onCreate" );
+            Log.v( "PickContactsListActivity: end onCreate" );
         }
     }
 
@@ -67,12 +67,12 @@ public class PickContactsListActivity
                 getContentResolver().query( People.CONTENT_URI, mProjection, People.NAME + " like \"" + text + "%\"",
                                             null, People.NAME + " ASC" );
         }
-
+        startManagingCursor( mCursor );
         String[] from = { People.NAME };
         int[] to = { android.R.id.text1 };
         SimpleCursorAdapter simpleAdapter =
             new SimpleCursorAdapter( this, android.R.layout.simple_list_item_1, mCursor, from, to );
-        setListAdapter( simpleAdapter );     
+        setListAdapter( simpleAdapter );
     }
 
     @Override
