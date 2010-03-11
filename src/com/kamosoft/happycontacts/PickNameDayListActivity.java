@@ -5,6 +5,7 @@ package com.kamosoft.happycontacts;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
@@ -13,6 +14,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -192,8 +194,14 @@ public class PickNameDayListActivity
         {
             case DialogInterface.BUTTON_NEUTRAL:
                 dialog.dismiss();
-                mEditText.setText( null );                
+                mEditText.setText( null );
+                /* hide the keyboard */
+                InputMethodManager inputManager =
+                    (InputMethodManager) this.getSystemService( Context.INPUT_METHOD_SERVICE );
+                inputManager.hideSoftInputFromWindow( this.getCurrentFocus().getWindowToken(),
+                                                      InputMethodManager.HIDE_NOT_ALWAYS );
                 break;
+
             case DialogInterface.BUTTON_NEGATIVE:
                 dialog.dismiss();
                 returnToWhiteList();
