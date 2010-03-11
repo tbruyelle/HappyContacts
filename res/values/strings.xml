@@ -80,7 +80,7 @@
 <string name="add">Add</string>
 <string name="no_whitelist">No white listed contact</string>
 <string name="pref_whitelist">White list</string>
-<string name="pref_whitelist_summary">Names always whished (usefull if you use nickname in your contacts)</string>
+<string name="pref_whitelist_summary">Link a contact to a name-day (usefull for contacts with nickname)</string>
 <string name="empty_name">Please enter a name</string>
 <string name="whitelist_added">%s has been added to white list</string>
 <string name="pick_contact">Pick a contact with a nickname</string>
@@ -90,5 +90,5 @@
 <string name="deleteall">Delete all</string>
 <string name="confirm_deleteall">Do you really want to delete all ?</string>
 <string name="type_to_filter">Type to filter</string>
-<string name="add_whitelist">Link a contact and a name-day</string>
+<string name="add_whitelist">Link a contact to a name-day</string>
 </resources>
