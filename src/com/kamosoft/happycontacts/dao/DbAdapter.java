@@ -363,6 +363,16 @@ public class DbAdapter
                           null, null );
     }
 
+    public Cursor fetchWhiteListForNameDay( String nameDay )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: call fetchWhiteListForNameDay() "+nameDay );
+        }
+        return mDb.query( HappyContactsDb.WhiteList.TABLE_NAME, HappyContactsDb.WhiteList.COLUMNS,
+                          HappyContactsDb.WhiteList.NAME_DAY + " = \"" + nameDay + "\"", null, null, null, null );
+    }
+
     public boolean insertWhiteList( Long contactId, String contactName, String nameDay )
     {
         if ( Log.DEBUG )

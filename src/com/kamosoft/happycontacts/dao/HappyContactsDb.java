@@ -69,6 +69,6 @@ public final class HappyContactsDb
 
         public static String NAME_DAY = "nameDay";
 
-        public static String[] COLUMNS = { ID, CONTACT_NAME, NAME_DAY };
+        public static String[] COLUMNS = { ID, CONTACT_ID, CONTACT_NAME, NAME_DAY };
     }
 }
