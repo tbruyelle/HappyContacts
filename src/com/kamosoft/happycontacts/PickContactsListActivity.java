@@ -11,11 +11,9 @@ import android.provider.Contacts.People;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.kamosoft.utils.AndroidUtils;
 
@@ -26,7 +24,7 @@ import com.kamosoft.utils.AndroidUtils;
  */
 public class PickContactsListActivity
     extends ListActivity
-    implements Constants, OnItemClickListener, TextWatcher
+    implements Constants, TextWatcher
 {
     private Cursor mCursor;
 
@@ -89,15 +87,6 @@ public class PickContactsListActivity
         intent.putExtra( CONTACTID_INTENT_KEY, mCursor.getLong( mCursor.getColumnIndex( People._ID ) ) );
         intent.putExtra( CONTACTNAME_INTENT_KEY, mCursor.getString( mCursor.getColumnIndex( People.NAME ) ) );
         startActivity( intent );
-    }
-
-    /**
-     * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
-     */
-    @Override
-    public void onItemClick( AdapterView<?> adapterView, View view, int position, long id )
-    {
-        onContactClick( position );
     }
 
     /**

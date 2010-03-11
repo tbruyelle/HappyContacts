@@ -91,4 +91,6 @@
 <string name="pick_contact">Choississez un contact avec un surnom</string>
 <string name="type_to_filter">Tapez pour filtrer</string>
 <string name="add_whitelist">Associer un contact avec un prénom</string>
+<string name="can_match_normally">%s peut déjà correspondre au prénom %s, il est donc inutile de l\'ajouter à la liste blanche.</string>
+<string name="link_other">Associer un autre</string>
 </resources>

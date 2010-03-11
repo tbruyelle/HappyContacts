@@ -3,23 +3,25 @@
  */
 package com.kamosoft.happycontacts;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.dao.HappyContactsDb;
+import com.kamosoft.utils.AndroidUtils;
 
 /**
  * After select the contact in PickContactListActivity, the user has to select a nameday from this Activity
@@ -28,7 +30,7 @@ import com.kamosoft.happycontacts.dao.HappyContactsDb;
  */
 public class PickNameDayListActivity
     extends ListActivity
-    implements Constants, OnItemClickListener, TextWatcher
+    implements Constants, TextWatcher, OnClickListener
 {
     private DbAdapter mDb;
 
@@ -113,24 +115,43 @@ public class PickNameDayListActivity
         onNameDayClick( position );
     }
 
+    /**
+     * return true if the contactName can normally be detected by application without being whitelised
+     * @param contactName
+     * @param nameDay
+     * @return
+     */
+    private boolean canMatchNormally( String contactName, String nameDay )
+    {
+        nameDay = AndroidUtils.replaceAccents( nameDay ).toUpperCase();
+        for ( String subName : contactName.split( " " ) )
+        {
+            subName = AndroidUtils.replaceAccents( subName ).toUpperCase();
+            if ( subName.equals( nameDay ) )
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void onNameDayClick( int position )
     {
         mCursor.moveToPosition( position );
         String nameDay = mCursor.getString( mCursor.getColumnIndexOrThrow( HappyContactsDb.NameDay.NAME_DAY ) );
-        mDb.insertWhiteList( mContactId, mContactName, nameDay );
-        Toast.makeText( this, getString( R.string.whitelist_added, mContactName, nameDay ), Toast.LENGTH_SHORT ).show();
-        Intent intent = new Intent( this, WhiteListActivity.class );
-        intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
-        startActivity( intent );
-    }
-
-    /**
-     * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
-     */
-    @Override
-    public void onItemClick( AdapterView<?> adapterView, View view, int position, long id )
-    {
-        onNameDayClick( position );
+        if ( canMatchNormally( mContactName, nameDay ) )
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder( this );
+            builder.setMessage( getString( R.string.can_match_normally, mContactName, nameDay ) );
+            builder.setNeutralButton( R.string.link_other, this ).setNegativeButton( R.string.cancel, this );
+            builder.create().show();
+        }
+        else
+        {
+            mDb.insertWhiteList( mContactId, mContactName, nameDay );
+            Toast.makeText( this, getString( R.string.whitelist_added, mContactName, nameDay ), Toast.LENGTH_SHORT ).show();
+            returnToWhiteList();
+        }
     }
 
     /**
@@ -159,5 +180,31 @@ public class PickNameDayListActivity
     {
         String text = mEditText.getText().toString();
         fillList( text );
+    }
+
+    /**
+     * @see android.content.DialogInterface.OnClickListener#onClick(android.content.DialogInterface, int)
+     */
+    @Override
+    public void onClick( DialogInterface dialog, int id )
+    {
+        switch ( id )
+        {
+            case DialogInterface.BUTTON_NEUTRAL:
+                dialog.dismiss();
+                mEditText.setText( null );                
+                break;
+            case DialogInterface.BUTTON_NEGATIVE:
+                dialog.dismiss();
+                returnToWhiteList();
+                break;
+        }
+    }
+
+    private void returnToWhiteList()
+    {
+        Intent intent = new Intent( this, WhiteListActivity.class );
+        intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+        startActivity( intent );
     }
 }

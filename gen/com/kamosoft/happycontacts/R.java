@@ -99,6 +99,7 @@ public final class R {
         public static final int back_to_main=0x7f060038;
         public static final int blacklist_label=0x7f06000b;
         public static final int call=0x7f060006;
+        public static final int can_match_normally=0x7f060057;
         public static final int cancel=0x7f060030;
         public static final int check_contacts=0x7f060028;
         public static final int confirm_delete_blacklist=0x7f060052;
@@ -122,6 +123,7 @@ public final class R {
         public static final int happyfeast_name=0x7f060040;
         public static final int last_wish_date=0x7f06000c;
         public static final int later=0x7f060007;
+        public static final int link_other=0x7f060058;
         public static final int loading_data=0x7f060029;
         public static final int mail_template_subject=0x7f06003a;
         public static final int mail_template_text=0x7f06003b;
