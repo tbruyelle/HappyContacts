@@ -169,7 +169,7 @@ public class DayMatcherService
                 }
                 continue;
             }
-            ContactFeast contactFeast = new ContactFeast( name, null );
+            ContactFeast contactFeast = new ContactFeast( name, name, null );
             String nameUpper = AndroidUtils.replaceAccents( name ).toUpperCase();
             names.put( nameUpper, contactFeast );
             if ( Log.DEBUG )
@@ -179,33 +179,39 @@ public class DayMatcherService
 
             /* check white list */
             Cursor whiteListCursor = mDb.fetchWhiteListForNameDay( name );
-            if ( whiteListCursor != null && whiteListCursor.getCount() > 0 )
+            if ( whiteListCursor != null )
             {
-                if ( Log.DEBUG )
+                if ( whiteListCursor.getCount() > 0 )
                 {
-                    Log.v( "DayMatcher: have found " + whiteListCursor.getCount() + " white listed contacts" );
-                }
-                int contactIdIndex = whiteListCursor.getColumnIndexOrThrow( HappyContactsDb.WhiteList.CONTACT_ID );
-                int contactNameIndex = whiteListCursor.getColumnIndexOrThrow( HappyContactsDb.WhiteList.CONTACT_NAME );
-                while ( whiteListCursor.moveToNext() )
-                {
-                    Long contactId = whiteListCursor.getLong( contactIdIndex );
-                    String contactName = whiteListCursor.getString( contactNameIndex );
-                    if ( mDb.isBlackListed( contactId, fullDate ) )
-                    {
-                        if ( Log.DEBUG )
-                        {
-                            Log.v( "DayMatcher: already wished this year " + contactName + " from whitelist is ignored" );
-                        }
-                        continue;
-                    }
-                    /* found from white list ! */
                     if ( Log.DEBUG )
                     {
-                        Log.v( "DayMatcher: add " + contactId + " " + contactName + " from whitelist to the ContactFeastToday" );
+                        Log.v( "DayMatcher: have found " + whiteListCursor.getCount() + " white listed contacts" );
                     }
-                    contactFeastToday.addContact( contactId, new ContactFeast( contactName, null ) );
+                    int contactIdIndex = whiteListCursor.getColumnIndexOrThrow( HappyContactsDb.WhiteList.CONTACT_ID );
+                    int contactNameIndex =
+                        whiteListCursor.getColumnIndexOrThrow( HappyContactsDb.WhiteList.CONTACT_NAME );
+                    while ( whiteListCursor.moveToNext() )
+                    {
+                        Long contactId = whiteListCursor.getLong( contactIdIndex );
+                        String contactName = whiteListCursor.getString( contactNameIndex );
+                        if ( mDb.isBlackListed( contactId, fullDate ) )
+                        {
+                            if ( Log.DEBUG )
+                            {
+                                Log.v( "DayMatcher: already wished this year " + contactName
+                                    + " from whitelist is ignored" );
+                            }
+                            continue;
+                        }
+                        /* found from white list ! */
+                        if ( Log.DEBUG )
+                        {
+                            Log.v( "DayMatcher: add " + contactId + " " + contactName
+                                + " from whitelist to the ContactFeastToday" );
+                        }
+                        contactFeastToday.addContact( contactId, new ContactFeast( name, contactName, null ) );
 
+                    }                    
                 }
                 whiteListCursor.close();
             }
@@ -258,7 +264,8 @@ public class DayMatcherService
                         }
                         ContactFeast contactFeast = names.get( subNameUpper );
                         /* duplicate the contact feast and set the name */
-                        ContactFeast newContactFeast = new ContactFeast( contactName, contactFeast.getLastWishYear() );
+                        ContactFeast newContactFeast =
+                            new ContactFeast( contactFeast.getNameDay(), contactName, contactFeast.getLastWishYear() );
                         contactFeastToday.addContact( contactId, newContactFeast );
                     }
                 }

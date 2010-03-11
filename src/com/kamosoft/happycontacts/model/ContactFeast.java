@@ -18,6 +18,8 @@ public class ContactFeast
      */
     private static final long serialVersionUID = 5984664253829892060L;
 
+    private String nameDay;
+
     private String contactName;
 
     private Long contactId;
@@ -28,8 +30,9 @@ public class ContactFeast
 
     private String lastWishYear;
 
-    public ContactFeast( String contactName, String lastWishYear )
+    public ContactFeast( String nameDay, String contactName, String lastWishYear )
     {
+        this.nameDay = nameDay;
         this.contactName = contactName;
         this.setLastWishYear( lastWishYear );
     }
@@ -123,4 +126,19 @@ public class ContactFeast
         return contactId;
     }
 
+    /**
+     * @return the nameDay
+     */
+    public String getNameDay()
+    {
+        return nameDay;
+    }
+
+    /**
+     * @param nameDay the nameDay to set
+     */
+    public void setNameDay( String nameDay )
+    {
+        this.nameDay = nameDay;
+    }
 }

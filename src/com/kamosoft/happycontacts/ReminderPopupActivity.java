@@ -65,6 +65,8 @@ public class ReminderPopupActivity
 
     private TextView mFeastCounter;
 
+    private TextView mNameDayTitle;
+
     private ContactFeasts mContactFeasts;
 
     private int mIndex;
@@ -99,6 +101,7 @@ public class ReminderPopupActivity
         /* boucle sur les contacts a qui il fait souhaiter la fete */
         contacts = mContactFeasts.getContactList().entrySet().iterator();
 
+        mNameDayTitle = (TextView) findViewById( R.id.nameday_title );
         mFeastCounter = (TextView) findViewById( R.id.feast_counter );
         if ( mContactFeasts.getContactList().size() <= 1 )
         {
@@ -120,8 +123,8 @@ public class ReminderPopupActivity
             /* First dialog which show the available methods to contact */
             case HOW_TO_CONTACT_DIALOG_ID:
                 AlertDialog.Builder builder = new AlertDialog.Builder( this );
-                builder.setTitle( getString( R.string.contact_method_dialog_title, mCurrentContactFeast
-                    .getContactName() ) );
+                builder.setTitle( getString( R.string.contact_method_dialog_title,
+                                             mCurrentContactFeast.getContactName() ) );
 
                 final String[] contactMethods = getResources().getStringArray( R.array.contactmethods_items );
 
@@ -278,8 +281,7 @@ public class ReminderPopupActivity
     {
         if ( mContactFeasts.getContactList().size() > 1 )
         {
-            mFeastCounter
-                .setText( getString( R.string.feast_counter, ++mIndex, mContactFeasts.getContactList().size() ) );
+            mFeastCounter.setText( getString( R.string.feast_counter, ++mIndex, mContactFeasts.getContactList().size() ) );
         }
     }
 
@@ -330,6 +332,8 @@ public class ReminderPopupActivity
     {
         mCurrentContactFeast = contactFeast;
         contactFeast.setContactId( contactId );
+
+        mNameDayTitle.setText( "St " + contactFeast.getNameDay() );
 
         TextView contactNameTextView = (TextView) findViewById( R.id.contact_name );
         contactNameTextView.setText( contactFeast.getContactName() );
@@ -444,8 +448,8 @@ public class ReminderPopupActivity
 
     private void updateCurrentContactFeast()
     {
-        boolean res = mDb.updateContactFeast( mCurrentContactFeast.getContactId(), mCurrentContactFeast
-            .getContactName(), mDate );
+        boolean res =
+            mDb.updateContactFeast( mCurrentContactFeast.getContactId(), mCurrentContactFeast.getContactName(), mDate );
         if ( !res )
         {
             Log.e( "Error insertBlackList with year " + mDate );
@@ -457,8 +461,9 @@ public class ReminderPopupActivity
         if ( contactFeast.getPhones() == null )
         {
             /* have to retrieve contact phones */
-            Cursor c = getContentResolver().query( Contacts.Phones.CONTENT_URI, null,
-                                                   Contacts.Phones.PERSON_ID + "=" + contactId, null, null );
+            Cursor c =
+                getContentResolver().query( Contacts.Phones.CONTENT_URI, null,
+                                            Contacts.Phones.PERSON_ID + "=" + contactId, null, null );
             if ( c.moveToFirst() )
             {
                 /* add the phone(s) */
@@ -487,8 +492,9 @@ public class ReminderPopupActivity
         if ( contactFeast.getEmails() == null )
         {
             /* have to retrieve emails */
-            Cursor c = getContentResolver().query( Contacts.ContactMethods.CONTENT_URI, null,
-                                                   Contacts.Phones.PERSON_ID + "=" + contactId, null, null );
+            Cursor c =
+                getContentResolver().query( Contacts.ContactMethods.CONTENT_URI, null,
+                                            Contacts.Phones.PERSON_ID + "=" + contactId, null, null );
             if ( c.moveToFirst() )
             {
                 do

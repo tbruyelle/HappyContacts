@@ -38,31 +38,32 @@ public final class R {
     }
     public static final class id {
         public static final int about_content=0x7f080001;
-        public static final int add_whitelist=0x7f080018;
+        public static final int add_whitelist=0x7f080019;
         public static final int autocomplete=0x7f080005;
         public static final int button_name_cancel=0x7f080009;
         public static final int button_name_ok=0x7f080008;
-        public static final int call_button=0x7f080012;
-        public static final int cancel_button=0x7f080011;
+        public static final int call_button=0x7f080013;
+        public static final int cancel_button=0x7f080012;
         public static final int contact_name=0x7f080003;
-        public static final int contact_photo=0x7f080016;
-        public static final int dateback=0x7f08000e;
-        public static final int datenext=0x7f08000f;
+        public static final int contact_photo=0x7f080017;
+        public static final int dateback=0x7f08000f;
+        public static final int datenext=0x7f080010;
         public static final int edittext_name=0x7f080007;
         public static final int element=0x7f080006;
         public static final int feast_counter=0x7f08000a;
         public static final int last_wish_date=0x7f080004;
-        public static final int later_button=0x7f080014;
+        public static final int later_button=0x7f080015;
         public static final int layout_root=0x7f080000;
         public static final int mail_template_body=0x7f08000c;
         public static final int mail_template_subject=0x7f08000b;
-        public static final int nameday=0x7f080019;
-        public static final int never_button=0x7f080015;
-        public static final int nottoday_button=0x7f080013;
+        public static final int nameday=0x7f08001a;
+        public static final int nameday_title=0x7f08000d;
+        public static final int never_button=0x7f080016;
+        public static final int nottoday_button=0x7f080014;
         public static final int ok_button=0x7f080002;
-        public static final int pick_nameday=0x7f08000d;
-        public static final int reset_button=0x7f080010;
-        public static final int sms_template_content=0x7f080017;
+        public static final int pick_nameday=0x7f08000e;
+        public static final int reset_button=0x7f080011;
+        public static final int sms_template_content=0x7f080018;
     }
     public static final class layout {
         public static final int about=0x7f030000;
@@ -75,16 +76,17 @@ public final class R {
         public static final int enter_name_popup=0x7f030007;
         public static final int feast_counter=0x7f030008;
         public static final int mail_template=0x7f030009;
-        public static final int namedaylist=0x7f03000a;
-        public static final int namelist=0x7f03000b;
-        public static final int okcancel_buttons=0x7f03000c;
-        public static final int reminder=0x7f03000d;
-        public static final int reminder_header=0x7f03000e;
-        public static final int sms_template=0x7f03000f;
-        public static final int testapp=0x7f030010;
-        public static final int testapp_element=0x7f030011;
-        public static final int whitelist=0x7f030012;
-        public static final int whitelist_element=0x7f030013;
+        public static final int nameday=0x7f03000a;
+        public static final int namedaylist=0x7f03000b;
+        public static final int namelist=0x7f03000c;
+        public static final int okcancel_buttons=0x7f03000d;
+        public static final int reminder=0x7f03000e;
+        public static final int reminder_header=0x7f03000f;
+        public static final int sms_template=0x7f030010;
+        public static final int testapp=0x7f030011;
+        public static final int testapp_element=0x7f030012;
+        public static final int whitelist=0x7f030013;
+        public static final int whitelist_element=0x7f030014;
     }
     public static final class raw {
         public static final int db_create=0x7f040000;

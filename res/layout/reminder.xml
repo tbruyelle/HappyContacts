@@ -3,6 +3,8 @@
   android:orientation="vertical" android:layout_width="fill_parent"
   android:layout_height="fill_parent">
 
+  <include layout="@layout/nameday" />
+  <include layout="@layout/divider" />
   <include layout="@layout/reminder_header" />
   <include layout="@layout/divider" />
 

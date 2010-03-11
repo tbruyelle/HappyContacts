@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent" android:layout_height="fill_parent">
+  <TextView android:id="@+id/nameday_title"
+    android:layout_width="fill_parent" android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:paddingBottom="2sp" android:paddingTop="2sp"
+    android:paddingLeft="5sp" android:gravity="center_horizontal|center_vertical"
+    android:paddingRight="5sp" />
+</RelativeLayout>
