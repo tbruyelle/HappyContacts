@@ -3,7 +3,8 @@
   android:layout_width="fill_parent" android:layout_height="wrap_content"
   android:orientation="vertical">
   <TextView android:layout_width="fill_parent"
-    android:layout_height="wrap_content" android:text="@string/pick_contact" />
+    android:layout_height="wrap_content" android:text="@string/pick_contact"
+    android:textAppearance="?android:attr/textAppearanceMedium" android:padding="5sp"/>
   <EditText android:layout_width="fill_parent"
     android:layout_height="wrap_content" android:id="@+id/autocomplete"
     android:hint="@string/type_to_filter" android:inputType="textFilter"

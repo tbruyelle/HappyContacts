@@ -83,12 +83,12 @@
 <string name="pref_whitelist_summary">Associer un contact avec un prénom (utile pour les contacts avec des surnoms)</string>
 <string name="empty_name">Veuillez entrer un prénom</string>
 <string name="whitelist_added">%s ajouté à la liste blanche</string>
-<string name="pick_nameday">Choissisez le prénom pour %s</string>
+<string name="pick_nameday">2. Choissisez le prénom pour %s</string>
 <string name="confirm_delete_whitelist">Etes-vous sûr de vouloir supprimer le lien entre %s et %s ?</string>
 <string name="confirm_delete_blacklist">Etes-vous sûr de vouloir supprimer %s de la liste noire ?</string>
 <string name="deleteall">Supprimer tout</string>
 <string name="confirm_deleteall">Voulez-vous vraiment tout supprimer ?</string>
-<string name="pick_contact">Choississez un contact avec un surnom</string>
+<string name="pick_contact">1. Choississez un contact avec un surnom</string>
 <string name="type_to_filter">Tapez pour filtrer</string>
 <string name="add_whitelist">Associer un contact avec un prénom</string>
 <string name="can_match_normally">%s peut déjà correspondre au prénom %s, il est donc inutile de l\'ajouter à la liste blanche.</string>
