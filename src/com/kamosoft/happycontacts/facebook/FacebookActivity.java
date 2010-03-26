@@ -3,9 +3,10 @@
  */
 package com.kamosoft.happycontacts.facebook;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -23,7 +24,7 @@ import com.nloko.simplyfacebook.net.FacebookRestClient;
  * @version $Id$
  */
 public class FacebookActivity
-    extends Activity
+    extends ListActivity
     implements Constants
 {
     private static final int ACTIVITY_LOGIN = 1;
@@ -55,21 +56,26 @@ public class FacebookActivity
     private void sync()
     {
         FacebookRestClient client =
-            new FacebookRestClient( FACEBOOK_API_KEY, this.getSharedPreferences( APP_NAME, 0 ).getString( "uid",
-                                                                                                             null ),
+            new FacebookRestClient( FACEBOOK_API_KEY,
+                                    this.getSharedPreferences( APP_NAME, 0 ).getString( "uid", null ),
                                     this.getSharedPreferences( APP_NAME, 0 ).getString( "session_key", null ),
                                     this.getSharedPreferences( APP_NAME, 0 ).getString( "secret", null ) );
 
         FacebookApi api = new FacebookApi( client );
         try
         {
-            List<SocialNetworkUser> userList = api.getUserInfo( api.getFriends() );
+            ArrayList<SocialNetworkUser> userList = api.getUserInfo( api.getFriends() );
             if ( userList != null && !userList.isEmpty() )
             {
                 SocialNetworkUser fbUser = userList.get( 0 );
                 TextView text = (TextView) findViewById( R.id.facebook_sync );
                 text.setText( "user0 : " + fbUser.uid + ", " + fbUser.firstName + ", " + fbUser.lastName + ", "
                     + fbUser.name + ", " + fbUser.birthday );
+
+                SocialUserArrayAdapter adapter =
+                    new SocialUserArrayAdapter( this, R.layout.socialnetworkuser, userList );
+
+                setListAdapter( adapter );
             }
             else
             {

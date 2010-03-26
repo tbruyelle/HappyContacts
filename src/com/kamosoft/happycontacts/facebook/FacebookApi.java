@@ -25,7 +25,6 @@ package com.kamosoft.happycontacts.facebook;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.http.client.ClientProtocolException;
@@ -84,13 +83,13 @@ public class FacebookApi
         return null;
     }
 
-    public List<SocialNetworkUser> getUserInfo( String uids )
+    public ArrayList<SocialNetworkUser> getUserInfo( String uids )
         throws JSONException, ClientProtocolException, IOException
     {
         return getUserInfo( uids, false );
     }
 
-    public List<SocialNetworkUser> getUserInfo( String uids, boolean highQuality )
+    public ArrayList<SocialNetworkUser> getUserInfo( String uids, boolean highQuality )
         throws JSONException, ClientProtocolException, IOException
     {
         if ( uids == null )
@@ -110,7 +109,7 @@ public class FacebookApi
 
         JSONArray users = new JSONArray( response.data );
 
-        List<SocialNetworkUser> list = new ArrayList<SocialNetworkUser>();
+        ArrayList<SocialNetworkUser> list = new ArrayList<SocialNetworkUser>();
         Map<String, SocialNetworkUser> userMap = new HashMap<String, SocialNetworkUser>();
 
         SocialNetworkUser fbUser = null;
