@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -96,6 +97,27 @@ public class FacebookActivity
     {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.facebook_sync );
-        startActivityForResult( new Intent( this, FacebookLoginActivity.class ), ACTIVITY_LOGIN );
+
+        if ( isLoggedIn() )
+        {
+            sync();
+        }
+        else
+        {
+            startActivityForResult( new Intent( this, FacebookLoginActivity.class ), ACTIVITY_LOGIN );
+        }
+    }
+
+    /**
+     * @return
+     */
+    private boolean isLoggedIn()
+    {
+        SharedPreferences settings = this.getSharedPreferences( APP_NAME, 0 );
+        String session_key = settings.getString( "session_key", null );
+        String secret = settings.getString( "secret", null );
+        String uid = settings.getString( "uid", null );
+
+        return session_key != null && secret != null && uid != null;
     }
 }
