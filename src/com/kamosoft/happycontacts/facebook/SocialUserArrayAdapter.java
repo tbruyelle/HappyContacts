@@ -28,6 +28,8 @@ public class SocialUserArrayAdapter
 
     private ArrayList<SocialNetworkUser> mUsers;
 
+    private LayoutInflater mInflater;
+
     /**
      * @param context
      * @param resource
@@ -39,6 +41,7 @@ public class SocialUserArrayAdapter
         super( context, textViewResourceId, users );
         mUsers = users;
         mContext = context;
+        mInflater = (LayoutInflater) mContext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
     }
 
     /**
@@ -50,8 +53,7 @@ public class SocialUserArrayAdapter
         View view = convertView;
         if ( view == null )
         {
-            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-            view = inflater.inflate( R.layout.socialnetworkuser, null );
+            view = mInflater.inflate( R.layout.socialnetworkuser, null );
         }
 
         SocialNetworkUser user = mUsers.get( position );

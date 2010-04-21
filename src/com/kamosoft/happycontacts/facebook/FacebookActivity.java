@@ -9,13 +9,16 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.Contacts.People;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.R;
 import com.kamosoft.happycontacts.model.SocialNetworkUser;
+import com.kamosoft.utils.AndroidUtils;
 import com.nloko.simplyfacebook.net.FacebookRestClient;
 
 /**
@@ -29,6 +32,8 @@ public class FacebookActivity
     implements Constants
 {
     private static final int ACTIVITY_LOGIN = 1;
+
+    private String[] mProjection = new String[] { People._ID, People.NAME };
 
     /**
      * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
@@ -68,6 +73,23 @@ public class FacebookActivity
             ArrayList<SocialNetworkUser> userList = api.getUserInfo( api.getFriends() );
             if ( userList != null && !userList.isEmpty() )
             {
+                Cursor contacts =
+                    AndroidUtils.avoidEmptyName( this.getContentResolver().query( People.CONTENT_URI, mProjection,
+                                                                                  null, null, People.NAME + " ASC" ) );
+
+                for ( SocialNetworkUser user : userList )
+                {
+                    while ( contacts.moveToNext() )
+                    {
+                        String contactName = contacts.getString( contacts.getColumnIndexOrThrow( People.NAME ) );
+                        if ( nameMatch( contactName, user.name ) )
+                        {
+                            /* user FB trouvé dans les contacts */
+                            user.setContactId( contacts.getLong( contacts.getColumnIndexOrThrow( People._ID ) ) );
+                            user.setContactName( contactName );
+                        }
+                    }
+                }
                 SocialNetworkUser fbUser = userList.get( 0 );
                 TextView text = (TextView) findViewById( R.id.facebook_sync );
                 text.setText( "user0 : " + fbUser.uid + ", " + fbUser.firstName + ", " + fbUser.lastName + ", "
@@ -87,6 +109,32 @@ public class FacebookActivity
         {
             Toast.makeText( this, e.getMessage(), Toast.LENGTH_LONG ).show();
         }
+    }
+
+    private boolean nameMatch( String contactName, String userName )
+    {
+        if ( contactName == null || contactName.length() == 0 || userName == null || userName.length() == 0 )
+        {
+            return false;
+        }
+        String[] contactSubNames = AndroidUtils.replaceAccents( contactName ).split( " " );
+        String[] userSubNames = AndroidUtils.replaceAccents( userName ).split( " " );
+        boolean subNameFound = false;
+        for ( String userSubName : userSubNames )
+        {
+            for ( String contactSubName : contactSubNames )
+            {
+                if ( userSubName.equalsIgnoreCase( contactSubName ) )
+                {
+                    subNameFound = true;
+                }
+            }
+            if ( !subNameFound )
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
