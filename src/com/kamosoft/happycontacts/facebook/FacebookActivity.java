@@ -12,10 +12,10 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.Contacts.People;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kamosoft.happycontacts.Constants;
+import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
 import com.kamosoft.happycontacts.model.SocialNetworkUser;
 import com.kamosoft.utils.AndroidUtils;
@@ -61,6 +61,10 @@ public class FacebookActivity
      */
     private void sync()
     {
+        if ( Log.DEBUG )
+        {
+            Log.v( "Start sync" );
+        }
         FacebookRestClient client =
             new FacebookRestClient( FACEBOOK_API_KEY,
                                     this.getSharedPreferences( APP_NAME, 0 ).getString( "uid", null ),
@@ -70,30 +74,51 @@ public class FacebookActivity
         FacebookApi api = new FacebookApi( client );
         try
         {
+            if ( Log.DEBUG )
+            {
+                Log.v( "Start getUserInfo" );
+            }
             ArrayList<SocialNetworkUser> userList = api.getUserInfo( api.getFriends() );
+            if ( Log.DEBUG )
+            {
+                Log.v( "End getUserInfo" );
+            }
             if ( userList != null && !userList.isEmpty() )
             {
                 Cursor contacts =
                     AndroidUtils.avoidEmptyName( this.getContentResolver().query( People.CONTENT_URI, mProjection,
                                                                                   null, null, People.NAME + " ASC" ) );
-
+                if ( Log.DEBUG )
+                {
+                    Log.v( "Start matching with contacts" );
+                }
                 for ( SocialNetworkUser user : userList )
                 {
+                    if ( Log.DEBUG )
+                    {
+                        Log.d( "searching contact for user " + user.name );
+                    }
                     while ( contacts.moveToNext() )
                     {
                         String contactName = contacts.getString( contacts.getColumnIndexOrThrow( People.NAME ) );
                         if ( nameMatch( contactName, user.name ) )
                         {
+                            if ( Log.DEBUG )
+                            {
+                                Log.d( "*** " + contactName + " match with " + user.name + " ***" );
+                            }
                             /* user FB trouvé dans les contacts */
                             user.setContactId( contacts.getLong( contacts.getColumnIndexOrThrow( People._ID ) ) );
                             user.setContactName( contactName );
+                            break;
                         }
                     }
+                    contacts.moveToFirst();
                 }
-                SocialNetworkUser fbUser = userList.get( 0 );
-                TextView text = (TextView) findViewById( R.id.facebook_sync );
-                text.setText( "user0 : " + fbUser.uid + ", " + fbUser.firstName + ", " + fbUser.lastName + ", "
-                    + fbUser.name + ", " + fbUser.birthday );
+                if ( Log.DEBUG )
+                {
+                    Log.v( "Stop matching with contacts" );
+                }
 
                 SocialUserArrayAdapter adapter =
                     new SocialUserArrayAdapter( this, R.layout.socialnetworkuser, userList );
@@ -127,12 +152,14 @@ public class FacebookActivity
                 if ( userSubName.equalsIgnoreCase( contactSubName ) )
                 {
                     subNameFound = true;
+                    break;
                 }
             }
             if ( !subNameFound )
             {
                 return false;
             }
+            subNameFound = false;
         }
         return true;
     }
@@ -143,16 +170,32 @@ public class FacebookActivity
     @Override
     protected void onCreate( Bundle savedInstanceState )
     {
+        if ( Log.DEBUG )
+        {
+            Log.v( "onCreate FaceBookActivity start" );
+        }
         super.onCreate( savedInstanceState );
         setContentView( R.layout.facebook_sync );
 
         if ( isLoggedIn() )
         {
+            if ( Log.DEBUG )
+            {
+                Log.v( "onCreate FaceBookActivity user logged" );
+            }
             sync();
         }
         else
         {
+            if ( Log.DEBUG )
+            {
+                Log.v( "onCreate FaceBookActivity start login" );
+            }
             startActivityForResult( new Intent( this, FacebookLoginActivity.class ), ACTIVITY_LOGIN );
+        }
+        if ( Log.DEBUG )
+        {
+            Log.v( "onCreate FaceBookActivity end" );
         }
     }
 

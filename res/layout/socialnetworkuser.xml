@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent" android:layout_height="fill_parent">
-  <TextView android:id="@+id/name" android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent"
+  android:layout_height="fill_parent" android:orientation="horizontal" android:gravity="center_horizontal|center_vertical">
+
+  <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical"
+    android:gravity="center_horizontal|center_vertical">
+    <TextView android:id="@+id/user_name" android:layout_width="wrap_content" android:layout_height="wrap_content"
+      android:text="user_name" android:textSize="20sp" android:maxLines="2" />
+    <TextView android:id="@+id/birthday_date" android:text="No birthday found" android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+  </LinearLayout>
+
+  <ImageView android:text="contact_name" android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:src="@drawable/ic_menu_forward" android:paddingLeft="5sp" android:paddingRight="5sp" />
+
+  <TextView android:id="@+id/contact_name" android:text="@string/contact_not_found" android:layout_width="wrap_content"
+    android:layout_height="wrap_content" android:textSize="20sp" android:maxLines="2"/>
+
 </LinearLayout>

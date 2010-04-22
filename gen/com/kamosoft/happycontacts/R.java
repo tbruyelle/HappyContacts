@@ -38,8 +38,9 @@ public final class R {
     }
     public static final class id {
         public static final int about_content=0x7f080001;
-        public static final int add_whitelist=0x7f08001d;
+        public static final int add_whitelist=0x7f08001e;
         public static final int autocomplete=0x7f080005;
+        public static final int birthday_date=0x7f08001d;
         public static final int button_name_cancel=0x7f080009;
         public static final int button_name_ok=0x7f080008;
         public static final int call_button=0x7f080016;
@@ -58,8 +59,7 @@ public final class R {
         public static final int layout_root=0x7f080000;
         public static final int mail_template_body=0x7f08000f;
         public static final int mail_template_subject=0x7f08000e;
-        public static final int name=0x7f08001c;
-        public static final int nameday=0x7f08001e;
+        public static final int nameday=0x7f08001f;
         public static final int nameday_title=0x7f080010;
         public static final int never_button=0x7f080019;
         public static final int nottoday_button=0x7f080017;
@@ -67,6 +67,7 @@ public final class R {
         public static final int pick_nameday=0x7f080011;
         public static final int reset_button=0x7f080014;
         public static final int sms_template_content=0x7f08001b;
+        public static final int user_name=0x7f08001c;
         public static final int webview=0x7f08000a;
     }
     public static final class layout {
@@ -117,6 +118,7 @@ public final class R {
         public static final int confirm_deleteall=0x7f060054;
         public static final int contact_method_dialog_title=0x7f060033;
         public static final int contact_method_not_supported=0x7f060034;
+        public static final int contact_not_found=0x7f06005f;
         public static final int date_list_title=0x7f06000e;
         public static final int dateback=0x7f060047;
         public static final int datenext=0x7f060048;

@@ -72,11 +72,7 @@ public class FacebookApi
                     sb.append( "," );
                     sb.append( friends.get( i ) );
                 }
-            }
-            if ( Log.DEBUG )
-            {
-                Log.d( sb.toString() );
-            }
+            }            
             return sb.toString();
         }
 
@@ -130,8 +126,7 @@ public class FacebookApi
 
             if ( Log.DEBUG )
             {
-                Log.d( "add new user " + fbUser.uid + ", " + fbUser.firstName + ", " + fbUser.lastName + ", "
-                    + fbUser.name + ", " + fbUser.birthday );
+                Log.d( "found FB user " + fbUser.name + ", " + fbUser.birthday );
             }
 
             list.add( fbUser );

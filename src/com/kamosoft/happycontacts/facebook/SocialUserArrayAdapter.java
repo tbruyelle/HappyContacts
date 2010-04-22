@@ -59,13 +59,20 @@ public class SocialUserArrayAdapter
         SocialNetworkUser user = mUsers.get( position );
         if ( user != null )
         {
-            // My layout has only one TextView
-            TextView itemView = (TextView) view.findViewById( R.id.name );
-            if ( itemView != null )
+
+            TextView userNameText = (TextView) view.findViewById( R.id.user_name );
+            userNameText.setText( user.name );
+            if ( user.birthday != null )
             {
-                // do whatever you want with your string and long
-                itemView.setText( user.name );
+                TextView birthdayText = (TextView) view.findViewById( R.id.birthday_date );
+                birthdayText.setText( user.birthday );
             }
+            
+            if ( user.getContactName() != null )
+            {
+                TextView contactNameText = (TextView) view.findViewById( R.id.contact_name );
+                contactNameText.setText( user.getContactName() );
+            }            
         }
         return view;
     }

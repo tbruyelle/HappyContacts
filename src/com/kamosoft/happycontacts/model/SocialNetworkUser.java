@@ -60,4 +60,13 @@ public final class SocialNetworkUser
         return contactName;
     }
 
+    /**
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString()
+    {
+        return name + " - " + contactName;
+    }
+
 }
