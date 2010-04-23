@@ -56,23 +56,30 @@ public class SocialUserArrayAdapter
             view = mInflater.inflate( R.layout.socialnetworkuser, null );
         }
 
-        SocialNetworkUser user = mUsers.get( position );
+        SocialNetworkUser user = getItem( position );
         if ( user != null )
         {
 
             TextView userNameText = (TextView) view.findViewById( R.id.user_name );
             userNameText.setText( user.name );
+            TextView birthdayText = (TextView) view.findViewById( R.id.birthday_date );
             if ( user.birthday != null )
-            {
-                TextView birthdayText = (TextView) view.findViewById( R.id.birthday_date );
+            {               
                 birthdayText.setText( user.birthday );
             }
-            
-            if ( user.getContactName() != null )
+            else
             {
-                TextView contactNameText = (TextView) view.findViewById( R.id.contact_name );
+                birthdayText.setTag( R.string.unknow_birthday );
+            }
+            TextView contactNameText = (TextView) view.findViewById( R.id.contact_name );
+            if ( user.getContactName() != null )
+            {                
                 contactNameText.setText( user.getContactName() );
             }            
+            else
+            {
+                contactNameText.setText( R.string.contact_not_found );
+            }
         }
         return view;
     }

@@ -107,4 +107,5 @@
 <string name="start_sync">Start synchronisation</string>
 <string name="store_birthdays">Store birthdays</string>
 <string name="confirm_delete_birthday">Do you really want to delete %s birthday ?</string>
+<string name="unknow_birthday">Birthday not provided</string>
 </resources>
