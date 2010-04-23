@@ -4,11 +4,14 @@
 package com.kamosoft.happycontacts;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -29,6 +32,10 @@ public class BirthdayActivity
     extends ListActivity
     implements OnClickListener, android.content.DialogInterface.OnClickListener
 {
+    private static final int DELETEALL_MENU_ID = Menu.FIRST;
+
+    private static final int DELETEALL_DIALOG_ID = 1;
+
     private DbAdapter mDb;
 
     private Cursor mCursor;
@@ -108,11 +115,15 @@ public class BirthdayActivity
         switch ( which )
         {
             case DialogInterface.BUTTON_POSITIVE:
-                mDb.deleteBlackList( mBirthdayId );
+                mDb.deleteBirthday( mBirthdayId );
                 fillList();
                 return;
             case DialogInterface.BUTTON_NEGATIVE:
                 dialog.dismiss();
+                return;
+            case DialogInterface.BUTTON_NEUTRAL:
+                mDb.deleteAllBirthday();
+                fillList();
                 return;
         }
     }
@@ -123,11 +134,11 @@ public class BirthdayActivity
     private void fillList()
     {
         mCursor = mDb.fetchAllBirthdays();
+        startManagingCursor( mCursor );
         if ( Log.DEBUG )
         {
             Log.d( "BirthdayActivity: retrieveing " + mCursor.getCount() + " birthdays from db" );
         }
-        startManagingCursor( mCursor );
         if ( mCursorAdapter == null )
         {
             String[] from =
@@ -176,6 +187,46 @@ public class BirthdayActivity
                 startActivity( new Intent( this, FacebookActivity.class ) );
                 return;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu )
+    {
+        super.onCreateOptionsMenu( menu );
+        menu.add( 0, DELETEALL_MENU_ID, 0, R.string.deleteall ).setIcon( R.drawable.ic_menu_delete );
+        return true;
+    }
+
+    @Override
+    public boolean onMenuItemSelected( int featureId, MenuItem item )
+    {
+        switch ( item.getItemId() )
+        {
+            case DELETEALL_MENU_ID:
+                showDialog( DELETEALL_DIALOG_ID );
+                return true;
+
+        }
+        return super.onMenuItemSelected( featureId, item );
+    }
+
+    /**
+     * @see android.app.Activity#onCreateDialog(int)
+     */
+    @Override
+    protected Dialog onCreateDialog( int id )
+    {
+        switch ( id )
+        {
+            case DELETEALL_DIALOG_ID:
+                AlertDialog.Builder builder = new AlertDialog.Builder( this );
+                builder.setMessage( R.string.confirm_deleteall ).setCancelable( false ).setNeutralButton( R.string.ok,
+                                                                                                          this ).setNegativeButton(
+                                                                                                                                    R.string.cancel,
+                                                                                                                                    this );
+                return builder.create();
+        }
+        return null;
     }
 
 }

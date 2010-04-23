@@ -38,6 +38,7 @@ create table birthday (
 create index idx_feast_day on feast (day);
 create index idx_feast_name on feast (name);
 create index idx_birthday_day on birthday (birthdayDate);
+create unique index idx_birthday_uniqueContactId on birthday (contactId);
 
 insert into feast (name, day, source) values ("Guadalupe", "09/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Jean-Diego", "09/12", "ephemeride.name");

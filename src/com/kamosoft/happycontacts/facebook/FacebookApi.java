@@ -72,7 +72,7 @@ public class FacebookApi
                     sb.append( "," );
                     sb.append( friends.get( i ) );
                 }
-            }            
+            }
             return sb.toString();
         }
 
@@ -122,7 +122,9 @@ public class FacebookApi
             fbUser.picUrl =
                 ( user.getString( "pic" ).equals( "null" ) || user.getString( "pic" ) == "" ) ? null
                                 : user.getString( "pic" );
-            fbUser.birthday = user.getString( "birthday" );
+            fbUser.birthday =
+                user.getString( "birthday" ).equals( "null" ) || user.getString( "birthday" ) == "" ? null
+                                : user.getString( "birthday" );
 
             if ( Log.DEBUG )
             {

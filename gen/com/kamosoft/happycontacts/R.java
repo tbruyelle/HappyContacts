@@ -34,17 +34,20 @@ public final class R {
         public static final int right_deco=0x7f02000e;
         public static final int sad=0x7f02000f;
         public static final int smile=0x7f020010;
-        public static final int umbrella=0x7f020011;
+        public static final int sync_ko=0x7f020011;
+        public static final int sync_not_found=0x7f020012;
+        public static final int sync_ok=0x7f020013;
+        public static final int umbrella=0x7f020014;
     }
     public static final class id {
         public static final int about_content=0x7f080001;
         public static final int add_birthday=0x7f080006;
-        public static final int add_whitelist=0x7f080024;
+        public static final int add_whitelist=0x7f080025;
         public static final int autocomplete=0x7f08000a;
         public static final int birthday_birthday_date=0x7f080004;
         public static final int birthday_birthday_year=0x7f080005;
         public static final int birthday_contact_name=0x7f080003;
-        public static final int birthday_date=0x7f080023;
+        public static final int birthday_date=0x7f080024;
         public static final int button_name_cancel=0x7f08000e;
         public static final int button_name_ok=0x7f08000d;
         public static final int call_button=0x7f08001c;
@@ -57,12 +60,13 @@ public final class R {
         public static final int element=0x7f08000b;
         public static final int fb_connect=0x7f080012;
         public static final int feast_counter=0x7f080013;
+        public static final int icon_sync=0x7f080022;
         public static final int last_wish_date=0x7f080009;
         public static final int later_button=0x7f08001e;
         public static final int layout_root=0x7f080000;
         public static final int mail_template_body=0x7f080015;
         public static final int mail_template_subject=0x7f080014;
-        public static final int nameday=0x7f080025;
+        public static final int nameday=0x7f080026;
         public static final int nameday_title=0x7f080016;
         public static final int never_button=0x7f08001f;
         public static final int nottoday_button=0x7f08001d;
@@ -73,7 +77,7 @@ public final class R {
         public static final int start_sync=0x7f080010;
         public static final int store_birthdays=0x7f080011;
         public static final int sync_facebook=0x7f080007;
-        public static final int user_name=0x7f080022;
+        public static final int user_name=0x7f080023;
         public static final int webview=0x7f08000f;
     }
     public static final class layout {

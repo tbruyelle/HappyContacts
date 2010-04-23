@@ -4,7 +4,11 @@
 package com.kamosoft.happycontacts.dao;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -30,6 +34,14 @@ public class DbAdapter
     private SQLiteDatabase mDb;
 
     private final Context mCtx;
+
+    private static final SimpleDateFormat birthdayFull = new SimpleDateFormat( "MMMM dd, yyyy", Locale.ENGLISH );
+
+    private static final SimpleDateFormat birthdaySmall = new SimpleDateFormat( "MMMM dd", Locale.ENGLISH );
+
+    private static final SimpleDateFormat dayDateFormat = new SimpleDateFormat( "dd/MM" );
+
+    private static final SimpleDateFormat yearDateFormat = new SimpleDateFormat( "yyyy" );
 
     private static class DatabaseHelper
         extends SQLiteOpenHelper
@@ -237,9 +249,30 @@ public class DbAdapter
         ContentValues initialValues = new ContentValues();
         initialValues.put( HappyContactsDb.Birthday.CONTACT_ID, contactId );
         initialValues.put( HappyContactsDb.Birthday.CONTACT_NAME, contactName );
-        /* TODO clause where à revoir si la date contient des années, formatter birthdayDate en dd/mm
-         * et ajouter l'année à part */
-        initialValues.put( HappyContactsDb.Birthday.BIRTHDAY_DATE, birthdayDate );
+        /* birthday date has format MMMM dd, yyyy or MMMM dd */
+        String birthday = null, birthyear = null;
+        try
+        {
+            Date date = birthdayFull.parse( birthdayDate );
+            birthday = dayDateFormat.format( date );
+            birthyear = yearDateFormat.format( date );
+
+        }
+        catch ( ParseException e )
+        {
+            try
+            {
+                Date date = birthdaySmall.parse( birthdayDate );
+                birthday = dayDateFormat.format( date );
+                birthyear = null;
+            }
+            catch ( ParseException e1 )
+            {
+                Log.e( "unable to parse date " + birthdayDate );
+            }
+        }
+        initialValues.put( HappyContactsDb.Birthday.BIRTHDAY_DATE, birthday );
+        initialValues.put( HappyContactsDb.Birthday.BIRTHDAY_YEAR, birthyear );
 
         return mDb.insert( HappyContactsDb.Birthday.TABLE_NAME, null, initialValues ) > 0;
     }
@@ -251,6 +284,15 @@ public class DbAdapter
             Log.v( "DbAdapter: call deleteBirthday(" + id + ")" );
         }
         return mDb.delete( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.ID + "=" + id, null ) > 0;
+    }
+
+    public boolean deleteAllBirthday()
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: call deleteAllBirthday()" );
+        }
+        return mDb.delete( HappyContactsDb.Birthday.TABLE_NAME, null, null ) > 0;
     }
 
     /**
@@ -291,6 +333,7 @@ public class DbAdapter
             user.setContactName( contactName );
             userList.add( user );
         }
+        cursor.close();
 
         if ( Log.DEBUG )
         {

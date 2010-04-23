@@ -10,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
 import com.kamosoft.happycontacts.model.SocialNetworkUser;
 
@@ -26,10 +28,6 @@ public class SocialUserArrayAdapter
 {
     private Context mContext;
 
-    private ArrayList<SocialNetworkUser> mUsers;
-
-    private LayoutInflater mInflater;
-
     /**
      * @param context
      * @param resource
@@ -39,9 +37,7 @@ public class SocialUserArrayAdapter
     public SocialUserArrayAdapter( Context context, int textViewResourceId, ArrayList<SocialNetworkUser> users )
     {
         super( context, textViewResourceId, users );
-        mUsers = users;
         mContext = context;
-        mInflater = (LayoutInflater) mContext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
     }
 
     /**
@@ -53,32 +49,43 @@ public class SocialUserArrayAdapter
         View view = convertView;
         if ( view == null )
         {
-            view = mInflater.inflate( R.layout.socialnetworkuser, null );
+            LayoutInflater layoutInflater =
+                (LayoutInflater) mContext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+            view = layoutInflater.inflate( R.layout.socialnetworkuser, null );
         }
 
         SocialNetworkUser user = getItem( position );
         if ( user != null )
         {
-
             TextView userNameText = (TextView) view.findViewById( R.id.user_name );
             userNameText.setText( user.name );
-            TextView birthdayText = (TextView) view.findViewById( R.id.birthday_date );
-            if ( user.birthday != null )
-            {               
-                birthdayText.setText( user.birthday );
-            }
-            else
+
+            if ( Log.DEBUG )
             {
+                TextView contactNameText = (TextView) view.findViewById( R.id.contact_name );
+                contactNameText.setVisibility( View.VISIBLE );
+                contactNameText.setText( user.getContactName() );
+            }
+
+            TextView birthdayText = (TextView) view.findViewById( R.id.birthday_date );
+            ImageView iconSync = (ImageView) view.findViewById( R.id.icon_sync );
+            if ( user.birthday == null )
+            {
+                iconSync.setImageResource( R.drawable.sync_ko );
                 birthdayText.setText( R.string.unknow_birthday );
             }
-            TextView contactNameText = (TextView) view.findViewById( R.id.contact_name );
-            if ( user.getContactName() != null )
-            {                
-                contactNameText.setText( user.getContactName() );
-            }            
             else
             {
-                contactNameText.setText( R.string.contact_not_found );
+                birthdayText.setText( user.birthday );
+
+                if ( user.getContactName() != null )
+                {
+                    iconSync.setImageResource( R.drawable.sync_ok );
+                }
+                else
+                {
+                    iconSync.setImageResource( R.drawable.sync_not_found );
+                }
             }
         }
         return view;

@@ -17,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.kamosoft.happycontacts.BirthdayActivity;
 import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
@@ -117,6 +118,14 @@ public class FacebookActivity
                 }
                 for ( SocialNetworkUser user : mUserList )
                 {
+                    if ( user.birthday == null )
+                    {
+                        if ( Log.DEBUG )
+                        {
+                            Log.d( "skpping user " + user.name + " no birthday provided" );
+                        }
+                        continue;
+                    }
                     if ( Log.DEBUG )
                     {
                         Log.d( "searching contact for user " + user.name );
@@ -144,10 +153,8 @@ public class FacebookActivity
                 }
                 /* record results in database */
                 mDb.insertSyncResults( mUserList );
-                mStoreButton.setVisibility( View.VISIBLE );
-                mArrayAdapter = new SocialUserArrayAdapter( this, R.layout.socialnetworkuser, mUserList );
 
-                setListAdapter( mArrayAdapter );
+                fillList();
             }
             else
             {
@@ -206,7 +213,6 @@ public class FacebookActivity
 
         mStoreButton = (Button) findViewById( R.id.store_birthdays );
         mStoreButton.setOnClickListener( this );
-        mStoreButton.setVisibility( View.GONE );
 
         mDb = new DbAdapter( this );
 
@@ -306,7 +312,7 @@ public class FacebookActivity
         {
             for ( SocialNetworkUser user : mUserList )
             {
-                if ( user.birthday == null || user.getContactId() == null )
+                if ( user.birthday == null || user.getContactName() == null )
                 {
                     /* we don't store if no birthday */
                     continue;
@@ -316,6 +322,13 @@ public class FacebookActivity
                     Log.e( "Error while inserting birthday " + user.toString() );
                 }
             }
+            Intent intent = new Intent( this, BirthdayActivity.class );
+            intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+            startActivity( intent );
+        }
+        else
+        {
+            Toast.makeText( this, R.string.no_birthday, Toast.LENGTH_SHORT ).show();
         }
     }
 }
