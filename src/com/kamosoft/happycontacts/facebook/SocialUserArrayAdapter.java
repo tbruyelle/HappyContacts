@@ -69,7 +69,7 @@ public class SocialUserArrayAdapter
             }
             else
             {
-                birthdayText.setTag( R.string.unknow_birthday );
+                birthdayText.setText( R.string.unknow_birthday );
             }
             TextView contactNameText = (TextView) view.findViewById( R.id.contact_name );
             if ( user.getContactName() != null )
