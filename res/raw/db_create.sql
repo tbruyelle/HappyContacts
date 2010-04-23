@@ -20,9 +20,24 @@ create table nameDay (
  contactName text not null,
  nameDay varchar(64) not null);
  
-
+create table syncResult (
+  _id integer primary key autoincrement,
+  userId integer not null,
+  userName text not null,
+  birthdayDate text null,
+  contactId integer null,
+  contactName text null);
+  
+create table birthday (
+  _id integer primary key autoincrement,
+  birthdayDate text not null,
+  birthdayYear text null,
+  contactId integer not null,
+  contactName text not null);
+ 
 create index idx_feast_day on feast (day);
 create index idx_feast_name on feast (name);
+create index idx_birthday_day on birthday (birthdayDate);
 
 insert into feast (name, day, source) values ("Guadalupe", "09/12", "ephemeride.name");
 insert into feast (name, day, source) values ("Jean-Diego", "09/12", "ephemeride.name");

@@ -11,7 +11,43 @@ public final class HappyContactsDb
 {
     public static String DATABASE_NAME = "happy_contacts";
 
-    public static int DATABASE_VERSION = 41;
+    public static int DATABASE_VERSION = 42;
+
+    public static final class SyncResult
+    {
+        public static String TABLE_NAME = "syncResult";
+
+        public static String ID = "_id";
+
+        public static String USER_ID = "userId";
+
+        public static String USER_NAME = "userName";
+
+        public static String BIRTHDAY_DATE = "birthdayDate";
+
+        public static String CONTACT_ID = "contactId";
+
+        public static String CONTACT_NAME = "contactName";
+
+        public static String[] COLUMNS = { ID, USER_ID, USER_NAME, BIRTHDAY_DATE, CONTACT_ID, CONTACT_NAME };
+    }
+
+    public static final class Birthday
+    {
+        public static String TABLE_NAME = "birthday";
+
+        public static String ID = "_id";
+
+        public static String BIRTHDAY_DATE = "birthdayDate";
+
+        public static String BIRTHDAY_YEAR = "birthdayYear";
+
+        public static String CONTACT_ID = "contactId";
+
+        public static String CONTACT_NAME = "contactName";
+
+        public static String[] COLUMNS = { ID, CONTACT_ID, CONTACT_NAME, BIRTHDAY_DATE, BIRTHDAY_YEAR };
+    }
 
     public static final class Feast
     {

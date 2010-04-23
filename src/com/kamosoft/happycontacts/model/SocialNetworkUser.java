@@ -66,7 +66,7 @@ public final class SocialNetworkUser
     @Override
     public String toString()
     {
-        return name + " - " + contactName;
+        return name + " - " + birthday + " - " + contactName;
     }
 
 }

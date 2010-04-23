@@ -46,7 +46,8 @@
     <activity android:name=".facebook.FacebookLoginActivity"
       android:label="@string/facebooklogin" />
 
-  </application>
+  <activity android:name="BirthdayActivity"></activity>
+</application>
   <uses-sdk android:minSdkVersion="3" android:targetSdkVersion="4" />
 
   <uses-permission android:name="android.permission.READ_CONTACTS" />

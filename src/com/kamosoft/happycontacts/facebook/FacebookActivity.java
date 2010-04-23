@@ -12,11 +12,15 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.Contacts.People;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
+import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.model.SocialNetworkUser;
 import com.kamosoft.utils.AndroidUtils;
 import com.nloko.simplyfacebook.net.FacebookRestClient;
@@ -29,11 +33,19 @@ import com.nloko.simplyfacebook.net.FacebookRestClient;
  */
 public class FacebookActivity
     extends ListActivity
-    implements Constants
+    implements Constants, OnClickListener
 {
     private static final int ACTIVITY_LOGIN = 1;
 
     private String[] mProjection = new String[] { People._ID, People.NAME };
+
+    private DbAdapter mDb;
+
+    private SocialUserArrayAdapter mArrayAdapter;
+
+    private ArrayList<SocialNetworkUser> mUserList;
+
+    private Button mStoreButton;
 
     /**
      * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
@@ -51,9 +63,20 @@ public class FacebookActivity
         switch ( requestCode )
         {
             case ACTIVITY_LOGIN:
-                sync();
+                fillList();
                 break;
         }
+    }
+
+    /**
+     * 
+     */
+    private void fillList()
+    {
+        mUserList = mDb.fetchAllSyncResults();
+
+        mArrayAdapter = new SocialUserArrayAdapter( this, R.layout.socialnetworkuser, mUserList );
+        setListAdapter( mArrayAdapter );
     }
 
     /**
@@ -78,12 +101,12 @@ public class FacebookActivity
             {
                 Log.v( "Start getUserInfo" );
             }
-            ArrayList<SocialNetworkUser> userList = api.getUserInfo( api.getFriends() );
+            mUserList = api.getUserInfo( api.getFriends() );
             if ( Log.DEBUG )
             {
                 Log.v( "End getUserInfo" );
             }
-            if ( userList != null && !userList.isEmpty() )
+            if ( mUserList != null && !mUserList.isEmpty() )
             {
                 Cursor contacts =
                     AndroidUtils.avoidEmptyName( this.getContentResolver().query( People.CONTENT_URI, mProjection,
@@ -92,7 +115,7 @@ public class FacebookActivity
                 {
                     Log.v( "Start matching with contacts" );
                 }
-                for ( SocialNetworkUser user : userList )
+                for ( SocialNetworkUser user : mUserList )
                 {
                     if ( Log.DEBUG )
                     {
@@ -119,11 +142,12 @@ public class FacebookActivity
                 {
                     Log.v( "Stop matching with contacts" );
                 }
+                /* record results in database */
+                mDb.insertSyncResults( mUserList );
+                mStoreButton.setVisibility( View.VISIBLE );
+                mArrayAdapter = new SocialUserArrayAdapter( this, R.layout.socialnetworkuser, mUserList );
 
-                SocialUserArrayAdapter adapter =
-                    new SocialUserArrayAdapter( this, R.layout.socialnetworkuser, userList );
-
-                setListAdapter( adapter );
+                setListAdapter( mArrayAdapter );
             }
             else
             {
@@ -172,30 +196,74 @@ public class FacebookActivity
     {
         if ( Log.DEBUG )
         {
-            Log.v( "onCreate FaceBookActivity start" );
+            Log.v( "FaceBookActivity: onCreate()  start" );
         }
         super.onCreate( savedInstanceState );
         setContentView( R.layout.facebook_sync );
+
+        Button syncButton = (Button) findViewById( R.id.start_sync );
+        syncButton.setOnClickListener( this );
+
+        mStoreButton = (Button) findViewById( R.id.store_birthdays );
+        mStoreButton.setOnClickListener( this );
+        mStoreButton.setVisibility( View.GONE );
+
+        mDb = new DbAdapter( this );
+
+        if ( Log.DEBUG )
+        {
+            Log.v( "FaceBookActivity: onCreate() end" );
+        }
+    }
+
+    @Override
+    protected void onResume()
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "FaceBookActivity: start onResume" );
+        }
+        super.onResume();
+
+        mDb.open( false );
 
         if ( isLoggedIn() )
         {
             if ( Log.DEBUG )
             {
-                Log.v( "onCreate FaceBookActivity user logged" );
+                Log.v( "FaceBookActivity: onCreate user logged" );
             }
-            sync();
+            fillList();
         }
         else
         {
             if ( Log.DEBUG )
             {
-                Log.v( "onCreate FaceBookActivity start login" );
+                Log.v( "FaceBookActivity: onCreate start login" );
             }
             startActivityForResult( new Intent( this, FacebookLoginActivity.class ), ACTIVITY_LOGIN );
         }
         if ( Log.DEBUG )
         {
-            Log.v( "onCreate FaceBookActivity end" );
+            Log.v( "FaceBookActivity: end onResume" );
+        }
+    }
+
+    @Override
+    protected void onStop()
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "BirthdayActivity: start onStop" );
+        }
+        super.onStop();
+        if ( mDb != null )
+        {
+            mDb.close();
+        }
+        if ( Log.DEBUG )
+        {
+            Log.v( "BirthdayActivity: end onStop" );
         }
     }
 
@@ -210,5 +278,44 @@ public class FacebookActivity
         String uid = settings.getString( "uid", null );
 
         return session_key != null && secret != null && uid != null;
+    }
+
+    /**
+     * @see android.view.View.OnClickListener#onClick(android.view.View)
+     */
+    @Override
+    public void onClick( View view )
+    {
+        switch ( view.getId() )
+        {
+            case R.id.start_sync:
+                sync();
+                return;
+            case R.id.store_birthdays:
+                store();
+                return;
+        }
+    }
+
+    /**
+     * 
+     */
+    private void store()
+    {
+        if ( mUserList != null && !mUserList.isEmpty() )
+        {
+            for ( SocialNetworkUser user : mUserList )
+            {
+                if ( user.birthday == null || user.getContactId() == null )
+                {
+                    /* we don't store if no birthday */
+                    continue;
+                }
+                if ( !mDb.insertBirthday( user.getContactId(), user.getContactName(), user.birthday ) )
+                {
+                    Log.e( "Error while inserting birthday " + user.toString() );
+                }
+            }
+        }
     }
 }

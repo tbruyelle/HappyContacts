@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent"
+  android:layout_height="fill_parent" android:orientation="horizontal" android:gravity="center_horizontal|center_vertical">
+
+  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/birthday_contact_name"
+    android:textSize="20sp" android:text="birthday_contact_name" android:layout_alignParentLeft="true" android:paddingLeft="5sp"
+    android:maxLines="2" />
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="wrap_content"
+    android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center_horizontal|center_vertical"
+    android:layout_alignParentRight="true" android:paddingRight="5sp">
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/birthday_birthday_date"
+      android:text="birthday_birthday_date" />
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/birthday_birthday_year"
+      android:text="birthday_birthday_year" />
+  </LinearLayout>
+
+</RelativeLayout>

@@ -4,6 +4,7 @@
 package com.kamosoft.happycontacts.dao;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -14,6 +15,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
+import com.kamosoft.happycontacts.model.SocialNetworkUser;
 import com.kamosoft.utils.AndroidUtils;
 import com.kamosoft.utils.ProgressDialogHandler;
 
@@ -174,6 +176,168 @@ public class DbAdapter
     public void close()
     {
         mDbHelper.close();
+    }
+
+    /**
+     * Return the birthdays
+     * @return
+     */
+    public Cursor fetchAllBirthdays()
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start fetchAllBirthdays()" );
+        }
+        /* use order by name */
+        Cursor cursor =
+            mDb.query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS, null, null, null, null,
+                       HappyContactsDb.Birthday.CONTACT_NAME );
+
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: end fetchAllBirthdays()" );
+        }
+        return cursor;
+    }
+
+    /**
+     * Return the birthdays for a given day
+     * @param day format dd/MM
+     * @return
+     */
+    public Cursor fetchBirthdayForDay( String day )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start fetchBirthdayForDay(" + day + ")" );
+        }
+        /* use order by name */
+        Cursor cursor =
+            mDb.query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS,
+                       HappyContactsDb.Birthday.BIRTHDAY_DATE + "='" + day + "'", null, null, null,
+                       HappyContactsDb.Birthday.CONTACT_NAME );
+
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: end fetchBirthdayForDay()" );
+        }
+        return cursor;
+    }
+
+    /**
+     * insert a birthday 
+     * @return
+     */
+    public boolean insertBirthday( Long contactId, String contactName, String birthdayDate )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start insertBirthday(" + contactId + ", " + contactName + ", " + birthdayDate );
+        }
+        ContentValues initialValues = new ContentValues();
+        initialValues.put( HappyContactsDb.Birthday.CONTACT_ID, contactId );
+        initialValues.put( HappyContactsDb.Birthday.CONTACT_NAME, contactName );
+        /* TODO clause where à revoir si la date contient des années, formatter birthdayDate en dd/mm
+         * et ajouter l'année à part */
+        initialValues.put( HappyContactsDb.Birthday.BIRTHDAY_DATE, birthdayDate );
+
+        return mDb.insert( HappyContactsDb.Birthday.TABLE_NAME, null, initialValues ) > 0;
+    }
+
+    public boolean deleteBirthday( long id )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: call deleteBirthday(" + id + ")" );
+        }
+        return mDb.delete( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.ID + "=" + id, null ) > 0;
+    }
+
+    /**
+     * Return the sync results
+     * @return
+     */
+    public ArrayList<SocialNetworkUser> fetchAllSyncResults()
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start fetchAllSyncResult()" );
+        }
+        /* use order by name */
+        Cursor cursor =
+            mDb.query( HappyContactsDb.SyncResult.TABLE_NAME, HappyContactsDb.SyncResult.COLUMNS, null, null, null,
+                       null, HappyContactsDb.SyncResult.USER_NAME );
+
+        int userIdColumnId = cursor.getColumnIndexOrThrow( HappyContactsDb.SyncResult.USER_ID );
+        int userNameColumnId = cursor.getColumnIndexOrThrow( HappyContactsDb.SyncResult.USER_NAME );
+        int birthdayColumnId = cursor.getColumnIndexOrThrow( HappyContactsDb.SyncResult.BIRTHDAY_DATE );
+        int contactIdColumnId = cursor.getColumnIndexOrThrow( HappyContactsDb.SyncResult.CONTACT_ID );
+        int contactNameColumnId = cursor.getColumnIndexOrThrow( HappyContactsDb.SyncResult.CONTACT_NAME );
+
+        ArrayList<SocialNetworkUser> userList = new ArrayList<SocialNetworkUser>();
+
+        while ( cursor.moveToNext() )
+        {
+            String userId = cursor.getString( userIdColumnId );
+            String userName = cursor.getString( userNameColumnId );
+            String birthday = cursor.getString( birthdayColumnId );
+            Long contactId = cursor.getLong( contactIdColumnId );
+            String contactName = cursor.getString( contactNameColumnId );
+            SocialNetworkUser user = new SocialNetworkUser();
+            user.uid = userId;
+            user.name = userName;
+            user.birthday = birthday;
+            user.setContactId( contactId );
+            user.setContactName( contactName );
+            userList.add( user );
+        }
+
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: end fetchAllSyncResult()" );
+        }
+        return userList;
+    }
+
+    public boolean deleteAllSyncResults()
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: call deleteAllSyncResults()" );
+        }
+        return mDb.delete( HappyContactsDb.SyncResult.TABLE_NAME, null, null ) > 0;
+    }
+
+    public boolean insertSyncResults( ArrayList<SocialNetworkUser> users )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start insertSyncResults" );
+        }
+        /* delete all previous sync results */
+        deleteAllSyncResults();
+        boolean res = false;
+        for ( SocialNetworkUser user : users )
+        {
+            ContentValues initialValues = new ContentValues();
+            initialValues.put( HappyContactsDb.SyncResult.USER_ID, user.uid );
+            initialValues.put( HappyContactsDb.SyncResult.USER_NAME, user.name );
+            initialValues.put( HappyContactsDb.SyncResult.BIRTHDAY_DATE, user.birthday );
+            initialValues.put( HappyContactsDb.SyncResult.CONTACT_ID, user.getContactId() );
+            initialValues.put( HappyContactsDb.SyncResult.CONTACT_NAME, user.getContactName() );
+
+            res = mDb.insert( HappyContactsDb.SyncResult.TABLE_NAME, null, initialValues ) > 0;
+            if ( !res )
+            {
+                Log.e( "Error while insert syncResults for user " + user.toString() );
+                return res;
+            }
+        }
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: end insertSyncResults" );
+        }
+        return true;
     }
 
     /**
@@ -367,7 +531,7 @@ public class DbAdapter
     {
         if ( Log.DEBUG )
         {
-            Log.v( "DbAdapter: call fetchWhiteListForNameDay() "+nameDay );
+            Log.v( "DbAdapter: call fetchWhiteListForNameDay() " + nameDay );
         }
         return mDb.query( HappyContactsDb.WhiteList.TABLE_NAME, HappyContactsDb.WhiteList.COLUMNS,
                           HappyContactsDb.WhiteList.NAME_DAY + " = \"" + nameDay + "\"", null, null, null, null );

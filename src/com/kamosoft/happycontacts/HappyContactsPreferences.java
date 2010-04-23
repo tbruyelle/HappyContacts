@@ -25,7 +25,6 @@ import android.widget.TimePicker;
 import com.kamosoft.happycontacts.alarm.AlarmController;
 import com.kamosoft.happycontacts.blacklist.BlackListActivity;
 import com.kamosoft.happycontacts.dao.DbAdapter;
-import com.kamosoft.happycontacts.facebook.FacebookActivity;
 import com.kamosoft.happycontacts.template.MailTemplateActivity;
 import com.kamosoft.happycontacts.template.SmsTemplateActivity;
 import com.kamosoft.utils.AndroidUtils;
@@ -239,11 +238,11 @@ public class HappyContactsPreferences
         databasePrefCat.setTitle( R.string.pref_data_cat );
         root.addPreference( databasePrefCat );
 
-        /* fb connect for birthday */
+        /* birthday */
         Preference fbConnectPref = new Preference( this );
-        fbConnectPref.setTitle( R.string.pref_fb_connect );
-        fbConnectPref.setSummary( R.string.pref_fb_connect_summary );
-        fbConnectPref.setIntent( new Intent( this, FacebookActivity.class ) );
+        fbConnectPref.setTitle( R.string.pref_birthday );
+        fbConnectPref.setSummary( R.string.pref_birthday_summary );
+        fbConnectPref.setIntent( new Intent( this, BirthdayActivity.class ) );
         databasePrefCat.addPreference( fbConnectPref );
 
         /* check todays name days */
