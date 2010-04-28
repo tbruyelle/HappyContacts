@@ -5,10 +5,8 @@ package com.kamosoft.happycontacts.dao;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -17,6 +15,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
 import com.kamosoft.happycontacts.model.SocialNetworkUser;
@@ -28,20 +27,13 @@ import com.kamosoft.utils.ProgressDialogHandler;
  * 
  */
 public class DbAdapter
+    implements Constants
 {
     private DatabaseHelper mDbHelper;
 
     private SQLiteDatabase mDb;
 
     private final Context mCtx;
-
-    private static final SimpleDateFormat birthdayFull = new SimpleDateFormat( "MMMM dd, yyyy", Locale.ENGLISH );
-
-    private static final SimpleDateFormat birthdaySmall = new SimpleDateFormat( "MMMM dd", Locale.ENGLISH );
-
-    private static final SimpleDateFormat dayDateFormat = new SimpleDateFormat( "dd/MM" );
-
-    private static final SimpleDateFormat yearDateFormat = new SimpleDateFormat( "yyyy" );
 
     private static class DatabaseHelper
         extends SQLiteOpenHelper
@@ -237,40 +229,59 @@ public class DbAdapter
     }
 
     /**
-     * insert a birthday 
-     * @return
+     * @param contactId
+     * @return String the birthday date or null
      */
-    public boolean insertBirthday( Long contactId, String contactName, String birthdayDate )
+    public Date getBirthday( Long contactId )
     {
         if ( Log.DEBUG )
         {
-            Log.v( "DbAdapter: start insertBirthday(" + contactId + ", " + contactName + ", " + birthdayDate );
+            Log.v( "DbAdapter: start hasBirthday(" + contactId + ")" );
+        }
+        Cursor cursor =
+            mDb.query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS,
+                       HappyContactsDb.Birthday.CONTACT_ID + "='" + contactId + "'", null, null, null, null );
+        Date birthdayDate = null;
+        if ( cursor.getCount() > 0 )
+        {
+            cursor.moveToFirst();
+            String day = cursor.getString( cursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.BIRTHDAY_DATE ) );
+            String year = cursor.getString( cursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.BIRTHDAY_YEAR ) );
+            cursor.close();
+            String date = day + "/" + year;
+
+            try
+            {
+                birthdayDate = fullDateFormat.parse( date );
+            }
+            catch ( ParseException e )
+            {
+                Log.e( "unable to parse date " + date );
+            }
+        }
+        cursor.close();
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: end hasBirthday with date " + birthdayDate );
+        }
+        return birthdayDate;
+    }
+
+    /**
+     * insert a birthday 
+     * @return
+     */
+    public boolean insertBirthday( Long contactId, String contactName, String birthday, String birthyear )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start insertBirthday(" + contactId + ", " + contactName + ", " + birthday + ", "
+                + birthyear );
         }
         ContentValues initialValues = new ContentValues();
         initialValues.put( HappyContactsDb.Birthday.CONTACT_ID, contactId );
         initialValues.put( HappyContactsDb.Birthday.CONTACT_NAME, contactName );
-        /* birthday date has format MMMM dd, yyyy or MMMM dd */
-        String birthday = null, birthyear = null;
-        try
-        {
-            Date date = birthdayFull.parse( birthdayDate );
-            birthday = dayDateFormat.format( date );
-            birthyear = yearDateFormat.format( date );
 
-        }
-        catch ( ParseException e )
-        {
-            try
-            {
-                Date date = birthdaySmall.parse( birthdayDate );
-                birthday = dayDateFormat.format( date );
-                birthyear = null;
-            }
-            catch ( ParseException e1 )
-            {
-                Log.e( "unable to parse date " + birthdayDate );
-            }
-        }
         initialValues.put( HappyContactsDb.Birthday.BIRTHDAY_DATE, birthday );
         initialValues.put( HappyContactsDb.Birthday.BIRTHDAY_YEAR, birthyear );
 
@@ -284,6 +295,40 @@ public class DbAdapter
             Log.v( "DbAdapter: call deleteBirthday(" + id + ")" );
         }
         return mDb.delete( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.ID + "=" + id, null ) > 0;
+    }
+
+    public boolean deleteBirthdayWithContactId( Long contactId )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: call deleteBirthdayWithContactId(" + contactId + ")" );
+        }
+        return mDb.delete( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.CONTACT_ID + "=" + contactId,
+                           null ) > 0;
+    }
+
+    public boolean updateBirthday( Long contactId, String contactName, String birthday, String birthyear )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start updateBirthday(" + contactId + ", " + contactName + ", " + birthday + ", "
+                + birthyear );
+        }
+        if ( !this.deleteBirthdayWithContactId( contactId ) )
+        {
+            Log.e( "Error while deleting " + contactId + ", " + contactName + ", " + birthday + ", " + birthyear );
+            return false;
+        }
+        if ( !this.insertBirthday( contactId, contactName, birthday, birthyear ) )
+        {
+            Log.e( "Error while inserting " + contactId + ", " + contactName + ", " + birthday + ", " + birthyear );
+            return false;
+        }
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: end success updateBirthday" );
+        }
+        return true;
     }
 
     public boolean deleteAllBirthday()

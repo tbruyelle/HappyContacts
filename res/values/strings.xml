@@ -83,7 +83,7 @@
 <string name="pref_whitelist_summary">Link a contact to a name-day (usefull for contacts with nickname)</string>
 <string name="empty_name">Please enter a name</string>
 <string name="whitelist_added">%s has been added to white list</string>
-<string name="pick_contact">1. Pick a contact with a nickname</string>
+<string name="pick_contact_nickname">1. Pick a contact with a nickname</string>
 <string name="pick_nameday">2. Pick a name day for %s</string>
 <string name="confirm_delete_whitelist">Are you sure you want to delete link between %s and %s ?</string>
 <string name="confirm_delete_blacklist">Are you sure you want to delete %s from blacklist ?</string>
@@ -108,4 +108,9 @@
 <string name="store_birthdays">Store birthdays</string>
 <string name="confirm_delete_birthday">Do you really want to delete %s birthday ?</string>
 <string name="unknow_birthday">Birthday not provided</string>
+<string name="pick_birthday_label">Pick birthday date for %s</string>
+<string name="birthday_added">Birthday added successfully</string>
+<string name="pick_contact_birthday">Pick a contact</string>
+<string name="pick_birthday_update_label">Update birthday date for %s</string>
+<string name="birthday_updated">Birthday updated successfully</string>
 </resources>

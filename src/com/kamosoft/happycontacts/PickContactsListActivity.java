@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import com.kamosoft.utils.AndroidUtils;
 
@@ -32,6 +33,8 @@ public class PickContactsListActivity
 
     private String[] mProjection = new String[] { People._ID, People.NAME };
 
+    private Class<?> mNextActivity;
+
     @Override
     protected void onCreate( Bundle savedInstanceState )
     {
@@ -43,6 +46,11 @@ public class PickContactsListActivity
         setContentView( R.layout.contactlist );
         mEditText = (EditText) findViewById( R.id.autocomplete );
         mEditText.addTextChangedListener( this );
+
+        mNextActivity = (Class<?>) getIntent().getExtras().getSerializable( NEXT_ACTIVITY_INTENT_KEY );
+        int pickContactLabel = getIntent().getExtras().getInt( PICK_CONTACT_LABEL_INTENT_KEY );
+        TextView textView = (TextView) findViewById( R.id.pick_contact_label );
+        textView.setText( pickContactLabel );
         fillList( null );
 
         if ( Log.DEBUG )
@@ -83,7 +91,7 @@ public class PickContactsListActivity
     private void onContactClick( int position )
     {
         mCursor.moveToPosition( position );
-        Intent intent = new Intent( this, PickNameDayListActivity.class );
+        Intent intent = new Intent( this, mNextActivity );
         intent.putExtra( CONTACTID_INTENT_KEY, mCursor.getLong( mCursor.getColumnIndex( People._ID ) ) );
         intent.putExtra( CONTACTNAME_INTENT_KEY, mCursor.getString( mCursor.getColumnIndex( People.NAME ) ) );
         startActivity( intent );

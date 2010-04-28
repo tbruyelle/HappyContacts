@@ -3,7 +3,6 @@
  */
 package com.kamosoft.happycontacts;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import android.app.DatePickerDialog;
@@ -120,9 +119,8 @@ public abstract class DateNameListOptionsMenu
                                                                                   Calendar cal = Calendar.getInstance();
                                                                                   cal.set( year, monthOfYear,
                                                                                            dayOfMonth );
-                                                                                  SimpleDateFormat dateFormat = new SimpleDateFormat(
-                                                                                                                                      DAY_FORMAT );
-                                                                                  String day = dateFormat.format( cal
+                                                                                  
+                                                                                  String day = dayDateFormat.format( cal
                                                                                       .getTime() );
                                                                                   Intent intent = new Intent(
                                                                                                               DateNameListOptionsMenu.this,

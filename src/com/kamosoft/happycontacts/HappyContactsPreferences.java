@@ -3,7 +3,6 @@
  */
 package com.kamosoft.happycontacts;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Dialog;
@@ -23,6 +22,7 @@ import android.text.format.DateFormat;
 import android.widget.TimePicker;
 
 import com.kamosoft.happycontacts.alarm.AlarmController;
+import com.kamosoft.happycontacts.birthday.BirthdayActivity;
 import com.kamosoft.happycontacts.blacklist.BlackListActivity;
 import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.template.MailTemplateActivity;
@@ -265,8 +265,7 @@ public class HappyContactsPreferences
         nameListPref.setTitle( R.string.pref_feast_list );
         nameListPref.setSummary( R.string.pref_feast_list_summary );
         Intent intent = new Intent( this, NameListActivity.class );
-        SimpleDateFormat dateFormat = new SimpleDateFormat( DAY_FORMAT );
-        intent.putExtra( DATE_INTENT_KEY, dateFormat.format( new Date() ) );
+        intent.putExtra( DATE_INTENT_KEY, dayDateFormat.format( new Date() ) );
         nameListPref.setIntent( intent );
         databasePrefCat.addPreference( nameListPref );
 

@@ -88,7 +88,7 @@
 <string name="confirm_delete_blacklist">Etes-vous sûr de vouloir supprimer %s de la liste noire ?</string>
 <string name="deleteall">Supprimer tout</string>
 <string name="confirm_deleteall">Voulez-vous vraiment tout supprimer ?</string>
-<string name="pick_contact">1. Choississez un contact avec un surnom</string>
+<string name="pick_contact_nickname">1. Choississez un contact avec un surnom</string>
 <string name="type_to_filter">Tapez pour filtrer</string>
 <string name="add_whitelist">Associer un contact avec un prénom</string>
 <string name="can_match_normally">%s peut déjà correspondre au prénom %s, il est donc inutile de l\'ajouter à la liste blanche.</string>

@@ -1,7 +1,7 @@
 /**
  * Copyright (C) Kamosoft 2010
  */
-package com.kamosoft.happycontacts;
+package com.kamosoft.happycontacts.birthday;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -18,6 +18,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
+import com.kamosoft.happycontacts.Constants;
+import com.kamosoft.happycontacts.Log;
+import com.kamosoft.happycontacts.PickContactsListActivity;
+import com.kamosoft.happycontacts.R;
 import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.dao.HappyContactsDb;
 import com.kamosoft.happycontacts.facebook.FacebookActivity;
@@ -30,7 +34,7 @@ import com.kamosoft.happycontacts.facebook.FacebookActivity;
  */
 public class BirthdayActivity
     extends ListActivity
-    implements OnClickListener, android.content.DialogInterface.OnClickListener
+    implements OnClickListener, android.content.DialogInterface.OnClickListener, Constants
 {
     private static final int DELETEALL_MENU_ID = Menu.FIRST;
 
@@ -181,8 +185,12 @@ public class BirthdayActivity
         switch ( view.getId() )
         {
             case R.id.add_birthday:
-                /* TODO */
+                Intent intent = new Intent( this, PickContactsListActivity.class );
+                intent.putExtra( NEXT_ACTIVITY_INTENT_KEY, PickBirthdayActivity.class );
+                intent.putExtra( PICK_CONTACT_LABEL_INTENT_KEY, R.string.pick_contact_birthday );
+                startActivity( intent );
                 return;
+
             case R.id.sync_facebook:
                 startActivity( new Intent( this, FacebookActivity.class ) );
                 return;

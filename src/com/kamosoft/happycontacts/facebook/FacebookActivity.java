@@ -3,7 +3,9 @@
  */
 package com.kamosoft.happycontacts.facebook;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import android.app.Activity;
 import android.app.ListActivity;
@@ -17,10 +19,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.kamosoft.happycontacts.BirthdayActivity;
 import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
+import com.kamosoft.happycontacts.birthday.BirthdayActivity;
 import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.model.SocialNetworkUser;
 import com.kamosoft.utils.AndroidUtils;
@@ -317,7 +319,30 @@ public class FacebookActivity
                     /* we don't store if no birthday */
                     continue;
                 }
-                if ( !mDb.insertBirthday( user.getContactId(), user.getContactName(), user.birthday ) )
+                /* facebook birthday date has format MMMM dd, yyyy or MMMM dd */
+                String birthday = null, birthyear = null;
+                try
+                {
+                    Date date = FB_birthdayFull.parse( user.birthday );
+                    birthday = dayDateFormat.format( date );
+                    birthyear = yearDateFormat.format( date );
+
+                }
+                catch ( ParseException e )
+                {
+                    try
+                    {
+                        Date date = FB_birthdaySmall.parse( user.birthday );
+                        birthday = dayDateFormat.format( date );
+                        birthyear = null;
+                    }
+                    catch ( ParseException e1 )
+                    {
+                        Log.e( "unable to parse date " + user.birthday );
+                        continue;
+                    }
+                }
+                if ( !mDb.insertBirthday( user.getContactId(), user.getContactName(), birthday, birthyear ) )
                 {
                     Log.e( "Error while inserting birthday " + user.toString() );
                 }

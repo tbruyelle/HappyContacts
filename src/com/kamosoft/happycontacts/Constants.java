@@ -3,6 +3,9 @@
  */
 package com.kamosoft.happycontacts;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 /**
  * @author tom
  *
@@ -10,8 +13,9 @@ package com.kamosoft.happycontacts;
  * @version $Id$
  */
 public interface Constants
-{    
+{
     public static final String FACEBOOK_API_KEY = "8e9a98e18c9e1c174e6c8904d9ed350e";
+
     public static final String FACEBOOK_SECRET_API_KEY = "6ad543258350e403b907878a8f4b5308";
 
     public static final String FACEBOOK_API_NAME = "HappyContacts";
@@ -50,6 +54,10 @@ public interface Constants
 
     public static final String CONTACTID_INTENT_KEY = "contactId";
 
+    public static final String NEXT_ACTIVITY_INTENT_KEY = "nextActivity";
+
+    public static final String PICK_CONTACT_LABEL_INTENT_KEY = "pickContactLabel";
+
     /* contact methods in the string array 'contactmethods_items' */
     public static final int CALL_ITEM_INDEX = 0;
 
@@ -58,5 +66,16 @@ public interface Constants
     public static final int EMAIL_ITEM_INDEX = 2;
 
     public static final String CONTACTFEAST_INTENT_KEY = "ContactFeasts";
+
+    /* date formats */
+    public static final SimpleDateFormat FB_birthdayFull = new SimpleDateFormat( "MMMM dd, yyyy", Locale.ENGLISH );
+
+    public static final SimpleDateFormat FB_birthdaySmall = new SimpleDateFormat( "MMMM dd", Locale.ENGLISH );
+
+    public static final SimpleDateFormat dayDateFormat = new SimpleDateFormat( DAY_FORMAT );
+
+    public static final SimpleDateFormat fullDateFormat = new SimpleDateFormat( FULL_DATE_FORMAT );
+
+    public static final SimpleDateFormat yearDateFormat = new SimpleDateFormat( "yyyy" );
 
 }

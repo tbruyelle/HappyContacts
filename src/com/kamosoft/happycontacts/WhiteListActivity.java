@@ -30,7 +30,7 @@ import com.kamosoft.happycontacts.dao.HappyContactsDb;
  */
 public class WhiteListActivity
     extends ListActivity
-    implements OnClickListener, DialogInterface.OnClickListener
+    implements OnClickListener, DialogInterface.OnClickListener, Constants
 {
     private static final int DELETEALL_MENU_ID = Menu.FIRST;
 
@@ -123,7 +123,10 @@ public class WhiteListActivity
     @Override
     public void onClick( View v )
     {
-        startActivity( new Intent( this, PickContactsListActivity.class ) );
+        Intent intent = new Intent( this, PickContactsListActivity.class );
+        intent.putExtra( NEXT_ACTIVITY_INTENT_KEY, PickNameDayListActivity.class );
+        intent.putExtra( PICK_CONTACT_LABEL_INTENT_KEY, R.string.pick_contact_nickname );
+        startActivity( intent );
 
         //            /* hide the keyboard */
         //            InputMethodManager inputManager = (InputMethodManager) this.getSystemService( Context.INPUT_METHOD_SERVICE );
