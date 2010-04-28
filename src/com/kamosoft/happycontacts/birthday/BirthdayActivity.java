@@ -10,13 +10,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.Log;
@@ -40,13 +42,15 @@ public class BirthdayActivity
 
     private static final int DELETEALL_DIALOG_ID = 1;
 
+    private static final int EDIT_CONTEXT_MENU_ID = 1;
+
+    private static final int DELETE_CONTEXT_MENU_ID = 2;
+
     private DbAdapter mDb;
 
     private Cursor mCursor;
 
     private SimpleCursorAdapter mCursorAdapter;
-
-    private Long mBirthdayId;
 
     /**
      * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -67,6 +71,8 @@ public class BirthdayActivity
         syncFacebook.setOnClickListener( this );
 
         mDb = new DbAdapter( this );
+
+        registerForContextMenu( getListView() );
 
         if ( Log.DEBUG )
         {
@@ -92,22 +98,40 @@ public class BirthdayActivity
         }
     }
 
-    /**
-     * @see android.app.ListActivity#onListItemClick(android.widget.ListView, android.view.View, int, long)
-     */
-    @Override
-    protected void onListItemClick( ListView l, View v, int position, long id )
+    public void onCreateContextMenu( ContextMenu menu, View v, ContextMenuInfo menuInfo )
     {
-        super.onListItemClick( l, v, position, id );
-        mBirthdayId = mCursor.getLong( mCursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.ID ) );
-        String name = mCursor.getString( mCursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.CONTACT_NAME ) );
-        AlertDialog.Builder builder = new AlertDialog.Builder( this );
-        builder.setMessage( getString( R.string.confirm_delete_birthday, name ) ).setCancelable( false ).setPositiveButton(
-                                                                                                                            R.string.ok,
-                                                                                                                            this ).setNegativeButton(
-                                                                                                                                                      R.string.cancel,
-                                                                                                                                                      this );
-        builder.create().show();
+        super.onCreateContextMenu( menu, v, menuInfo );
+        menu.add( 0, EDIT_CONTEXT_MENU_ID, 0, getString( R.string.update ) );
+        menu.add( 0, DELETE_CONTEXT_MENU_ID, 0, getString( R.string.delete ) );
+    }
+
+    @Override
+    public boolean onContextItemSelected( MenuItem item )
+    {
+        AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+        switch ( item.getItemId() )
+        {
+            case EDIT_CONTEXT_MENU_ID:
+                mCursor.moveToPosition( info.position );
+                Long contactId = mCursor.getLong( mCursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.CONTACT_ID ) );
+                String contactName =
+                    mCursor.getString( mCursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.CONTACT_NAME ) );
+                Intent intent = new Intent( this, PickBirthdayActivity.class );
+                intent.putExtra( CONTACTID_INTENT_KEY, contactId );
+                intent.putExtra( CONTACTNAME_INTENT_KEY, contactName );
+                startActivity( intent );
+                return true;
+
+            case DELETE_CONTEXT_MENU_ID:
+                if ( !mDb.deleteBirthday( info.id ) )
+                {
+                    Log.e( "Error while deleting item " + info.id );
+                }
+                fillList();
+                return true;
+            default:
+                return super.onContextItemSelected( item );
+        }
     }
 
     /**
@@ -118,14 +142,10 @@ public class BirthdayActivity
     {
         switch ( which )
         {
-            case DialogInterface.BUTTON_POSITIVE:
-                mDb.deleteBirthday( mBirthdayId );
-                fillList();
-                return;
             case DialogInterface.BUTTON_NEGATIVE:
                 dialog.dismiss();
                 return;
-            case DialogInterface.BUTTON_NEUTRAL:
+            case DialogInterface.BUTTON_POSITIVE:
                 mDb.deleteAllBirthday();
                 fillList();
                 return;
@@ -206,16 +226,15 @@ public class BirthdayActivity
     }
 
     @Override
-    public boolean onMenuItemSelected( int featureId, MenuItem item )
+    public boolean onOptionsItemSelected( MenuItem item )
     {
         switch ( item.getItemId() )
         {
             case DELETEALL_MENU_ID:
                 showDialog( DELETEALL_DIALOG_ID );
                 return true;
-
         }
-        return super.onMenuItemSelected( featureId, item );
+        return super.onOptionsItemSelected( item );
     }
 
     /**
@@ -228,13 +247,12 @@ public class BirthdayActivity
         {
             case DELETEALL_DIALOG_ID:
                 AlertDialog.Builder builder = new AlertDialog.Builder( this );
-                builder.setMessage( R.string.confirm_deleteall ).setCancelable( false ).setNeutralButton( R.string.ok,
-                                                                                                          this ).setNegativeButton(
-                                                                                                                                    R.string.cancel,
-                                                                                                                                    this );
+                builder.setMessage( R.string.confirm_deleteall ).setCancelable( false ).setPositiveButton( R.string.ok,
+                                                                                                           this ).setNegativeButton(
+                                                                                                                                     R.string.cancel,
+                                                                                                                                     this );
                 return builder.create();
         }
         return null;
     }
-
 }

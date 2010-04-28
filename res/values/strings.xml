@@ -113,4 +113,6 @@
 <string name="pick_contact_birthday">Pick a contact</string>
 <string name="pick_birthday_update_label">Update birthday date for %s</string>
 <string name="birthday_updated">Birthday updated successfully</string>
+<string name="delete">Delete</string>
+<string name="update">Update</string>
 </resources>

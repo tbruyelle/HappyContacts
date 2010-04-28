@@ -146,6 +146,7 @@ public final class R {
         public static final int default_mail_body_template=0x7f060036;
         public static final int default_mail_subject_tempate=0x7f060035;
         public static final int default_sms_body_template=0x7f060037;
+        public static final int delete=0x7f06006d;
         public static final int deleteall=0x7f060053;
         public static final int empty_name=0x7f06004d;
         public static final int enter_date=0x7f060027;
@@ -224,6 +225,7 @@ public final class R {
         public static final int toast_sms_template_saved=0x7f06003e;
         public static final int type_to_filter=0x7f060055;
         public static final int unknow_birthday=0x7f060067;
+        public static final int update=0x7f06006e;
         public static final int updating_data=0x7f06002a;
         public static final int version=0x7f060000;
         public static final int whattodo=0x7f06000a;
