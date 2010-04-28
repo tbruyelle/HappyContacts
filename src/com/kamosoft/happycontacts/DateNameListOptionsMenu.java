@@ -8,6 +8,7 @@ import java.util.Calendar;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Intent;
 import android.text.format.DateFormat;
 import android.view.Menu;
@@ -22,7 +23,7 @@ import android.widget.DatePicker;
  */
 public abstract class DateNameListOptionsMenu
     extends ListActivity
-    implements Constants
+    implements Constants, OnDateSetListener
 {
     protected static final int BACK_MENU_ID = Menu.FIRST;
 
@@ -108,32 +109,26 @@ public abstract class DateNameListOptionsMenu
                 return new EnterNameDialog( this );
 
             case DATE_FORM_DIALOG_ID:
-                DatePickerDialog datePickerDialog = new DatePickerDialog( this,
-                                                                          new DatePickerDialog.OnDateSetListener()
-                                                                          {
-                                                                              public void onDateSet( DatePicker view,
-                                                                                                     int year,
-                                                                                                     int monthOfYear,
-                                                                                                     int dayOfMonth )
-                                                                              {
-                                                                                  Calendar cal = Calendar.getInstance();
-                                                                                  cal.set( year, monthOfYear,
-                                                                                           dayOfMonth );
-                                                                                  
-                                                                                  String day = dayDateFormat.format( cal
-                                                                                      .getTime() );
-                                                                                  Intent intent = new Intent(
-                                                                                                              DateNameListOptionsMenu.this,
-                                                                                                              NameListActivity.class );
-                                                                                  intent
-                                                                                      .putExtra( DATE_INTENT_KEY, day );
-                                                                                  startActivity( intent );
-                                                                              }
-                                                                          }, 0, 0, 0 );
+                DatePickerDialog datePickerDialog = new DatePickerDialog( this, this, 0, 0, 0 );
                 datePickerDialog.setTitle( R.string.enter_date );
                 return datePickerDialog;
         }
         return null;
+    }
+
+    /**
+     * @see android.app.DatePickerDialog.OnDateSetListener#onDateSet(android.widget.DatePicker, int, int, int)
+     */
+    @Override
+    public void onDateSet( DatePicker arg0, int year, int monthOfYear, int dayOfMonth )
+    {
+        Calendar cal = Calendar.getInstance();
+        cal.set( year, monthOfYear, dayOfMonth );
+
+        String day = dayDateFormat.format( cal.getTime() );
+        Intent intent = new Intent( DateNameListOptionsMenu.this, NameListActivity.class );
+        intent.putExtra( DATE_INTENT_KEY, day );
+        startActivity( intent );
     }
 
     /**
@@ -151,4 +146,5 @@ public abstract class DateNameListOptionsMenu
                 break;
         }
     }
+
 }
