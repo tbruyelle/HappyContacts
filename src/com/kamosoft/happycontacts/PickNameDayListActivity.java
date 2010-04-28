@@ -44,6 +44,8 @@ public class PickNameDayListActivity
 
     private EditText mEditText;
 
+    private Class<?> mNextActivity;
+
     @Override
     protected void onCreate( Bundle savedInstanceState )
     {
@@ -57,8 +59,19 @@ public class PickNameDayListActivity
         mContactId = getIntent().getExtras().getLong( CONTACTID_INTENT_KEY );
         mContactName = getIntent().getExtras().getString( CONTACTNAME_INTENT_KEY );
 
+        /* optionnal extras for other way to work */
+        mNextActivity = (Class<?>) getIntent().getExtras().getSerializable( NEXT_ACTIVITY_INTENT_KEY );
+        String pickNameDayLabel = getIntent().getExtras().getString( PICK_NAMEDAY_LABEL_INTENT_KEY );
+
         TextView pickNameDayTextView = (TextView) findViewById( R.id.pick_nameday );
-        pickNameDayTextView.setText( getString( R.string.pick_nameday, mContactName ) );
+        if ( pickNameDayLabel == null )
+        {
+            pickNameDayTextView.setText( getString( R.string.pick_nameday, mContactName ) );
+        }
+        else
+        {
+            pickNameDayTextView.setText( pickNameDayLabel );
+        }
 
         mEditText = (EditText) findViewById( R.id.autocomplete );
         mEditText.addTextChangedListener( this );
@@ -141,18 +154,27 @@ public class PickNameDayListActivity
     {
         mCursor.moveToPosition( position );
         String nameDay = mCursor.getString( mCursor.getColumnIndexOrThrow( HappyContactsDb.NameDay.NAME_DAY ) );
-        if ( canMatchNormally( mContactName, nameDay ) )
+        if ( mNextActivity == null )
         {
-            AlertDialog.Builder builder = new AlertDialog.Builder( this );
-            builder.setMessage( getString( R.string.can_match_normally, mContactName, nameDay ) );
-            builder.setNeutralButton( R.string.link_other, this ).setNegativeButton( R.string.cancel, this );
-            builder.create().show();
+            if ( canMatchNormally( mContactName, nameDay ) )
+            {
+                AlertDialog.Builder builder = new AlertDialog.Builder( this );
+                builder.setMessage( getString( R.string.can_match_normally, mContactName, nameDay ) );
+                builder.setNeutralButton( R.string.link_other, this ).setNegativeButton( R.string.cancel, this );
+                builder.create().show();
+            }
+            else
+            {
+                mDb.insertWhiteList( mContactId, mContactName, nameDay );
+                Toast.makeText( this, getString( R.string.whitelist_added, mContactName, nameDay ), Toast.LENGTH_SHORT ).show();
+                returnToWhiteList();
+            }
         }
         else
         {
-            mDb.insertWhiteList( mContactId, mContactName, nameDay );
-            Toast.makeText( this, getString( R.string.whitelist_added, mContactName, nameDay ), Toast.LENGTH_SHORT ).show();
-            returnToWhiteList();
+            Intent intent = new Intent( this, DateListActivity.class );
+            intent.putExtra( NAME_INTENT_KEY, nameDay );
+            startActivity( intent );
         }
     }
 

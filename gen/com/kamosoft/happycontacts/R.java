@@ -184,6 +184,7 @@ public final class R {
         public static final int pick_contact_birthday=0x7f06006a;
         public static final int pick_contact_nickname=0x7f06004f;
         public static final int pick_nameday=0x7f060050;
+        public static final int pick_nameday_datelist=0x7f06006f;
         public static final int please_wait=0x7f060032;
         public static final int pref_alarm=0x7f060019;
         public static final int pref_alarm_off=0x7f06001b;

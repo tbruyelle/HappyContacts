@@ -91,7 +91,12 @@ public abstract class DateNameListOptionsMenu
                 return true;
 
             case NAME_MENU_ID:
-                showDialog( NAME_FORM_DIALOG_ID );
+                /* in order to resolve accent issue, we start PickNameDayActivity instead of EnterNameDialog */
+                //showDialog( NAME_FORM_DIALOG_ID );
+                Intent intent2 = new Intent( this, PickNameDayListActivity.class );
+                intent2.putExtra( NEXT_ACTIVITY_INTENT_KEY, DateListActivity.class );
+                intent2.putExtra( PICK_NAMEDAY_LABEL_INTENT_KEY, getString( R.string.pick_nameday_datelist ) );
+                startActivity( intent2 );
                 return true;
         }
         return super.onMenuItemSelected( featureId, item );

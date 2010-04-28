@@ -57,6 +57,7 @@ public interface Constants
     public static final String NEXT_ACTIVITY_INTENT_KEY = "nextActivity";
 
     public static final String PICK_CONTACT_LABEL_INTENT_KEY = "pickContactLabel";
+    public static final String PICK_NAMEDAY_LABEL_INTENT_KEY = "pickNameDayLabel";
 
     /* contact methods in the string array 'contactmethods_items' */
     public static final int CALL_ITEM_INDEX = 0;
