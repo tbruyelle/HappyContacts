@@ -1918,7 +1918,6 @@ insert into feast (name, day, source) values ("Zéno", "28/04", "ephemeride.name"
 insert into feast (name, day, source) values ("Zénon", "28/04", "ephemeride.name");
 insert into feast (name, day, source) values ("Zénone", "28/04", "ephemeride.name");
 insert into feast (name, day, source) values ("Zénonina", "28/04", "ephemeride.name");
-insert into feast (name, day, source) values ("CatherinedeSi", "29/04", "ephemeride.name");
 insert into feast (name, day, source) values ("Adjuteur", "30/04", "ephemeride.name");
 insert into feast (name, day, source) values ("Adjutor", "30/04", "ephemeride.name");
 insert into feast (name, day, source) values ("Aphrodise", "30/04", "ephemeride.name");
