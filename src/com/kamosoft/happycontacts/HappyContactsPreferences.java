@@ -232,20 +232,8 @@ public class HappyContactsPreferences
             }
         } );
         root.addItemFromInflater( alarmTimePref );
-
-        /* database category */
-        PreferenceCategory databasePrefCat = new PreferenceCategory( this );
-        databasePrefCat.setTitle( R.string.pref_data_cat );
-        root.addPreference( databasePrefCat );
-
-        /* birthday */
-        Preference fbConnectPref = new Preference( this );
-        fbConnectPref.setTitle( R.string.pref_birthday );
-        fbConnectPref.setSummary( R.string.pref_birthday_summary );
-        fbConnectPref.setIntent( new Intent( this, BirthdayActivity.class ) );
-        databasePrefCat.addPreference( fbConnectPref );
-
-        /* check todays name days */
+        
+        /* check todays events */
         Preference checkNameDayPref = new Preference( this );
         checkNameDayPref.setTitle( R.string.pref_check_name_days );
         checkNameDayPref.setSummary( R.string.pref_check_name_days_summary );
@@ -258,7 +246,19 @@ public class HappyContactsPreferences
                 return true;
             }
         } );
-        databasePrefCat.addItemFromInflater( checkNameDayPref );
+        root.addItemFromInflater( checkNameDayPref );
+
+        /* database category */
+        PreferenceCategory databasePrefCat = new PreferenceCategory( this );
+        databasePrefCat.setTitle( R.string.pref_data_cat );
+        root.addPreference( databasePrefCat );
+
+        /* birthday */
+        Preference fbConnectPref = new Preference( this );
+        fbConnectPref.setTitle( R.string.pref_birthday );
+        fbConnectPref.setSummary( R.string.pref_birthday_summary );
+        fbConnectPref.setIntent( new Intent( this, BirthdayActivity.class ) );
+        databasePrefCat.addPreference( fbConnectPref );        
 
         /* name days list */
         Preference nameListPref = new Preference( this );
