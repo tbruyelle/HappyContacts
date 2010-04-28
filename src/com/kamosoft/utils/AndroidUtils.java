@@ -28,6 +28,10 @@ public final class AndroidUtils
 {
     public static Cursor avoidEmptyName( Cursor cursor )
     {
+        if ( cursor.getCount() == 0 )
+        {
+            return cursor;
+        }
         MatrixCursor matrixCursor = new MatrixCursor( new String[] { People._ID, People.NAME } );
         int idColumnIndex = cursor.getColumnIndex( People._ID );
         int nameColumnIndex = cursor.getColumnIndex( People.NAME );
