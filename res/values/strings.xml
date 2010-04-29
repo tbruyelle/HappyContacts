@@ -26,8 +26,8 @@
 	<string name="pref_blacklist">Black list</string>
 	<string name="pref_blacklist_summary">Contacts list which are ignored</string>
 	<string name="pref_alarm">Alarm</string>
-	<string name="pref_alarm_on">Search in contacts enabled</string>
-	<string name="pref_alarm_off">Search in contacts disabled</string>
+	<string name="pref_alarm_on">Automatic checking events is enabled</string>
+	<string name="pref_alarm_off">Automatic checking events is disabled</string>
 	<string name="pref_time">Hour</string>
   <string name="pref_time_summary">Every day at %s</string>
 	<string name="pref_template_sms_dialog">Enter SMS template</string>
@@ -35,7 +35,7 @@
 	<string name="toast_contact_blacklisted">Contact is blacklisted</string>
 	<string name="toast_blacklisted">%s has been added to the black list</string>
 	<string name="toast_later">The notification is kept for later.</string>
-	<string name="toast_no_contact">No name days found in your contacts today !</string>
+	<string name="toast_no_contact">No events today !</string>
 	<string name="toast_contact_one">It\'s his/her name day :\n</string>
 	<string name="toast_contact_list">It\'s their name day :\n</string>
 	<string name="toast_finish">Today's name days have been completed.</string>
@@ -60,6 +60,9 @@
 <string name="default_mail_subject_tempate">There is something to wish today !...</string>
 <string name="default_mail_body_template">It seems it\'s your day today ! Happy name day !</string>
 <string name="default_sms_body_template">It\'s your day today... Happy name day !</string>
+<string name="default_mail_birthday_subject_template">There is something to wish today !...</string>
+<string name="default_mail_birthday_body_template">It seems it\'s your day today ! Happy birthday !</string>
+<string name="default_sms_birthday_body_template">It\'s your day today... Happy birthday !</string>
 <string name="back_to_main">Back to main menu</string>
 <string name="sms_template_text">Edit SMS template</string>
 <string name="mail_template_subject">Object : </string>
@@ -70,7 +73,7 @@
 <string name="feast_counter">%d/%d</string>
 <string name="happyfeast_name">It\'s his/her name day :</string>
 <string name="pref_check_name_days">Check today events</string>
-<string name="pref_check_name_days_summary">Search if there is something to wish to.</string>
+<string name="pref_check_name_days_summary">Perform a manual check of the day's events</string>
 <string name="pref_data_cat">Database</string>
 <string name="about_content"><a href="http://kamosoft.wordpress.com">Kamosoft</a> (c) 2010</string>
 <string name="about">About</string>
@@ -116,4 +119,5 @@
 <string name="delete">Delete</string>
 <string name="update">Update</string>
 <string name="pick_nameday_datelist">Enter or pick a name day</string>
+<string name="happybirthday_name">It\'s his/her birthday :</string>
 </resources>

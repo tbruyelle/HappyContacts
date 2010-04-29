@@ -11,7 +11,7 @@
 		android:layout_width="fill_parent" android:layout_height="fill_parent"
 		android:gravity="center_vertical|center_horizontal">
 
-		<TextView android:text="@string/happyfeast_name"
+		<TextView android:id="@+id/happyfeast_name"
 			android:gravity="center" android:layout_width="fill_parent"
 			android:layout_height="wrap_content" android:paddingBottom="2dp" />
 

@@ -3,7 +3,6 @@
  */
 package com.kamosoft.happycontacts;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -55,7 +54,7 @@ public class ReminderPopupActivity
 
     private Iterator<Map.Entry<Long, ContactFeast>> contacts;
 
-    private boolean keepNotif = false;
+    private boolean mKeepNotif = false;
 
     private String mDate;
 
@@ -66,6 +65,8 @@ public class ReminderPopupActivity
     private TextView mFeastCounter;
 
     private TextView mNameDayTitle;
+
+    private TextView mHappyFeastText;
 
     private ContactFeasts mContactFeasts;
 
@@ -91,18 +92,16 @@ public class ReminderPopupActivity
         mPrefs = getSharedPreferences( APP_NAME, 0 );
 
         /* boucle sur les contacts a qui il fait souhaiter la fete */
-        SimpleDateFormat dateFormat = new SimpleDateFormat( "dd/MM" );
         Date date = new Date();
-        String day = dateFormat.format( date );
-        SimpleDateFormat fullDateFormat = new SimpleDateFormat( "dd/MM/yyyy" );
+        String day = dayDateFormat.format( date );
         mDate = fullDateFormat.format( date );
-
         mContactFeasts = DayMatcherService.testDayMatch( this, day, mDate );
         /* boucle sur les contacts a qui il fait souhaiter la fete */
         contacts = mContactFeasts.getContactList().entrySet().iterator();
 
         mNameDayTitle = (TextView) findViewById( R.id.nameday_title );
         mFeastCounter = (TextView) findViewById( R.id.feast_counter );
+        mHappyFeastText = (TextView) findViewById( R.id.happyfeast_name );
         if ( mContactFeasts.getContactList().size() <= 1 )
         {
             mFeastCounter.setVisibility( View.GONE );
@@ -249,16 +248,31 @@ public class ReminderPopupActivity
 
     private String getMailBody()
     {
+        if ( mCurrentContactFeast.getNameDay().equals( BDAY_HINT ) )
+        {
+            return mPrefs.getString( PREF_MAIL_BIRTHDAY_BODY_TEMPLATE,
+                                     getString( R.string.default_mail_birthday_body_template ) );
+        }
         return mPrefs.getString( PREF_MAIL_BODY_TEMPLATE, getString( R.string.default_mail_body_template ) );
     }
 
     private String getMailSubject()
     {
+        if ( mCurrentContactFeast.getNameDay().equals( BDAY_HINT ) )
+        {
+            return mPrefs.getString( PREF_MAIL_BIRTHDAY_SUBJECT_TEMPLATE,
+                                     getString( R.string.default_mail_birthday_subject_template ) );
+        }
         return mPrefs.getString( PREF_MAIL_SUBJECT_TEMPLATE, getString( R.string.default_mail_subject_tempate ) );
     }
 
     private String getSmsBody()
     {
+        if ( mCurrentContactFeast.getNameDay().equals( BDAY_HINT ) )
+        {
+            return mPrefs.getString( PREF_SMS_BIRTHDAY_BODY_TEMPLATE,
+                                     getString( R.string.default_sms_birthday_body_template ) );
+        }
         return mPrefs.getString( PREF_SMS_BODY_TEMPLATE, getString( R.string.default_sms_body_template ) );
     }
 
@@ -333,7 +347,19 @@ public class ReminderPopupActivity
         mCurrentContactFeast = contactFeast;
         contactFeast.setContactId( contactId );
 
-        mNameDayTitle.setText( "St " + contactFeast.getNameDay() );
+        if ( contactFeast.getNameDay().equals( BDAY_HINT ) )
+        {
+            /* its a birthday */
+            mNameDayTitle.setVisibility( View.GONE );
+            mHappyFeastText.setText( R.string.happybirthday_name );
+        }
+        else
+        {
+            /* its a name day */
+            mNameDayTitle.setVisibility( View.VISIBLE );
+            mNameDayTitle.setText( "St " + contactFeast.getNameDay() );
+            mHappyFeastText.setText( R.string.happyfeast_name );
+        }
 
         TextView contactNameTextView = (TextView) findViewById( R.id.contact_name );
         contactNameTextView.setText( contactFeast.getContactName() );
@@ -397,7 +423,7 @@ public class ReminderPopupActivity
                 }
                 // we keep notification in place if 'later' is clicked
                 //Toast.makeText( ReminderPopupActivity.this, R.string.toast_later, Toast.LENGTH_LONG ).show();
-                keepNotif = true;
+                mKeepNotif = true;
                 nextOrExit();
             }
         } );
@@ -540,24 +566,13 @@ public class ReminderPopupActivity
         }
     }
 
-    //  @Override
-    //  protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    //  {
-    //    if (Log.DEBUG)
-    //    {
-    //      Log.v("ReminderPopupActivity: onActivityResult start");
-    //    }
-    //    super.onActivityResult(requestCode, resultCode, data);
-    //    nextOrExit();
-    //  }
-
     private void exit()
     {
         if ( Log.DEBUG )
         {
             Log.v( "ReminderPopupActivity: start exit" );
         }
-        if ( !keepNotif )
+        if ( !mKeepNotif )
         {
             NotificationManager nm = (NotificationManager) getSystemService( Activity.NOTIFICATION_SERVICE );
             nm.cancel( R.string.app_name );

@@ -3,7 +3,6 @@
  */
 package com.kamosoft.happycontacts;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +28,7 @@ import com.kamosoft.utils.AndroidUtils;
  */
 public class DayMatcherService
     extends Service
+    implements Constants
 {
     @Override
     public void onCreate()
@@ -75,6 +75,7 @@ public class DayMatcherService
 
         if ( !contactFeastToday.getContactList().isEmpty() )
         {
+            /* TODO improve display */
             StringBuilder sb = new StringBuilder();
             if ( contactFeastToday.getContactList().size() > 1 )
             {
@@ -90,9 +91,6 @@ public class DayMatcherService
                 sb.append( "\n" );
             }
             Toast.makeText( context, sb.toString(), Toast.LENGTH_LONG ).show();
-            //                    Intent intent = new Intent( this, ContactsPopupActivity.class );
-            //                    intent.putExtra( CONTACTFEAST_INTENT_KEY, contactFeastToday );
-            //                    startActivity( intent );
             Notifier.notifyEvent( context );
         }
         else
@@ -108,10 +106,8 @@ public class DayMatcherService
      */
     public static ContactFeasts testDayMatch( Context context )
     {
-        SimpleDateFormat dateFormat = new SimpleDateFormat( "dd/MM" );
         Date date = new Date();
-        String day = dateFormat.format( date );
-        SimpleDateFormat fullDateFormat = new SimpleDateFormat( "dd/MM/yyyy" );
+        String day = dayDateFormat.format( date );
         String fullDate = fullDateFormat.format( date );
         return testDayMatch( context, day, fullDate );
     }
@@ -127,7 +123,7 @@ public class DayMatcherService
     {
         if ( Log.DEBUG )
         {
-            Log.v( "DayMatcher: start testDayMatch()" );
+            Log.v( "DayMatcher: start testDayMatch( " + day + ", " + fullDate + " )" );
         }
 
         /*
@@ -139,8 +135,87 @@ public class DayMatcherService
         /*
          * Look for names matching today date
          */
-        ContactFeasts contactFeastToday = new ContactFeasts( day );
+        ContactFeasts contactFeastsToday = new ContactFeasts( day );
 
+        checkNameDays( context, mDb, contactFeastsToday, day, fullDate );
+
+        checkBirthdays( context, mDb, contactFeastsToday, day, fullDate );
+
+        if ( Log.DEBUG )
+        {
+            if ( contactFeastsToday.getContactList().isEmpty() )
+            {
+                Log.v( "DayMatcher: no matching contact found for name days or birthdays" );
+            }
+        }
+
+        mDb.close();
+        if ( Log.DEBUG )
+        {
+            Log.v( "DayMatcher: end testDayMatch()" );
+        }
+        return contactFeastsToday;
+    }
+
+    /**
+     * @param context
+     * @param mDb
+     * @param contactFeastsToday
+     * @param day
+     * @param fullDate
+     */
+    private static void checkBirthdays( Context context, DbAdapter mDb, ContactFeasts contactFeastsToday, String day,
+                                        String fullDate )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DayMatcher: start check Birthdays( )" );
+        }
+        Cursor cursor = mDb.fetchBirthdayForDay( day );
+
+        if ( cursor.getCount() == 0 )
+        {
+            if ( Log.DEBUG )
+            {
+                Log.v( "DayMatcher: day " + day + " no birthday found" );
+            }
+            cursor.close();
+            return;
+        }
+
+        while ( cursor.moveToNext() )
+        {
+            Long contactId = cursor.getLong( cursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.CONTACT_ID ) );
+            String contactName =
+                cursor.getString( cursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.CONTACT_NAME ) );
+            if ( mDb.isBlackListed( contactId, fullDate ) )
+            {
+                if ( Log.DEBUG )
+                {
+                    Log.v( "DayMatcher: already wished this year " + contactName + " is ignored" );
+                }
+                continue;
+            }
+            if ( Log.DEBUG )
+            {
+                Log.v( "DayMatcher: adding birthday for " + contactName );
+            }
+            contactFeastsToday.addContact( contactId, new ContactFeast( BDAY_HINT, contactName, null ) );
+        }
+        cursor.close();
+        if ( Log.DEBUG )
+        {
+            Log.v( "DayMatcher: end check Birthdays( )" );
+        }
+    }
+
+    private static void checkNameDays( Context context, DbAdapter mDb, ContactFeasts contactFeastsToday, String day,
+                                       String fullDate )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DayMatcher: start check NameDays( )" );
+        }
         Cursor cursor = mDb.fetchNamesForDay( day );
         if ( cursor.getCount() == 0 )
         {
@@ -149,8 +224,7 @@ public class DayMatcherService
                 Log.v( "DayMatcher: day " + day + " no feast found" );
             }
             cursor.close();
-            mDb.close();
-            return contactFeastToday;
+            return;
         }
         if ( Log.DEBUG )
         {
@@ -209,9 +283,9 @@ public class DayMatcherService
                             Log.v( "DayMatcher: add " + contactId + " " + contactName
                                 + " from whitelist to the ContactFeastToday" );
                         }
-                        contactFeastToday.addContact( contactId, new ContactFeast( name, contactName, null ) );
+                        contactFeastsToday.addContact( contactId, new ContactFeast( name, contactName, null ) );
 
-                    }                    
+                    }
                 }
                 whiteListCursor.close();
             }
@@ -266,26 +340,16 @@ public class DayMatcherService
                         /* duplicate the contact feast and set the name */
                         ContactFeast newContactFeast =
                             new ContactFeast( contactFeast.getNameDay(), contactName, contactFeast.getLastWishYear() );
-                        contactFeastToday.addContact( contactId, newContactFeast );
+                        contactFeastsToday.addContact( contactId, newContactFeast );
                     }
                 }
             }
             cursor.close();
         }
-
         if ( Log.DEBUG )
         {
-            if ( contactFeastToday.getContactList().isEmpty() )
-            {
-                Log.v( "DayMatcher: no matching contact found" );
-            }
+            Log.v( "DayMatcher: end check NameDays( )" );
         }
-        mDb.close();
-        if ( Log.DEBUG )
-        {
-            Log.v( "DayMatcher: end testDayMatch()" );
-        }
-        return contactFeastToday;
     }
 
     /**

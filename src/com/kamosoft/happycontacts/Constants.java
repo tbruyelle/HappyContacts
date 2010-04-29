@@ -44,6 +44,14 @@ public interface Constants
     public static final String PREF_MAIL_BODY_TEMPLATE = "mailBodyTemplate";
 
     public static final String PREF_SMS_BODY_TEMPLATE = "smsSubjectTemplate";
+    
+    public static final String PREF_MAIL_BIRTHDAY_SUBJECT_TEMPLATE = "mailBirthdaySubjectTemplate";
+
+    public static final String PREF_MAIL_BIRTHDAY_BODY_TEMPLATE = "mailBirthdayBodyTemplate";
+
+    public static final String PREF_SMS_BIRTHDAY_BODY_TEMPLATE = "smsBirthdaySubjectTemplate";
+
+    public static final String BDAY_HINT = "BDAY";
 
     /* intents data keys */
     public static final String NAME_INTENT_KEY = "name";
@@ -57,6 +65,7 @@ public interface Constants
     public static final String NEXT_ACTIVITY_INTENT_KEY = "nextActivity";
 
     public static final String PICK_CONTACT_LABEL_INTENT_KEY = "pickContactLabel";
+
     public static final String PICK_NAMEDAY_LABEL_INTENT_KEY = "pickNameDayLabel";
 
     /* contact methods in the string array 'contactmethods_items' */

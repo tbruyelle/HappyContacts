@@ -94,8 +94,12 @@ public class PickBirthdayActivity
     @Override
     public void onClick( View view )
     {
-        String birthday =
-            String.valueOf( mDatePicker.getDayOfMonth() ) + "/" + String.valueOf( mDatePicker.getMonth() + 1 );
+        String month = String.valueOf( mDatePicker.getMonth() + 1 );
+        if ( month.length() == 1 )
+        {
+            month = "0" + month;
+        }
+        String birthday = String.valueOf( mDatePicker.getDayOfMonth() ) + "/" + month;
         String birthyear = String.valueOf( mDatePicker.getYear() );
         if ( mUpdate )
         {
