@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -23,11 +24,13 @@ import com.kamosoft.happycontacts.R;
  */
 public class SmsTemplateActivity
     extends Activity
-    implements Constants
+    implements Constants, OnClickListener
 {
-    SharedPreferences mPrefs;
+    private SharedPreferences mPrefs;
 
-    EditText mSmsContent;
+    private EditText mSmsNamedayContent;
+
+    private EditText mSmsBirthdayContent;
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -40,46 +43,51 @@ public class SmsTemplateActivity
         setContentView( R.layout.sms_template );
         mPrefs = getSharedPreferences( APP_NAME, 0 );
 
-        mSmsContent = (EditText) findViewById( R.id.sms_template_content );
-        mSmsContent
-            .setText( mPrefs.getString( PREF_SMS_BODY_TEMPLATE, getString( R.string.default_sms_body_template ) ) );
+        mSmsNamedayContent = (EditText) findViewById( R.id.sms_template_content );
+        mSmsNamedayContent.setText( mPrefs.getString( PREF_SMS_BODY_TEMPLATE,
+                                                      getString( R.string.default_sms_body_template ) ) );
+
+        mSmsBirthdayContent = (EditText) findViewById( R.id.sms_birthday_template_content );
+        mSmsBirthdayContent.setText( mPrefs.getString( PREF_SMS_BIRTHDAY_BODY_TEMPLATE,
+                                                       getString( R.string.default_sms_birthday_body_template ) ) );
 
         Button ok = (Button) findViewById( R.id.ok_button );
-        ok.setOnClickListener( new View.OnClickListener()
-        {
-            @Override
-            public void onClick( View v )
-            {
-                Editor editor = mPrefs.edit();
-                editor.putString( PREF_SMS_BODY_TEMPLATE, mSmsContent.getText().toString() );
-                editor.commit();
-                Toast.makeText( SmsTemplateActivity.this, R.string.toast_sms_template_saved, Toast.LENGTH_SHORT )
-                    .show();
-                SmsTemplateActivity.this.finish();
-            }
-        } );
+        ok.setOnClickListener( this );
         Button reset = (Button) findViewById( R.id.reset_button );
-        reset.setOnClickListener( new View.OnClickListener()
-        {
-            @Override
-            public void onClick( View v )
-            {
-                mSmsContent.setText( getString( R.string.default_sms_body_template ) );
-            }
-        } );
+        reset.setOnClickListener( this );
         Button cancel = (Button) findViewById( R.id.cancel_button );
-        cancel.setOnClickListener( new View.OnClickListener()
-        {
-
-            @Override
-            public void onClick( View v )
-            {
-                SmsTemplateActivity.this.finish();
-            }
-        } );
+        cancel.setOnClickListener( this );
         if ( Log.DEBUG )
         {
             Log.v( "SmsTemplateActivity: end onCreate()" );
+        }
+    }
+
+    /**
+     * @see android.view.View.OnClickListener#onClick(android.view.View)
+     */
+    @Override
+    public void onClick( View view )
+    {
+        switch ( view.getId() )
+        {
+            case R.id.cancel_button:
+                this.finish();
+                return;
+
+            case R.id.reset_button:
+                mSmsNamedayContent.setText( getString( R.string.default_sms_body_template ) );
+                mSmsBirthdayContent.setText( getString( R.string.default_sms_birthday_body_template ) );
+                return;
+
+            case R.id.ok_button:
+                Editor editor = mPrefs.edit();
+                editor.putString( PREF_SMS_BODY_TEMPLATE, mSmsNamedayContent.getText().toString() );
+                editor.putString( PREF_SMS_BIRTHDAY_BODY_TEMPLATE, mSmsBirthdayContent.getText().toString() );
+                editor.commit();
+                Toast.makeText( this, R.string.toast_sms_template_saved, Toast.LENGTH_SHORT ).show();
+                this.finish();
+                return;
         }
     }
 }

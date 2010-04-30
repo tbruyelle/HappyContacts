@@ -60,12 +60,12 @@
 <string name="default_mail_body_template">On dirait que c\'est ton jour, alors bonne fête !</string>
 <string name="default_sms_body_template">C\'est ta fête aujourd\'hui... Bonne fête !</string>
 <string name="back_to_main">Retour au menu principal</string>
-<string name="sms_template_text">Editer ici votre modèle de SMS</string>
+<string name="sms_template_text">Editer ici votre modèle de SMS pour les fêtes</string>
 
 
 <string name="mail_template_subject">Objet : </string>
 
-<string name="mail_template_text">Editer ici votre modèle de mail</string>
+<string name="mail_template_text">Editer ici votre modèle de mail pour les fêtes</string>
 
 <string name="reset_button">Par défaut</string>
 <string name="toast_mail_template_saved">Modèle d\'email sauvegardé</string>
