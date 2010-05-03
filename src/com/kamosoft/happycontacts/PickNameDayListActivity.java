@@ -139,9 +139,9 @@ public class PickNameDayListActivity
     private boolean canMatchNormally( String contactName, String nameDay )
     {
         nameDay = AndroidUtils.replaceAccents( nameDay ).toUpperCase();
+        contactName = AndroidUtils.replaceAccents( contactName ).toUpperCase();
         for ( String subName : contactName.split( " " ) )
         {
-            subName = AndroidUtils.replaceAccents( subName ).toUpperCase();
             if ( subName.equals( nameDay ) )
             {
                 return true;

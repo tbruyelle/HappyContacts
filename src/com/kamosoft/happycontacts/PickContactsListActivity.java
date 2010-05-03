@@ -7,7 +7,6 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.provider.Contacts.People;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -16,7 +15,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-import com.kamosoft.utils.AndroidUtils;
+import com.kamosoft.happycontacts.contacts.ContactUtils;
 
 /**
  * Allow user to select a contact in order to link it with a nameday (usefull for nickname)
@@ -30,8 +29,6 @@ public class PickContactsListActivity
     private Cursor mCursor;
 
     private EditText mEditText;
-
-    private String[] mProjection = new String[] { People._ID, People.NAME };
 
     private Class<?> mNextActivity;
 
@@ -63,18 +60,14 @@ public class PickContactsListActivity
     {
         if ( text == null || text.length() == 0 )
         {
-            mCursor =
-                AndroidUtils.avoidEmptyName( this.getContentResolver().query( People.CONTENT_URI, mProjection, null,
-                                                                              null, People.NAME + " ASC" ) );
+            mCursor = ContactUtils.doQuery( this, ContactUtils.getNameColumn() + " is not null" );
         }
         else
         {
-            mCursor =
-                getContentResolver().query( People.CONTENT_URI, mProjection, People.NAME + " like \"" + text + "%\"",
-                                            null, People.NAME + " ASC" );
+            mCursor = ContactUtils.doQuery( this, ContactUtils.getNameColumn() + " like \"" + text + "%\"" );
         }
         startManagingCursor( mCursor );
-        String[] from = { People.NAME };
+        String[] from = { ContactUtils.getNameColumn() };
         int[] to = { android.R.id.text1 };
         SimpleCursorAdapter simpleAdapter =
             new SimpleCursorAdapter( this, android.R.layout.simple_list_item_1, mCursor, from, to );
@@ -92,8 +85,10 @@ public class PickContactsListActivity
     {
         mCursor.moveToPosition( position );
         Intent intent = new Intent( this, mNextActivity );
-        intent.putExtra( CONTACTID_INTENT_KEY, mCursor.getLong( mCursor.getColumnIndex( People._ID ) ) );
-        intent.putExtra( CONTACTNAME_INTENT_KEY, mCursor.getString( mCursor.getColumnIndex( People.NAME ) ) );
+        intent.putExtra( CONTACTID_INTENT_KEY,
+                         mCursor.getLong( mCursor.getColumnIndex( ContactUtils.getIdColumn() ) ) );
+        intent.putExtra( CONTACTNAME_INTENT_KEY,
+                         mCursor.getString( mCursor.getColumnIndex( ContactUtils.getNameColumn() ) ) );
         startActivity( intent );
     }
 

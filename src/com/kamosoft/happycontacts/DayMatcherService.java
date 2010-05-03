@@ -3,6 +3,7 @@
  */
 package com.kamosoft.happycontacts;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,10 +13,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.IBinder;
-import android.provider.Contacts.People;
 import android.widget.Toast;
 
 import com.kamosoft.happycontacts.alarm.AlarmController;
+import com.kamosoft.happycontacts.contacts.ContactUtils;
+import com.kamosoft.happycontacts.contacts.PhoneContact;
 import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.dao.HappyContactsDb;
 import com.kamosoft.happycontacts.model.ContactFeast;
@@ -295,37 +297,22 @@ public class DayMatcherService
         /*
          * now we have to scan contacts
          */
-        String[] projection = new String[] { People._ID, People.NAME, People.DISPLAY_NAME };
-        cursor = context.getContentResolver().query( People.CONTENT_URI, projection, null, null, People.NAME + " ASC" );
+        ArrayList<PhoneContact> phoneContacts = ContactUtils.loadPhoneContacts( context );
 
-        if ( cursor != null )
+        if ( phoneContacts != null && !phoneContacts.isEmpty() )
         {
-            while ( cursor.moveToNext() )
+            for ( PhoneContact phoneContact : phoneContacts )
             {
-                Long contactId = cursor.getLong( cursor.getColumnIndexOrThrow( People._ID ) );
-                String contactName = cursor.getString( cursor.getColumnIndexOrThrow( People.NAME ) );
-                String displayName = cursor.getString( cursor.getColumnIndexOrThrow( People.DISPLAY_NAME ) );
-
-                if ( contactId == null || contactName == null )
+                String phoneContactName = AndroidUtils.replaceAccents( phoneContact.name ).toUpperCase();
+                for ( String subName : phoneContactName.split( " " ) )
                 {
-                    if ( Log.DEBUG )
+                    if ( names.containsKey( subName ) )
                     {
-                        Log.v( "DayMatcher: skipping Contact with displayName=" + displayName + ", name=" + contactName
-                            + ", contactId=" + contactId );
-                    }
-                    continue;
-                }
-
-                for ( String subName : contactName.split( " " ) )
-                {
-                    String subNameUpper = AndroidUtils.replaceAccents( subName ).toUpperCase();
-                    if ( names.containsKey( subNameUpper ) )
-                    {
-                        if ( mDb.isBlackListed( contactId, fullDate ) )
+                        if ( mDb.isBlackListed( phoneContact.id, fullDate ) )
                         {
                             if ( Log.DEBUG )
                             {
-                                Log.v( "DayMatcher: already wished this year " + contactName + " is ignored" );
+                                Log.v( "DayMatcher: already wished this year " + phoneContact.name + " is ignored" );
                             }
                             continue;
                         }
@@ -333,14 +320,15 @@ public class DayMatcherService
                         /* find one !! */
                         if ( Log.DEBUG )
                         {
-                            Log.v( "DayMatcher: day contact feast found for \"" + contactName + "\", id=\"" + contactId
-                                + "\"" );
+                            Log.v( "DayMatcher: day contact feast found for \"" + phoneContact.name + "\", id=\""
+                                + phoneContact.id + "\"" );
                         }
-                        ContactFeast contactFeast = names.get( subNameUpper );
+                        ContactFeast contactFeast = names.get( subName );
                         /* duplicate the contact feast and set the name */
                         ContactFeast newContactFeast =
-                            new ContactFeast( contactFeast.getNameDay(), contactName, contactFeast.getLastWishYear() );
-                        contactFeastsToday.addContact( contactId, newContactFeast );
+                            new ContactFeast( contactFeast.getNameDay(), phoneContact.name,
+                                              contactFeast.getLastWishYear() );
+                        contactFeastsToday.addContact( phoneContact.id, newContactFeast );
                     }
                 }
             }

@@ -16,12 +16,9 @@ import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Contacts;
-import android.provider.Contacts.People;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -30,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kamosoft.happycontacts.contacts.ContactUtils;
 import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.model.ContactFeast;
 import com.kamosoft.happycontacts.model.ContactFeasts;
@@ -364,8 +362,7 @@ public class ReminderPopupActivity
         TextView contactNameTextView = (TextView) findViewById( R.id.contact_name );
         contactNameTextView.setText( contactFeast.getContactName() );
 
-        Uri contactUri = ContentUris.withAppendedId( People.CONTENT_URI, contactId );
-        Bitmap photo = People.loadContactPhoto( this, contactUri, R.drawable.nophoto, null );
+        Bitmap photo = ContactUtils.loadContactPhoto( this, contactId );
         ImageView imageView = (ImageView) findViewById( R.id.contact_photo );
         imageView.setBackgroundResource( android.R.drawable.picture_frame );
         imageView.setImageBitmap( photo );
@@ -397,7 +394,8 @@ public class ReminderPopupActivity
                     }
                     Toast.makeText( ReminderPopupActivity.this, R.string.contact_method_not_supported,
                                     Toast.LENGTH_LONG ).show();
-                    Uri displayContactUri = ContentUris.withAppendedId( People.CONTENT_URI, contactId.intValue() );
+                    Uri displayContactUri =
+                        ContentUris.withAppendedId( ContactUtils.getContentUri(), contactId.intValue() );
                     Intent intent = new Intent( Intent.ACTION_VIEW, displayContactUri );
                     intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
                     startActivity( intent );
@@ -486,83 +484,40 @@ public class ReminderPopupActivity
     {
         if ( contactFeast.getPhones() == null )
         {
-            /* have to retrieve contact phones */
-            Cursor c =
-                getContentResolver().query( Contacts.Phones.CONTENT_URI, null,
-                                            Contacts.Phones.PERSON_ID + "=" + contactId, null, null );
-            if ( c.moveToFirst() )
+            contactFeast.setPhones( ContactUtils.getContactPhones( this, contactId ) );
+
+            if ( Log.DEBUG )
             {
-                /* add the phone(s) */
-                do
+                Log.v( "ReminderPopup: " + contactFeast.getContactName() + " has " + contactFeast.getPhones().size()
+                    + " phones" );
+                for ( String phone : contactFeast.getPhones() )
                 {
-                    String phone = c.getString( c.getColumnIndex( Contacts.PhonesColumns.NUMBER ) );
-                    contactFeast.addPhone( phone );
                     if ( Log.DEBUG )
                     {
                         Log.v( "ReminderPopup: " + contactFeast.getContactName() + " - add a phone " + phone );
                     }
                 }
-                while ( c.moveToNext() );
             }
-            else
-            {
-                /* no phone found fill with empty list */
-                if ( Log.DEBUG )
-                {
-                    Log.v( "ReminderPopup: " + contactFeast.getContactName() + " no phones found" );
-                }
-                contactFeast.setPhones( new ArrayList<String>() );
-            }
-            c.close();
         }
         if ( contactFeast.getEmails() == null )
         {
-            /* have to retrieve emails */
-            Cursor c =
-                getContentResolver().query( Contacts.ContactMethods.CONTENT_URI, null,
-                                            Contacts.Phones.PERSON_ID + "=" + contactId, null, null );
-            if ( c.moveToFirst() )
-            {
-                do
-                {
-                    String type = c.getString( c.getColumnIndex( Contacts.ContactMethodsColumns.TYPE ) );
-                    String data = c.getString( c.getColumnIndex( Contacts.ContactMethodsColumns.DATA ) );
-                    int kind = c.getInt( c.getColumnIndex( Contacts.ContactMethodsColumns.KIND ) );
-                    if ( Log.DEBUG )
-                    {
-                        Log.v( "ReminderPopup: " + contactFeast.getContactName() + " - found a contact method, type=\""
-                            + type + "\", data=\"" + data + "\", kind=\"" + kind + "\"" );
-                    }
-                    if ( kind == Contacts.KIND_EMAIL )
-                    {
-                        contactFeast.addEmail( data );
-                        if ( Log.DEBUG )
-                        {
-                            Log.v( "ReminderPopup: " + contactFeast.getContactName() + " - add email " + data );
-                        }
-                    }
-                }
-                while ( c.moveToNext() );
+            contactFeast.setEmails( ContactUtils.getContactEmails( this, contactId ) );
 
-                if ( contactFeast.getEmails() == null )
-                {
-                    /* no contact method of kind mail found */
-                    if ( Log.DEBUG )
-                    {
-                        Log.v( "ReminderPopup: " + contactFeast.getContactName() + " - no email found" );
-                    }
-                    contactFeast.setEmails( new ArrayList<String>() );
-                }
-            }
-            else
+            if ( Log.DEBUG )
             {
                 if ( Log.DEBUG )
                 {
-                    Log.v( "ReminderPopup: " + contactFeast.getContactName() + " - no email found" );
+                    Log.v( "ReminderPopup: " + contactFeast.getContactName() + " has "
+                        + contactFeast.getEmails().size() + " emails" );
                 }
-                contactFeast.setEmails( new ArrayList<String>() );
+                for ( String email : contactFeast.getEmails() )
+                {
+                    if ( Log.DEBUG )
+                    {
+                        Log.v( "ReminderPopup: " + contactFeast.getContactName() + " - add a email " + email );
+                    }
+                }
             }
-            c.close();
         }
     }
 

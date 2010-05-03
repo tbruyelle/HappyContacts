@@ -13,11 +13,8 @@ import java.text.StringCharacterIterator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.Cursor;
-import android.database.MatrixCursor;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.Contacts.People;
 
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
@@ -32,32 +29,7 @@ public final class AndroidUtils
     {
         String version = Build.VERSION.SDK;
         return Integer.parseInt( version );
-    }
-
-    public static Cursor avoidEmptyName( Cursor cursor )
-    {
-        if ( cursor.getCount() == 0 )
-        {
-            return cursor;
-        }
-        MatrixCursor matrixCursor = new MatrixCursor( new String[] { People._ID, People.NAME } );
-        int idColumnIndex = cursor.getColumnIndex( People._ID );
-        int nameColumnIndex = cursor.getColumnIndex( People.NAME );
-        cursor.moveToFirst();
-        do
-        {
-            String columnValue = cursor.getString( nameColumnIndex );
-            if ( columnValue == null || columnValue.length() == 0 )
-            {
-                continue;
-            }
-            Long id = cursor.getLong( idColumnIndex );
-            matrixCursor.newRow().add( id ).add( columnValue );
-        }
-        while ( cursor.moveToNext() );
-        cursor.close();
-        return matrixCursor;
-    }
+    }    
 
     public static void composeSms( Context context, String phoneNumber, String smsBody )
     {
