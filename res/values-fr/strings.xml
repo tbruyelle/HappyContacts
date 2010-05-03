@@ -30,7 +30,7 @@
     <string name="pref_time">Heure</string>
     <string name="pref_time_summary">Tous les jours à %s</string>
     <string name="pref_template_sms_dialog">Entrez le modèle de SMS</string>
-    <string name="pref_template_email_dialog">Entrez le modèle d'email</string>
+    <string name="pref_template_email_dialog">Entrez le modèle d\'email</string>
     <string name="toast_contact_blacklisted">Le contact est dans la liste noire !</string>
     <string name="toast_blacklisted">%s a été ajouté à la liste noire</string>
     <string name="toast_later">La notification est conservée pour plus tard.</string>
@@ -76,7 +76,7 @@
 <string name="pref_check_name_days_summary">Effectuer une vérification manuelle des évènements du jour</string>
 <string name="pref_data_cat">Base de données</string>
 <string name="about">A propos</string>
-<string name="sendmail">Envoyer l'email avec...</string>
+<string name="sendmail">Envoyer l\'email avec...</string>
 <string name="add">Ajout</string>
 <string name="no_whitelist">Pas de contact en liste blanche</string>
 <string name="pref_whitelist">Liste blanche</string>

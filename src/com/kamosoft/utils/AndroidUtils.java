@@ -16,8 +16,10 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.Contacts.People;
 
+import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
 
 /**
@@ -26,6 +28,12 @@ import com.kamosoft.happycontacts.R;
  */
 public final class AndroidUtils
 {
+    public static int determineOsVersion()
+    {
+        String version = Build.VERSION.SDK;
+        return Integer.parseInt( version );
+    }
+
     public static Cursor avoidEmptyName( Cursor cursor )
     {
         if ( cursor.getCount() == 0 )
@@ -82,6 +90,14 @@ public final class AndroidUtils
 
     public static String replaceAccents( String str )
     {
+        if ( str == null || str.length() == 0 )
+        {
+            if ( Log.DEBUG )
+            {
+                Log.v( "Calling replaceAccent with null" );
+            }
+            return null;
+        }
         StringBuilder sb = new StringBuilder( str.length() );
 
         CharacterIterator iter = new StringCharacterIterator( str );

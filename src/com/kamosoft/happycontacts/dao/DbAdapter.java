@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -396,7 +397,7 @@ public class DbAdapter
         return mDb.delete( HappyContactsDb.SyncResult.TABLE_NAME, null, null ) > 0;
     }
 
-    public boolean insertSyncResults( ArrayList<SocialNetworkUser> users )
+    public boolean insertSyncResults( List<SocialNetworkUser> users )
     {
         if ( Log.DEBUG )
         {

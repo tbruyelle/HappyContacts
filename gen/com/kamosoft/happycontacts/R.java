@@ -156,6 +156,7 @@ public final class R {
         public static final int delete=0x7f060070;
         public static final int deleteall=0x7f060056;
         public static final int empty_name=0x7f060050;
+        public static final int end_sync=0x7f060078;
         public static final int enter_date=0x7f060027;
         public static final int enter_name=0x7f06002e;
         public static final int exit=0x7f060003;
@@ -169,6 +170,7 @@ public final class R {
         public static final int later=0x7f060007;
         public static final int link_other=0x7f06005b;
         public static final int loading_data=0x7f060029;
+        public static final int loading_friends=0x7f060076;
         public static final int login_authorization=0x7f060060;
         public static final int login_thankyou=0x7f06005e;
         public static final int mail_birthday_template_text=0x7f060074;
@@ -225,6 +227,7 @@ public final class R {
         public static final int start_sync=0x7f060067;
         public static final int store_birthdays=0x7f060068;
         public static final int sync_facebook=0x7f060065;
+        public static final int sync_friends=0x7f060077;
         public static final int toast_blacklisted=0x7f060021;
         public static final int toast_contact_blacklisted=0x7f060020;
         public static final int toast_contact_list=0x7f060025;

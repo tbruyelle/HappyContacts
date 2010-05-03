@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="version">1.2</string>
+	<string name="version">2.0</string>
 	<string name="app_name">HappyContacts</string>
 	<string name="no_contacts">No contacts</string>
 	<string name="exit">Exit</string>
@@ -38,7 +38,7 @@
 	<string name="toast_no_contact">No events today !</string>
 	<string name="toast_contact_one">It\'s his/her name day :\n</string>
 	<string name="toast_contact_list">It\'s their name day :\n</string>
-	<string name="toast_finish">Today's name days have been completed.</string>
+	<string name="toast_finish">Today\'s name days have been completed.</string>
 	<string name="enter_date">Enter a date</string>
 	<string name="check_contacts">Check the contacts</string>
 	<string name="loading_data">The database is being created, this will occurs only one time...</string>
@@ -73,7 +73,7 @@
 <string name="feast_counter">%d/%d</string>
 <string name="happyfeast_name">It\'s his/her name day :</string>
 <string name="pref_check_name_days">Check today events</string>
-<string name="pref_check_name_days_summary">Perform a manual check of the day's events</string>
+<string name="pref_check_name_days_summary">Perform a manual check of the day\'s events</string>
 <string name="pref_data_cat">Database</string>
 <string name="about_content"><a href="http://kamosoft.wordpress.com">Kamosoft</a> (c) 2010</string>
 <string name="about">About</string>
@@ -98,7 +98,7 @@
 <string name="link_other">Link an other</string>
 <string name="pref_birthday">Birthdays</string>
 <string name="pref_birthday_summary">Retrieve all your friends\' birthday from Facebook</string>
-<string name="login_thankyou">You're now logged to Facebook</string>
+<string name="login_thankyou">You\'re now logged to Facebook</string>
 <string name="facebooklogin_urlError">Error when trying to connect to Facebook</string>
 <string name="login_authorization">Please wait while verifying application authorization...</string>
 <string name="facebooklogin">Login to Facebook</string>
@@ -122,4 +122,7 @@
 <string name="happybirthday_name">It\'s his/her birthday :</string>
 <string name="mail_birthday_template_text">Edit birthday email template</string>
 <string name="sms_birthday_template_text">Edit birthday SMS template</string>
+<string name="loading_friends">Retrieving Facebook friends, please wait...</string>
+<string name="sync_friends">Synchronizing %s...</string>
+<string name="end_sync">Sync is finishing...</string>
 </resources>

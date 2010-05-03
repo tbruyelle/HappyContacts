@@ -6,14 +6,14 @@ package com.kamosoft.happycontacts.facebook;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.provider.Contacts.People;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -25,8 +25,6 @@ import com.kamosoft.happycontacts.R;
 import com.kamosoft.happycontacts.birthday.BirthdayActivity;
 import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.model.SocialNetworkUser;
-import com.kamosoft.utils.AndroidUtils;
-import com.nloko.simplyfacebook.net.FacebookRestClient;
 
 /**
  * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
@@ -40,8 +38,6 @@ public class FacebookActivity
 {
     private static final int ACTIVITY_LOGIN = 1;
 
-    private String[] mProjection = new String[] { People._ID, People.NAME };
-
     private DbAdapter mDb;
 
     private SocialUserArrayAdapter mArrayAdapter;
@@ -49,6 +45,8 @@ public class FacebookActivity
     private ArrayList<SocialNetworkUser> mUserList;
 
     private Button mStoreButton;
+
+    private ProgressDialog mProgressDialog;
 
     /**
      * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
@@ -82,6 +80,26 @@ public class FacebookActivity
         setListAdapter( mArrayAdapter );
     }
 
+    public ProgressDialog getProgressDialog()
+    {
+        return this.mProgressDialog;
+    }
+
+    public void finishSync( List<SocialNetworkUser> users )
+    {
+        if ( users == null || users.isEmpty() )
+        {
+            Toast.makeText( this, "No Facebook friends found !", Toast.LENGTH_SHORT );
+        }
+        else
+        {
+            /* record results in database */            
+            mDb.insertSyncResults( users );
+            mProgressDialog.dismiss();
+            fillList();
+        }
+    }
+
     /**
      * 
      */
@@ -89,112 +107,10 @@ public class FacebookActivity
     {
         if ( Log.DEBUG )
         {
-            Log.v( "Start sync" );
+            Log.v( "FaceBookActivity: Start sync" );
         }
-        FacebookRestClient client =
-            new FacebookRestClient( FACEBOOK_API_KEY,
-                                    this.getSharedPreferences( APP_NAME, 0 ).getString( "uid", null ),
-                                    this.getSharedPreferences( APP_NAME, 0 ).getString( "session_key", null ),
-                                    this.getSharedPreferences( APP_NAME, 0 ).getString( "secret", null ) );
-
-        FacebookApi api = new FacebookApi( client );
-        try
-        {
-            if ( Log.DEBUG )
-            {
-                Log.v( "Start getUserInfo" );
-            }
-            mUserList = api.getUserInfo( api.getFriends() );
-            if ( Log.DEBUG )
-            {
-                Log.v( "End getUserInfo" );
-            }
-            if ( mUserList != null && !mUserList.isEmpty() )
-            {
-                Cursor contacts =
-                    AndroidUtils.avoidEmptyName( this.getContentResolver().query( People.CONTENT_URI, mProjection,
-                                                                                  null, null, People.NAME + " ASC" ) );
-                if ( Log.DEBUG )
-                {
-                    Log.v( "Start matching with contacts" );
-                }
-                for ( SocialNetworkUser user : mUserList )
-                {
-                    if ( user.birthday == null )
-                    {
-                        if ( Log.DEBUG )
-                        {
-                            Log.d( "skpping user " + user.name + " no birthday provided" );
-                        }
-                        continue;
-                    }
-                    if ( Log.DEBUG )
-                    {
-                        Log.d( "searching contact for user " + user.name );
-                    }
-                    while ( contacts.moveToNext() )
-                    {
-                        String contactName = contacts.getString( contacts.getColumnIndexOrThrow( People.NAME ) );
-                        if ( nameMatch( contactName, user.name ) )
-                        {
-                            if ( Log.DEBUG )
-                            {
-                                Log.d( "*** " + contactName + " match with " + user.name + " ***" );
-                            }
-                            /* user FB trouvé dans les contacts */
-                            user.setContactId( contacts.getLong( contacts.getColumnIndexOrThrow( People._ID ) ) );
-                            user.setContactName( contactName );
-                            break;
-                        }
-                    }
-                    contacts.moveToFirst();
-                }
-                if ( Log.DEBUG )
-                {
-                    Log.v( "Stop matching with contacts" );
-                }
-                /* record results in database */
-                mDb.insertSyncResults( mUserList );
-
-                fillList();
-            }
-            else
-            {
-                Toast.makeText( this, "No friends found !", Toast.LENGTH_SHORT ).show();
-            }
-        }
-        catch ( Exception e )
-        {
-            Toast.makeText( this, e.getMessage(), Toast.LENGTH_LONG ).show();
-        }
-    }
-
-    private boolean nameMatch( String contactName, String userName )
-    {
-        if ( contactName == null || contactName.length() == 0 || userName == null || userName.length() == 0 )
-        {
-            return false;
-        }
-        String[] contactSubNames = AndroidUtils.replaceAccents( contactName ).split( " " );
-        String[] userSubNames = AndroidUtils.replaceAccents( userName ).split( " " );
-        boolean subNameFound = false;
-        for ( String userSubName : userSubNames )
-        {
-            for ( String contactSubName : contactSubNames )
-            {
-                if ( userSubName.equalsIgnoreCase( contactSubName ) )
-                {
-                    subNameFound = true;
-                    break;
-                }
-            }
-            if ( !subNameFound )
-            {
-                return false;
-            }
-            subNameFound = false;
-        }
-        return true;
+        mProgressDialog = ProgressDialog.show( this, "", this.getString( R.string.loading_friends ), true );
+        new FacebookContactSync( this ).execute();
     }
 
     /**
