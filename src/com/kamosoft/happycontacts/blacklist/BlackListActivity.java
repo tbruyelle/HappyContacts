@@ -91,18 +91,7 @@ public class BlackListActivity
         else
         {
             mCursorBlakListed = mDb.fetchAllTimeBlackListed();
-        }
-        if ( Log.DEBUG )
-        {
-            while ( mCursorBlakListed.moveToNext() )
-            {
-                String name =
-                    mCursorBlakListed.getString( mCursorBlakListed.getColumnIndexOrThrow( HappyContactsDb.BlackList.CONTACT_NAME ) );
-                String lastWishDate =
-                    mCursorBlakListed.getString( mCursorBlakListed.getColumnIndexOrThrow( HappyContactsDb.BlackList.LAST_WISH_DATE ) );
-                Log.v( "blacklisted " + name + " date=" + lastWishDate );
-            }
-        }
+        }       
         startManagingCursor( mCursorBlakListed );
         String[] from =
             new String[] { HappyContactsDb.BlackList.CONTACT_NAME, HappyContactsDb.BlackList.LAST_WISH_DATE };

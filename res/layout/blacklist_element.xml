@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" android:layout_height="fill_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent"
+  android:layout_height="fill_parent" android:gravity="center_vertical|center_horizontal"
+  android:orientation="vertical">
 
-	<TextView android:id="@+id/contact_name" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:textSize="20sp"
-		android:textStyle="bold" android:layout_alignParentLeft="true"
-		android:layout_alignParentTop="true" />
-	<TextView android:id="@+id/last_wish_date"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:textStyle="italic" android:layout_alignParentLeft="true"
-		android:layout_below="@id/contact_name"
-		android:layout_alignParentBottom="true" />
+  <TextView android:id="@+id/contact_name" android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:textSize="20sp" android:textStyle="bold" android:text="name" />
+  <TextView android:id="@+id/last_wish_date" android:layout_width="wrap_content" android:layout_height="wrap_content" />
 
-</RelativeLayout>
+</LinearLayout>
