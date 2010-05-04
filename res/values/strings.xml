@@ -126,4 +126,5 @@
 <string name="sync_friends">Synchronizing %s...</string>
 <string name="end_sync">Sync is finishing...</string>
 <string name="inserting_results">Displaying results...</string>
+<string name="inserting_birthdays">Recording %d birthdays...</string>
 </resources>

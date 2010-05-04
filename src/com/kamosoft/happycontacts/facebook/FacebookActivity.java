@@ -13,6 +13,7 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -93,7 +94,6 @@ public class FacebookActivity
         }
         else
         {
-            mProgressDialog.setMessage( getString( R.string.inserting_results ) );
             /* record results in database */
             mDb.insertSyncResults( users );
             mProgressDialog.dismiss();
@@ -222,20 +222,24 @@ public class FacebookActivity
         }
     }
 
-    /**
-     * 
-     */
-    private void store()
+    private class StoreAsyncTask
+        extends AsyncTask<Void, Integer, Void>
     {
-        if ( mUserList != null && !mUserList.isEmpty() )
+        /**
+         * @see android.os.AsyncTask#doInBackground(Params[])
+         */
+        @Override
+        protected Void doInBackground( Void... voids )
         {
+            int counter = 1;
             for ( SocialNetworkUser user : mUserList )
-            {
+            {                
                 if ( user.birthday == null || user.getContactName() == null )
                 {
                     /* we don't store if no birthday */
                     continue;
                 }
+                publishProgress( counter++ );
                 /* facebook birthday date has format MMMM dd, yyyy or MMMM dd */
                 String birthday = null, birthyear = null;
                 try
@@ -243,7 +247,6 @@ public class FacebookActivity
                     Date date = FB_birthdayFull.parse( user.birthday );
                     birthday = dayDateFormat.format( date );
                     birthyear = yearDateFormat.format( date );
-
                 }
                 catch ( ParseException e )
                 {
@@ -264,9 +267,42 @@ public class FacebookActivity
                     Log.e( "Error while inserting birthday " + user.toString() );
                 }
             }
-            Intent intent = new Intent( this, BirthdayActivity.class );
+            return null;
+        }
+
+        /**
+         * @see android.os.AsyncTask#onProgressUpdate(Progress[])
+         */
+        @Override
+        protected void onProgressUpdate( Integer... values )
+        {
+            mProgressDialog.setMessage( FacebookActivity.this.getString( R.string.inserting_birthdays, values[0] ) );
+        }
+
+        /**
+         * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+         */
+        @Override
+        protected void onPostExecute( Void voids )
+        {
+            mProgressDialog.dismiss();
+            Intent intent = new Intent( FacebookActivity.this, BirthdayActivity.class );
             intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
             startActivity( intent );
+        }
+    }
+
+    /**
+     * 
+     */
+    private void store()
+    {
+        if ( mUserList != null && !mUserList.isEmpty() )
+        {
+            mProgressDialog =
+                ProgressDialog.show( FacebookActivity.this, "",
+                                     FacebookActivity.this.getString( R.string.inserting_birthdays, 0 ), true );
+            new StoreAsyncTask().execute();
         }
         else
         {

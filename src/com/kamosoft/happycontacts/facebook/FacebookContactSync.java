@@ -128,7 +128,7 @@ public class FacebookContactSync
         {
             Log.v( "FacebookContactSync: Stop matching with contacts" );
         }
-        publishProgress( mContext.getString( R.string.end_sync ) );
+        publishProgress( mContext.getString( R.string.inserting_results )  );
         return users;
     }
 
