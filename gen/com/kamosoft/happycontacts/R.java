@@ -166,6 +166,7 @@ public final class R {
         public static final int happybirthday_name=0x7f060073;
         public static final int happyfeast=0x7f060009;
         public static final int happyfeast_name=0x7f060043;
+        public static final int inserting_results=0x7f060079;
         public static final int last_wish_date=0x7f06000c;
         public static final int later=0x7f060007;
         public static final int link_other=0x7f06005b;

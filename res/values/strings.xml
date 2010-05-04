@@ -125,4 +125,5 @@
 <string name="loading_friends">Retrieving Facebook friends, please wait...</string>
 <string name="sync_friends">Synchronizing %s...</string>
 <string name="end_sync">Sync is finishing...</string>
+<string name="inserting_results">Displaying results...</string>
 </resources>

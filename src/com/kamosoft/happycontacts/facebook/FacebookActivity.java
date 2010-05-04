@@ -93,7 +93,8 @@ public class FacebookActivity
         }
         else
         {
-            /* record results in database */            
+            mProgressDialog.setMessage( getString( R.string.inserting_results ) );
+            /* record results in database */
             mDb.insertSyncResults( users );
             mProgressDialog.dismiss();
             fillList();
