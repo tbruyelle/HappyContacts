@@ -12,6 +12,16 @@ import android.net.Uri;
 
 public class ContactUtils
 {
+    private static IContactProxy singleInstance;
+    
+    private static IContactProxy getInstance()
+    {
+        if (singleInstance==null)
+        {
+            singleInstance=ContactProxyFactory.create();
+        }
+        return singleInstance;
+    }
     public static ArrayList<String> getContactPhones( Context context, Long contactId )
     {
         return ContactProxyFactory.create().getContactPhones( context, contactId );
