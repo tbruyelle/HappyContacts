@@ -48,6 +48,66 @@ public class FacebookActivity
     private Button mStoreButton;
 
     private ProgressDialog mProgressDialog;
+    
+    /**
+     * @see android.app.Activity#onCreate(android.os.Bundle)
+     */
+    @Override
+    protected void onCreate( Bundle savedInstanceState )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "FaceBookActivity: onCreate()  start" );
+        }
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.facebook_sync );
+
+        Button syncButton = (Button) findViewById( R.id.start_sync );
+        syncButton.setOnClickListener( this );
+
+        mStoreButton = (Button) findViewById( R.id.store_birthdays );
+        mStoreButton.setOnClickListener( this );
+
+        mDb = new DbAdapter( this );
+
+        if ( Log.DEBUG )
+        {
+            Log.v( "FaceBookActivity: onCreate() end" );
+        }
+    }
+
+    @Override
+    protected void onResume()
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "FaceBookActivity: start onResume" );
+        }
+        super.onResume();
+
+        mDb.open( false );
+
+        if ( isLoggedIn() )
+        {
+            if ( Log.DEBUG )
+            {
+                Log.v( "FaceBookActivity: onCreate user logged" );
+            }
+            fillList();
+        }
+        else
+        {
+            if ( Log.DEBUG )
+            {
+                Log.v( "FaceBookActivity: onCreate start login" );
+            }
+            startActivityForResult( new Intent( this, FacebookLoginActivity.class ), ACTIVITY_LOGIN );
+        }
+        if ( Log.DEBUG )
+        {
+            Log.v( "FaceBookActivity: end onResume" );
+        }
+    }
 
     /**
      * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
@@ -114,65 +174,7 @@ public class FacebookActivity
         new FacebookContactSync( this ).execute();
     }
 
-    /**
-     * @see android.app.Activity#onCreate(android.os.Bundle)
-     */
-    @Override
-    protected void onCreate( Bundle savedInstanceState )
-    {
-        if ( Log.DEBUG )
-        {
-            Log.v( "FaceBookActivity: onCreate()  start" );
-        }
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.facebook_sync );
-
-        Button syncButton = (Button) findViewById( R.id.start_sync );
-        syncButton.setOnClickListener( this );
-
-        mStoreButton = (Button) findViewById( R.id.store_birthdays );
-        mStoreButton.setOnClickListener( this );
-
-        mDb = new DbAdapter( this );
-
-        if ( Log.DEBUG )
-        {
-            Log.v( "FaceBookActivity: onCreate() end" );
-        }
-    }
-
-    @Override
-    protected void onResume()
-    {
-        if ( Log.DEBUG )
-        {
-            Log.v( "FaceBookActivity: start onResume" );
-        }
-        super.onResume();
-
-        mDb.open( false );
-
-        if ( isLoggedIn() )
-        {
-            if ( Log.DEBUG )
-            {
-                Log.v( "FaceBookActivity: onCreate user logged" );
-            }
-            fillList();
-        }
-        else
-        {
-            if ( Log.DEBUG )
-            {
-                Log.v( "FaceBookActivity: onCreate start login" );
-            }
-            startActivityForResult( new Intent( this, FacebookLoginActivity.class ), ACTIVITY_LOGIN );
-        }
-        if ( Log.DEBUG )
-        {
-            Log.v( "FaceBookActivity: end onResume" );
-        }
-    }
+    
 
     @Override
     protected void onStop()
