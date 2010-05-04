@@ -13,52 +13,53 @@ import android.net.Uri;
 public class ContactUtils
 {
     private static IContactProxy singleInstance;
-    
+
     private static IContactProxy getInstance()
     {
-        if (singleInstance==null)
+        if ( singleInstance == null )
         {
-            singleInstance=ContactProxyFactory.create();
+            singleInstance = ContactProxyFactory.create();
         }
         return singleInstance;
     }
+
     public static ArrayList<String> getContactPhones( Context context, Long contactId )
     {
-        return ContactProxyFactory.create().getContactPhones( context, contactId );
+        return getInstance().getContactPhones( context, contactId );
     }
 
     public static ArrayList<String> getContactEmails( Context context, Long contactId )
     {
-        return ContactProxyFactory.create().getContactEmails( context, contactId );
+        return getInstance().getContactEmails( context, contactId );
     }
 
     public static Bitmap loadContactPhoto( Context context, Long contactId )
     {
-        return ContactProxyFactory.create().loadContactPhoto( context, contactId );
+        return getInstance().loadContactPhoto( context, contactId );
     }
 
     public static Uri getContentUri()
     {
-        return ContactProxyFactory.create().getContentUri();
+        return getInstance().getContentUri();
     }
 
     public static ArrayList<PhoneContact> loadPhoneContacts( Context context )
     {
-        return ContactProxyFactory.create().loadPhoneContacts( context );
+        return getInstance().loadPhoneContacts( context );
     }
 
     public static Cursor doQuery( Context context, String where )
     {
-        return ContactProxyFactory.create().doQuery( context, where );
+        return getInstance().doQuery( context, where );
     }
 
     public static String getIdColumn()
     {
-        return ContactProxyFactory.create().getIdColumn();
+        return getInstance().getIdColumn();
     }
 
     public static String getNameColumn()
     {
-        return ContactProxyFactory.create().getNameColumn();
+        return getInstance().getNameColumn();
     }
 }
