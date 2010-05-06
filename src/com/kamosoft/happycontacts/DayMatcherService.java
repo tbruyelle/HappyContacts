@@ -201,8 +201,8 @@ public class DayMatcherService
             if ( Log.DEBUG )
             {
                 Log.v( "DayMatcher: adding birthday for " + contactName );
-            }
-            contactFeastsToday.addContact( contactId, new ContactFeast( BDAY_HINT, contactName, null ) );
+            }                      
+            contactFeastsToday.addContact( contactId, new ContactFeast( BDAY_HINT, contactName ) );
         }
         cursor.close();
         if ( Log.DEBUG )
@@ -245,7 +245,7 @@ public class DayMatcherService
                 }
                 continue;
             }
-            ContactFeast contactFeast = new ContactFeast( name, name, null );
+            ContactFeast contactFeast = new ContactFeast( name, name );
             String nameUpper = AndroidUtils.replaceAccents( name ).toUpperCase();
             names.put( nameUpper, contactFeast );
             if ( Log.DEBUG )
@@ -285,7 +285,7 @@ public class DayMatcherService
                             Log.v( "DayMatcher: add " + contactId + " " + contactName
                                 + " from whitelist to the ContactFeastToday" );
                         }
-                        contactFeastsToday.addContact( contactId, new ContactFeast( name, contactName, null ) );
+                        contactFeastsToday.addContact( contactId, new ContactFeast( name, contactName ) );
 
                     }
                 }
@@ -326,8 +326,7 @@ public class DayMatcherService
                         ContactFeast contactFeast = names.get( subName );
                         /* duplicate the contact feast and set the name */
                         ContactFeast newContactFeast =
-                            new ContactFeast( contactFeast.getNameDay(), phoneContact.name,
-                                              contactFeast.getLastWishYear() );
+                            new ContactFeast( contactFeast.getNameDay(), phoneContact.name );
                         contactFeastsToday.addContact( phoneContact.id, newContactFeast );
                     }
                 }

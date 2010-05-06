@@ -28,13 +28,10 @@ public class ContactFeast
 
     private ArrayList<String> emails;
 
-    private String lastWishYear;
-
-    public ContactFeast( String nameDay, String contactName, String lastWishYear )
+    public ContactFeast( String nameDay, String contactName )
     {
         this.nameDay = nameDay;
         this.contactName = contactName;
-        this.setLastWishYear( lastWishYear );
     }
 
     public boolean isContactable()
@@ -98,23 +95,7 @@ public class ContactFeast
     public void setContactName( String contactName )
     {
         this.contactName = contactName;
-    }
-
-    /**
-     * @param lastWishYear the lastWishYear to set
-     */
-    public void setLastWishYear( String lastWishYear )
-    {
-        this.lastWishYear = lastWishYear;
-    }
-
-    /**
-     * @return the lastWishYear
-     */
-    public String getLastWishYear()
-    {
-        return lastWishYear;
-    }
+    }   
 
     public void setContactId( Long contactId )
     {
