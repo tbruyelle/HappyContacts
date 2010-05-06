@@ -4,7 +4,6 @@
 package com.kamosoft.happycontacts.birthday;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -58,8 +57,9 @@ public class PickBirthdayActivity
         mContactId = getIntent().getExtras().getLong( CONTACTID_INTENT_KEY );
         mContactName = getIntent().getExtras().getString( CONTACTNAME_INTENT_KEY );
 
-        Date date = mDb.getBirthday( mContactId );
-        mUpdate = date != null;
+        /* is it an update or an insert ? */
+        String[] dayYear = mDb.getBirthday( mContactId );
+        mUpdate = dayYear != null;
 
         mDatePicker = (DatePicker) findViewById( R.id.birthday_picker );
         TextView textView = (TextView) findViewById( R.id.pick_birthday_label );
@@ -67,11 +67,14 @@ public class PickBirthdayActivity
         if ( mUpdate )
         {
             /* contact has already a birthday, this is an update */
+            String birthdayDate = dayYear[0];
+            String birthdayYear = dayYear[1];
             textView.setText( getString( R.string.pick_birthday_update_label, mContactName ) );
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime( date );
-            mDatePicker.updateDate( calendar.get( Calendar.YEAR ), calendar.get( Calendar.MONTH ),
-                                    calendar.get( Calendar.DAY_OF_MONTH ) );
+            int year =
+                birthdayYear == null ? Calendar.getInstance().get( Calendar.YEAR ) : Integer.parseInt( birthdayYear );
+            int month = Integer.parseInt( birthdayDate.subSequence( 3, 5 ).toString() );
+            int day = Integer.parseInt( birthdayDate.subSequence( 0, 2 ).toString() );
+            mDatePicker.updateDate( year, month - 1, day );
         }
         else
         {

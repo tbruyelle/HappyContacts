@@ -116,6 +116,7 @@ public class BirthdayActivity
                 Long contactId = mCursor.getLong( mCursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.CONTACT_ID ) );
                 String contactName =
                     mCursor.getString( mCursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.CONTACT_NAME ) );
+
                 Intent intent = new Intent( this, PickBirthdayActivity.class );
                 intent.putExtra( CONTACTID_INTENT_KEY, contactId );
                 intent.putExtra( CONTACTNAME_INTENT_KEY, contactName );

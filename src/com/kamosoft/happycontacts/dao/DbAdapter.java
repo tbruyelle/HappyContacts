@@ -4,9 +4,7 @@
 package com.kamosoft.happycontacts.dao;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import android.content.ContentValues;
@@ -233,40 +231,91 @@ public class DbAdapter
      * @param contactId
      * @return String the birthday date or null
      */
-    public Date getBirthday( Long contactId )
+//    public boolean hasBirthday( Long contactId )
+//    {
+//        if ( Log.DEBUG )
+//        {
+//            Log.v( "DbAdapter: start hasBirthday(" + contactId + ")" );
+//        }
+//        Cursor cursor =
+//            mDb.query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS,
+//                       HappyContactsDb.Birthday.CONTACT_ID + "='" + contactId + "'", null, null, null, null );
+//        boolean hasBirhtday = cursor.getCount() > 0;
+//        cursor.close();
+//        return hasBirhtday;
+//    }
+
+    public String[] getBirthday( Long contactId )
     {
         if ( Log.DEBUG )
         {
-            Log.v( "DbAdapter: start hasBirthday(" + contactId + ")" );
+            Log.v( "DbAdapter: start getBirthday(" + contactId + ")" );
         }
         Cursor cursor =
             mDb.query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS,
                        HappyContactsDb.Birthday.CONTACT_ID + "='" + contactId + "'", null, null, null, null );
-        Date birthdayDate = null;
+        String day, year;
         if ( cursor.getCount() > 0 )
         {
             cursor.moveToFirst();
-            String day = cursor.getString( cursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.BIRTHDAY_DATE ) );
-            String year = cursor.getString( cursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.BIRTHDAY_YEAR ) );
+            day = cursor.getString( cursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.BIRTHDAY_DATE ) );
+            year = cursor.getString( cursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.BIRTHDAY_YEAR ) );
+        }
+        else
+        {
+            if ( Log.DEBUG )
+            {
+                Log.v( "DbAdapter: getBirthday() not found" );
+            }
             cursor.close();
-            String date = day + "/" + year;
-
-            try
-            {
-                birthdayDate = fullDateFormat.parse( date );
-            }
-            catch ( ParseException e )
-            {
-                Log.e( "unable to parse date " + date );
-            }
+            return null;
         }
         cursor.close();
         if ( Log.DEBUG )
         {
-            Log.v( "DbAdapter: end hasBirthday with date " + birthdayDate );
+            Log.v( "DbAdapter: end getBirthday with date=" + day + " year=" + year );
         }
-        return birthdayDate;
+        return new String[] { day, year };
     }
+
+    /**
+     * @param contactId
+     * @return String the birthday date or null
+     */
+    //    public Date getBirthday( Long contactId )
+    //    {
+    //        if ( Log.DEBUG )
+    //        {
+    //            Log.v( "DbAdapter: start getBirthday(" + contactId + ")" );
+    //        }
+    //        Cursor cursor =
+    //            mDb.query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS,
+    //                       HappyContactsDb.Birthday.CONTACT_ID + "='" + contactId + "'", null, null, null, null );
+    //        Date birthdayDate = null;
+    //        if ( cursor.getCount() > 0 )
+    //        {
+    //            cursor.moveToFirst();
+    //            String day = cursor.getString( cursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.BIRTHDAY_DATE ) );
+    //            String year = cursor.getString( cursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.BIRTHDAY_YEAR ) );
+    //            cursor.close();
+    //            String date = day + "/" + year;
+    //
+    //            try
+    //            {
+    //                birthdayDate = fullDateFormat.parse( date );
+    //            }
+    //            catch ( ParseException e )
+    //            {
+    //                Log.e( "unable to parse date " + date );
+    //            }
+    //        }
+    //        cursor.close();
+    //        if ( Log.DEBUG )
+    //        {
+    //            Log.v( "DbAdapter: end getBirthday with date " + birthdayDate );
+    //        }
+    //        return birthdayDate;
+    //    }
 
     /**
      * insert a birthday 

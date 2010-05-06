@@ -44,7 +44,7 @@ public interface Constants
     public static final String PREF_MAIL_BODY_TEMPLATE = "mailBodyTemplate";
 
     public static final String PREF_SMS_BODY_TEMPLATE = "smsSubjectTemplate";
-    
+
     public static final String PREF_MAIL_BIRTHDAY_SUBJECT_TEMPLATE = "mailBirthdaySubjectTemplate";
 
     public static final String PREF_MAIL_BIRTHDAY_BODY_TEMPLATE = "mailBirthdayBodyTemplate";
