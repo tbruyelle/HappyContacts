@@ -201,8 +201,12 @@ public class DayMatcherService
             if ( Log.DEBUG )
             {
                 Log.v( "DayMatcher: adding birthday for " + contactName );
-            }                      
-            contactFeastsToday.addContact( contactId, new ContactFeast( BDAY_HINT, contactName ) );
+            }
+            ContactFeast contactFeast = new ContactFeast( BDAY_HINT, contactName );
+            contactFeast.setBirthdayDate( cursor.getString( cursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.BIRTHDAY_DATE ) ) );
+            contactFeast.setBirthdayYear( cursor.getString( cursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.BIRTHDAY_YEAR ) ) );
+
+            contactFeastsToday.addContact( contactId, contactFeast );
         }
         cursor.close();
         if ( Log.DEBUG )
@@ -325,8 +329,7 @@ public class DayMatcherService
                         }
                         ContactFeast contactFeast = names.get( subName );
                         /* duplicate the contact feast and set the name */
-                        ContactFeast newContactFeast =
-                            new ContactFeast( contactFeast.getNameDay(), phoneContact.name );
+                        ContactFeast newContactFeast = new ContactFeast( contactFeast.getNameDay(), phoneContact.name );
                         contactFeastsToday.addContact( phoneContact.id, newContactFeast );
                     }
                 }

@@ -127,4 +127,6 @@
 <string name="end_sync">Sync is finishing...</string>
 <string name="inserting_results">Displaying results...</string>
 <string name="inserting_birthdays">Recording %d birthdays...</string>
+<string name="age">%d years old</string>
+<string name="age_unknow">\? years old</string>
 </resources>

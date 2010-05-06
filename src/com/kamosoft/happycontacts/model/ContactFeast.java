@@ -28,6 +28,12 @@ public class ContactFeast
 
     private ArrayList<String> emails;
 
+    /** for birthday only */
+    private String birthdayDate;
+
+    /** for birthday only */
+    private String birthdayYear;
+
     public ContactFeast( String nameDay, String contactName )
     {
         this.nameDay = nameDay;
@@ -95,7 +101,7 @@ public class ContactFeast
     public void setContactName( String contactName )
     {
         this.contactName = contactName;
-    }   
+    }
 
     public void setContactId( Long contactId )
     {
@@ -121,5 +127,37 @@ public class ContactFeast
     public void setNameDay( String nameDay )
     {
         this.nameDay = nameDay;
+    }
+
+    /**
+     * @param birthday the birthday to set
+     */
+    public void setBirthdayDate( String birthday )
+    {
+        this.birthdayDate = birthday;
+    }
+
+    /**
+     * @return the birthday
+     */
+    public String getBirthdayDate()
+    {
+        return birthdayDate;
+    }
+
+    /**
+     * @param birthyear the birthyear to set
+     */
+    public void setBirthdayYear( String birthyear )
+    {
+        this.birthdayYear = birthyear;
+    }
+
+    /**
+     * @return the birthyear
+     */
+    public String getBirthdayYear()
+    {
+        return birthdayYear;
     }
 }

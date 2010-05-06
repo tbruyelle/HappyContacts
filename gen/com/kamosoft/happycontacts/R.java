@@ -128,6 +128,8 @@ public final class R {
         public static final int add=0x7f06004c;
         public static final int add_birthday=0x7f060064;
         public static final int add_whitelist=0x7f060059;
+        public static final int age=0x7f06007b;
+        public static final int age_unknow=0x7f06007c;
         public static final int app_name=0x7f060001;
         public static final int back_to_main=0x7f06003b;
         public static final int birthday_added=0x7f06006c;

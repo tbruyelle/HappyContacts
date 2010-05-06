@@ -4,6 +4,7 @@
 package com.kamosoft.happycontacts;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
@@ -70,6 +71,8 @@ public class ReminderPopupActivity
 
     private int mIndex;
 
+    private int mCurrentYear;
+
     @Override
     protected void onCreate( Bundle savedInstanceState )
     {
@@ -89,12 +92,17 @@ public class ReminderPopupActivity
 
         mPrefs = getSharedPreferences( APP_NAME, 0 );
 
-        /* boucle sur les contacts a qui il fait souhaiter la fete */
         Date date = new Date();
         String day = dayDateFormat.format( date );
         mDate = fullDateFormat.format( date );
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime( date );
+        mCurrentYear = cal.get( Calendar.YEAR );
+
         mContactFeasts = DayMatcherService.testDayMatch( this, day, mDate );
-        /* boucle sur les contacts a qui il fait souhaiter la fete */
+
+        /* loop on contacts */
         contacts = mContactFeasts.getContactList().entrySet().iterator();
 
         mNameDayTitle = (TextView) findViewById( R.id.nameday_title );
@@ -348,7 +356,17 @@ public class ReminderPopupActivity
         if ( contactFeast.getNameDay().equals( BDAY_HINT ) )
         {
             /* its a birthday */
-            mNameDayTitle.setVisibility( View.GONE );
+            if ( contactFeast.getBirthdayYear() != null )
+            {
+                /* year is provided, we can calculate the age */
+                int birtdayYear = Integer.parseInt( contactFeast.getBirthdayYear() );
+                mNameDayTitle.setText( getString( R.string.age, Integer.valueOf( mCurrentYear - birtdayYear ) ) );
+            }
+            else
+            {
+                mNameDayTitle.setText( R.string.age_unknow );
+            }
+
             mHappyFeastText.setText( R.string.happybirthday_name );
         }
         else
