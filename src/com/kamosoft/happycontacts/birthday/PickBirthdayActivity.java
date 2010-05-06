@@ -99,7 +99,12 @@ public class PickBirthdayActivity
         {
             month = "0" + month;
         }
-        String birthday = String.valueOf( mDatePicker.getDayOfMonth() ) + "/" + month;
+        String day = String.valueOf( mDatePicker.getDayOfMonth() );
+        if ( day.length() == 1 )
+        {
+            day = "0" + day;
+        }
+        String birthday = day + "/" + month;
         String birthyear = String.valueOf( mDatePicker.getYear() );
         if ( mUpdate )
         {
