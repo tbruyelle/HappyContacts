@@ -48,7 +48,7 @@ public class FacebookActivity
     private Button mStoreButton;
 
     private ProgressDialog mProgressDialog;
-    
+
     /**
      * @see android.app.Activity#onCreate(android.os.Bundle)
      */
@@ -174,8 +174,6 @@ public class FacebookActivity
         new FacebookContactSync( this ).execute();
     }
 
-    
-
     @Override
     protected void onStop()
     {
@@ -235,7 +233,7 @@ public class FacebookActivity
         {
             int counter = 1;
             for ( SocialNetworkUser user : mUserList )
-            {                
+            {
                 if ( user.birthday == null || user.getContactName() == null )
                 {
                     /* we don't store if no birthday */
@@ -264,7 +262,7 @@ public class FacebookActivity
                         continue;
                     }
                 }
-                if ( !mDb.insertBirthday( user.getContactId(), user.getContactName(), birthday, birthyear ) )
+                if ( mDb.insertBirthday( user.getContactId(), user.getContactName(), birthday, birthyear ) == -1 )
                 {
                     Log.e( "Error while inserting birthday " + user.toString() );
                 }

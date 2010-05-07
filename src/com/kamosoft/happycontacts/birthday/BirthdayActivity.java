@@ -92,10 +92,33 @@ public class BirthdayActivity
         mDb.open( false );
 
         fillList();
+        /* check intent contactId to scroll to the right item after update or delete */
+        if ( getIntent().hasExtra( CONTACTID_INTENT_KEY ) )
+        {
+            long id = getIntent().getLongExtra( CONTACTID_INTENT_KEY, 0 );
+            int position = getPositionFromContactId( id );
+            getListView().setSelection( position > 0 ? position - 1 : 0 );
+            getIntent().removeExtra( CONTACTID_INTENT_KEY );
+        }
         if ( Log.DEBUG )
         {
             Log.v( "BirthdayActivity: end onResume" );
         }
+    }
+
+    private int getPositionFromContactId( long id )
+    {
+        mCursor.moveToFirst();
+        do
+        {
+            Long cursorId = mCursor.getLong( mCursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.CONTACT_ID ) );
+            if ( cursorId.longValue() == id )
+            {
+                return mCursor.getPosition();
+            }
+        }
+        while ( mCursor.moveToNext() );
+        return 0;
     }
 
     public void onCreateContextMenu( ContextMenu menu, View v, ContextMenuInfo menuInfo )

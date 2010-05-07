@@ -116,29 +116,62 @@ public class PickBirthdayActivity
                 String error = "Error while updating birthday for " + mContactName + ", " + birthday + ", " + birthyear;
                 Log.e( error );
                 Toast.makeText( this, error, Toast.LENGTH_SHORT ).show();
+                finishError();
             }
             else
             {
                 Toast.makeText( this, R.string.birthday_updated, Toast.LENGTH_SHORT ).show();
+                finishSuccess( mContactId );
             }
         }
         else
         {
-            if ( !mDb.insertBirthday( mContactId, mContactName, birthday, birthyear ) )
+            if ( mDb.insertBirthday( mContactId, mContactName, birthday, birthyear ) < 0 )
             {
                 String error =
                     "Error while inserting birthday for " + mContactName + ", " + birthday + ", " + birthyear;
                 Log.e( error );
                 Toast.makeText( this, error, Toast.LENGTH_SHORT ).show();
+                finishError();
             }
             else
             {
                 Toast.makeText( this, R.string.birthday_added, Toast.LENGTH_SHORT ).show();
+                finishSuccess( mContactId );
             }
         }
+    }
+
+    private void finishSuccess( long contactId )
+    {
+        Intent intent = new Intent( this, BirthdayActivity.class );
+        intent.putExtra( CONTACTID_INTENT_KEY, contactId );
+        intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+        startActivity( intent );
+    }
+
+    private void finishError()
+    {
         Intent intent = new Intent( this, BirthdayActivity.class );
         intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
         startActivity( intent );
     }
 
+    @Override
+    protected void onStop()
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "PickBirthdayActivity: start onStop" );
+        }
+        super.onStop();
+        if ( mDb != null )
+        {
+            mDb.close();
+        }
+        if ( Log.DEBUG )
+        {
+            Log.v( "PickBirthdayActivity: end onStop" );
+        }
+    }
 }

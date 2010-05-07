@@ -231,19 +231,19 @@ public class DbAdapter
      * @param contactId
      * @return String the birthday date or null
      */
-//    public boolean hasBirthday( Long contactId )
-//    {
-//        if ( Log.DEBUG )
-//        {
-//            Log.v( "DbAdapter: start hasBirthday(" + contactId + ")" );
-//        }
-//        Cursor cursor =
-//            mDb.query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS,
-//                       HappyContactsDb.Birthday.CONTACT_ID + "='" + contactId + "'", null, null, null, null );
-//        boolean hasBirhtday = cursor.getCount() > 0;
-//        cursor.close();
-//        return hasBirhtday;
-//    }
+    //    public boolean hasBirthday( Long contactId )
+    //    {
+    //        if ( Log.DEBUG )
+    //        {
+    //            Log.v( "DbAdapter: start hasBirthday(" + contactId + ")" );
+    //        }
+    //        Cursor cursor =
+    //            mDb.query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS,
+    //                       HappyContactsDb.Birthday.CONTACT_ID + "='" + contactId + "'", null, null, null, null );
+    //        boolean hasBirhtday = cursor.getCount() > 0;
+    //        cursor.close();
+    //        return hasBirhtday;
+    //    }
 
     public String[] getBirthday( Long contactId )
     {
@@ -321,7 +321,7 @@ public class DbAdapter
      * insert a birthday 
      * @return
      */
-    public boolean insertBirthday( Long contactId, String contactName, String birthday, String birthyear )
+    public long insertBirthday( Long contactId, String contactName, String birthday, String birthyear )
     {
         if ( Log.DEBUG )
         {
@@ -335,7 +335,7 @@ public class DbAdapter
         initialValues.put( HappyContactsDb.Birthday.BIRTHDAY_DATE, birthday );
         initialValues.put( HappyContactsDb.Birthday.BIRTHDAY_YEAR, birthyear );
 
-        return mDb.insert( HappyContactsDb.Birthday.TABLE_NAME, null, initialValues ) > 0;
+        return mDb.insert( HappyContactsDb.Birthday.TABLE_NAME, null, initialValues );
     }
 
     public boolean deleteBirthday( long id )
@@ -364,21 +364,27 @@ public class DbAdapter
             Log.v( "DbAdapter: start updateBirthday(" + contactId + ", " + contactName + ", " + birthday + ", "
                 + birthyear );
         }
-        if ( !this.deleteBirthdayWithContactId( contactId ) )
-        {
-            Log.e( "Error while deleting " + contactId + ", " + contactName + ", " + birthday + ", " + birthyear );
-            return false;
-        }
-        if ( !this.insertBirthday( contactId, contactName, birthday, birthyear ) )
-        {
-            Log.e( "Error while inserting " + contactId + ", " + contactName + ", " + birthday + ", " + birthyear );
-            return false;
-        }
-        if ( Log.DEBUG )
-        {
-            Log.v( "DbAdapter: end success updateBirthday" );
-        }
-        return true;
+        ContentValues values = new ContentValues();
+        values.put( HappyContactsDb.Birthday.BIRTHDAY_DATE, birthday );
+        values.put( HappyContactsDb.Birthday.BIRTHDAY_YEAR, birthyear );
+
+        return mDb.update( HappyContactsDb.Birthday.TABLE_NAME, values, HappyContactsDb.Birthday.CONTACT_ID + "="
+            + contactId, null ) > 0;
+        //        if ( !this.deleteBirthdayWithContactId( contactId ) )
+        //        {
+        //            Log.e( "Error while deleting " + contactId + ", " + contactName + ", " + birthday + ", " + birthyear );
+        //            return false;
+        //        }
+        //        if ( !this.insertBirthday( contactId, contactName, birthday, birthyear ) )
+        //        {
+        //            Log.e( "Error while inserting " + contactId + ", " + contactName + ", " + birthday + ", " + birthyear );
+        //            return false;
+        //        }
+        //        if ( Log.DEBUG )
+        //        {
+        //            Log.v( "DbAdapter: end success updateBirthday" );
+        //        }
+        //        return true;
     }
 
     public boolean deleteAllBirthday()
