@@ -125,7 +125,7 @@ public class WhiteListActivity
     {
         Intent intent = new Intent( this, PickContactsListActivity.class );
         intent.putExtra( NEXT_ACTIVITY_INTENT_KEY, PickNameDayListActivity.class );
-        intent.putExtra( PICK_CONTACT_LABEL_INTENT_KEY, R.string.pick_contact_nickname );
+        intent.putExtra( PICK_CONTACT_LABEL_INTENT_KEY, getString( R.string.pick_contact_nickname ) );
         startActivity( intent );
 
         //            /* hide the keyboard */

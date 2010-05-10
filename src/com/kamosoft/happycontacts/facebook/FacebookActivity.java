@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.kamosoft.happycontacts.Constants;
@@ -37,7 +38,9 @@ public class FacebookActivity
     extends ListActivity
     implements Constants, OnClickListener
 {
-    private static final int ACTIVITY_LOGIN = 1;
+    private static final int LOGIN_ACTIVITY_RESULT = 1;
+
+    public static final int PICK_CONTACT_ACTIVITY_RESULT = 2;
 
     private DbAdapter mDb;
 
@@ -46,6 +49,10 @@ public class FacebookActivity
     private ArrayList<SocialNetworkUser> mUserList;
 
     private ProgressDialog mProgressDialog;
+
+    private SocialNetworkUser mCurrentUser;
+
+    private int mCurrentPosition;
 
     /**
      * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -99,13 +106,48 @@ public class FacebookActivity
             {
                 Log.v( "FaceBookActivity: onCreate start login" );
             }
-            startActivityForResult( new Intent( this, FacebookLoginActivity.class ), ACTIVITY_LOGIN );
+            startActivityForResult( new Intent( this, FacebookLoginActivity.class ), LOGIN_ACTIVITY_RESULT );
         }
         if ( Log.DEBUG )
         {
             Log.v( "FaceBookActivity: end onResume" );
         }
     }
+
+    /**
+     * @see android.app.ListActivity#onListItemClick(android.widget.ListView, android.view.View, int, long)
+     */
+    @Override
+    protected void onListItemClick( ListView l, View v, int position, long id )
+    {
+        super.onListItemClick( l, v, position, id );
+        SocialNetworkUser user = mArrayAdapter.getItem( position );
+        if ( user.birthday == null )
+        {
+            /* nothing todo if no birthday */
+            Toast.makeText( this, R.string.no_birthday, Toast.LENGTH_SHORT ).show();
+            return;
+        }
+        mCurrentUser = user;
+        //TODO faire en sorte de ne pas bouger de ligne
+        mCurrentPosition = position;
+        new SocialUserDialog( this, user, mDb ).show();
+    }
+
+    //
+    //    private int getPositionFromUserId( String userId )
+    //    {
+    //        int position = 0;
+    //        for ( SocialNetworkUser user : mUserList )
+    //        {
+    //            if ( user.uid.equals( userId ) )
+    //            {
+    //                return position;
+    //            }
+    //            position++;
+    //        }
+    //        return 0;
+    //    }
 
     /**
      * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
@@ -124,8 +166,12 @@ public class FacebookActivity
 
         switch ( requestCode )
         {
-            case ACTIVITY_LOGIN:
+            case LOGIN_ACTIVITY_RESULT:
                 fillList();
+                break;
+
+            case PICK_CONTACT_ACTIVITY_RESULT:
+                setIntent( data );
                 break;
         }
     }
@@ -133,12 +179,30 @@ public class FacebookActivity
     /**
      * 
      */
-    private void fillList()
+    public void fillList()
     {
+        /* check intent contactId to update contact link and then scroll to the right item */
+        if ( getIntent().hasExtra( CONTACTID_INTENT_KEY ) )
+        {
+            long id = getIntent().getLongExtra( CONTACTID_INTENT_KEY, 0 );
+            String contactName = getIntent().getStringExtra( CONTACTNAME_INTENT_KEY );
+            if ( contactName != null && mCurrentUser != null )
+            {
+                mCurrentUser.setContactId( id );
+                mCurrentUser.setContactName( contactName );
+                mDb.updateSyncResult( mCurrentUser );
+                getIntent().removeExtra( CONTACTNAME_INTENT_KEY );
+            }
+
+        }
         mUserList = mDb.fetchAllSyncResults();
 
         mArrayAdapter = new SocialUserArrayAdapter( this, R.layout.socialnetworkuser, mUserList );
         setListAdapter( mArrayAdapter );
+        if ( mCurrentPosition > 0 )
+        {
+            getListView().setSelection( mCurrentPosition );
+        }
     }
 
     public ProgressDialog getProgressDialog()
@@ -182,10 +246,10 @@ public class FacebookActivity
             Log.v( "BirthdayActivity: start onStop" );
         }
         super.onStop();
-        if ( mDb != null )
-        {
-            mDb.close();
-        }
+        //        if ( mDb != null )
+        //        {
+        //            mDb.close();
+        //        }
         if ( Log.DEBUG )
         {
             Log.v( "BirthdayActivity: end onStop" );

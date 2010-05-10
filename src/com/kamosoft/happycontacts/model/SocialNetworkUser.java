@@ -3,6 +3,8 @@
  */
 package com.kamosoft.happycontacts.model;
 
+import java.io.Serializable;
+
 /**
  * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
  *
@@ -10,6 +12,7 @@ package com.kamosoft.happycontacts.model;
  * @version $Id$
  */
 public final class SocialNetworkUser
+    implements Serializable
 {
 
     public String uid;

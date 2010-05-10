@@ -130,4 +130,11 @@
 <string name="age">%d years old</string>
 <string name="age_unknow">\? years old</string>
 <string name="facebook_login_error">Sorry, unable to login to Facebook</string>
+<string name="link_contact">Link to a contact</string>
+<string name="unlink_contact">Unlink this contact</string>
+<string name="link_contact_alert">%s is already linked to %s, are you sure to link to another contact ?</string>
+<string name="yes">Yes</string>
+<string name="no">No</string>
+<string name="unlink_contact_useless">This friend has no linked contact, no need to unlink</string>
+<string name="pick_contact_to_link">Pick a contact to link to friend %s</string>
 </resources>

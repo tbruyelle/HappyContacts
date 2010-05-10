@@ -452,6 +452,22 @@ public class DbAdapter
         return mDb.delete( HappyContactsDb.SyncResult.TABLE_NAME, null, null ) > 0;
     }
 
+    public boolean updateSyncResult( SocialNetworkUser user )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start updateSyncResult user " + user.toString() );
+        }
+        ContentValues initialValues = new ContentValues();
+        initialValues.put( HappyContactsDb.SyncResult.USER_ID, user.uid );
+        initialValues.put( HappyContactsDb.SyncResult.USER_NAME, user.name );
+        initialValues.put( HappyContactsDb.SyncResult.BIRTHDAY_DATE, user.birthday );
+        initialValues.put( HappyContactsDb.SyncResult.CONTACT_ID, user.getContactId() );
+        initialValues.put( HappyContactsDb.SyncResult.CONTACT_NAME, user.getContactName() );
+        return mDb.update( HappyContactsDb.SyncResult.TABLE_NAME, initialValues, HappyContactsDb.SyncResult.USER_ID
+            + "=" + user.uid + "", null ) > 0;
+    }
+
     public boolean insertSyncResults( List<SocialNetworkUser> users )
     {
         if ( Log.DEBUG )

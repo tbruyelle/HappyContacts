@@ -231,7 +231,7 @@ public class BirthdayActivity
             case R.id.add_birthday:
                 Intent intent = new Intent( this, PickContactsListActivity.class );
                 intent.putExtra( NEXT_ACTIVITY_INTENT_KEY, PickBirthdayActivity.class );
-                intent.putExtra( PICK_CONTACT_LABEL_INTENT_KEY, R.string.pick_contact_birthday );
+                intent.putExtra( PICK_CONTACT_LABEL_INTENT_KEY, getString( R.string.pick_contact_birthday) );
                 startActivity( intent );
                 return;
 

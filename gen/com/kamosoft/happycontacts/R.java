@@ -42,7 +42,7 @@ public final class R {
     public static final class id {
         public static final int about_content=0x7f080001;
         public static final int add_birthday=0x7f080006;
-        public static final int add_whitelist=0x7f08002d;
+        public static final int add_whitelist=0x7f08002f;
         public static final int autocomplete=0x7f08000b;
         public static final int birthday_birthday_date=0x7f080004;
         public static final int birthday_birthday_year=0x7f080005;
@@ -66,11 +66,12 @@ public final class R {
         public static final int last_wish_date=0x7f080009;
         public static final int later_button=0x7f080024;
         public static final int layout_root=0x7f080000;
+        public static final int link_contact=0x7f08002d;
         public static final int mail_birthday_template_body=0x7f080018;
         public static final int mail_birthday_template_subject=0x7f080017;
         public static final int mail_template_body=0x7f080016;
         public static final int mail_template_subject=0x7f080015;
-        public static final int nameday=0x7f08002e;
+        public static final int nameday=0x7f080030;
         public static final int nameday_title=0x7f080019;
         public static final int never_button=0x7f080025;
         public static final int nottoday_button=0x7f080023;
@@ -85,6 +86,7 @@ public final class R {
         public static final int start_sync=0x7f080011;
         public static final int store_birthdays=0x7f080012;
         public static final int sync_facebook=0x7f080007;
+        public static final int unlink_contact=0x7f08002e;
         public static final int user_name=0x7f08002b;
         public static final int webview=0x7f080010;
     }
@@ -113,10 +115,11 @@ public final class R {
         public static final int reminder_header=0x7f030015;
         public static final int sms_template=0x7f030016;
         public static final int socialnetworkuser=0x7f030017;
-        public static final int testapp=0x7f030018;
-        public static final int testapp_element=0x7f030019;
-        public static final int whitelist=0x7f03001a;
-        public static final int whitelist_element=0x7f03001b;
+        public static final int socialuserdialog=0x7f030018;
+        public static final int testapp=0x7f030019;
+        public static final int testapp_element=0x7f03001a;
+        public static final int whitelist=0x7f03001b;
+        public static final int whitelist_element=0x7f03001c;
     }
     public static final class raw {
         public static final int db_create=0x7f040000;
@@ -173,6 +176,8 @@ public final class R {
         public static final int inserting_results=0x7f060079;
         public static final int last_wish_date=0x7f06000c;
         public static final int later=0x7f060007;
+        public static final int link_contact=0x7f06007e;
+        public static final int link_contact_alert=0x7f060080;
         public static final int link_other=0x7f06005b;
         public static final int loading_data=0x7f060029;
         public static final int loading_friends=0x7f060076;
@@ -184,6 +189,7 @@ public final class R {
         public static final int name_list_title=0x7f06000d;
         public static final int never=0x7f060008;
         public static final int next=0x7f060004;
+        public static final int no=0x7f060082;
         public static final int no_birthday=0x7f060063;
         public static final int no_contacts=0x7f060002;
         public static final int no_feast=0x7f060010;
@@ -199,6 +205,7 @@ public final class R {
         public static final int pick_birthday_update_label=0x7f06006e;
         public static final int pick_contact_birthday=0x7f06006d;
         public static final int pick_contact_nickname=0x7f060052;
+        public static final int pick_contact_to_link=0x7f060084;
         public static final int pick_nameday=0x7f060053;
         public static final int pick_nameday_datelist=0x7f060072;
         public static final int please_wait=0x7f060032;
@@ -244,10 +251,13 @@ public final class R {
         public static final int toast_sms_template_saved=0x7f060041;
         public static final int type_to_filter=0x7f060058;
         public static final int unknow_birthday=0x7f06006a;
+        public static final int unlink_contact=0x7f06007f;
+        public static final int unlink_contact_useless=0x7f060083;
         public static final int update=0x7f060071;
         public static final int updating_data=0x7f06002a;
         public static final int version=0x7f060000;
         public static final int whattodo=0x7f06000a;
         public static final int whitelist_added=0x7f060051;
+        public static final int yes=0x7f060081;
     }
 }

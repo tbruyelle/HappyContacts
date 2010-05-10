@@ -3,6 +3,7 @@
  */
 package com.kamosoft.happycontacts;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -45,7 +46,7 @@ public class PickContactsListActivity
         mEditText.addTextChangedListener( this );
 
         mNextActivity = (Class<?>) getIntent().getExtras().getSerializable( NEXT_ACTIVITY_INTENT_KEY );
-        int pickContactLabel = getIntent().getExtras().getInt( PICK_CONTACT_LABEL_INTENT_KEY );
+        String pickContactLabel = getIntent().getExtras().getString( PICK_CONTACT_LABEL_INTENT_KEY );
         TextView textView = (TextView) findViewById( R.id.pick_contact_label );
         textView.setText( pickContactLabel );
         fillList( null );
@@ -85,11 +86,18 @@ public class PickContactsListActivity
     {
         mCursor.moveToPosition( position );
         Intent intent = new Intent( this, mNextActivity );
-        intent.putExtra( CONTACTID_INTENT_KEY,
-                         mCursor.getLong( mCursor.getColumnIndex( ContactUtils.getIdColumn() ) ) );
+        intent.putExtra( CONTACTID_INTENT_KEY, mCursor.getLong( mCursor.getColumnIndex( ContactUtils.getIdColumn() ) ) );
         intent.putExtra( CONTACTNAME_INTENT_KEY,
                          mCursor.getString( mCursor.getColumnIndex( ContactUtils.getNameColumn() ) ) );
-        startActivity( intent );
+        if ( getIntent().hasExtra( CALLED_FOR_RESULT_INTENT_KEY ) )
+        {
+            setResult( Activity.RESULT_OK, intent );
+            finish();
+        }
+        else
+        {
+            startActivity( intent );
+        }
     }
 
     /**
