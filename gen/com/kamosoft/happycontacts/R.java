@@ -162,6 +162,7 @@ public final class R {
         public static final int enter_date=0x7f060027;
         public static final int enter_name=0x7f06002e;
         public static final int exit=0x7f060003;
+        public static final int facebook_login_error=0x7f06007d;
         public static final int facebooklogin=0x7f060061;
         public static final int facebooklogin_urlError=0x7f06005f;
         public static final int feast_counter=0x7f060042;

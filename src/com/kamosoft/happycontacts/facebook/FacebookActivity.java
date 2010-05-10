@@ -45,8 +45,6 @@ public class FacebookActivity
 
     private ArrayList<SocialNetworkUser> mUserList;
 
-    private Button mStoreButton;
-
     private ProgressDialog mProgressDialog;
 
     /**
@@ -65,8 +63,8 @@ public class FacebookActivity
         Button syncButton = (Button) findViewById( R.id.start_sync );
         syncButton.setOnClickListener( this );
 
-        mStoreButton = (Button) findViewById( R.id.store_birthdays );
-        mStoreButton.setOnClickListener( this );
+        Button storeButton = (Button) findViewById( R.id.store_birthdays );
+        storeButton.setOnClickListener( this );
 
         mDb = new DbAdapter( this );
 
@@ -119,6 +117,8 @@ public class FacebookActivity
 
         if ( resultCode != Activity.RESULT_OK )
         {
+            Toast.makeText( this, R.string.facebook_login_error, Toast.LENGTH_SHORT );
+            this.finish();
             return;
         }
 

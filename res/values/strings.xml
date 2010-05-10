@@ -129,4 +129,5 @@
 <string name="inserting_birthdays">Recording %d birthdays...</string>
 <string name="age">%d years old</string>
 <string name="age_unknow">\? years old</string>
+<string name="facebook_login_error">Sorry, unable to login to Facebook</string>
 </resources>
