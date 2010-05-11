@@ -137,4 +137,12 @@
 <string name="no">No</string>
 <string name="unlink_contact_useless">This friend has no linked contact, no need to unlink</string>
 <string name="pick_contact_to_link">Pick a contact to link to friend %s</string>
+<string name="syncresults">Sync results</string>
+<string name="birthdaylist">Birthdays list</string>
+<string name="friend_no_birthday">This friend doesn\'t provide his brithday</string>
+<string name="blacklist">Black list</string>
+<string name="contactlist">Contacts list</string>
+
+<string name="namedaylist">Name-days list</string>
+<string name="whitelist">White list</string>
 </resources>

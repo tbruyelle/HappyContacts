@@ -125,11 +125,10 @@ public class FacebookActivity
         if ( user.birthday == null )
         {
             /* nothing todo if no birthday */
-            Toast.makeText( this, R.string.no_birthday, Toast.LENGTH_SHORT ).show();
+            Toast.makeText( this, R.string.friend_no_birthday, Toast.LENGTH_SHORT ).show();
             return;
         }
         mCurrentUser = user;
-        //TODO faire en sorte de ne pas bouger de ligne
         mCurrentPosition = position;
         new SocialUserDialog( this, user, mDb ).show();
     }

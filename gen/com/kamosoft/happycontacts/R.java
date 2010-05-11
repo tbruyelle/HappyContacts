@@ -137,6 +137,8 @@ public final class R {
         public static final int back_to_main=0x7f06003b;
         public static final int birthday_added=0x7f06006c;
         public static final int birthday_updated=0x7f06006f;
+        public static final int birthdaylist=0x7f060086;
+        public static final int blacklist=0x7f060088;
         public static final int blacklist_label=0x7f06000b;
         public static final int call=0x7f060006;
         public static final int can_match_normally=0x7f06005a;
@@ -149,6 +151,7 @@ public final class R {
         public static final int contact_method_dialog_title=0x7f060033;
         public static final int contact_method_not_supported=0x7f060034;
         public static final int contact_not_found=0x7f060062;
+        public static final int contactlist=0x7f060089;
         public static final int date_list_title=0x7f06000e;
         public static final int dateback=0x7f06004a;
         public static final int datenext=0x7f06004b;
@@ -169,6 +172,7 @@ public final class R {
         public static final int facebooklogin=0x7f060061;
         public static final int facebooklogin_urlError=0x7f06005f;
         public static final int feast_counter=0x7f060042;
+        public static final int friend_no_birthday=0x7f060087;
         public static final int happybirthday_name=0x7f060073;
         public static final int happyfeast=0x7f060009;
         public static final int happyfeast_name=0x7f060043;
@@ -187,6 +191,7 @@ public final class R {
         public static final int mail_template_subject=0x7f06003d;
         public static final int mail_template_text=0x7f06003e;
         public static final int name_list_title=0x7f06000d;
+        public static final int namedaylist=0x7f06008a;
         public static final int never=0x7f060008;
         public static final int next=0x7f060004;
         public static final int no=0x7f060082;
@@ -240,6 +245,7 @@ public final class R {
         public static final int store_birthdays=0x7f060068;
         public static final int sync_facebook=0x7f060065;
         public static final int sync_friends=0x7f060077;
+        public static final int syncresults=0x7f060085;
         public static final int toast_blacklisted=0x7f060021;
         public static final int toast_contact_blacklisted=0x7f060020;
         public static final int toast_contact_list=0x7f060025;
@@ -257,6 +263,7 @@ public final class R {
         public static final int updating_data=0x7f06002a;
         public static final int version=0x7f060000;
         public static final int whattodo=0x7f06000a;
+        public static final int whitelist=0x7f06008b;
         public static final int whitelist_added=0x7f060051;
         public static final int yes=0x7f060081;
     }

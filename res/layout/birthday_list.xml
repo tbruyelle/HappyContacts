@@ -7,7 +7,14 @@
     <Button android:id="@+id/sync_facebook" android:text="@string/sync_facebook" android:layout_width="fill_parent"
       android:layout_weight="1" android:layout_height="wrap_content" />
   </LinearLayout>
-  <include layout="@layout/divider" />
+   <TextView android:text="@string/birthdaylist" 
+    android:layout_height="wrap_content" 
+    android:layout_width="fill_parent" 
+    android:textStyle="bold" 
+    android:textColor="#DDDDDD" 
+    android:background="#666666" 
+    android:padding="4dip" 
+    android:layout_marginTop="4dip" />
   <ListView android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@android:id/list" />
   <TextView android:id="@android:id/empty" android:layout_width="wrap_content" android:layout_height="wrap_content"
     android:text="@string/no_birthday" />
