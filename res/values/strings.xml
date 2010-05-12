@@ -102,7 +102,7 @@
 <string name="facebooklogin_urlError">Error when trying to connect to Facebook</string>
 <string name="login_authorization">Please wait while verifying application authorization...</string>
 <string name="facebooklogin">Login to Facebook</string>
-<string name="contact_not_found">Contact not found</string>
+<string name="contact_not_found">Phone contact not found</string>
 <string name="no_birthday">No birthday in the database</string>
 <string name="add_birthday">Add a birthday</string>
 <string name="sync_facebook">Sync with Facebook</string>
@@ -137,7 +137,7 @@
 <string name="no">No</string>
 <string name="unlink_contact_useless">This friend has no linked contact, no need to unlink</string>
 <string name="pick_contact_to_link">Pick a contact to link to friend %s</string>
-<string name="syncresults">Sync results</string>
+<string name="syncresults">Synchronization results</string>
 <string name="birthdaylist">Birthdays list</string>
 <string name="friend_no_birthday">This friend doesn\'t provide his brithday</string>
 <string name="blacklist">Black list</string>

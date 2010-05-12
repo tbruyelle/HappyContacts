@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent"
-  android:layout_height="fill_parent" android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent" android:layout_height="fill_parent"
+  android:orientation="vertical">
 
-  <Button android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/start_sync"
-    android:text="@string/start_sync" />
-  <Button android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/store_birthdays"
+  <Button android:layout_width="fill_parent"
+    android:layout_height="wrap_content" android:id="@+id/start_sync"
+    android:text="@string/start_sync" android:layout_marginTop="5dip" />
+  <Button android:layout_width="fill_parent"
+    android:layout_height="wrap_content" android:id="@+id/store_birthdays"
     android:text="@string/store_birthdays" />
-  <TextView android:text="@string/syncresults" 
-    android:layout_height="wrap_content" 
-    android:layout_width="fill_parent" 
-    android:textStyle="bold" 
-    android:textColor="#DDDDDD" 
-    android:background="#666666" 
-    android:padding="4dip" 
+  <TextView android:text="@string/syncresults"
+    android:layout_height="wrap_content" android:layout_width="fill_parent"
+    android:textStyle="bold" android:textColor="#DDDDDD"
+    android:background="#666666" android:padding="4dip"
     android:layout_marginTop="4dip" />
-  <ListView android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@android:id/list" />
-  <TextView android:id="@android:id/empty" android:text="@string/no_syncresults" android:layout_width="wrap_content"
+  <ListView android:layout_width="fill_parent"
+    android:layout_height="wrap_content" android:id="@android:id/list" />
+  <TextView android:id="@android:id/empty"
+    android:text="@string/no_syncresults" android:layout_width="wrap_content"
     android:layout_height="wrap_content" />
 </LinearLayout>

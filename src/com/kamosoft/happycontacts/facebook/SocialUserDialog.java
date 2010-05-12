@@ -43,9 +43,9 @@ public class SocialUserDialog
         TextView userNameText = (TextView) findViewById( R.id.user_name );
         userNameText.setText( user.name );
 
-        TextView contactNameText = (TextView) findViewById( R.id.contact_name );
-        contactNameText.setVisibility( View.VISIBLE );
-        contactNameText.setText( user.getContactName() );
+//        TextView contactNameText = (TextView) findViewById( R.id.contact_name );
+//        contactNameText.setVisibility( View.VISIBLE );
+//        contactNameText.setText( user.getContactName() );
 
         TextView birthdayText = (TextView) findViewById( R.id.birthday_date );
         ImageView iconSync = (ImageView) findViewById( R.id.icon_sync );

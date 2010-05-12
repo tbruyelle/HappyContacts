@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
 import com.kamosoft.happycontacts.model.SocialNetworkUser;
 
@@ -60,12 +59,11 @@ public class SocialUserArrayAdapter
             TextView userNameText = (TextView) view.findViewById( R.id.user_name );
             userNameText.setText( user.name );
 
-            if ( Log.DEBUG )
-            {
-                TextView contactNameText = (TextView) view.findViewById( R.id.contact_name );
-                contactNameText.setVisibility( View.VISIBLE );
-                contactNameText.setText( user.getContactName() );
-            }
+//            if ( user.getContactName() != null )
+//            {
+//                TextView contactNameText = (TextView) view.findViewById( R.id.contact_name );
+//                contactNameText.setText( user.getContactName() );
+//            }
 
             TextView birthdayText = (TextView) view.findViewById( R.id.birthday_date );
             ImageView iconSync = (ImageView) view.findViewById( R.id.icon_sync );
