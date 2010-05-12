@@ -9,12 +9,17 @@ import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -36,8 +41,12 @@ import com.kamosoft.happycontacts.model.SocialNetworkUser;
  */
 public class FacebookActivity
     extends ListActivity
-    implements Constants, OnClickListener
+    implements Constants, OnClickListener, android.content.DialogInterface.OnClickListener
 {
+    private static final int DELETEALL_MENU_ID = Menu.FIRST;
+
+    private static final int DELETEALL_DIALOG_ID = 1;
+
     private static final int LOGIN_ACTIVITY_RESULT = 1;
 
     public static final int PICK_CONTACT_ACTIVITY_RESULT = 2;
@@ -369,7 +378,64 @@ public class FacebookActivity
         }
         else
         {
-            Toast.makeText( this, R.string.no_birthday, Toast.LENGTH_SHORT ).show();
+            Toast.makeText( this, R.string.no_syncresults, Toast.LENGTH_SHORT ).show();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu )
+    {
+        super.onCreateOptionsMenu( menu );
+        menu.add( 0, DELETEALL_MENU_ID, 0, R.string.deleteall ).setIcon( R.drawable.ic_menu_delete );
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected( MenuItem item )
+    {
+        switch ( item.getItemId() )
+        {
+            case DELETEALL_MENU_ID:
+                showDialog( DELETEALL_DIALOG_ID );
+                return true;
+        }
+        return super.onOptionsItemSelected( item );
+    }
+
+    /**
+     * @see android.app.Activity#onCreateDialog(int)
+     */
+    @Override
+    protected Dialog onCreateDialog( int id )
+    {
+        switch ( id )
+        {
+            case DELETEALL_DIALOG_ID:
+                AlertDialog.Builder builder = new AlertDialog.Builder( this );
+                builder.setMessage( R.string.confirm_deleteall ).setCancelable( false ).setPositiveButton( R.string.ok,
+                                                                                                           this ).setNegativeButton(
+                                                                                                                                     R.string.cancel,
+                                                                                                                                     this );
+                return builder.create();
+        }
+        return null;
+    }
+
+    /**
+     * @see android.content.DialogInterface.OnClickListener#onClick(android.content.DialogInterface, int)
+     */
+    @Override
+    public void onClick( DialogInterface dialog, int which )
+    {
+        switch ( which )
+        {
+            case DialogInterface.BUTTON_NEGATIVE:
+                dialog.dismiss();
+                return;
+            case DialogInterface.BUTTON_POSITIVE:
+                mDb.deleteAllSyncResults();
+                fillList();
+                return;
         }
     }
 }
