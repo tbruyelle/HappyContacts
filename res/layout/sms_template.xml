@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent"
-  android:layout_height="fill_parent" android:orientation="vertical">
-  <TextView android:text="@string/sms_template_text" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-  <EditText android:id="@+id/sms_template_content" android:layout_width="fill_parent" android:layout_height="100dp" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent" android:layout_height="fill_parent"
+  android:orientation="vertical">
+  <TextView android:text="@string/sms_template_text"
+    android:layout_height="wrap_content" android:layout_width="fill_parent"
+    android:textStyle="bold" android:textColor="#DDDDDD"
+    android:background="#666666" android:padding="4dip"
+    android:layout_marginTop="4dip" android:layout_marginBottom="4dip" />
 
-  <include layout="@layout/divider" />
+  <EditText android:id="@+id/sms_template_content"
+    android:layout_width="fill_parent" android:layout_height="100dp" />
 
-  <TextView android:text="@string/sms_birthday_template_text" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-  <EditText android:id="@+id/sms_birthday_template_content" android:layout_width="fill_parent" android:layout_height="100dp" />
+  <TextView android:text="@string/sms_birthday_template_text"
+    android:layout_height="wrap_content" android:layout_width="fill_parent"
+    android:textStyle="bold" android:textColor="#DDDDDD"
+    android:background="#666666" android:padding="4dip"
+    android:layout_marginTop="4dip" android:layout_marginBottom="4dip" />
+
+  <EditText android:id="@+id/sms_birthday_template_content"
+    android:layout_width="fill_parent" android:layout_height="100dp" />
   <include layout="@layout/okcancel_buttons" />
 </LinearLayout>
