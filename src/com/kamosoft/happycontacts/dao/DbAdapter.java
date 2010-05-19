@@ -231,19 +231,19 @@ public class DbAdapter
      * @param contactId
      * @return String the birthday date or null
      */
-    //    public boolean hasBirthday( Long contactId )
-    //    {
-    //        if ( Log.DEBUG )
-    //        {
-    //            Log.v( "DbAdapter: start hasBirthday(" + contactId + ")" );
-    //        }
-    //        Cursor cursor =
-    //            mDb.query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS,
-    //                       HappyContactsDb.Birthday.CONTACT_ID + "='" + contactId + "'", null, null, null, null );
-    //        boolean hasBirhtday = cursor.getCount() > 0;
-    //        cursor.close();
-    //        return hasBirhtday;
-    //    }
+    public boolean hasBirthday( Long contactId )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start hasBirthday(" + contactId + ")" );
+        }
+        Cursor cursor =
+            mDb.query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS,
+                       HappyContactsDb.Birthday.CONTACT_ID + "='" + contactId + "'", null, null, null, null );
+        boolean hasBirhtday = cursor.getCount() > 0;
+        cursor.close();
+        return hasBirhtday;
+    }
 
     public String[] getBirthday( Long contactId )
     {
@@ -335,7 +335,7 @@ public class DbAdapter
         initialValues.put( HappyContactsDb.Birthday.BIRTHDAY_DATE, birthday );
         initialValues.put( HappyContactsDb.Birthday.BIRTHDAY_YEAR, birthyear );
 
-        return mDb.insert( HappyContactsDb.Birthday.TABLE_NAME, null, initialValues );
+        return mDb.insert( HappyContactsDb.Birthday.TABLE_NAME, null, initialValues ) ;
     }
 
     public boolean deleteBirthday( long id )

@@ -205,7 +205,6 @@ public class FacebookActivity
                 mDb.updateSyncResult( mCurrentUser );
                 getIntent().removeExtra( CONTACTNAME_INTENT_KEY );
             }
-
         }
         mUserList = mDb.fetchAllSyncResults();
         mSyncCounter.setText( String.valueOf( mUserList.size() ) );
@@ -294,9 +293,9 @@ public class FacebookActivity
             int counter = 1;
             for ( SocialNetworkUser user : mUserList )
             {
-                if ( user.birthday == null || user.getContactName() == null )
+                if ( user.birthday == null || user.getContactName() == null || mDb.hasBirthday( user.getContactId() ) )
                 {
-                    /* we don't store if no birthday */
+                    /* we don't store if no birthday, not linked to a contact or has already a birthday*/
                     continue;
                 }
                 publishProgress( counter++ );
@@ -360,8 +359,8 @@ public class FacebookActivity
         if ( mUserList != null && !mUserList.isEmpty() )
         {
             mProgressDialog =
-                ProgressDialog.show( FacebookActivity.this, "",
-                                     FacebookActivity.this.getString( R.string.inserting_birthdays, 0 ), true );
+                ProgressDialog.show( this, "",
+                                     getString( R.string.inserting_birthdays, 0 ), true );
             new StoreAsyncTask().execute();
         }
         else

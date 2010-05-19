@@ -126,7 +126,7 @@
 <string name="sync_friends">Synchronizing %s...</string>
 <string name="end_sync">Sync is finishing...</string>
 <string name="inserting_results">Displaying results...</string>
-<string name="inserting_birthdays">Recording %d birthdays...</string>
+<string name="inserting_birthdays">Recording %d birthdays...\n\nExisting birthdays won\'t be updated.</string>
 <string name="age">%d years old</string>
 <string name="age_unknow">\? years old</string>
 <string name="facebook_login_error">Sorry, unable to login to Facebook</string>
@@ -151,4 +151,5 @@
 <string name="logout_ok">Logout from your Facebook account completed !</string>
 <string name="logout_ko">You\'re not logged to a Facebook account</string>
 <string name="linked_to">linked to contact %s</string>
+
 </resources>
