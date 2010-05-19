@@ -6,6 +6,7 @@ package com.kamosoft.happycontacts.facebook;
 import android.app.Dialog;
 import android.content.Intent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,13 +40,18 @@ public class SocialUserDialog
         mUser = user;
         mDb = db;
         setContentView( R.layout.socialuserdialog );
+        
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.width = WindowManager.LayoutParams.FILL_PARENT;
+        lp.height = getWindow().getAttributes().height;
+        getWindow().setAttributes( lp );
 
         TextView userNameText = (TextView) findViewById( R.id.user_name );
         userNameText.setText( user.name );
 
-//        TextView contactNameText = (TextView) findViewById( R.id.contact_name );
-//        contactNameText.setVisibility( View.VISIBLE );
-//        contactNameText.setText( user.getContactName() );
+        //        TextView contactNameText = (TextView) findViewById( R.id.contact_name );
+        //        contactNameText.setVisibility( View.VISIBLE );
+        //        contactNameText.setText( user.getContactName() );
 
         TextView birthdayText = (TextView) findViewById( R.id.birthday_date );
         ImageView iconSync = (ImageView) findViewById( R.id.icon_sync );
@@ -61,6 +67,9 @@ public class SocialUserDialog
             if ( user.getContactName() != null )
             {
                 iconSync.setImageResource( R.drawable.sync_ok );
+                TextView linkedTo = (TextView) findViewById( R.id.linked_to );
+                linkedTo.setVisibility( View.VISIBLE );
+                linkedTo.setText( facebookActivity.getString( R.string.linked_to, user.getContactName() ) );
             }
             else
             {

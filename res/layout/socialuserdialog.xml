@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="wrap_content"
-  android:layout_height="wrap_content" android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent" android:layout_height="fill_parent"
+  android:orientation="vertical">
   <include layout="@layout/socialnetworkuser" />
-  <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content"
-    android:paddingLeft="0dp" android:paddingTop="5dp" android:paddingRight="0dp" android:background="@android:color/darker_gray">
-    <Button android:text="@string/link_contact" android:id="@+id/link_contact" android:layout_width="wrap_content"
-      android:layout_height="wrap_content" android:layout_weight="1" />
-    <Button android:text="@string/unlink_contact" android:id="@+id/unlink_contact" android:layout_width="wrap_content"
-      android:layout_height="wrap_content" android:layout_weight="1" />
+  <TextView android:id="@+id/linked_to" android:layout_gravity="center_horizontal"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:padding="4dip" android:visibility="gone" />
+  <LinearLayout android:orientation="horizontal"
+    android:layout_width="fill_parent" android:layout_height="wrap_content"
+    android:paddingLeft="0dp" android:paddingTop="5dp"
+    android:paddingRight="0dp" android:background="@android:color/darker_gray">
+    <Button android:text="@string/link_contact"
+      android:id="@+id/link_contact" android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_weight="1" />
+    <Button android:text="@string/unlink_contact"
+      android:id="@+id/unlink_contact" android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_weight="1" />
   </LinearLayout>
 </LinearLayout>

@@ -2,14 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent" android:layout_height="fill_parent"
   android:orientation="vertical">
-
-  <Button android:id="@+id/add_birthday" android:text="@string/add_birthday"
-    android:layout_width="fill_parent" android:layout_height="wrap_content"
-    android:layout_marginTop="5dip" />
-  <Button android:id="@+id/sync_facebook" android:text="@string/sync_facebook"
-    android:layout_width="fill_parent" android:layout_height="wrap_content"
+  <!--
+    <Button android:id="@+id/add_birthday"
+    android:text="@string/add_birthday"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dip" /> <Button
+    android:id="@+id/sync_facebook"
+    android:text="@string/sync_facebook"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
     android:drawableLeft="@drawable/fb" />
-
+  -->
+  <LinearLayout android:layout_width="fill_parent"
+    android:layout_height="wrap_content" android:orientation="horizontal">
+    <TextView android:text="0" android:id="@+id/birthday_counter"
+      android:layout_width="wrap_content" android:layout_height="wrap_content"
+      android:textSize="20dip" android:paddingRight="10dip"
+      android:paddingLeft="10dip" android:textColor="#FFFFFF" />
+    <TextView android:text="@string/birthday_counter"
+      android:layout_width="wrap_content" android:layout_height="wrap_content"
+      android:textSize="16dip" />
+  </LinearLayout>
   <TextView android:text="@string/birthdaylist"
     android:layout_height="wrap_content" android:layout_width="fill_parent"
     android:textStyle="bold" android:textColor="#DDDDDD"
@@ -19,5 +33,6 @@
     android:layout_height="wrap_content" android:id="@android:id/list" />
   <TextView android:id="@android:id/empty"
     android:layout_width="wrap_content" android:layout_height="wrap_content"
-    android:text="@string/no_birthday" />
+    android:text="@string/no_birthday" android:layout_gravity="center"
+    android:paddingTop="5dip" />
 </LinearLayout>

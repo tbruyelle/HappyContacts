@@ -15,9 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import com.kamosoft.happycontacts.Constants;
@@ -36,9 +35,13 @@ import com.kamosoft.happycontacts.facebook.FacebookActivity;
  */
 public class BirthdayActivity
     extends ListActivity
-    implements OnClickListener, android.content.DialogInterface.OnClickListener, Constants
+    implements android.content.DialogInterface.OnClickListener, Constants
 {
-    private static final int DELETEALL_MENU_ID = Menu.FIRST;
+    private static final int ADD_BIRTHDAY_MENU_ID = Menu.FIRST;
+
+    private static final int SYNC_FACEBOOK_MENU_ID = ADD_BIRTHDAY_MENU_ID + 1;
+
+    private static final int DELETEALL_MENU_ID = SYNC_FACEBOOK_MENU_ID + 1;
 
     private static final int DELETEALL_DIALOG_ID = 1;
 
@@ -51,6 +54,8 @@ public class BirthdayActivity
     private Cursor mCursor;
 
     private SimpleCursorAdapter mCursorAdapter;
+
+    private TextView mBirthdayCounter;
 
     /**
      * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -65,10 +70,7 @@ public class BirthdayActivity
         super.onCreate( savedInstanceState );
         setContentView( R.layout.birthday_list );
 
-        Button addBirthday = (Button) findViewById( R.id.add_birthday );
-        addBirthday.setOnClickListener( this );
-        Button syncFacebook = (Button) findViewById( R.id.sync_facebook );
-        syncFacebook.setOnClickListener( this );
+        mBirthdayCounter = (TextView) findViewById( R.id.birthday_counter );
 
         mDb = new DbAdapter( this );
 
@@ -183,6 +185,7 @@ public class BirthdayActivity
     {
         mCursor = mDb.fetchAllBirthdays();
         startManagingCursor( mCursor );
+        mBirthdayCounter.setText( String.valueOf( mCursor.getCount() ) );
         if ( Log.DEBUG )
         {
             Log.d( "BirthdayActivity: retrieveing " + mCursor.getCount() + " birthdays from db" );
@@ -220,31 +223,12 @@ public class BirthdayActivity
         }
     }
 
-    /**
-     * @see android.view.View.OnClickListener#onClick(android.view.View)
-     */
-    @Override
-    public void onClick( View view )
-    {
-        switch ( view.getId() )
-        {
-            case R.id.add_birthday:
-                Intent intent = new Intent( this, PickContactsListActivity.class );
-                intent.putExtra( NEXT_ACTIVITY_INTENT_KEY, PickBirthdayActivity.class );
-                intent.putExtra( PICK_CONTACT_LABEL_INTENT_KEY, getString( R.string.pick_contact_birthday) );
-                startActivity( intent );
-                return;
-
-            case R.id.sync_facebook:
-                startActivity( new Intent( this, FacebookActivity.class ) );
-                return;
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu( Menu menu )
     {
         super.onCreateOptionsMenu( menu );
+        menu.add( 0, SYNC_FACEBOOK_MENU_ID, 0, R.string.sync_facebook ).setIcon( R.drawable.fb );
+        menu.add( 0, ADD_BIRTHDAY_MENU_ID, 0, R.string.add_birthday ).setIcon( R.drawable.ic_menu_add );
         menu.add( 0, DELETEALL_MENU_ID, 0, R.string.deleteall ).setIcon( R.drawable.ic_menu_delete );
         return true;
     }
@@ -254,6 +238,17 @@ public class BirthdayActivity
     {
         switch ( item.getItemId() )
         {
+            case ADD_BIRTHDAY_MENU_ID:
+                Intent intent = new Intent( this, PickContactsListActivity.class );
+                intent.putExtra( NEXT_ACTIVITY_INTENT_KEY, PickBirthdayActivity.class );
+                intent.putExtra( PICK_CONTACT_LABEL_INTENT_KEY, getString( R.string.pick_contact_birthday ) );
+                startActivity( intent );
+                return true;
+
+            case SYNC_FACEBOOK_MENU_ID:
+                startActivity( new Intent( this, FacebookActivity.class ) );
+                return true;
+
             case DELETEALL_MENU_ID:
                 showDialog( DELETEALL_DIALOG_ID );
                 return true;

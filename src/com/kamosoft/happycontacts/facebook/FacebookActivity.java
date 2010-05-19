@@ -16,14 +16,14 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kamosoft.happycontacts.Constants;
@@ -41,9 +41,15 @@ import com.kamosoft.happycontacts.model.SocialNetworkUser;
  */
 public class FacebookActivity
     extends ListActivity
-    implements Constants, OnClickListener, android.content.DialogInterface.OnClickListener
+    implements Constants, android.content.DialogInterface.OnClickListener
 {
-    private static final int DELETEALL_MENU_ID = Menu.FIRST;
+    private static final int START_SYNC_MENU_ID = Menu.FIRST;
+
+    private static final int LOGOUT_MENU_ID = START_SYNC_MENU_ID + 1;
+
+    private static final int STORE_SYNC_MENU_ID = LOGOUT_MENU_ID + 1;
+
+    private static final int DELETEALL_MENU_ID = STORE_SYNC_MENU_ID + 1;
 
     private static final int DELETEALL_DIALOG_ID = 1;
 
@@ -63,6 +69,8 @@ public class FacebookActivity
 
     private int mCurrentPosition;
 
+    private TextView mSyncCounter;
+
     /**
      * @see android.app.Activity#onCreate(android.os.Bundle)
      */
@@ -76,11 +84,7 @@ public class FacebookActivity
         super.onCreate( savedInstanceState );
         setContentView( R.layout.facebook_sync );
 
-        Button syncButton = (Button) findViewById( R.id.start_sync );
-        syncButton.setOnClickListener( this );
-
-        Button storeButton = (Button) findViewById( R.id.store_birthdays );
-        storeButton.setOnClickListener( this );
+        mSyncCounter = (TextView) findViewById( R.id.sync_counter );
 
         mDb = new DbAdapter( this );
 
@@ -204,6 +208,7 @@ public class FacebookActivity
 
         }
         mUserList = mDb.fetchAllSyncResults();
+        mSyncCounter.setText( String.valueOf( mUserList.size() ) );
 
         mArrayAdapter = new SocialUserArrayAdapter( this, R.layout.socialnetworkuser, mUserList );
         setListAdapter( mArrayAdapter );
@@ -275,23 +280,6 @@ public class FacebookActivity
         String uid = settings.getString( "uid", null );
 
         return session_key != null && secret != null && uid != null;
-    }
-
-    /**
-     * @see android.view.View.OnClickListener#onClick(android.view.View)
-     */
-    @Override
-    public void onClick( View view )
-    {
-        switch ( view.getId() )
-        {
-            case R.id.start_sync:
-                sync();
-                return;
-            case R.id.store_birthdays:
-                store();
-                return;
-        }
     }
 
     private class StoreAsyncTask
@@ -386,6 +374,9 @@ public class FacebookActivity
     public boolean onCreateOptionsMenu( Menu menu )
     {
         super.onCreateOptionsMenu( menu );
+        menu.add( 0, START_SYNC_MENU_ID, 0, R.string.start_sync ).setIcon( R.drawable.fb );
+        menu.add( 0, LOGOUT_MENU_ID, 0, R.string.logout ).setIcon( R.drawable.ic_menu_close_clear_cancel );
+        menu.add( 0, STORE_SYNC_MENU_ID, 0, R.string.store_birthdays ).setIcon( R.drawable.ic_menu_save );
         menu.add( 0, DELETEALL_MENU_ID, 0, R.string.deleteall ).setIcon( R.drawable.ic_menu_delete );
         return true;
     }
@@ -395,11 +386,42 @@ public class FacebookActivity
     {
         switch ( item.getItemId() )
         {
+            case START_SYNC_MENU_ID:
+                sync();
+                return true;
+            case STORE_SYNC_MENU_ID:
+                store();
+                return true;
+            case LOGOUT_MENU_ID:
+                logout();
+                return true;
             case DELETEALL_MENU_ID:
                 showDialog( DELETEALL_DIALOG_ID );
                 return true;
         }
         return super.onOptionsItemSelected( item );
+    }
+
+    /**
+     * 
+     */
+    private void logout()
+    {
+        if ( isLoggedIn() )
+        {
+            SharedPreferences settings = this.getSharedPreferences( APP_NAME, 0 );
+            Editor editor = settings.edit();
+            editor.remove( "session_key" );
+            editor.remove( "secret" );
+            editor.remove( "uid" );
+            editor.commit();
+            Toast.makeText( this, R.string.logout_ok, Toast.LENGTH_SHORT ).show();
+        }
+        else
+        {
+            Toast.makeText( this, R.string.logout_ko, Toast.LENGTH_SHORT ).show();
+        }
+        this.finish();
     }
 
     /**
