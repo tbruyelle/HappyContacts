@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +41,8 @@ public class PickBirthdayActivity
 
     private DatePicker mDatePicker;
 
+    private CheckBox mIgnoreBirthyear;
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate( Bundle savedInstanceState )
@@ -64,11 +67,14 @@ public class PickBirthdayActivity
         mDatePicker = (DatePicker) findViewById( R.id.birthday_picker );
         TextView textView = (TextView) findViewById( R.id.pick_birthday_label );
 
+        mIgnoreBirthyear = (CheckBox) findViewById( R.id.ignore_birthyear );
+
         if ( mUpdate )
         {
             /* contact has already a birthday, this is an update */
             String birthdayDate = dayYear[0];
             String birthdayYear = dayYear[1];
+            mIgnoreBirthyear.setChecked( birthdayYear == null );
             textView.setText( getString( R.string.pick_birthday_update_label, mContactName ) );
             int year =
                 birthdayYear == null ? Calendar.getInstance().get( Calendar.YEAR ) : Integer.parseInt( birthdayYear );
@@ -108,7 +114,7 @@ public class PickBirthdayActivity
             day = "0" + day;
         }
         String birthday = day + "/" + month;
-        String birthyear = String.valueOf( mDatePicker.getYear() );
+        String birthyear = mIgnoreBirthyear.isChecked() ? null : String.valueOf( mDatePicker.getYear() );
         if ( mUpdate )
         {
             if ( !mDb.updateBirthday( mContactId, mContactName, birthday, birthyear ) )

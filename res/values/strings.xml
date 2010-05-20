@@ -151,5 +151,5 @@
 <string name="logout_ok">Logout from your Facebook account completed !</string>
 <string name="logout_ko">You\'re not logged to a Facebook account</string>
 <string name="linked_to">linked to contact %s</string>
-
+<string name="ignore_birthyear">Ignore year field (check if you don\'t know the birth year)</string>
 </resources>
