@@ -153,6 +153,7 @@ public final class R {
         public static final int confirm_delete_blacklist=0x7f060055;
         public static final int confirm_delete_whitelist=0x7f060054;
         public static final int confirm_deleteall=0x7f060057;
+        public static final int confirm_store_question=0x7f060094;
         public static final int contact_method_dialog_title=0x7f060033;
         public static final int contact_method_not_supported=0x7f060034;
         public static final int contact_not_found=0x7f060062;
@@ -183,6 +184,7 @@ public final class R {
         public static final int happyfeast_name=0x7f060043;
         public static final int ignore_birthyear=0x7f060092;
         public static final int inserting_birthdays=0x7f06007a;
+        public static final int inserting_birthdays_done=0x7f060093;
         public static final int inserting_results=0x7f060079;
         public static final int last_wish_date=0x7f06000c;
         public static final int later=0x7f060007;

@@ -126,7 +126,7 @@
 <string name="sync_friends">Synchronizing %s...</string>
 <string name="end_sync">Sync is finishing...</string>
 <string name="inserting_results">Displaying results...</string>
-<string name="inserting_birthdays">Recording %d birthdays...\n\nExisting birthdays won\'t be updated.</string>
+<string name="inserting_birthdays">Recording %d birthdays...</string>
 <string name="age">%d years old</string>
 <string name="age_unknow">\? years old</string>
 <string name="facebook_login_error">Sorry, unable to login to Facebook</string>
@@ -152,4 +152,6 @@
 <string name="logout_ko">You\'re not logged to a Facebook account</string>
 <string name="linked_to">linked to contact %s</string>
 <string name="ignore_birthyear">Ignore year field (check if you don\'t know the birth year)</string>
+<string name="inserting_birthdays_done">%d birthdays recorded</string>
+<string name="confirm_store_question">Do you want to update existing birthdays with this results ?</string>
 </resources>

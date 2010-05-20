@@ -17,6 +17,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -52,6 +53,8 @@ public class FacebookActivity
     private static final int DELETEALL_MENU_ID = STORE_SYNC_MENU_ID + 1;
 
     private static final int DELETEALL_DIALOG_ID = 1;
+
+    private static final int CONFIRM_STORE_DIALOG_ID = 2;
 
     private static final int LOGIN_ACTIVITY_RESULT = 1;
 
@@ -284,21 +287,36 @@ public class FacebookActivity
     private class StoreAsyncTask
         extends AsyncTask<Void, Integer, Void>
     {
+        private int counter;
+
+        private boolean update;
+
+        public StoreAsyncTask( boolean update )
+        {
+            this.update = update;
+            this.counter=0;
+        }
+
         /**
          * @see android.os.AsyncTask#doInBackground(Params[])
          */
         @Override
         protected Void doInBackground( Void... voids )
-        {
-            int counter = 1;
+        {            
             for ( SocialNetworkUser user : mUserList )
             {
-                if ( user.birthday == null || user.getContactName() == null || mDb.hasBirthday( user.getContactId() ) )
+                if ( user.birthday == null || user.getContactName() == null )
                 {
                     /* we don't store if no birthday, not linked to a contact or has already a birthday*/
                     continue;
                 }
-                publishProgress( counter++ );
+                boolean hasBirthday = mDb.hasBirthday( user.getContactId() );
+                if ( !update && hasBirthday )
+                {
+                    /* we don't store if update option is off and if contact has already a birthday */
+                    continue;
+                }
+                publishProgress( ++counter );
                 /* facebook birthday date has format MMMM dd, yyyy or MMMM dd */
                 String birthday = null, birthyear = null;
                 try
@@ -321,9 +339,19 @@ public class FacebookActivity
                         continue;
                     }
                 }
-                if ( mDb.insertBirthday( user.getContactId(), user.getContactName(), birthday, birthyear ) == -1 )
+                if ( hasBirthday && update )
                 {
-                    Log.e( "Error while inserting birthday " + user.toString() );
+                    if ( !mDb.updateBirthday( user.getContactId(), user.getContactName(), birthday, birthyear ) )
+                    {
+                        Log.e( "Error while updating birthday " + user.toString() );
+                    }
+                }
+                else
+                {
+                    if ( mDb.insertBirthday( user.getContactId(), user.getContactName(), birthday, birthyear ) == -1 )
+                    {
+                        Log.e( "Error while inserting birthday " + user.toString() );
+                    }
                 }
             }
             return null;
@@ -345,23 +373,23 @@ public class FacebookActivity
         protected void onPostExecute( Void voids )
         {
             mProgressDialog.dismiss();
+            Toast.makeText( FacebookActivity.this, getString( R.string.inserting_birthdays_done, counter ),
+                            Toast.LENGTH_SHORT ).show();
             Intent intent = new Intent( FacebookActivity.this, BirthdayActivity.class );
             intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
-            startActivity( intent );
+            startActivity( intent );           
         }
     }
 
     /**
      * 
      */
-    private void store()
+    public void store( boolean update )
     {
         if ( mUserList != null && !mUserList.isEmpty() )
         {
-            mProgressDialog =
-                ProgressDialog.show( this, "",
-                                     getString( R.string.inserting_birthdays, 0 ), true );
-            new StoreAsyncTask().execute();
+            mProgressDialog = ProgressDialog.show( this, "", getString( R.string.inserting_birthdays, 0 ), true );
+            new StoreAsyncTask( update ).execute();
         }
         else
         {
@@ -389,7 +417,17 @@ public class FacebookActivity
                 sync();
                 return true;
             case STORE_SYNC_MENU_ID:
-                store();
+                Cursor cursor = mDb.fetchAllBirthdays();
+                boolean existingBirthdays = cursor.getCount() > 0;
+                cursor.close();
+                if ( existingBirthdays )
+                {
+                    showDialog( CONFIRM_STORE_DIALOG_ID );
+                }
+                else
+                {
+                    store( false );
+                }
                 return true;
             case LOGOUT_MENU_ID:
                 logout();
@@ -438,6 +476,10 @@ public class FacebookActivity
                                                                                                                                      R.string.cancel,
                                                                                                                                      this );
                 return builder.create();
+
+            case CONFIRM_STORE_DIALOG_ID:
+                return new ConfirmStoreDialog( this );
+
         }
         return null;
     }
