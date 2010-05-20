@@ -253,6 +253,7 @@ public final class R {
         public static final int sendmail=0x7f060049;
         public static final int sms_birthday_template_text=0x7f060075;
         public static final int sms_template_text=0x7f06003c;
+        public static final int socialuserdialog_title=0x7f060095;
         public static final int start_sync=0x7f060067;
         public static final int store_birthdays=0x7f060068;
         public static final int sync_counter=0x7f06008d;

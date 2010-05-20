@@ -154,4 +154,5 @@
 <string name="ignore_birthyear">Ignore year field (check if you don\'t know the birth year)</string>
 <string name="inserting_birthdays_done">%d birthdays recorded</string>
 <string name="confirm_store_question">Do you want to update existing birthdays with this results ?</string>
+<string name="socialuserdialog_title">Modify sync</string>
 </resources>

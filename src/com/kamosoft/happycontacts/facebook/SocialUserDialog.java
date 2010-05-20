@@ -40,6 +40,7 @@ public class SocialUserDialog
         mUser = user;
         mDb = db;
         setContentView( R.layout.socialuserdialog );
+        setTitle( R.string.socialuserdialog_title );
         
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.width = WindowManager.LayoutParams.FILL_PARENT;
