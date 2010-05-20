@@ -34,9 +34,7 @@
     <string name="toast_contact_blacklisted">Le contact est dans la liste noire !</string>
     <string name="toast_blacklisted">%s a été ajouté à la liste noire</string>
     <string name="toast_later">La notification est conservée pour plus tard.</string>
-    <string name="toast_no_contact">Pas de fêtes à souhaiter parmi vos contacts aujourd\'hui !</string>
-    <string name="toast_contact_one">C\'est sa fête :\n</string>
-    <string name="toast_contact_list">C\'est leur fête :\n</string>
+    <string name="toast_no_events">Pas d\'évènements aujourd\'hui !</string>
     <string name="toast_finish">Les fêtes du jour ont été traitées</string>
     <string name="enter_date">Saisir une date</string>
     <string name="check_contacts">Vérifier les contacts</string>
@@ -59,14 +57,13 @@
 <string name="default_mail_subject_tempate">Il y a quelque chose à fêter aujourd\'hui...</string>
 <string name="default_mail_body_template">On dirait que c\'est ton jour, alors bonne fête !</string>
 <string name="default_sms_body_template">C\'est ta fête aujourd\'hui... Bonne fête !</string>
+<string name="default_mail_birthday_subject_template">Il y a quelquechose à fêter aujourd\'hui !...</string>
+<string name="default_mail_birthday_body_template">On dirait que c\'est ton jour, alors bon anniversaire !</string>
+<string name="default_sms_birthday_body_template">On dirait que c\'est ton jour, alors bon anniversaire !</string>
 <string name="back_to_main">Retour au menu principal</string>
 <string name="sms_template_text">Editer ici votre modèle de SMS pour les fêtes</string>
-
-
 <string name="mail_template_subject">Objet : </string>
-
 <string name="mail_template_text">Editer ici votre modèle de mail pour les fêtes</string>
-
 <string name="reset_button">Par défaut</string>
 <string name="toast_mail_template_saved">Modèles d\'email sauvegardés</string>
 <string name="toast_sms_template_saved">Modèles de SMS sauvegardés</string>
@@ -93,4 +90,67 @@
 <string name="add_whitelist">Associer un contact avec un prénom</string>
 <string name="can_match_normally">%s peut déjà correspondre au prénom %s, il est donc inutile de l\'ajouter à la liste blanche.</string>
 <string name="link_other">Associer un autre</string>
+
+<string name="pref_birthday">Anniversaires</string>
+<string name="pref_birthday_summary">Récupèrer les anniversaires de vos amis depuis Facebook</string>
+<string name="login_thankyou">Vous êtes maintenant connecté à Facebook</string>
+<string name="facebooklogin_urlError">Erreur pendant la tentative de connexion à Facebook</string>
+<string name="login_authorization">Merci de patienter pendant la vérification des autorisations de l\'application...</string>
+<string name="facebooklogin">Connexion à Facebook</string>
+<string name="contact_not_found">Contact de téléphone non trouvé</string>
+<string name="no_birthday">Pas d\'anniversaire dans la base de données</string>
+<string name="add_birthday">Ajouter un anniversaire</string>
+<string name="sync_facebook">Synchro avec Facebook</string>
+<string name="no_syncresults">Pas de résultat de synchro</string>
+<string name="start_sync">Commencer la synchro</string>
+<string name="store_birthdays">Enregistrer les anniversaires</string>
+<string name="confirm_delete_birthday">Voulez-vous vraiment supprimer l\'anniversaire de %s ?</string>
+<string name="unknow_birthday">Anniversaire non fourni</string>
+<string name="pick_birthday_label">Saisir la date d\'anniversaire de %s</string>
+<string name="birthday_added">Anniversaire ajouté avec succès</string>
+<string name="pick_contact_birthday">Saisir un contact</string>
+<string name="pick_birthday_update_label">Mettre à jour la date d\'anniversaire de %s</string>
+<string name="birthday_updated">Anniversaire mis à jour avec succès</string>
+<string name="birthday_deleted">Anniversaire supprimé avec succès</string>
+<string name="delete">Supprimer</string>
+<string name="update">Mettre à jour</string>
+<string name="pick_nameday_datelist">Saisir une fête</string>
+<string name="happybirthday_name">C\'est son anniversaire :</string>
+<string name="mail_birthday_template_text">Editer le modèle de mail pour les anniversaires</string>
+<string name="sms_birthday_template_text">Editer le modèle de sms pour les anniversaires</string>
+<string name="loading_friends">Récupération de vos amis Facebook, merci de patienter...</string>
+<string name="sync_friends">Synchronisation de %s...</string>
+<string name="end_sync">La synchro est terminée...</string>
+<string name="inserting_results">Affichage des résultats...</string>
+<string name="inserting_birthdays">Enregistrement de %d anniversaires...</string>
+<string name="age">%d ans</string>
+<string name="age_unknow">\? ans</string>
+<string name="facebook_login_error">Désolé, impossible de se connecter à Facebook</string>
+<string name="link_contact">Associer à un contact</string>
+<string name="unlink_contact">Dissocier du contact</string>
+<string name="link_contact_alert">%s est déjà associé à %s, êtes-vous sûr de vouloir l\'associer à un autre contact ?</string>
+<string name="link_contact_done">%s est maintenant associé à %s</string>
+<string name="yes">Oui</string>
+<string name="no">Non</string>
+<string name="unlink_contact_useless">Cet ami n\'a pas de contact associé, inutile de le dissocier</string>
+<string name="pick_contact_to_link">Saisir un contact à associer avec votre ami %s</string>
+<string name="syncresults">Résultats de la synchronisation</string>
+<string name="birthdaylist">Liste des anniversaires</string>
+<string name="friend_no_birthday">Cet ami n\'a pas fourni son anniversaire</string>
+<string name="blacklist">Liste noire</string>
+<string name="contactlist">Liste des contacts</string>
+<string name="namedaylist">Liste des fêtes</string>
+<string name="whitelist">Liste blanche</string>
+<string name="birthday_counter">anniversaires enregistrés</string>
+<string name="sync_counter">amis récupérés depuis Facebook</string>
+<string name="logout">Déconnexion de Facebook</string>
+<string name="logout_ok">Déconnexion de votre compte Facebook effectuée !</string>
+<string name="logout_ko">Vous n\'êtes pas connecté à un compte Facebook</string>
+<string name="linked_to">Associé au contact %s</string>
+<string name="ignore_birthyear">Ignore l\'année de naissance (à cocher si vous ne connaissez pas l\'année de naissance)</string>
+<string name="inserting_birthdays_done">%d anniversaires enregistrés</string>
+<string name="confirm_store_question">Voulez-vous mettre-à-jour les anniversaires existants avec ces résultats ?</string>
+<string name="socialuserdialog_title">Modification synchro</string>
+<string name="toast_events">Il y a des évènements aujourd\'hui ! Regardez dans la barre de notification</string>
+
 </resources>

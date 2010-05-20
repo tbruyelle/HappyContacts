@@ -35,9 +35,7 @@
 	<string name="toast_contact_blacklisted">Contact is blacklisted</string>
 	<string name="toast_blacklisted">%s has been added to the black list</string>
 	<string name="toast_later">The notification is kept for later.</string>
-	<string name="toast_no_contact">No events today !</string>
-	<string name="toast_contact_one">It\'s his/her name day :\n</string>
-	<string name="toast_contact_list">It\'s their name day :\n</string>
+	<string name="toast_no_events">No events today !</string>
 	<string name="toast_finish">Today\'s name days have been completed.</string>
 	<string name="enter_date">Enter a date</string>
 	<string name="check_contacts">Check the contacts</string>
@@ -116,6 +114,7 @@
 <string name="pick_contact_birthday">Pick a contact</string>
 <string name="pick_birthday_update_label">Update birthday date for %s</string>
 <string name="birthday_updated">Birthday updated successfully</string>
+<string name="birthday_deleted">Birthday deleted successfully</string>
 <string name="delete">Delete</string>
 <string name="update">Update</string>
 <string name="pick_nameday_datelist">Enter or pick a name day</string>
@@ -133,6 +132,7 @@
 <string name="link_contact">Link to a contact</string>
 <string name="unlink_contact">Unlink this contact</string>
 <string name="link_contact_alert">%s is already linked to %s, are you sure to link to another contact ?</string>
+<string name="link_contact_done">%s is now linked to %s</string>
 <string name="yes">Yes</string>
 <string name="no">No</string>
 <string name="unlink_contact_useless">This friend has no linked contact, no need to unlink</string>
@@ -142,7 +142,6 @@
 <string name="friend_no_birthday">This friend doesn\'t provide his brithday</string>
 <string name="blacklist">Black list</string>
 <string name="contactlist">Contacts list</string>
-
 <string name="namedaylist">Name-days list</string>
 <string name="whitelist">White list</string>
 <string name="birthday_counter">birthday(s) recorded</string>
@@ -155,4 +154,5 @@
 <string name="inserting_birthdays_done">%d birthdays recorded</string>
 <string name="confirm_store_question">Do you want to update existing birthdays with this results ?</string>
 <string name="socialuserdialog_title">Modify sync</string>
+<string name="toast_events">There is some events today ! Check the notification bar on top</string>
 </resources>

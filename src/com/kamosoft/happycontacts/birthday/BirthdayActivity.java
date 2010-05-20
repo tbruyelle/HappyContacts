@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import com.kamosoft.happycontacts.Constants;
@@ -152,6 +153,10 @@ public class BirthdayActivity
                 if ( !mDb.deleteBirthday( info.id ) )
                 {
                     Log.e( "Error while deleting item " + info.id );
+                }
+                else
+                {
+                    Toast.makeText( this, R.string.birthday_deleted, Toast.LENGTH_SHORT ).show();
                 }
                 fillList();
                 return true;

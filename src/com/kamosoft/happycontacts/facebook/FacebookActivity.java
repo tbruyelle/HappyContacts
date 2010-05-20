@@ -186,6 +186,10 @@ public class FacebookActivity
                 break;
 
             case PICK_CONTACT_ACTIVITY_RESULT:
+                Toast.makeText(
+                                this,
+                                getString( R.string.link_contact_done, mCurrentUser.name,
+                                           data.getStringExtra( CONTACTNAME_INTENT_KEY ) ), Toast.LENGTH_LONG ).show();
                 setIntent( data );
                 break;
         }
@@ -294,7 +298,7 @@ public class FacebookActivity
         public StoreAsyncTask( boolean update )
         {
             this.update = update;
-            this.counter=0;
+            this.counter = 0;
         }
 
         /**
@@ -302,7 +306,7 @@ public class FacebookActivity
          */
         @Override
         protected Void doInBackground( Void... voids )
-        {            
+        {
             for ( SocialNetworkUser user : mUserList )
             {
                 if ( user.birthday == null || user.getContactName() == null )
@@ -377,7 +381,7 @@ public class FacebookActivity
                             Toast.LENGTH_SHORT ).show();
             Intent intent = new Intent( FacebookActivity.this, BirthdayActivity.class );
             intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
-            startActivity( intent );           
+            startActivity( intent );
         }
     }
 

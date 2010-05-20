@@ -77,27 +77,12 @@ public class DayMatcherService
 
         if ( !contactFeastToday.getContactList().isEmpty() )
         {
-            /* TODO improve display */
-            StringBuilder sb = new StringBuilder();
-            if ( contactFeastToday.getContactList().size() > 1 )
-            {
-                sb.append( context.getString( R.string.toast_contact_list ) );
-            }
-            else
-            {
-                sb.append( context.getString( R.string.toast_contact_one ) );
-            }
-            for ( Map.Entry<Long, ContactFeast> mapEntry : contactFeastToday.getContactList().entrySet() )
-            {
-                sb.append( mapEntry.getValue().getContactName() );
-                sb.append( "\n" );
-            }
-            Toast.makeText( context, sb.toString(), Toast.LENGTH_LONG ).show();
             Notifier.notifyEvent( context );
+            Toast.makeText( context, R.string.toast_events, Toast.LENGTH_LONG ).show();
         }
         else
         {
-            Toast.makeText( context, R.string.toast_no_contact, Toast.LENGTH_LONG ).show();
+            Toast.makeText( context, R.string.toast_no_events, Toast.LENGTH_LONG ).show();
         }
     }
 
