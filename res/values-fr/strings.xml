@@ -18,9 +18,9 @@
     <string name="no_feast">Pas de fête pour ce jour.</string>
     <string name="pref_feast_list_summary">Afficher les fêtes par jour et par prénom</string>
     <string name="pref_templates_cat">Modèles</string>
-    <string name="pref_template_sms">Modèle SMS</string>
+    <string name="pref_template_sms">Modèles SMS</string>
     <string name="pref_template_sms_summary">Contenu du SMS à envoyer</string>
-    <string name="pref_template_email">Modèle Email</string>
+    <string name="pref_template_email">Modèles Email</string>
     <string name="pref_template_email_summary">Contenu de l\'email à envoyer</string>
     <string name="pref_blacklist">Liste noire</string>
     <string name="pref_blacklist_summary">Liste des contacts ignorés</string>
@@ -68,8 +68,8 @@
 <string name="mail_template_text">Editer ici votre modèle de mail pour les fêtes</string>
 
 <string name="reset_button">Par défaut</string>
-<string name="toast_mail_template_saved">Modèle d\'email sauvegardé</string>
-<string name="toast_sms_template_saved">Modèle de SMS sauvegardé</string>
+<string name="toast_mail_template_saved">Modèles d\'email sauvegardés</string>
+<string name="toast_sms_template_saved">Modèles de SMS sauvegardés</string>
 <string name="feast_counter">%d/%d</string>
 <string name="happyfeast_name">C\'est la fête de</string>
 <string name="pref_check_name_days">Vérifier les évènements</string>

@@ -21,7 +21,7 @@
 	<string name="pref_templates_cat">Templates</string>
 	<string name="pref_template_sms">SMS templates</string>
 	<string name="pref_template_sms_summary">SMS body to send</string>
-	<string name="pref_template_email">Email template</string>
+	<string name="pref_template_email">Email templates</string>
 	<string name="pref_template_email_summary">Email subject and body to send</string>
 	<string name="pref_blacklist">Black list</string>
 	<string name="pref_blacklist_summary">Contacts list which are ignored</string>
@@ -31,7 +31,7 @@
 	<string name="pref_time">Hour</string>
   <string name="pref_time_summary">Every day at %s</string>
 	<string name="pref_template_sms_dialog">Enter SMS template</string>
-	<string name="pref_template_email_dialog">Enter email template</string>
+	<string name="pref_template_email_dialog">Enter email templates</string>
 	<string name="toast_contact_blacklisted">Contact is blacklisted</string>
 	<string name="toast_blacklisted">%s has been added to the black list</string>
 	<string name="toast_later">The notification is kept for later.</string>
@@ -68,8 +68,8 @@
 <string name="mail_template_subject">Object : </string>
 <string name="mail_template_text">Edit name-day email template</string>
 <string name="reset_button">default</string>
-<string name="toast_mail_template_saved">Email template saved</string>
-<string name="toast_sms_template_saved">SMS template saved</string>
+<string name="toast_mail_template_saved">Email templates saved</string>
+<string name="toast_sms_template_saved">SMS templates saved</string>
 <string name="feast_counter">%d/%d</string>
 <string name="happyfeast_name">It\'s his/her name day :</string>
 <string name="pref_check_name_days">Check today events</string>
