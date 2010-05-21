@@ -142,7 +142,7 @@
 <string name="namedaylist">Liste des fêtes</string>
 <string name="whitelist">Liste blanche</string>
 <string name="birthday_counter">anniversaire(s) enregistré(s)</string>
-<string name="sync_counter">amis récupérés depuis Facebook</string>
+<string name="sync_counter">ami(s) récupéré(s) depuis Facebook</string>
 <string name="logout">Déconnexion de Facebook</string>
 <string name="logout_ok">Déconnexion de votre compte Facebook effectuée !</string>
 <string name="logout_ko">Vous n\'êtes pas connecté à un compte Facebook</string>
