@@ -172,6 +172,11 @@ public class FacebookActivity
     {
         super.onActivityResult( requestCode, resultCode, data );
 
+        if ( resultCode == Activity.RESULT_CANCELED )
+        {
+            return;
+        }
+
         if ( resultCode != Activity.RESULT_OK )
         {
             Toast.makeText( this, R.string.facebook_login_error, Toast.LENGTH_SHORT );
