@@ -103,6 +103,7 @@ public class PickBirthdayActivity
     @Override
     public void onClick( View view )
     {
+        mDatePicker.clearFocus();
         String month = String.valueOf( mDatePicker.getMonth() + 1 );
         if ( month.length() == 1 )
         {
