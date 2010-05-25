@@ -155,4 +155,5 @@
 <string name="confirm_store_question">Do you want to update existing birthdays with this results ?</string>
 <string name="socialuserdialog_title">Modify sync</string>
 <string name="toast_events">There is some events today ! Check the notification bar on top</string>
+<string name="sync_googlecontacts">Sync with Google Contacts</string>
 </resources>

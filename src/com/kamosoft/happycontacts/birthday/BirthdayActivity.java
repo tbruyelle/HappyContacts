@@ -27,6 +27,7 @@ import com.kamosoft.happycontacts.R;
 import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.dao.HappyContactsDb;
 import com.kamosoft.happycontacts.facebook.FacebookActivity;
+import com.kamosoft.happycontacts.gdata.GoogleContactsActivity;
 
 /**
  * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
@@ -42,7 +43,9 @@ public class BirthdayActivity
 
     private static final int SYNC_FACEBOOK_MENU_ID = ADD_BIRTHDAY_MENU_ID + 1;
 
-    private static final int DELETEALL_MENU_ID = SYNC_FACEBOOK_MENU_ID + 1;
+    private static final int SYNC_GOOGLE_CONTACTS_ID = SYNC_FACEBOOK_MENU_ID + 1;
+
+    private static final int DELETEALL_MENU_ID = SYNC_GOOGLE_CONTACTS_ID + 1;
 
     private static final int DELETEALL_DIALOG_ID = 1;
 
@@ -233,6 +236,7 @@ public class BirthdayActivity
     {
         super.onCreateOptionsMenu( menu );
         menu.add( 0, SYNC_FACEBOOK_MENU_ID, 0, R.string.sync_facebook ).setIcon( R.drawable.fb );
+        menu.add( 0, SYNC_GOOGLE_CONTACTS_ID, 0, R.string.sync_googlecontacts ).setIcon( R.drawable.googlecontacts );
         menu.add( 0, ADD_BIRTHDAY_MENU_ID, 0, R.string.add_birthday ).setIcon( R.drawable.ic_menu_add );
         menu.add( 0, DELETEALL_MENU_ID, 0, R.string.deleteall ).setIcon( R.drawable.ic_menu_delete );
         return true;
@@ -252,6 +256,10 @@ public class BirthdayActivity
 
             case SYNC_FACEBOOK_MENU_ID:
                 startActivity( new Intent( this, FacebookActivity.class ) );
+                return true;
+
+            case SYNC_GOOGLE_CONTACTS_ID:
+                startActivity( new Intent( this, GoogleContactsActivity.class ) );
                 return true;
 
             case DELETEALL_MENU_ID:
