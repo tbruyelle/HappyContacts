@@ -432,7 +432,7 @@ public class GoogleContactsActivity
                     boolean success = false;
                     try
                     {
-                        HttpRequest request = transport.buildPostRequest();
+                        HttpRequest request = transport.buildPostRequest();                        
                         request.url = new GenericUrl( GoogleContacts.ROOT_URL );
                         GoogleHeaders.setSlug( request.headers, sendData.fileName );
                         InputStreamContent content = new InputStreamContent();
@@ -483,15 +483,16 @@ public class GoogleContactsActivity
         String[] albumNames = { "toto", "titi", "tata" };
 
         HttpRequest request = transport.buildGetRequest();
-        request.setUrl( "http://www.google.com/m8/feeds/contacts/thomas.bruyelle%40gmail.com/full" );
+        request.setUrl( "https://www.google.com/m8/feeds/contacts/thomas.bruyelle%40gmail.com/full" );
 
         try
         {
             HttpResponse response = request.execute();
             String content = readInputStreamAsString( response.getContent() );
+            String tot=content.toLowerCase();
             if ( Log.DEBUG )
             {
-                Log.d( content );
+                Log.d( content+tot );
             }
         }
         catch ( IOException e )
