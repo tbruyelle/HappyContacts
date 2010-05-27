@@ -3,10 +3,8 @@
  */
 package com.kamosoft.happycontacts.gdata;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,6 +45,8 @@ import com.google.api.client.xml.atom.AtomParser;
 import com.google.api.data.contacts.v3.GoogleContacts;
 import com.google.api.data.contacts.v3.atom.GoogleContactsAtom;
 import com.google.api.data.picasa.v2.PicasaWebAlbums;
+import com.google.gdata.data.extensions.ContactEntry;
+import com.google.gdata.data.extensions.ContactFeed;
 import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
@@ -432,7 +432,7 @@ public class GoogleContactsActivity
                     boolean success = false;
                     try
                     {
-                        HttpRequest request = transport.buildPostRequest();                        
+                        HttpRequest request = transport.buildPostRequest();
                         request.url = new GenericUrl( GoogleContacts.ROOT_URL );
                         GoogleHeaders.setSlug( request.headers, sendData.fileName );
                         InputStreamContent content = new InputStreamContent();
@@ -462,37 +462,22 @@ public class GoogleContactsActivity
         }
     }
 
-    public static String readInputStreamAsString( InputStream in )
-        throws IOException
-    {
-
-        BufferedInputStream bis = new BufferedInputStream( in );
-        ByteArrayOutputStream buf = new ByteArrayOutputStream();
-        int result = bis.read();
-        while ( result != -1 )
-        {
-            byte b = (byte) result;
-            buf.write( b );
-            result = bis.read();
-        }
-        return buf.toString();
-    }
-
     private void retrieveContacts()
     {
-        String[] albumNames = { "toto", "titi", "tata" };
+        ArrayList<String> names = new ArrayList<String>();
 
         HttpRequest request = transport.buildGetRequest();
+        //TODO mettre une variable et escapé le @
         request.setUrl( "https://www.google.com/m8/feeds/contacts/thomas.bruyelle%40gmail.com/full" );
 
         try
         {
             HttpResponse response = request.execute();
-            String content = readInputStreamAsString( response.getContent() );
-            String tot=content.toLowerCase();
-            if ( Log.DEBUG )
+            ContactFeed contactFeed = response.getParser().parse( response, ContactFeed.class );
+
+            for ( ContactEntry contactEntry : contactFeed.getEntries() )
             {
-                Log.d( content+tot );
+                names.add( contactEntry.getSummary().getPlainText() );
             }
         }
         catch ( IOException e )
@@ -526,7 +511,7 @@ public class GoogleContactsActivity
         //                  albumNames = new String[] {e.getMessage()};
         //                  albums.clear();
         //                }
-        setListAdapter( new ArrayAdapter<String>( this, android.R.layout.simple_list_item_1, albumNames ) );
+        setListAdapter( new ArrayAdapter<String>( this, android.R.layout.simple_list_item_1, names ) );
     }
 
     @Override

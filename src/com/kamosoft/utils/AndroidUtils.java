@@ -3,6 +3,8 @@
  */
 package com.kamosoft.utils;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -29,7 +31,7 @@ public final class AndroidUtils
     {
         String version = Build.VERSION.SDK;
         return Integer.parseInt( version );
-    }    
+    }
 
     public static void composeSms( Context context, String phoneNumber, String smsBody )
     {
@@ -208,6 +210,21 @@ public final class AndroidUtils
 
         }
         return c;
+    }
+
+    public static String readInputStreamAsString( InputStream in )
+        throws IOException
+    {
+        BufferedInputStream bis = new BufferedInputStream( in );
+        ByteArrayOutputStream buf = new ByteArrayOutputStream();
+        int result = bis.read();
+        while ( result != -1 )
+        {
+            byte b = (byte) result;
+            buf.write( b );
+            result = bis.read();
+        }
+        return buf.toString();
     }
 
     public static String getFileContent( Resources resources, int rawId )
