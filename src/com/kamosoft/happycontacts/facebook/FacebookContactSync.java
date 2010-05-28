@@ -90,7 +90,15 @@ public class FacebookContactSync
         }
         for ( SocialNetworkUser user : users )
         {
-            if ( user.birthday == null )
+            if ( user == null )
+            {
+                if ( Log.DEBUG )
+                {
+                    Log.d( "FacebookContactSync: skipping user null" );
+                }
+                continue;
+            }
+            if ( user.birthday == null || user.name == null )
             {
                 if ( Log.DEBUG )
                 {
@@ -106,9 +114,9 @@ public class FacebookContactSync
 
             String friendName = AndroidUtils.replaceAccents( user.name );
             for ( PhoneContact phoneContact : phoneContacts )
-            {              
-                if ( phoneContact.name == null || phoneContact.name.length() == 0 )
-                {                    
+            {
+                if ( phoneContact == null || phoneContact.name == null || phoneContact.name.length() == 0 )
+                {
                     continue;
                 }
                 if ( nameMatch( AndroidUtils.replaceAccents( phoneContact.name ), friendName ) )
@@ -128,7 +136,7 @@ public class FacebookContactSync
         {
             Log.v( "FacebookContactSync: Stop matching with contacts" );
         }
-        publishProgress( mContext.getString( R.string.inserting_results )  );
+        publishProgress( mContext.getString( R.string.inserting_results ) );
         return users;
     }
 

@@ -85,9 +85,7 @@ public class FacebookActivity
             Log.v( "FaceBookActivity: onCreate()  start" );
         }
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.facebook_sync );
-
-        mSyncCounter = (TextView) findViewById( R.id.sync_counter );
+        setContentView( R.layout.facebook_sync );        
 
         mDb = new DbAdapter( this );
 
@@ -105,6 +103,8 @@ public class FacebookActivity
             Log.v( "FaceBookActivity: start onResume" );
         }
         super.onResume();
+        
+        mSyncCounter = (TextView) findViewById( R.id.sync_counter );
 
         mDb.open( false );
 
