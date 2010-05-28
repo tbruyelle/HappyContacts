@@ -78,11 +78,17 @@ public class DbAdapter
                 {
                     db.execSQL( sqlStatements[i] );
 
-                    /* update handler */
-                    handler.updateProgress( i, nbStatements );
+                    if ( handler != null )
+                    {
+                        /* update handler */
+                        handler.updateProgress( i, nbStatements );
+                    }
                 }
-                /* send last message to the handler */
-                handler.updateProgress( 100 );
+                if ( handler != null )
+                {
+                    /* send last message to the handler */
+                    handler.updateProgress( 100 );
+                }
                 Log.v( "Creating database done..." );
             }
             catch ( IOException e )
@@ -335,7 +341,7 @@ public class DbAdapter
         initialValues.put( HappyContactsDb.Birthday.BIRTHDAY_DATE, birthday );
         initialValues.put( HappyContactsDb.Birthday.BIRTHDAY_YEAR, birthyear );
 
-        return mDb.insert( HappyContactsDb.Birthday.TABLE_NAME, null, initialValues ) ;
+        return mDb.insert( HappyContactsDb.Birthday.TABLE_NAME, null, initialValues );
     }
 
     public boolean deleteBirthday( long id )
