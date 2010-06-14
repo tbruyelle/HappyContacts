@@ -156,4 +156,6 @@
 <string name="socialuserdialog_title">Modify sync</string>
 <string name="toast_events">There is some events today ! Check the notification bar on top</string>
 <string name="sync_googlecontacts">Sync with Google Contacts</string>
+<string name="sync_google_counter">birthday(s) retrieved from Google Contacts</string>
+<string name="google_birthdaylist">Birthdays list of Google Contacts</string>
 </resources>

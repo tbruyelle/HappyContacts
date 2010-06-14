@@ -111,7 +111,7 @@ public class GoogleContactsHandler
     {
         if ( localName.equals( "entry" ) )
         {
-            if ( currentContact != null )
+            if ( currentContact != null && currentBirthday != null )
             {
                 SocialNetworkUser user = new SocialNetworkUser();
                 user.name = currentContact;

@@ -95,10 +95,10 @@ public final class R {
         public static final int sms_birthday_template_content=0x7f08002d;
         public static final int sms_template_content=0x7f08002c;
         public static final int sync_counter=0x7f080014;
+        public static final int sync_google_counter=0x7f080017;
         public static final int unlink_contact=0x7f080033;
         public static final int user_name=0x7f08002f;
         public static final int webview=0x7f080013;
-        public static final int xmlcontent=0x7f080017;
     }
     public static final class layout {
         public static final int about=0x7f030000;
@@ -188,6 +188,7 @@ public final class R {
         public static final int facebooklogin_urlError=0x7f06005d;
         public static final int feast_counter=0x7f060040;
         public static final int friend_no_birthday=0x7f060087;
+        public static final int google_birthdaylist=0x7f060099;
         public static final int happybirthday_name=0x7f060072;
         public static final int happyfeast=0x7f060009;
         public static final int happyfeast_name=0x7f060041;
@@ -269,6 +270,7 @@ public final class R {
         public static final int sync_counter=0x7f06008d;
         public static final int sync_facebook=0x7f060063;
         public static final int sync_friends=0x7f060076;
+        public static final int sync_google_counter=0x7f060098;
         public static final int sync_googlecontacts=0x7f060097;
         public static final int syncresults=0x7f060085;
         public static final int toast_blacklisted=0x7f060021;

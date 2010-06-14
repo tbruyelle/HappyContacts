@@ -4,11 +4,7 @@
 package com.kamosoft.happycontacts.gdata;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -16,21 +12,16 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.SAXException;
 
-import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore.Images;
-import android.text.method.PasswordTransformationMethod;
 import android.view.Menu;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.api.client.apache.ApacheHttpTransport;
 import com.google.api.client.auth.oauth.OAuthCallbackUrl;
@@ -39,7 +30,6 @@ import com.google.api.client.auth.oauth.OAuthHmacSigner;
 import com.google.api.client.auth.oauth.OAuthParameters;
 import com.google.api.client.googleapis.GoogleHeaders;
 import com.google.api.client.googleapis.GoogleTransport;
-import com.google.api.client.googleapis.auth.clientlogin.ClientLogin;
 import com.google.api.client.googleapis.auth.oauth.GoogleOAuthAuthorizeTemporaryTokenUrl;
 import com.google.api.client.googleapis.auth.oauth.GoogleOAuthGetAccessToken;
 import com.google.api.client.googleapis.auth.oauth.GoogleOAuthGetTemporaryToken;
@@ -52,11 +42,13 @@ import com.google.api.client.http.InputStreamContent;
 import com.google.api.client.xml.atom.AtomParser;
 import com.google.api.data.contacts.v3.GoogleContacts;
 import com.google.api.data.contacts.v3.atom.GoogleContactsAtom;
-import com.google.api.data.picasa.v2.PicasaWebAlbums;
 import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
+import com.kamosoft.happycontacts.contacts.ContactUtils;
+import com.kamosoft.happycontacts.contacts.PhoneContact;
 import com.kamosoft.happycontacts.facebook.SocialUserArrayAdapter;
+import com.kamosoft.happycontacts.model.SocialNetworkUser;
 
 /**
  * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
@@ -83,6 +75,8 @@ public class GoogleContactsActivity
 
     private String postLink;
 
+    private SocialUserArrayAdapter mArrayAdapter;
+
     private static boolean isTemporary;
 
     private static OAuthCredentialsResponse credentials;
@@ -91,9 +85,7 @@ public class GoogleContactsActivity
 
     private static final int MENU_ACCOUNTS = 1;
 
-    private static final int REQUEST_AUTHENTICATE = 0;
-
-    private static final int REQUEST_ADD_ACCOUNT = 1;
+    private TextView mSyncCounter;
 
     /**
      * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -102,13 +94,14 @@ public class GoogleContactsActivity
     protected void onCreate( Bundle savedInstanceState )
     {
         super.onCreate( savedInstanceState );
+        setContentView( R.layout.gcontactlist );
+        mSyncCounter = (TextView) findViewById( R.id.sync_google_counter );
+
         transport.setVersionHeader( GoogleContacts.VERSION );
         AtomParser atomParser = new AtomParser();
         atomParser.namespaceDictionary = GoogleContactsAtom.NAMESPACE_DICTIONARY;
         transport.addParser( atomParser );
         transport.applicationName = APP_NAME;
-        setContentView( R.layout.gcontactlist );
-
         HttpTransport.setLowLevelHttpTransport( ApacheHttpTransport.INSTANCE );
         Intent intent = getIntent();
         if ( Intent.ACTION_SEND.equals( intent.getAction() ) )
@@ -142,104 +135,10 @@ public class GoogleContactsActivity
         return authorizer;
     }
 
-    @Override
-    protected Dialog onCreateDialog( int id )
-    {
-        switch ( id )
-        {
-            case DIALOG_ACCOUNTS:
-                switch ( AUTH_TYPE )
-                {
-                    //                    case ACCOUNT_MANAGER:
-                    //                        AlertDialog.Builder builder = new AlertDialog.Builder( this );
-                    //                        builder.setTitle( "Select a Google account" );
-                    //                        final AccountManager manager = AccountManager.get( this );
-                    //                        final Account[] accounts = manager.getAccountsByType( "com.google" );
-                    //                        final int size = accounts.length;
-                    //                        String[] names = new String[size];
-                    //                        for ( int i = 0; i < size; i++ )
-                    //                        {
-                    //                            names[i] = accounts[i].name;
-                    //                        }
-                    //                        // names[size] = "New Account";
-                    //                        builder.setItems( names, new DialogInterface.OnClickListener()
-                    //                        {
-                    //                            @Override
-                    //                            public void onClick( DialogInterface dialog, int which )
-                    //                            {
-                    //                                if ( which == size )
-                    //                                {
-                    //                                    addAccount( manager );
-                    //                                }
-                    //                                else
-                    //                                {
-                    //                                    gotAccount( manager, accounts[which] );
-                    //                                }
-                    //                            }
-                    //                        } );
-                    //                        return builder.create();
-                    case CLIENT_LOGIN:
-                        final Dialog clientLoginDialog = new Dialog( this );
-                        clientLoginDialog.setContentView( R.layout.clientlogin );
-                        clientLoginDialog.setTitle( "Sign in with your Google Account" );
-                        Button signInButton = (Button) clientLoginDialog.findViewById( R.id.SignIn );
-                        final EditText password = (EditText) clientLoginDialog.findViewById( R.id.Password );
-                        password.setTransformationMethod( PasswordTransformationMethod.getInstance() );
-                        signInButton.setOnClickListener( new View.OnClickListener()
-                        {
-                            @Override
-                            public void onClick( View v )
-                            {
-                                clientLoginDialog.dismiss();
-                                ClientLogin authenticator = new ClientLogin();
-                                authenticator.authTokenType = PicasaWebAlbums.AUTH_TOKEN_TYPE;
-                                EditText username = (EditText) clientLoginDialog.findViewById( R.id.Email );
-                                authenticator.username = username.getText().toString();
-                                authenticator.password = password.getText().toString();
-                                try
-                                {
-                                    authenticator.authenticate().setAuthorizationHeader( transport );
-                                    authenticated();
-                                }
-                                catch ( IOException e )
-                                {
-                                    handleException( e );
-                                }
-                            }
-                        } );
-                        return clientLoginDialog;
-                }
-        }
-        return null;
-    }
-
     private void gotAccount( boolean tokenExpired )
     {
         switch ( AUTH_TYPE )
         {
-            //            case ACCOUNT_MANAGER:
-            //                SharedPreferences settings = getSharedPreferences( APP_NAME, 0 );
-            //                String accountName = settings.getString( "accountName", null );
-            //                if ( accountName != null )
-            //                {
-            //                    AccountManager manager = AccountManager.get( this );
-            //                    Account[] accounts = manager.getAccountsByType( "com.google" );
-            //                    int size = accounts.length;
-            //                    for ( int i = 0; i < size; i++ )
-            //                    {
-            //                        Account account = accounts[i];
-            //                        if ( accountName.equals( account.name ) )
-            //                        {
-            //                            if ( tokenExpired )
-            //                            {
-            //                                manager.invalidateAuthToken( "com.google", this.authToken );
-            //                            }
-            //                            gotAccount( manager, account );
-            //                            return;
-            //                        }
-            //                    }
-            //                }
-            //                break;
             case OAUTH:
                 try
                 {
@@ -293,110 +192,6 @@ public class GoogleContactsActivity
         showDialog( DIALOG_ACCOUNTS );
     }
 
-    //    private void addAccount( AccountManager manager )
-    //    {
-    //        // TODO: test!
-    //        try
-    //        {
-    //            Bundle bundle =
-    //                manager.addAccount( "google.com", PicasaWebAlbums.AUTH_TOKEN_TYPE, null, null, this, null, null ).getResult();
-    //            if ( bundle.containsKey( AccountManager.KEY_INTENT ) )
-    //            {
-    //                Intent intent = bundle.getParcelable( AccountManager.KEY_INTENT );
-    //                int flags = intent.getFlags();
-    //                flags &= ~Intent.FLAG_ACTIVITY_NEW_TASK;
-    //                intent.setFlags( flags );
-    //                startActivityForResult( intent, REQUEST_ADD_ACCOUNT );
-    //            }
-    //            else
-    //            {
-    //                addAccountResult( bundle );
-    //            }
-    //        }
-    //        catch ( Exception e )
-    //        {
-    //            handleException( e );
-    //        }
-    //    }
-
-    private void addAccountResult( Bundle bundle )
-    {
-        // TODO: test!
-        String authToken = null;// = bundle.getString( AccountManager.KEY_AUTHTOKEN );
-        String accountName = null;// = bundle.getString( AccountManager.KEY_ACCOUNT_NAME );
-        SharedPreferences settings = getSharedPreferences( APP_NAME, 0 );
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putString( "accountName", accountName );
-        editor.commit();
-        authenticatedClientLogin( authToken );
-    }
-
-    //    private void gotAccount( AccountManager manager, Account account )
-    //    {
-    //        SharedPreferences settings = getSharedPreferences( APP_NAME, 0 );
-    //        SharedPreferences.Editor editor = settings.edit();
-    //        editor.putString( "accountName", account.name );
-    //        editor.commit();
-    //        try
-    //        {
-    //            Bundle bundle =
-    //                manager.getAuthToken( account, PicasaWebAlbums.AUTH_TOKEN_TYPE, true, null, null ).getResult();
-    //            if ( bundle.containsKey( AccountManager.KEY_INTENT ) )
-    //            {
-    //                Intent intent = bundle.getParcelable( AccountManager.KEY_INTENT );
-    //                int flags = intent.getFlags();
-    //                flags &= ~Intent.FLAG_ACTIVITY_NEW_TASK;
-    //                intent.setFlags( flags );
-    //                startActivityForResult( intent, REQUEST_AUTHENTICATE );
-    //            }
-    //            else if ( bundle.containsKey( AccountManager.KEY_AUTHTOKEN ) )
-    //            {
-    //                authenticatedClientLogin( bundle.getString( AccountManager.KEY_AUTHTOKEN ) );
-    //            }
-    //        }
-    //        catch ( Exception e )
-    //        {
-    //            handleException( e );
-    //            return;
-    //        }
-    //    }
-
-    @Override
-    protected void onActivityResult( int requestCode, int resultCode, Intent data )
-    {
-        super.onActivityResult( requestCode, resultCode, data );
-        switch ( requestCode )
-        {
-            case REQUEST_AUTHENTICATE:
-                if ( resultCode == RESULT_OK )
-                {
-                    gotAccount( false );
-                }
-                else
-                {
-                    showDialog( DIALOG_ACCOUNTS );
-                }
-                break;
-            case REQUEST_ADD_ACCOUNT:
-                // TODO: test!
-                if ( resultCode == RESULT_OK )
-                {
-                    addAccountResult( data.getExtras() );
-                }
-                else
-                {
-                    showDialog( DIALOG_ACCOUNTS );
-                }
-        }
-    }
-
-    private void authenticatedClientLogin( String authToken )
-    {
-        this.authToken = authToken;
-        transport.setClientLoginToken( authToken );
-        authenticated();
-    }
-
     static class SendData
     {
         String fileName;
@@ -430,7 +225,6 @@ public class GoogleContactsActivity
 
     private void authenticated()
     {
-        Intent intent = getIntent();
         if ( sendData != null )
         {
             try
@@ -472,8 +266,6 @@ public class GoogleContactsActivity
 
     private void retrieveContacts()
     {
-        ArrayList<String> names = new ArrayList<String>();
-
         HttpRequest request = transport.buildGetRequest();
         //TODO mettre une variable et escapé le @       
         request.setUrl( "https://www.google.com/m8/feeds/contacts/thomas.bruyelle%40gmail.com/full" );
@@ -509,31 +301,80 @@ public class GoogleContactsActivity
         {
             Log.e( "ParserConfigurationException", e );
         }
-        setListAdapter( new SocialUserArrayAdapter( this, R.layout.socialnetworkuser, handler.getGoogleContacts() ) );
+        if ( handler.getGoogleContacts().size() > 0 )
+        {
+            syncWithPhoneContacts( handler.getGoogleContacts() );
+            mSyncCounter.setText( String.valueOf( handler.getGoogleContacts().size() ) );
+        }
+
+        mArrayAdapter = new SocialUserArrayAdapter( this, R.layout.socialnetworkuser, handler.getGoogleContacts() );
+        setListAdapter( mArrayAdapter );
+    }
+
+    /**
+     * 
+     */
+    private void syncWithPhoneContacts( ArrayList<SocialNetworkUser> users )
+    {
+        ArrayList<PhoneContact> phoneContacts = ContactUtils.loadPhoneContacts( this );
+
+        if ( Log.DEBUG )
+        {
+            Log.v( "GoogleContactsActivity: Start matching with contacts" );
+        }
+        for ( SocialNetworkUser user : users )
+        {
+            if ( user == null )
+            {
+                if ( Log.DEBUG )
+                {
+                    Log.d( "GoogleContactsActivity: skipping google contact null" );
+                }
+                continue;
+            }
+            if ( Log.DEBUG )
+            {
+                Log.d( "GoogleContactsActivity: searching contact for user " + user.name );
+            }
+            //TODO publishProgress( mContext.getString( R.string.sync_friends, user.name ) );
+
+            //String friendName = AndroidUtils.replaceAccents( user.name );
+            for ( PhoneContact phoneContact : phoneContacts )
+            {
+                if ( phoneContact == null || phoneContact.name == null || phoneContact.name.length() == 0 )
+                {
+                    if ( Log.DEBUG )
+                    {
+                        Log.d( "GoogleContactsActivity: skipping phone contact null" );
+                    }
+                    continue;
+                }
+                if ( phoneContact.name.equals( user.name ) )
+                {
+                    if ( Log.DEBUG )
+                    {
+                        Log.d( "GoogleContactsActivity: *** " + phoneContact.name + " match with " + user.name + " ***" );
+                    }
+                    /* user google trouvé dans les contacts */
+                    user.setContactId( phoneContact.id );
+                    user.setContactName( phoneContact.name );
+                    break;
+                }
+            }
+        }
+
     }
 
     @Override
     public boolean onCreateOptionsMenu( Menu menu )
     {
+        /* todo mettre l'enregistrement */
         menu.add( 0, MENU_ADD, 0, "New album" );
         if ( AUTH_TYPE != AuthType.OAUTH )
         {
             menu.add( 0, MENU_ACCOUNTS, 0, "Switch Account" );
         }
         return true;
-    }
-
-    private void setLogging( boolean logging )
-    {
-        Logger.getLogger( "com.google.api.client" ).setLevel( logging ? Level.CONFIG : Level.OFF );
-        SharedPreferences settings = getSharedPreferences( APP_NAME, 0 );
-        boolean currentSetting = settings.getBoolean( "logging", false );
-        if ( currentSetting != logging )
-        {
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putBoolean( "logging", logging );
-            editor.commit();
-        }
     }
 
     private void handleException( Exception e )
@@ -547,22 +388,6 @@ public class GoogleContactsActivity
                 gotAccount( true );
             }
             return;
-        }
-        SharedPreferences settings = getSharedPreferences( APP_NAME, 0 );
-        if ( settings.getBoolean( "logging", false ) )
-        {
-            if ( e instanceof HttpResponseException )
-            {
-                try
-                {
-                    Log.e( ( (HttpResponseException) e ).response.parseAsString() );
-                }
-                catch ( IOException parseException )
-                {
-                    parseException.printStackTrace();
-                }
-            }
-            Log.e( e.getMessage(), e );
         }
     }
 }

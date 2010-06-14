@@ -2,11 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent" android:layout_height="fill_parent"
   android:orientation="vertical">
-  <TextView android:layout_height="wrap_content"
-    android:layout_width="fill_parent" android:textSize="10dip"
-    android:text="xml content" android:id="@+id/xmlcontent" />
+ <LinearLayout android:layout_width="fill_parent"
+    android:layout_height="wrap_content" android:orientation="horizontal">
+    <TextView android:text="0" android:id="@+id/sync_google_counter"
+      android:layout_width="wrap_content" android:layout_height="wrap_content"
+      android:textSize="20dip" android:paddingRight="10dip"
+      android:paddingLeft="10dip" android:textColor="#FFFFFF" />
+    <TextView android:text="@string/sync_google_counter"
+      android:layout_width="wrap_content" android:layout_height="wrap_content"
+      android:textSize="16dip" />
+  </LinearLayout>
 
-  <TextView android:text="@string/contactlist"
+  <TextView android:text="@string/google_birthdaylist"
     android:layout_height="wrap_content" android:layout_width="fill_parent"
     android:textStyle="bold" android:textColor="#DDDDDD"
     android:background="#666666" android:padding="4dip"
