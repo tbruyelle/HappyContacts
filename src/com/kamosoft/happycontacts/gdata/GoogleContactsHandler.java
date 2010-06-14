@@ -28,6 +28,18 @@ public class GoogleContactsHandler
 
     private String currentBirthday;
 
+    private String nextResultUrl;
+
+    public GoogleContactsHandler()
+    {
+        socialNetworkUsers = new ArrayList<SocialNetworkUser>();
+    }
+
+    public String getNextResultUrl()
+    {
+        return nextResultUrl;
+    }
+
     /**
      * @see org.xml.sax.helpers.DefaultHandler#startDocument()
      */
@@ -35,7 +47,7 @@ public class GoogleContactsHandler
     public void startDocument()
         throws SAXException
     {
-        socialNetworkUsers = new ArrayList<SocialNetworkUser>();
+        nextResultUrl = null;
     }
 
     /**
@@ -60,7 +72,14 @@ public class GoogleContactsHandler
     public void startElement( String uri, String localName, String qName, Attributes attributes )
         throws SAXException
     {
-        if ( localName.equals( "fullName" ) )
+        if ( localName.equals( "link" ) )
+        {
+            if ( attributes.getValue( "rel" ).equals( "next" ) )
+            {
+                nextResultUrl = attributes.getValue( "href" );
+            }
+        }
+        else if ( localName.equals( "fullName" ) )
         {
             inFullName = true;
         }

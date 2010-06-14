@@ -4,6 +4,8 @@
 package com.kamosoft.happycontacts.gdata;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -473,35 +475,27 @@ public class GoogleContactsActivity
         ArrayList<String> names = new ArrayList<String>();
 
         HttpRequest request = transport.buildGetRequest();
-        //TODO mettre une variable et escapé le @
+        //TODO mettre une variable et escapé le @       
         request.setUrl( "https://www.google.com/m8/feeds/contacts/thomas.bruyelle%40gmail.com/full" );
-
+        GoogleContactsHandler handler = new GoogleContactsHandler();
         try
         {
-            HttpResponse response = request.execute();
+            /* loop on results */
+            while ( true )
+            {
+                HttpResponse response = request.execute();
 
-            SAXParserFactory saxFactory = SAXParserFactory.newInstance();
-            SAXParser parser = saxFactory.newSAXParser();
-            GoogleContactsHandler handler = new GoogleContactsHandler();
-            parser.parse( response.getContent(), handler );
+                SAXParserFactory saxFactory = SAXParserFactory.newInstance();
+                SAXParser parser = saxFactory.newSAXParser();
 
-            setListAdapter( new SocialUserArrayAdapter( this, R.layout.socialnetworkuser, handler.getGoogleContacts() ) );
+                parser.parse( response.getContent(), handler );
 
-            //            TextView xmlContent = (TextView) findViewById( R.id.xmlcontent );
-            //            xmlContent.setText( content );
-
-            //            ContactFeed contactFeed = response.getParser().parse( response, ContactFeed.class );
-            //
-            //            for ( ContactEntry contactEntry : contactFeed.getEntries() )
-            //            {
-            //                if ( Log.DEBUG )
-            //                {
-            //                    Log.d( "processing " + contactEntry.getTitle().getPlainText() + " summary="
-            //                        + contactEntry.getSummary().getPlainText() );
-            //                }
-            //
-            //                names.add( contactEntry.getSummary().getPlainText() );
-            //            }
+                if ( handler.getNextResultUrl() == null )
+                {
+                    break;
+                }
+                request.setUrl( handler.getNextResultUrl() );
+            }
         }
         catch ( IOException e )
         {
@@ -515,33 +509,7 @@ public class GoogleContactsActivity
         {
             Log.e( "ParserConfigurationException", e );
         }
-        //                List<AlbumEntry> albums = this.albums;
-        //                albums.clear();
-        //                try {
-        //                  PicasaUrl url = PicasaUrl.fromRelativePath("feed/api/user/default");
-        //                  // page through results
-        //                  while (true) {
-        //                    UserFeed userFeed = UserFeed.executeGet(transport, url);
-        //                    this.postLink = userFeed.getPostLink();
-        //                    if (userFeed.albums != null) {
-        //                      albums.addAll(userFeed.albums);
-        //                    }
-        //                    String nextLink = userFeed.getNextLink();
-        //                    if (nextLink == null) {
-        //                      break;
-        //                    }
-        //                  }
-        //                  int numAlbums = albums.size();
-        //                  albumNames = new String[numAlbums];
-        //                  for (int i = 0; i < numAlbums; i++) {
-        //                    albumNames[i] = albums.get(i).title;
-        //                  }
-        //                } catch (IOException e) {
-        //                  handleException(e);
-        //                  albumNames = new String[] {e.getMessage()};
-        //                  albums.clear();
-        //                }
-
+        setListAdapter( new SocialUserArrayAdapter( this, R.layout.socialnetworkuser, handler.getGoogleContacts() ) );
     }
 
     @Override
