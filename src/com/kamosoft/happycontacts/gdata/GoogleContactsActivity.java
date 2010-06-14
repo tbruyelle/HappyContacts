@@ -8,6 +8,12 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import org.xml.sax.SAXException;
+
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.ContentResolver;
@@ -45,11 +51,10 @@ import com.google.api.client.xml.atom.AtomParser;
 import com.google.api.data.contacts.v3.GoogleContacts;
 import com.google.api.data.contacts.v3.atom.GoogleContactsAtom;
 import com.google.api.data.picasa.v2.PicasaWebAlbums;
-import com.google.gdata.data.extensions.ContactEntry;
-import com.google.gdata.data.extensions.ContactFeed;
 import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
+import com.kamosoft.happycontacts.facebook.SocialUserArrayAdapter;
 
 /**
  * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
@@ -100,6 +105,7 @@ public class GoogleContactsActivity
         atomParser.namespaceDictionary = GoogleContactsAtom.NAMESPACE_DICTIONARY;
         transport.addParser( atomParser );
         transport.applicationName = APP_NAME;
+        setContentView( R.layout.gcontactlist );
 
         HttpTransport.setLowLevelHttpTransport( ApacheHttpTransport.INSTANCE );
         Intent intent = getIntent();
@@ -473,18 +479,42 @@ public class GoogleContactsActivity
         try
         {
             HttpResponse response = request.execute();
-            ContactFeed contactFeed = response.getParser().parse( response, ContactFeed.class );
 
-            for ( ContactEntry contactEntry : contactFeed.getEntries() )
-            {
-                names.add( contactEntry.getSummary().getPlainText() );
-            }
+            SAXParserFactory saxFactory = SAXParserFactory.newInstance();
+            SAXParser parser = saxFactory.newSAXParser();
+            GoogleContactsHandler handler = new GoogleContactsHandler();
+            parser.parse( response.getContent(), handler );
+
+            setListAdapter( new SocialUserArrayAdapter( this, R.layout.socialnetworkuser, handler.getGoogleContacts() ) );
+
+            //            TextView xmlContent = (TextView) findViewById( R.id.xmlcontent );
+            //            xmlContent.setText( content );
+
+            //            ContactFeed contactFeed = response.getParser().parse( response, ContactFeed.class );
+            //
+            //            for ( ContactEntry contactEntry : contactFeed.getEntries() )
+            //            {
+            //                if ( Log.DEBUG )
+            //                {
+            //                    Log.d( "processing " + contactEntry.getTitle().getPlainText() + " summary="
+            //                        + contactEntry.getSummary().getPlainText() );
+            //                }
+            //
+            //                names.add( contactEntry.getSummary().getPlainText() );
+            //            }
         }
         catch ( IOException e )
         {
             handleException( e );
         }
-
+        catch ( SAXException e )
+        {
+            Log.e( "SaxException", e );
+        }
+        catch ( ParserConfigurationException e )
+        {
+            Log.e( "ParserConfigurationException", e );
+        }
         //                List<AlbumEntry> albums = this.albums;
         //                albums.clear();
         //                try {
@@ -511,7 +541,7 @@ public class GoogleContactsActivity
         //                  albumNames = new String[] {e.getMessage()};
         //                  albums.clear();
         //                }
-        setListAdapter( new ArrayAdapter<String>( this, android.R.layout.simple_list_item_1, names ) );
+
     }
 
     @Override

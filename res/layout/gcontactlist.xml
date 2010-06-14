@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent" android:layout_height="fill_parent"
+  android:orientation="vertical">
+  <TextView android:layout_height="wrap_content"
+    android:layout_width="fill_parent" android:textSize="10dip"
+    android:text="xml content" android:id="@+id/xmlcontent" />
+
+  <TextView android:text="@string/contactlist"
+    android:layout_height="wrap_content" android:layout_width="fill_parent"
+    android:textStyle="bold" android:textColor="#DDDDDD"
+    android:background="#666666" android:padding="4dip"
+    android:layout_marginTop="4dip" />
+  <ListView android:id="@android:id/list"
+    android:layout_width="fill_parent" android:layout_height="wrap_content" />
+</LinearLayout>
