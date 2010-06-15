@@ -57,7 +57,6 @@ public class GoogleContactSync
             Log.v( "GoogleContactSync: Start getContacts" );
         }
         HttpRequest request = mGoogleTransport.buildGetRequest();
-        //TODO mettre une variable et escapé le @       
         request.setUrl( "https://www.google.com/m8/feeds/contacts/default/full" );
         GoogleContactsHandler handler = new GoogleContactsHandler();
         try
