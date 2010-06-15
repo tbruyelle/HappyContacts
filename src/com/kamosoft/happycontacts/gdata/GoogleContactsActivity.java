@@ -190,6 +190,7 @@ public class GoogleContactsActivity
                         authorizeUrl.temporaryToken = credentials.token;
                         Intent webIntent = new Intent( Intent.ACTION_VIEW );
                         webIntent.setData( Uri.parse( authorizeUrl.build() ) );
+                        webIntent.addFlags( Intent.FLAG_ACTIVITY_NO_HISTORY );
                         startActivity( webIntent );
                     }
                     else
@@ -313,7 +314,7 @@ public class GoogleContactsActivity
         }
         if ( users == null )
         {
-            Toast.makeText( this, "Authorization has expired !", Toast.LENGTH_SHORT ).show();
+            Toast.makeText( this, "Authorization has expired !", Toast.LENGTH_LONG ).show();
             mProgressDialog.dismiss();
             gotAccount( true );
         }

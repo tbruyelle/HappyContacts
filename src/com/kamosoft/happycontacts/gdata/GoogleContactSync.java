@@ -13,7 +13,6 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.SAXException;
 
-import android.accounts.AccountManager;
 import android.os.AsyncTask;
 
 import com.google.api.client.googleapis.GoogleTransport;

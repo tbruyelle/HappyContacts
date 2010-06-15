@@ -51,7 +51,7 @@
     <activity android:name=".birthday.BirthdayActivity"></activity>
     <activity android:name=".birthday.PickBirthdayActivity"></activity>
 
-    <activity android:name=".gdata.GoogleContactsActivity">
+    <activity android:name=".gdata.GoogleContactsActivity" android:clearTaskOnLaunch="true">
       <intent-filter>
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
