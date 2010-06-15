@@ -13,7 +13,7 @@ import java.util.Locale;
  * @version $Id$
  */
 public interface Constants
-{    
+{
     public static final String FACEBOOK_API_KEY = "8e9a98e18c9e1c174e6c8904d9ed350e";
 
     public static final String FACEBOOK_SECRET_API_KEY = "6ad543258350e403b907878a8f4b5308";
@@ -83,6 +83,11 @@ public interface Constants
     public static final SimpleDateFormat FB_birthdayFull = new SimpleDateFormat( "MMMM dd, yyyy", Locale.ENGLISH );
 
     public static final SimpleDateFormat FB_birthdaySmall = new SimpleDateFormat( "MMMM dd", Locale.ENGLISH );
+
+    public static final SimpleDateFormat GoogleContact_birthdayFull =
+        new SimpleDateFormat( "yyyy-MM-dd", Locale.ENGLISH );
+
+    public static final SimpleDateFormat GoogleContact_birthdaySmall = new SimpleDateFormat( "--MM-dd", Locale.ENGLISH );
 
     public static final SimpleDateFormat dayDateFormat = new SimpleDateFormat( DAY_FORMAT );
 

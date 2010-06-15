@@ -3,9 +3,7 @@
  */
 package com.kamosoft.happycontacts.facebook;
 
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
@@ -18,7 +16,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,9 +27,10 @@ import android.widget.Toast;
 import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
-import com.kamosoft.happycontacts.birthday.BirthdayActivity;
 import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.model.SocialNetworkUser;
+import com.kamosoft.happycontacts.sync.StoreAsyncTask;
+import com.kamosoft.happycontacts.sync.SyncStorer;
 
 /**
  * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
@@ -42,7 +40,7 @@ import com.kamosoft.happycontacts.model.SocialNetworkUser;
  */
 public class FacebookActivity
     extends ListActivity
-    implements Constants, android.content.DialogInterface.OnClickListener
+    implements Constants, android.content.DialogInterface.OnClickListener, SyncStorer
 {
     private static final int START_SYNC_MENU_ID = Menu.FIRST;
 
@@ -293,112 +291,15 @@ public class FacebookActivity
         return session_key != null && secret != null && uid != null;
     }
 
-    private class StoreAsyncTask
-        extends AsyncTask<Void, Integer, Void>
-    {
-        private int counter;
-
-        private boolean update;
-
-        public StoreAsyncTask( boolean update )
-        {
-            this.update = update;
-            this.counter = 0;
-        }
-
-        /**
-         * @see android.os.AsyncTask#doInBackground(Params[])
-         */
-        @Override
-        protected Void doInBackground( Void... voids )
-        {
-            for ( SocialNetworkUser user : mUserList )
-            {
-                if ( user.birthday == null || user.getContactName() == null )
-                {
-                    /* we don't store if no birthday, not linked to a contact or has already a birthday*/
-                    continue;
-                }
-                boolean hasBirthday = mDb.hasBirthday( user.getContactId() );
-                if ( !update && hasBirthday )
-                {
-                    /* we don't store if update option is off and if contact has already a birthday */
-                    continue;
-                }
-                publishProgress( ++counter );
-                /* facebook birthday date has format MMMM dd, yyyy or MMMM dd */
-                String birthday = null, birthyear = null;
-                try
-                {
-                    Date date = FB_birthdayFull.parse( user.birthday );
-                    birthday = dayDateFormat.format( date );
-                    birthyear = yearDateFormat.format( date );
-                }
-                catch ( ParseException e )
-                {
-                    try
-                    {
-                        Date date = FB_birthdaySmall.parse( user.birthday );
-                        birthday = dayDateFormat.format( date );
-                        birthyear = null;
-                    }
-                    catch ( ParseException e1 )
-                    {
-                        Log.e( "unable to parse date " + user.birthday );
-                        continue;
-                    }
-                }
-                if ( hasBirthday && update )
-                {
-                    if ( !mDb.updateBirthday( user.getContactId(), user.getContactName(), birthday, birthyear ) )
-                    {
-                        Log.e( "Error while updating birthday " + user.toString() );
-                    }
-                }
-                else
-                {
-                    if ( mDb.insertBirthday( user.getContactId(), user.getContactName(), birthday, birthyear ) == -1 )
-                    {
-                        Log.e( "Error while inserting birthday " + user.toString() );
-                    }
-                }
-            }
-            return null;
-        }
-
-        /**
-         * @see android.os.AsyncTask#onProgressUpdate(Progress[])
-         */
-        @Override
-        protected void onProgressUpdate( Integer... values )
-        {
-            mProgressDialog.setMessage( FacebookActivity.this.getString( R.string.inserting_birthdays, values[0] ) );
-        }
-
-        /**
-         * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
-         */
-        @Override
-        protected void onPostExecute( Void voids )
-        {
-            mProgressDialog.dismiss();
-            Toast.makeText( FacebookActivity.this, getString( R.string.inserting_birthdays_done, counter ),
-                            Toast.LENGTH_SHORT ).show();
-            Intent intent = new Intent( FacebookActivity.this, BirthdayActivity.class );
-            intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
-            startActivity( intent );
-        }
-    }
-
     /**
-     * 
+     * @see com.kamosoft.happycontacts.sync.SyncStorer#store(boolean)
      */
     public void store( boolean update )
     {
         if ( mUserList != null && !mUserList.isEmpty() )
         {
             mProgressDialog = ProgressDialog.show( this, "", getString( R.string.inserting_birthdays, 0 ), true );
-            new StoreAsyncTask( update ).execute();
+            new StoreAsyncTask( update, this, mUserList, mDb, true, mProgressDialog ).execute();
         }
         else
         {
@@ -487,7 +388,7 @@ public class FacebookActivity
                 return builder.create();
 
             case CONFIRM_STORE_DIALOG_ID:
-                return new ConfirmStoreDialog( this );
+                return new ConfirmStoreDialog( this, this );
 
         }
         return null;

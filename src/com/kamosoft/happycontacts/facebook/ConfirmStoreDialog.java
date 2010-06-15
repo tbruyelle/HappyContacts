@@ -4,9 +4,11 @@
 package com.kamosoft.happycontacts.facebook;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 
 import com.kamosoft.happycontacts.R;
+import com.kamosoft.happycontacts.sync.SyncStorer;
 
 /**
  * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
@@ -18,21 +20,21 @@ public class ConfirmStoreDialog
     extends AlertDialog
     implements DialogInterface.OnClickListener
 {
-    private FacebookActivity mFacebookActivity;
+    private SyncStorer mSyncStorer;
 
     /**
      * @param context
      */
-    public ConfirmStoreDialog( FacebookActivity facebookActivity )
+    public ConfirmStoreDialog( Context context, SyncStorer syncStorer )
     {
-        super( facebookActivity );
+        super( context );
 
-        mFacebookActivity = facebookActivity;
-        setMessage( mFacebookActivity.getString( R.string.confirm_store_question ) );
+        mSyncStorer = syncStorer;
+        setMessage( context.getString( R.string.confirm_store_question ) );
 
-        setButton( BUTTON_POSITIVE, mFacebookActivity.getString( R.string.yes ), this );
-        setButton( BUTTON_NEUTRAL, mFacebookActivity.getString( R.string.no ), this );
-        setButton( BUTTON_NEGATIVE, mFacebookActivity.getString( R.string.cancel ), this );
+        setButton( BUTTON_POSITIVE, context.getString( R.string.yes ), this );
+        setButton( BUTTON_NEUTRAL, context.getString( R.string.no ), this );
+        setButton( BUTTON_NEGATIVE, context.getString( R.string.cancel ), this );
     }
 
     /**
@@ -44,12 +46,12 @@ public class ConfirmStoreDialog
         switch ( which )
         {
             case BUTTON_POSITIVE:
-                mFacebookActivity.store( true );
+                mSyncStorer.store( true );
                 this.dismiss();
                 return;
 
             case BUTTON_NEUTRAL:
-                mFacebookActivity.store( false );
+                mSyncStorer.store( false );
                 this.dismiss();
                 return;
 

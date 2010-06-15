@@ -205,6 +205,7 @@ public final class R {
         public static final int linked_to=0x7f060091;
         public static final int loading_data=0x7f060027;
         public static final int loading_friends=0x7f060075;
+        public static final int loading_googlecontacts=0x7f06009a;
         public static final int login_authorization=0x7f06005e;
         public static final int login_thankyou=0x7f06005c;
         public static final int logout=0x7f06008e;

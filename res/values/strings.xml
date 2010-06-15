@@ -158,4 +158,5 @@
 <string name="sync_googlecontacts">Sync with Google Contacts</string>
 <string name="sync_google_counter">birthday(s) retrieved from Google Contacts</string>
 <string name="google_birthdaylist">Birthdays list of Google Contacts</string>
+<string name="loading_googlecontacts">Retrieving Google contacts, please wait...</string>
 </resources>
