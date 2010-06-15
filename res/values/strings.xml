@@ -95,7 +95,7 @@
 <string name="can_match_normally">%s can already be matched to name-day %s, so it\'s useless to add this link to the white list.</string>
 <string name="link_other">Link an other</string>
 <string name="pref_birthday">Birthdays</string>
-<string name="pref_birthday_summary">Retrieve all your friends\' birthday from Facebook</string>
+<string name="pref_birthday_summary">Retrieve all your friends\' birthday from Google Contacts or Facebook</string>
 <string name="login_thankyou">You\'re now logged to Facebook</string>
 <string name="facebooklogin_urlError">Error when trying to connect to Facebook</string>
 <string name="login_authorization">Please wait while verifying application authorization...</string>
@@ -156,7 +156,7 @@
 <string name="socialuserdialog_title">Modify sync</string>
 <string name="toast_events">There is some events today ! Check the notification bar on top</string>
 <string name="sync_googlecontacts">Sync with Google Contacts</string>
-<string name="sync_google_counter">birthday(s) retrieved from Google Contacts</string>
-<string name="google_birthdaylist">Birthdays list of Google Contacts</string>
+<string name="sync_google_counter">contact(s) with birthday retrieved from Google Contacts</string>
+<string name="google_birthdaylist">Google Contacts list</string>
 <string name="loading_googlecontacts">Retrieving Google contacts, please wait...</string>
 </resources>

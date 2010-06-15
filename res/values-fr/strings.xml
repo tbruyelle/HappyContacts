@@ -92,7 +92,7 @@
 <string name="link_other">Associer un autre</string>
 
 <string name="pref_birthday">Anniversaires</string>
-<string name="pref_birthday_summary">Récupèrer les anniversaires de vos amis depuis Facebook</string>
+<string name="pref_birthday_summary">Récupèrer les anniversaires de vos amis depuis Google Contacts ou Facebook</string>
 <string name="login_thankyou">Vous êtes maintenant connecté à Facebook</string>
 <string name="facebooklogin_urlError">Erreur pendant la tentative de connexion à Facebook</string>
 <string name="login_authorization">Merci de patienter pendant la vérification des autorisations de l\'application...</string>
@@ -152,5 +152,8 @@
 <string name="confirm_store_question">Voulez-vous mettre-à-jour les anniversaires existants avec ces résultats ?</string>
 <string name="socialuserdialog_title">Modification synchro</string>
 <string name="toast_events">Il y a des évènements aujourd\'hui ! Regardez dans la barre de notification</string>
-
+<string name="sync_googlecontacts">Synchro avec Google Contacts</string>
+<string name="sync_google_counter">contact(s) avec anniversaire récupéré(s) depuis Google Contacts</string>
+<string name="google_birthdaylist">Liste des contacts Google</string>
+<string name="loading_googlecontacts">Retrieving Google contacts, please wait...</string>
 </resources>
