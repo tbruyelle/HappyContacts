@@ -13,6 +13,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.SAXException;
 
+import android.accounts.AccountManager;
 import android.os.AsyncTask;
 
 import com.google.api.client.googleapis.GoogleTransport;
@@ -57,7 +58,7 @@ public class GoogleContactSync
         }
         HttpRequest request = mGoogleTransport.buildGetRequest();
         //TODO mettre une variable et escapé le @       
-        request.setUrl( "https://www.google.com/m8/feeds/contacts/thomas.bruyelle%40gmail.com/full" );
+        request.setUrl( "https://www.google.com/m8/feeds/contacts/default/full" );
         GoogleContactsHandler handler = new GoogleContactsHandler();
         try
         {
