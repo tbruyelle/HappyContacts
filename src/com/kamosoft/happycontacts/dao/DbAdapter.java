@@ -33,6 +33,9 @@ public class DbAdapter
     private SQLiteDatabase mDb;
 
     private final Context mCtx;
+    
+    /* use -1000 value for uid to distinguish from facebook sync result */
+    public static final String GOOGLE_CONTACT_UID = "-1000";
 
     private static class DatabaseHelper
         extends SQLiteOpenHelper
@@ -402,11 +405,21 @@ public class DbAdapter
         return mDb.delete( HappyContactsDb.Birthday.TABLE_NAME, null, null ) > 0;
     }
 
+    public ArrayList<SocialNetworkUser> fetchFacebookSyncResults()
+    {
+        return fetchSyncResults( HappyContactsDb.SyncResult.USER_ID + "!=" + GOOGLE_CONTACT_UID + "" );
+    }
+
+    public ArrayList<SocialNetworkUser> fetchGoogleSyncResults()
+    {
+        return fetchSyncResults( HappyContactsDb.SyncResult.USER_ID + "=" + GOOGLE_CONTACT_UID + "" );
+    }
+
     /**
      * Return the sync results
      * @return
      */
-    public ArrayList<SocialNetworkUser> fetchAllSyncResults()
+    private ArrayList<SocialNetworkUser> fetchSyncResults( String whereClause )
     {
         if ( Log.DEBUG )
         {
@@ -414,8 +427,8 @@ public class DbAdapter
         }
         /* use order by name */
         Cursor cursor =
-            mDb.query( HappyContactsDb.SyncResult.TABLE_NAME, HappyContactsDb.SyncResult.COLUMNS, null, null, null,
-                       null, HappyContactsDb.SyncResult.USER_NAME );
+            mDb.query( HappyContactsDb.SyncResult.TABLE_NAME, HappyContactsDb.SyncResult.COLUMNS, whereClause, null,
+                       null, null, HappyContactsDb.SyncResult.USER_NAME );
 
         int userIdColumnId = cursor.getColumnIndexOrThrow( HappyContactsDb.SyncResult.USER_ID );
         int userNameColumnId = cursor.getColumnIndexOrThrow( HappyContactsDb.SyncResult.USER_NAME );
@@ -449,13 +462,24 @@ public class DbAdapter
         return userList;
     }
 
-    public boolean deleteAllSyncResults()
+    public boolean deleteFacebookSyncResults()
     {
         if ( Log.DEBUG )
         {
             Log.v( "DbAdapter: call deleteAllSyncResults()" );
         }
-        return mDb.delete( HappyContactsDb.SyncResult.TABLE_NAME, null, null ) > 0;
+        return mDb.delete( HappyContactsDb.SyncResult.TABLE_NAME, HappyContactsDb.SyncResult.USER_ID + "!="
+            + GOOGLE_CONTACT_UID + "", null ) > 0;
+    }
+
+    public boolean deleteGoogleSyncResults()
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: call deleteAllSyncResults()" );
+        }
+        return mDb.delete( HappyContactsDb.SyncResult.TABLE_NAME, HappyContactsDb.SyncResult.USER_ID + "="
+            + GOOGLE_CONTACT_UID + "", null ) > 0;
     }
 
     public boolean updateSyncResult( SocialNetworkUser user )
@@ -474,19 +498,37 @@ public class DbAdapter
             + "=" + user.uid + "", null ) > 0;
     }
 
-    public boolean insertSyncResults( List<SocialNetworkUser> users )
+    public boolean insertFacebookSyncResults( List<SocialNetworkUser> users )
+    {
+        return insertSyncResults( users, true );
+    }
+
+    public boolean insertGoogleSyncResults( List<SocialNetworkUser> users )
+    {
+        return insertSyncResults( users, false );
+    }
+
+    private boolean insertSyncResults( List<SocialNetworkUser> users, boolean fromFaceBook )
     {
         if ( Log.DEBUG )
         {
             Log.v( "DbAdapter: start insertSyncResults" );
         }
         /* delete all previous sync results */
-        deleteAllSyncResults();
+        if ( fromFaceBook )
+        {
+            deleteFacebookSyncResults();
+        }
+        else
+        {
+            deleteGoogleSyncResults();
+        }
         boolean res = false;
         for ( SocialNetworkUser user : users )
         {
             ContentValues initialValues = new ContentValues();
-            initialValues.put( HappyContactsDb.SyncResult.USER_ID, user.uid );
+            initialValues.put( HappyContactsDb.SyncResult.USER_ID, fromFaceBook ? user.uid
+                            : GOOGLE_CONTACT_UID );
             initialValues.put( HappyContactsDb.SyncResult.USER_NAME, user.name );
             initialValues.put( HappyContactsDb.SyncResult.BIRTHDAY_DATE, user.birthday );
             initialValues.put( HappyContactsDb.SyncResult.CONTACT_ID, user.getContactId() );

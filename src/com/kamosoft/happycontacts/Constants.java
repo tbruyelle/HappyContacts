@@ -13,7 +13,7 @@ import java.util.Locale;
  * @version $Id$
  */
 public interface Constants
-{
+{    
     public static final String FACEBOOK_API_KEY = "8e9a98e18c9e1c174e6c8904d9ed350e";
 
     public static final String FACEBOOK_SECRET_API_KEY = "6ad543258350e403b907878a8f4b5308";

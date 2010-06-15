@@ -85,7 +85,7 @@ public class FacebookActivity
             Log.v( "FaceBookActivity: onCreate()  start" );
         }
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.facebook_sync );        
+        setContentView( R.layout.facebook_sync );
 
         mDb = new DbAdapter( this );
 
@@ -103,7 +103,7 @@ public class FacebookActivity
             Log.v( "FaceBookActivity: start onResume" );
         }
         super.onResume();
-        
+
         mSyncCounter = (TextView) findViewById( R.id.sync_counter );
 
         mDb.open( false );
@@ -218,7 +218,7 @@ public class FacebookActivity
                 getIntent().removeExtra( CONTACTNAME_INTENT_KEY );
             }
         }
-        mUserList = mDb.fetchAllSyncResults();
+        mUserList = mDb.fetchFacebookSyncResults();
         mSyncCounter.setText( String.valueOf( mUserList.size() ) );
 
         mArrayAdapter = new SocialUserArrayAdapter( this, R.layout.socialnetworkuser, mUserList );
@@ -243,7 +243,7 @@ public class FacebookActivity
         else
         {
             /* record results in database */
-            mDb.insertSyncResults( users );
+            mDb.insertFacebookSyncResults( users );
             mProgressDialog.dismiss();
             fillList();
         }
@@ -505,7 +505,7 @@ public class FacebookActivity
                 dialog.dismiss();
                 return;
             case DialogInterface.BUTTON_POSITIVE:
-                mDb.deleteAllSyncResults();
+                mDb.deleteFacebookSyncResults();
                 fillList();
                 return;
         }
