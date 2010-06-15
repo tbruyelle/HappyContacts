@@ -100,7 +100,6 @@ public class PickBirthdayActivity
     /**
      * @see android.view.View.OnClickListener#onClick(android.view.View)
      */
-    @Override
     public void onClick( View view )
     {
         mDatePicker.clearFocus();

@@ -42,7 +42,6 @@ public class EnterNameDialog
         Button buttonOK = (Button) findViewById( R.id.button_name_ok );
         buttonOK.setOnClickListener( new View.OnClickListener()
         {
-            @Override
             public void onClick( View view )
             {
                 Intent intent = new Intent( mContext, DateListActivity.class );
@@ -53,7 +52,6 @@ public class EnterNameDialog
         Button buttonCancel = (Button) findViewById( R.id.button_name_cancel );
         buttonCancel.setOnClickListener( new View.OnClickListener()
         {
-            @Override
             public void onClick( View view )
             {
                 EnterNameDialog.this.cancel();

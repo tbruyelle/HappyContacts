@@ -440,7 +440,6 @@ public class GoogleContactsActivity
     /**
      * @see android.content.DialogInterface.OnClickListener#onClick(android.content.DialogInterface, int)
      */
-    @Override
     public void onClick( DialogInterface dialog, int which )
     {
         switch ( which )

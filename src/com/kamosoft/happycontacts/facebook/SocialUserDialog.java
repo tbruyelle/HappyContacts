@@ -96,7 +96,6 @@ public class SocialUserDialog
     /**
      * @see android.view.View.OnClickListener#onClick(android.view.View)
      */
-    @Override
     public void onClick( View view )
     {
         switch ( view.getId() )

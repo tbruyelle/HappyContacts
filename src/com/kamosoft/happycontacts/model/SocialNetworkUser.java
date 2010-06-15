@@ -11,6 +11,7 @@ import java.io.Serializable;
  * @since 21 avr. 2010
  * @version $Id$
  */
+@SuppressWarnings("serial")
 public final class SocialNetworkUser
     implements Serializable
 {

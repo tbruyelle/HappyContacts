@@ -124,7 +124,6 @@ public abstract class DateNameListOptionsMenu
     /**
      * @see android.app.DatePickerDialog.OnDateSetListener#onDateSet(android.widget.DatePicker, int, int, int)
      */
-    @Override
     public void onDateSet( DatePicker arg0, int year, int monthOfYear, int dayOfMonth )
     {
         Calendar cal = Calendar.getInstance();

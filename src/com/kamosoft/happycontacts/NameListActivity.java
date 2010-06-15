@@ -38,7 +38,6 @@ public class NameListActivity
 
     private SimpleDateFormat df = new SimpleDateFormat( "dd/MM" );
 
-    @Override
     public void onClick( View v )
     {
         switch ( v.getId() )

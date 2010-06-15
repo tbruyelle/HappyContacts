@@ -28,7 +28,6 @@ public class AboutDialog
         Button ok = (Button) findViewById( R.id.ok_button );
         ok.setOnClickListener( new View.OnClickListener()
         {
-            @Override
             public void onClick( View v )
             {
                 AboutDialog.this.dismiss();

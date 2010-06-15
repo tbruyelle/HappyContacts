@@ -206,7 +206,6 @@ public class ReminderPopupActivity
                 builder.setItems( mCurrentContactFeast.getPhones().toArray( new String[] {} ),
                                   new DialogInterface.OnClickListener()
                                   {
-                                      @Override
                                       public void onClick( DialogInterface dialog, int item )
                                       {
                                           composeTel( mCurrentContactFeast.getPhones().get( item ) );
@@ -222,8 +221,6 @@ public class ReminderPopupActivity
                 builder.setItems( mCurrentContactFeast.getPhones().toArray( new String[] {} ),
                                   new DialogInterface.OnClickListener()
                                   {
-
-                                      @Override
                                       public void onClick( DialogInterface dialog, int item )
                                       {
                                           composeSms( mCurrentContactFeast.getPhones().get( item ) );
@@ -238,8 +235,6 @@ public class ReminderPopupActivity
                 builder.setItems( mCurrentContactFeast.getEmails().toArray( new String[] {} ),
                                   new DialogInterface.OnClickListener()
                                   {
-
-                                      @Override
                                       public void onClick( DialogInterface dialog, int item )
                                       {
                                           composeMail( mCurrentContactFeast.getEmails().get( item ) );

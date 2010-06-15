@@ -21,7 +21,6 @@ public class ProgressDialogHandler
 
     private final Runnable shower = new Runnable()
     {
-        @Override
         public void run()
         {
             mProgressDialog.show();
@@ -30,7 +29,6 @@ public class ProgressDialogHandler
 
     private final Runnable dissmisser = new Runnable()
     {
-        @Override
         public void run()
         {
             mProgressDialog.dismiss();

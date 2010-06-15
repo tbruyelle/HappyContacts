@@ -181,7 +181,6 @@ public class PickNameDayListActivity
     /**
      * @see android.text.TextWatcher#afterTextChanged(android.text.Editable)
      */
-    @Override
     public void afterTextChanged( Editable arg0 )
     {
         //nothing
@@ -190,7 +189,6 @@ public class PickNameDayListActivity
     /**
      * @see android.text.TextWatcher#beforeTextChanged(java.lang.CharSequence, int, int, int)
      */
-    @Override
     public void beforeTextChanged( CharSequence arg0, int arg1, int arg2, int arg3 )
     {
         //nothing
@@ -199,7 +197,6 @@ public class PickNameDayListActivity
     /**
      * @see android.text.TextWatcher#onTextChanged(java.lang.CharSequence, int, int, int)
      */
-    @Override
     public void onTextChanged( CharSequence arg0, int arg1, int arg2, int arg3 )
     {
         String text = mEditText.getText().toString();
@@ -209,7 +206,6 @@ public class PickNameDayListActivity
     /**
      * @see android.content.DialogInterface.OnClickListener#onClick(android.content.DialogInterface, int)
      */
-    @Override
     public void onClick( DialogInterface dialog, int id )
     {
         switch ( id )

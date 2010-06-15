@@ -120,7 +120,6 @@ public class WhiteListActivity
         builder.create().show();
     }
 
-    @Override
     public void onClick( View v )
     {
         Intent intent = new Intent( this, PickContactsListActivity.class );
@@ -138,7 +137,6 @@ public class WhiteListActivity
     /**
      * @see android.content.DialogInterface.OnClickListener#onClick(android.content.DialogInterface, int)
      */
-    @Override
     public void onClick( DialogInterface dialog, int which )
     {
         switch ( which )

@@ -115,7 +115,6 @@ public class HappyContactsPreferences
     /**
      * @see android.app.TimePickerDialog.OnTimeSetListener#onTimeSet(android.widget.TimePicker, int, int)
      */
-    @Override
     public void onTimeSet( TimePicker view, int hourOfDay, int minute )
     {
         mAlarmHour = hourOfDay;
@@ -239,7 +238,6 @@ public class HappyContactsPreferences
         checkNameDayPref.setSummary( R.string.pref_check_name_days_summary );
         checkNameDayPref.setOnPreferenceClickListener( new OnPreferenceClickListener()
         {
-            @Override
             public boolean onPreferenceClick( Preference arg0 )
             {
                 DayMatcherService.displayDayMatch( HappyContactsPreferences.this );
@@ -311,7 +309,6 @@ public class HappyContactsPreferences
         aboutPref.setTitle( R.string.about );
         aboutPref.setOnPreferenceClickListener( new OnPreferenceClickListener()
         {
-            @Override
             public boolean onPreferenceClick( Preference arg0 )
             {
                 new AboutDialog( HappyContactsPreferences.this ).show();
