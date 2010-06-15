@@ -235,8 +235,8 @@ public class BirthdayActivity
     public boolean onCreateOptionsMenu( Menu menu )
     {
         super.onCreateOptionsMenu( menu );
-        menu.add( 0, SYNC_FACEBOOK_MENU_ID, 0, R.string.sync_facebook ).setIcon( R.drawable.fb );
         menu.add( 0, SYNC_GOOGLE_CONTACTS_ID, 0, R.string.sync_googlecontacts ).setIcon( R.drawable.googlecontacts );
+        menu.add( 0, SYNC_FACEBOOK_MENU_ID, 0, R.string.sync_facebook ).setIcon( R.drawable.fb );        
         menu.add( 0, ADD_BIRTHDAY_MENU_ID, 0, R.string.add_birthday ).setIcon( R.drawable.ic_menu_add );
         menu.add( 0, DELETEALL_MENU_ID, 0, R.string.deleteall ).setIcon( R.drawable.ic_menu_delete );
         return true;
