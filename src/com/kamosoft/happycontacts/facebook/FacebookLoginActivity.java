@@ -176,7 +176,8 @@ public class FacebookLoginActivity
             catch ( Exception ex )
             {
                 Toast.makeText( activity.getApplicationContext(), R.string.facebooklogin_urlError, Toast.LENGTH_LONG ).show();
-                android.util.Log.getStackTraceString( ex );
+                Log.e("Exception during FaceBookLoginActivity.onPageStart()");
+                Log.e(android.util.Log.getStackTraceString( ex ));                
             }
         }
 
