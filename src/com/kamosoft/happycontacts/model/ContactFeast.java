@@ -40,6 +40,14 @@ public class ContactFeast
         this.contactName = contactName;
     }
 
+    @Override
+    public String toString()
+    {
+        return "ContactFeast [birthdayDate=" + birthdayDate + ", birthdayYear=" + birthdayYear + ", contactId="
+            + contactId + ", contactName=" + contactName + ", emails=" + emails + ", nameDay=" + nameDay + ", phones="
+            + phones + "]";
+    }
+
     public boolean isContactable()
     {
         return ( hasEmail() || hasPhone() );

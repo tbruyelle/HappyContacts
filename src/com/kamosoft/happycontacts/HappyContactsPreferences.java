@@ -25,6 +25,7 @@ import com.kamosoft.happycontacts.alarm.AlarmController;
 import com.kamosoft.happycontacts.birthday.BirthdayActivity;
 import com.kamosoft.happycontacts.blacklist.BlackListActivity;
 import com.kamosoft.happycontacts.dao.DbAdapter;
+import com.kamosoft.happycontacts.events.NextEventsActivity;
 import com.kamosoft.happycontacts.template.MailTemplateActivity;
 import com.kamosoft.happycontacts.template.SmsTemplateActivity;
 import com.kamosoft.utils.AndroidUtils;
@@ -103,8 +104,8 @@ public class HappyContactsPreferences
         switch ( id )
         {
             case TIME_DIALOG_ID:
-                dialog =
-                    new TimePickerDialog( HappyContactsPreferences.this, this, 0, 0, DateFormat.is24HourFormat( this ) );
+                dialog = new TimePickerDialog( HappyContactsPreferences.this, this, 0, 0, DateFormat
+                    .is24HourFormat( this ) );
                 break;
             default:
                 dialog = null;
@@ -124,7 +125,8 @@ public class HappyContactsPreferences
         editor.putInt( PREF_ALARM_HOUR, mAlarmHour );
         editor.putInt( PREF_ALARM_MINUTE, mAlarmMinute );
         editor.commit();
-        mAlarmTimePref.setSummary( getString( R.string.pref_time_summary, AndroidUtils.pad( mAlarmHour, mAlarmMinute ) ) );
+        mAlarmTimePref
+            .setSummary( getString( R.string.pref_time_summary, AndroidUtils.pad( mAlarmHour, mAlarmMinute ) ) );
 
         /* start the alarm */
         mAlarmStatePref.setSummary( R.string.pref_alarm_on );
@@ -221,7 +223,8 @@ public class HappyContactsPreferences
         Preference alarmTimePref = new Preference( this );
         mAlarmTimePref = alarmTimePref;
         alarmTimePref.setTitle( R.string.pref_time );
-        alarmTimePref.setSummary( getString( R.string.pref_time_summary, AndroidUtils.pad( mAlarmHour, mAlarmMinute ) ) );
+        alarmTimePref
+            .setSummary( getString( R.string.pref_time_summary, AndroidUtils.pad( mAlarmHour, mAlarmMinute ) ) );
         alarmTimePref.setOnPreferenceClickListener( new Preference.OnPreferenceClickListener()
         {
             public boolean onPreferenceClick( Preference preference )
@@ -231,7 +234,7 @@ public class HappyContactsPreferences
             }
         } );
         root.addItemFromInflater( alarmTimePref );
-        
+
         /* check todays events */
         Preference checkNameDayPref = new Preference( this );
         checkNameDayPref.setTitle( R.string.pref_check_name_days );
@@ -246,6 +249,13 @@ public class HappyContactsPreferences
         } );
         root.addItemFromInflater( checkNameDayPref );
 
+        /* upcoming events */
+        Preference nextEvents = new Preference( this );
+        nextEvents.setTitle( R.string.pref_nextevents );
+        nextEvents.setSummary( R.string.pref_nextevents_summary );
+        nextEvents.setIntent( new Intent( this, NextEventsActivity.class ) );
+        root.addPreference( nextEvents );
+
         /* database category */
         PreferenceCategory databasePrefCat = new PreferenceCategory( this );
         databasePrefCat.setTitle( R.string.pref_data_cat );
@@ -256,7 +266,7 @@ public class HappyContactsPreferences
         fbConnectPref.setTitle( R.string.pref_birthday );
         fbConnectPref.setSummary( R.string.pref_birthday_summary );
         fbConnectPref.setIntent( new Intent( this, BirthdayActivity.class ) );
-        databasePrefCat.addPreference( fbConnectPref );        
+        databasePrefCat.addPreference( fbConnectPref );
 
         /* name days list */
         Preference nameListPref = new Preference( this );

@@ -162,4 +162,8 @@
 <string name="nextevents_counter">upcoming event(s)</string>
 <string name="nexteventslist">Upcoming events list</string>
 <string name="no_nextevents">No upcoming events</string>
+<string name="birthday_of">Birthday of </string>
+<string name="nameday_of">Nameday of </string>
+<string name="pref_nextevents">Upcoming events</string>
+<string name="pref_nextevents_summary">Show the list of the next upcoming events</string>
 </resources>
