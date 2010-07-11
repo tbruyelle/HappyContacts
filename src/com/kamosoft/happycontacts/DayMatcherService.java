@@ -122,7 +122,7 @@ public class DayMatcherService
         /*
          * Look for names matching today date
          */
-        ContactFeasts contactFeastsToday = new ContactFeasts( day );
+        ContactFeasts contactFeastsToday = new ContactFeasts();
 
         checkNameDays( context, mDb, contactFeastsToday, day, fullDate );
 
@@ -151,7 +151,7 @@ public class DayMatcherService
      * @param day
      * @param fullDate
      */
-    private static void checkBirthdays( Context context, DbAdapter mDb, ContactFeasts contactFeastsToday, String day,
+    public static void checkBirthdays( Context context, DbAdapter mDb, ContactFeasts contactFeastsToday, String day,
                                         String fullDate )
     {
         if ( Log.DEBUG )
@@ -200,7 +200,7 @@ public class DayMatcherService
         }
     }
 
-    private static void checkNameDays( Context context, DbAdapter mDb, ContactFeasts contactFeastsToday, String day,
+    public static void checkNameDays( Context context, DbAdapter mDb, ContactFeasts contactFeastsToday, String day,
                                        String fullDate )
     {
         if ( Log.DEBUG )
