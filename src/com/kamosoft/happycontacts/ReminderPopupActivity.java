@@ -39,7 +39,7 @@ import com.kamosoft.utils.AndroidUtils;
  */
 public class ReminderPopupActivity
     extends Activity
-    implements Constants
+    implements Constants, DateFormatConstants
 {
     private final int HOW_TO_CONTACT_DIALOG_ID = 1;
 

@@ -30,7 +30,7 @@ import com.kamosoft.utils.AndroidUtils;
  */
 public class DayMatcherService
     extends Service
-    implements Constants
+    implements Constants, DateFormatConstants
 {
     @Override
     public void onCreate()

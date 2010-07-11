@@ -14,6 +14,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.kamosoft.happycontacts.Constants;
+import com.kamosoft.happycontacts.DateFormatConstants;
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
 import com.kamosoft.happycontacts.birthday.BirthdayActivity;
@@ -28,7 +29,7 @@ import com.kamosoft.happycontacts.model.SocialNetworkUser;
  */
 public class StoreAsyncTask
     extends AsyncTask<Void, Integer, Void>
-    implements Constants
+    implements Constants, DateFormatConstants
 {
     private int counter;
 

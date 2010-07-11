@@ -36,7 +36,7 @@ import com.kamosoft.utils.ProgressDialogHandler;
  */
 public class HappyContactsPreferences
     extends PreferenceActivity
-    implements Constants, TimePickerDialog.OnTimeSetListener
+    implements Constants, TimePickerDialog.OnTimeSetListener, DateFormatConstants
 {
     private static final int TIME_DIALOG_ID = 0;
 

@@ -23,7 +23,7 @@ import android.widget.DatePicker;
  */
 public abstract class DateNameListOptionsMenu
     extends ListActivity
-    implements Constants, OnDateSetListener
+    implements Constants, OnDateSetListener, DateFormatConstants
 {
     protected static final int BACK_MENU_ID = Menu.FIRST;
 
