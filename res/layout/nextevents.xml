@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:orientation="horizontal">
+		<TextView android:text="0" android:id="@+id/nextevents_counter"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:textSize="20dip" android:paddingRight="10dip"
+			android:paddingLeft="10dip" android:textColor="#FFFFFF" />
+		<TextView android:text="@string/nextevents_counter"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:textSize="16dip" />
+	</LinearLayout>
+	<TextView android:text="@string/nexteventslist"
+		android:layout_height="wrap_content" android:layout_width="fill_parent"
+		android:textStyle="bold" android:textColor="#DDDDDD"
+		android:background="#666666" android:padding="4dip"
+		android:layout_marginTop="4dip" />
+	<ListView android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:id="@android:id/list" />
+	<TextView android:id="@android:id/empty" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:text="@string/no_nextevents"
+		android:layout_gravity="center" android:paddingTop="5dip" />
+</LinearLayout>

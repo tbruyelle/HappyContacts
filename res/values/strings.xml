@@ -159,4 +159,7 @@
 <string name="sync_google_counter">contact(s) with birthday retrieved from Google Contacts</string>
 <string name="google_birthdaylist">Google Contacts list</string>
 <string name="loading_googlecontacts">Retrieving Google contacts, please wait...</string>
+<string name="nextevents_counter">upcoming event(s)</string>
+<string name="nexteventslist">Upcoming events list</string>
+<string name="no_nextevents">No upcoming events</string>
 </resources>
