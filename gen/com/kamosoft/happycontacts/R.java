@@ -274,6 +274,7 @@ public final class R {
         public static final int pref_whitelist=0x7f06004c;
         public static final int pref_whitelist_summary=0x7f06004d;
         public static final int reset_button=0x7f06003d;
+        public static final int retrieving_events=0x7f0600a2;
         public static final int sendmail=0x7f060047;
         public static final int sms_birthday_template_text=0x7f060074;
         public static final int sms_template_text=0x7f06003a;

@@ -24,5 +24,4 @@ public interface DateFormatConstants
     public static final SimpleDateFormat fullDateFormat = new SimpleDateFormat( FULL_DATE_FORMAT );
 
     public static final SimpleDateFormat yearDateFormat = new SimpleDateFormat( "yyyy" );
-
 }
