@@ -23,7 +23,6 @@ public class ContactProxy2
     /**
      * @see com.kamosoft.happycontacts.contacts.IContactProxy#getIdColumnIndex()
      */
-    @Override
     public String getIdColumn()
     {
         return ContactsContract.Contacts._ID;
@@ -32,7 +31,6 @@ public class ContactProxy2
     /**
      * @see com.kamosoft.happycontacts.contacts.IContactProxy#getNameColumnIndex()
      */
-    @Override
     public String getNameColumn()
     {
         return ContactsContract.Contacts.DISPLAY_NAME;
@@ -42,7 +40,6 @@ public class ContactProxy2
      * @see com.kamosoft.happycontacts.contacts.ContactProxy#loadContactPhoto(android.content.Context,
      *      java.lang.Long)
      */
-    @Override
     public Bitmap loadContactPhoto( Context context, Long contactId )
     {
         Uri uri = ContentUris.withAppendedId( getContentUri(), contactId );
@@ -60,7 +57,6 @@ public class ContactProxy2
     /**
      * @see com.kamosoft.happycontacts.contacts.ContactProxy#getContentUri()
      */
-    @Override
     public Uri getContentUri()
     {
         return ContactsContract.Contacts.CONTENT_URI;
@@ -70,7 +66,6 @@ public class ContactProxy2
      * @see com.kamosoft.happycontacts.contacts.IContactProxy#getContactEmails(android.content.Context,
      *      java.lang.Long)
      */
-    @Override
     public ArrayList<String> getContactEmails( Context context, Long contactId )
     {
         ArrayList<String> emails = new ArrayList<String>();
@@ -100,7 +95,6 @@ public class ContactProxy2
      * @see com.kamosoft.happycontacts.contacts.IContactProxy#getContactPhones(android.content.Context,
      *      java.lang.Long)
      */
-    @Override
     public ArrayList<String> getContactPhones( Context context, Long contactId )
     {
         ArrayList<String> phones = new ArrayList<String>();
