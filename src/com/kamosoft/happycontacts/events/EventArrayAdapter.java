@@ -4,15 +4,20 @@
 package com.kamosoft.happycontacts.events;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.R;
+import com.kamosoft.happycontacts.contacts.ContactUtils;
 import com.kamosoft.happycontacts.model.ContactFeast;
 
 /**
@@ -21,8 +26,11 @@ import com.kamosoft.happycontacts.model.ContactFeast;
  */
 public class EventArrayAdapter
     extends ArrayAdapter<ContactFeast>
+    implements Constants
 {
     private Context mContext;
+
+    private int mCurrentYear;
 
     /**
      * @param context
@@ -34,6 +42,8 @@ public class EventArrayAdapter
     {
         super( context, textViewResourceId, users );
         mContext = context;
+        Calendar cal = Calendar.getInstance();
+        mCurrentYear = cal.get( Calendar.YEAR );
     }
 
     /**
@@ -57,14 +67,32 @@ public class EventArrayAdapter
             userNameText.setText( user.getContactName() );
 
             TextView eventType = (TextView) view.findViewById( R.id.event_type );
-            if ( user.getBirthdayDate() == null )
+
+            if ( user.getNameDay().equals( BDAY_HINT ) )
             {
-                eventType.setText( R.string.nameday_of );
+                /* its a birthday */
+                if ( user.getBirthdayYear() != null )
+                {
+                    /* year is provided, we can calculate the age */
+                    int birtdayYear = Integer.parseInt( user.getBirthdayYear() );
+                    eventType
+                        .setText( mContext.getString( R.string.age, Integer.valueOf( mCurrentYear - birtdayYear ) ) );
+                }
+                else
+                {
+                    eventType.setText( R.string.age_unknow );
+                }
             }
             else
             {
-                eventType.setText( R.string.birthday_of );
+                /* its a nameday */
+                eventType.setText( mContext.getString( R.string.nameday, user.getNameDay() ) );
             }
+            /* photo */
+            Bitmap photo = ContactUtils.loadContactPhoto( mContext, user.getContactId() );
+            ImageView imageView = (ImageView) view.findViewById( R.id.contact_photo );
+            imageView.setBackgroundResource( android.R.drawable.picture_frame );
+            imageView.setImageBitmap( photo );
         }
         return view;
     }

@@ -6,6 +6,7 @@ package com.kamosoft.happycontacts.events;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.commonsware.android.listview.SectionedAdapter;
 import com.kamosoft.happycontacts.Constants;
@@ -24,13 +25,15 @@ public class NextEventsActivity
     extends ListActivity
     implements DateFormatConstants, Constants
 {
-    private static final int dayLimit = 10;
+    private static final int dayLimit = 15;
 
     private DbAdapter mDb;
 
     private SectionedAdapter mSectionedAdapter;
 
     private ProgressDialog mProgressDialog;
+
+    private TextView mEventCounter;
 
     /** Called when the activity is first created. */
     @Override
@@ -44,6 +47,7 @@ public class NextEventsActivity
         }
         super.onCreate( savedInstanceState );
         setContentView( R.layout.nextevents );
+        mEventCounter = (TextView) findViewById( R.id.nextevents_counter );
 
         mDb = new DbAdapter( this );
 
@@ -77,10 +81,11 @@ public class NextEventsActivity
         }
     }
 
-    public void finishRetrieveNextEvents( SectionedAdapter adapter )
-    {
-        getProgressDialog().dismiss();
+    public void finishRetrieveNextEvents( EventSectionedAdapter adapter )
+    {       
+        mEventCounter.setText( String.valueOf( adapter.getNbEvents() ) );
         setListAdapter( adapter );
+        getProgressDialog().dismiss();
     }
 
     public ProgressDialog getProgressDialog()

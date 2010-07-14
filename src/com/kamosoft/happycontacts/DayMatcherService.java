@@ -152,7 +152,7 @@ public class DayMatcherService
      * @param fullDate
      */
     public static void checkBirthdays( Context context, DbAdapter mDb, ContactFeasts contactFeastsToday, String day,
-                                        String fullDate )
+                                       String fullDate )
     {
         if ( Log.DEBUG )
         {
@@ -173,8 +173,8 @@ public class DayMatcherService
         while ( cursor.moveToNext() )
         {
             Long contactId = cursor.getLong( cursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.CONTACT_ID ) );
-            String contactName =
-                cursor.getString( cursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.CONTACT_NAME ) );
+            String contactName = cursor
+                .getString( cursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.CONTACT_NAME ) );
             if ( mDb.isBlackListed( contactId, fullDate ) )
             {
                 if ( Log.DEBUG )
@@ -188,8 +188,11 @@ public class DayMatcherService
                 Log.v( "DayMatcher: adding birthday for " + contactName );
             }
             ContactFeast contactFeast = new ContactFeast( BDAY_HINT, contactName );
-            contactFeast.setBirthdayDate( cursor.getString( cursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.BIRTHDAY_DATE ) ) );
-            contactFeast.setBirthdayYear( cursor.getString( cursor.getColumnIndexOrThrow( HappyContactsDb.Birthday.BIRTHDAY_YEAR ) ) );
+            contactFeast.setBirthdayDate( cursor.getString( cursor
+                .getColumnIndexOrThrow( HappyContactsDb.Birthday.BIRTHDAY_DATE ) ) );
+            contactFeast.setBirthdayYear( cursor.getString( cursor
+                .getColumnIndexOrThrow( HappyContactsDb.Birthday.BIRTHDAY_YEAR ) ) );
+            contactFeast.setContactId( contactId );
 
             contactFeastsToday.addContact( contactId, contactFeast );
         }
@@ -201,7 +204,7 @@ public class DayMatcherService
     }
 
     public static void checkNameDays( Context context, DbAdapter mDb, ContactFeasts contactFeastsToday, String day,
-                                       String fullDate )
+                                      String fullDate )
     {
         if ( Log.DEBUG )
         {
@@ -253,8 +256,8 @@ public class DayMatcherService
                         Log.v( "DayMatcher: have found " + whiteListCursor.getCount() + " white listed contacts" );
                     }
                     int contactIdIndex = whiteListCursor.getColumnIndexOrThrow( HappyContactsDb.WhiteList.CONTACT_ID );
-                    int contactNameIndex =
-                        whiteListCursor.getColumnIndexOrThrow( HappyContactsDb.WhiteList.CONTACT_NAME );
+                    int contactNameIndex = whiteListCursor
+                        .getColumnIndexOrThrow( HappyContactsDb.WhiteList.CONTACT_NAME );
                     while ( whiteListCursor.moveToNext() )
                     {
                         Long contactId = whiteListCursor.getLong( contactIdIndex );
@@ -315,6 +318,7 @@ public class DayMatcherService
                         ContactFeast contactFeast = names.get( subName );
                         /* duplicate the contact feast and set the name */
                         ContactFeast newContactFeast = new ContactFeast( contactFeast.getNameDay(), phoneContact.name );
+                        newContactFeast.setContactId( phoneContact.id );
                         contactFeastsToday.addContact( phoneContact.id, newContactFeast );
                     }
                 }

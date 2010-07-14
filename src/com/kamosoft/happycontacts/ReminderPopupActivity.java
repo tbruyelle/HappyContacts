@@ -97,7 +97,6 @@ public class ReminderPopupActivity
         mDate = fullDateFormat.format( date );
 
         Calendar cal = Calendar.getInstance();
-        cal.setTime( date );
         mCurrentYear = cal.get( Calendar.YEAR );
 
         mContactFeasts = DayMatcherService.testDayMatch( this, day, mDate );
@@ -128,8 +127,8 @@ public class ReminderPopupActivity
             /* First dialog which show the available methods to contact */
             case HOW_TO_CONTACT_DIALOG_ID:
                 AlertDialog.Builder builder = new AlertDialog.Builder( this );
-                builder.setTitle( getString( R.string.contact_method_dialog_title,
-                                             mCurrentContactFeast.getContactName() ) );
+                builder.setTitle( getString( R.string.contact_method_dialog_title, mCurrentContactFeast
+                    .getContactName() ) );
 
                 final String[] contactMethods = getResources().getStringArray( R.array.contactmethods_items );
 
@@ -296,7 +295,8 @@ public class ReminderPopupActivity
     {
         if ( mContactFeasts.getContactList().size() > 1 )
         {
-            mFeastCounter.setText( getString( R.string.feast_counter, ++mIndex, mContactFeasts.getContactList().size() ) );
+            mFeastCounter
+                .setText( getString( R.string.feast_counter, ++mIndex, mContactFeasts.getContactList().size() ) );
         }
     }
 
@@ -368,7 +368,7 @@ public class ReminderPopupActivity
         {
             /* its a name day */
             mNameDayTitle.setVisibility( View.VISIBLE );
-            mNameDayTitle.setText( "St " + contactFeast.getNameDay() );
+            mNameDayTitle.setText( getString( R.string.nameday, contactFeast.getNameDay() ) );
             mHappyFeastText.setText( R.string.happyfeast_name );
         }
 
@@ -407,8 +407,8 @@ public class ReminderPopupActivity
                     }
                     Toast.makeText( ReminderPopupActivity.this, R.string.contact_method_not_supported,
                                     Toast.LENGTH_LONG ).show();
-                    Uri displayContactUri =
-                        ContentUris.withAppendedId( ContactUtils.getContentUri(), contactId.intValue() );
+                    Uri displayContactUri = ContentUris.withAppendedId( ContactUtils.getContentUri(), contactId
+                        .intValue() );
                     Intent intent = new Intent( Intent.ACTION_VIEW, displayContactUri );
                     intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
                     startActivity( intent );
@@ -485,8 +485,8 @@ public class ReminderPopupActivity
 
     private void updateCurrentContactFeast()
     {
-        boolean res =
-            mDb.updateContactFeast( mCurrentContactFeast.getContactId(), mCurrentContactFeast.getContactName(), mDate );
+        boolean res = mDb.updateContactFeast( mCurrentContactFeast.getContactId(), mCurrentContactFeast
+            .getContactName(), mDate );
         if ( !res )
         {
             Log.e( "Error insertBlackList with year " + mDate );

@@ -11,11 +11,7 @@ import java.util.Map;
 
 import android.os.AsyncTask;
 import android.text.format.DateFormat;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.commonsware.android.listview.SectionedAdapter;
 import com.kamosoft.happycontacts.DateFormatConstants;
 import com.kamosoft.happycontacts.DayMatcherService;
 import com.kamosoft.happycontacts.Log;
@@ -29,7 +25,7 @@ import com.kamosoft.happycontacts.model.ContactFeasts;
  *
  */
 public class NextEventsAsyncTask
-    extends AsyncTask<Void, String, SectionedAdapter>
+    extends AsyncTask<Void, String, EventSectionedAdapter>
     implements DateFormatConstants
 {
     private NextEventsActivity mActivity;
@@ -46,7 +42,7 @@ public class NextEventsAsyncTask
     }
 
     @Override
-    protected void onPostExecute( SectionedAdapter result )
+    protected void onPostExecute( EventSectionedAdapter result )
     {
         mActivity.finishRetrieveNextEvents( result );
     }
@@ -55,28 +51,14 @@ public class NextEventsAsyncTask
      * @see android.os.AsyncTask#doInBackground(Params[])
      */
     @Override
-    protected SectionedAdapter doInBackground( Void... params )
+    protected EventSectionedAdapter doInBackground( Void... params )
     {
-        SectionedAdapter sectionedAdapter = new SectionedAdapter()
-        {
-            @Override
-            protected View getHeaderView( String caption, int index, View convertView, ViewGroup parent )
-            {
-                TextView result = (TextView) convertView;
+        EventSectionedAdapter sectionedAdapter = new EventSectionedAdapter( mActivity );
 
-                if ( convertView == null )
-                {
-                    result = (TextView) mActivity.getLayoutInflater().inflate( R.layout.event_header, null );
-                }
-
-                result.setText( caption );
-
-                return ( result );
-            }
-        };
         HashMap<Date, ContactFeasts> eventsPerDate = new HashMap<Date, ContactFeasts>();
         Calendar calendar = Calendar.getInstance();
         int inc = 0;
+        int nbEvents = 0;
         while ( inc++ < mDayLimit )
         {
             ContactFeasts contactFeasts = new ContactFeasts();
@@ -99,9 +81,11 @@ public class NextEventsAsyncTask
                     Log.d( "Event retrieved " + entry.toString() );
                 }
                 contacts.add( entry.getValue() );
+               
             }
             if ( !contacts.isEmpty() )
             {
+                nbEvents += contacts.size();
                 EventArrayAdapter eventArrayAdapter = new EventArrayAdapter( mActivity, R.layout.event_element,
                                                                              contacts );
                 sectionedAdapter.addSection( DateFormat.getDateFormat( mActivity ).format( date ), eventArrayAdapter );
@@ -109,6 +93,7 @@ public class NextEventsAsyncTask
 
             calendar.add( Calendar.DAY_OF_YEAR, 1 );
         }
+        sectionedAdapter.setNbEvents( nbEvents );
         return sectionedAdapter;
     }
 
