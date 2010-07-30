@@ -155,5 +155,15 @@
 <string name="sync_googlecontacts">Synchro avec Google Contacts</string>
 <string name="sync_google_counter">contact(s) avec anniversaire récupéré(s) depuis Google Contacts</string>
 <string name="google_birthdaylist">Liste des contacts Google</string>
-<string name="loading_googlecontacts">Retrieving Google contacts, please wait...</string>
+<string name="loading_googlecontacts">Récupération des contacts Google, veuillez patientez...</string>
+<string name="nextevents_counter">évènements à venir</string>
+<string name="nexteventslist">Liste des évènements à venir</string>
+<string name="no_nextevents">Pas d\'évènement à venir</string>
+<string name="nameday">St %s</string>
+<string name="pref_nextevents">Evènements à venir</string>
+<string name="pref_nextevents_summary">Afficher la liste des prochains évènements</string>
+<string name="retrieving_events">Récupération des évènements à venir...</string>
+<string name="today">Aujourd\'hui</string>
+<string name="tomorrow">Demain</string>
+
 </resources>

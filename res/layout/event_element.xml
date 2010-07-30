@@ -5,7 +5,8 @@
 
 	<ImageView android:id="@+id/contact_photo"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:padding="5sp" android:layout_gravity="center" />
+		android:padding="5sp" android:layout_gravity="center" 
+    android:maxWidth="70dip" android:maxHeight="70dip" android:scaleType="fitXY"/>
 
 	<LinearLayout android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:orientation="vertical">

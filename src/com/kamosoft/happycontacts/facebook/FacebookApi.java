@@ -95,7 +95,7 @@ public class FacebookApi
 
         Map<String, String> params = new HashMap<String, String>();
         params.put( "uids", uids );
-        params.put( "fields", "uid,first_name,last_name,name,birthday,pic" );
+        params.put( "fields", "uid,first_name,last_name,name,birthday,birthday_date,pic" );
         FacebookJSONResponse response = (FacebookJSONResponse) client.getData( "Users.getInfo", params );
         //Log.d(null, response.data);
         if ( response == null || response.isError() )
@@ -126,9 +126,11 @@ public class FacebookApi
                 user.getString( "birthday" ).equals( "null" ) || user.getString( "birthday" ) == "" ? null
                                 : user.getString( "birthday" );
 
+            String birthdayDate = user.getString( "birthday_date" );
+
             if ( Log.DEBUG )
             {
-                Log.d( "found FB user " + fbUser.name + ", " + fbUser.birthday );
+                Log.d( "found FB user " + fbUser.name + ", " + fbUser.birthday + ", birthday_date=" + birthdayDate );
             }
 
             list.add( fbUser );

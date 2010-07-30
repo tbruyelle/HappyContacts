@@ -23,7 +23,6 @@ import android.widget.Toast;
 import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
-import com.nloko.simplyfacebook.net.login.FacebookLogin;
 
 /**
  * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>

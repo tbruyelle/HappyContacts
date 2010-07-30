@@ -53,11 +53,11 @@ public class EventSectionedAdapter
             int nbDay = calendarCaption.get( Calendar.DAY_OF_YEAR ) - calendarToday.get( Calendar.DAY_OF_YEAR );
             if ( nbDay == 0 )
             {
-                result.setText( mActivity.getString( R.string.today, caption ) );
+                result.setText( mActivity.getString( R.string.today ) );
             }
             else if ( nbDay == 1 )
             {
-                result.setText( mActivity.getString( R.string.tomorrow, caption ) );
+                result.setText( mActivity.getString( R.string.tomorrow ) );
             }
             else
             {

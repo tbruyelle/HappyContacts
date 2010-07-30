@@ -166,6 +166,6 @@
 <string name="pref_nextevents">Upcoming events</string>
 <string name="pref_nextevents_summary">Show the list of the next upcoming events</string>
 <string name="retrieving_events">Retrieving upcoming events...</string>
-<string name="today">Today %s</string>
-<string name="tomorrow">Tomorow %s</string>
+<string name="today">Today</string>
+<string name="tomorrow">Tomorow</string>
 </resources>
