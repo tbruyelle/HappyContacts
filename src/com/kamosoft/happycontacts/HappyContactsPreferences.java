@@ -255,6 +255,42 @@ public class HappyContactsPreferences
         nextEvents.setSummary( R.string.pref_nextevents_summary );
         nextEvents.setIntent( new Intent( this, NextEventsActivity.class ) );
         root.addPreference( nextEvents );
+        
+        /* disable name days checkbox */
+        Preference disableNameDays=new CheckBoxPreference( this );
+        disableNameDays.setTitle( R.string.pref_disable_nameday );
+
+        if ( mPrefs.getBoolean( PREF_DISABLE_NAMEDAY, false ) )
+        {
+            mAlarmStatePref.setSummary( R.string.pref_disable_nameday_off );
+            mAlarmStatePref.setChecked( false );           
+        }
+        else
+        {
+            mAlarmStatePref.setSummary( R.string.pref_disable_nameday_on );
+            mAlarmStatePref.setChecked( true );           
+        }
+        disableNameDays.setOnPreferenceClickListener( new OnPreferenceClickListener()
+        {
+            public boolean onPreferenceClick( Preference preference )
+            {
+                boolean isChecked = ( (CheckBoxPreference) preference ).isChecked();
+                mPrefs.edit().putBoolean( PREF_DISABLE_NAMEDAY, isChecked ).commit();
+                if ( Log.DEBUG )
+                {
+                    Log.v( "HappyContactsPreferences : disable nameday = " + isChecked );
+                }
+                if ( isChecked )
+                {
+                    preference.setSummary( R.string.pref_disable_nameday_on );
+                }
+                else
+                {
+                    preference.setSummary( R.string.pref_disable_nameday_off );
+                }
+                return true;
+            }
+        });
 
         /* database category */
         PreferenceCategory databasePrefCat = new PreferenceCategory( this );

@@ -44,6 +44,8 @@ public interface Constants
     public static final String PREF_MAIL_BIRTHDAY_BODY_TEMPLATE = "mailBirthdayBodyTemplate";
 
     public static final String PREF_SMS_BIRTHDAY_BODY_TEMPLATE = "smsBirthdaySubjectTemplate";
+    
+    public static final String PREF_DISABLE_NAMEDAY="nameDayStatus";
 
     public static final String BDAY_HINT = "BDAY";
 

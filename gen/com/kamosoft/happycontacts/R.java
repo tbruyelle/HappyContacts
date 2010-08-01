@@ -257,6 +257,9 @@ public final class R {
         public static final int pref_check_name_days=0x7f060042;
         public static final int pref_check_name_days_summary=0x7f060043;
         public static final int pref_data_cat=0x7f060044;
+        public static final int pref_disable_nameday=0x7f0600a4;
+        public static final int pref_disable_nameday_off=0x7f0600a6;
+        public static final int pref_disable_nameday_on=0x7f0600a5;
         public static final int pref_feast_list=0x7f06000f;
         public static final int pref_feast_list_summary=0x7f060011;
         public static final int pref_nextevents=0x7f06009f;
