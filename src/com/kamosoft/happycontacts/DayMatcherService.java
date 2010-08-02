@@ -210,6 +210,14 @@ public class DayMatcherService
         {
             Log.v( "DayMatcher: start check NameDays( )" );
         }
+        if ( context.getSharedPreferences( APP_NAME, 0 ).getBoolean( PREF_DISABLE_NAMEDAY, false ) )
+        {
+            if ( Log.DEBUG )
+            {
+                Log.v( "DayMatcher: namedays are disabled" );
+                return;
+            }
+        }
         Cursor cursor = mDb.fetchNamesForDay( day );
         if ( cursor.getCount() == 0 )
         {

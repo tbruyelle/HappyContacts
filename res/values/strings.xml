@@ -168,4 +168,9 @@
 <string name="retrieving_events">Retrieving upcoming events...</string>
 <string name="today">Today</string>
 <string name="tomorrow">Tomorow</string>
+<string name="today">Today %s</string>
+<string name="tomorrow">Tomorow %s</string>
+<string name="pref_disable_nameday">Disable namedays</string>
+<string name="pref_disable_nameday_on">Namedays are disabled</string>
+<string name="pref_disable_nameday_off">Namedays are enabled</string>
 </resources>
