@@ -215,8 +215,8 @@ public class DayMatcherService
             if ( Log.DEBUG )
             {
                 Log.v( "DayMatcher: namedays are disabled" );
-                return;
             }
+            return;
         }
         Cursor cursor = mDb.fetchNamesForDay( day );
         if ( cursor.getCount() == 0 )

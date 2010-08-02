@@ -257,18 +257,18 @@ public class HappyContactsPreferences
         root.addPreference( nextEvents );
         
         /* disable name days checkbox */
-        Preference disableNameDays=new CheckBoxPreference( this );
+        CheckBoxPreference disableNameDays=new CheckBoxPreference( this );     
         disableNameDays.setTitle( R.string.pref_disable_nameday );
 
-        if ( mPrefs.getBoolean( PREF_DISABLE_NAMEDAY, false ) )
+        if ( !mPrefs.getBoolean( PREF_DISABLE_NAMEDAY, false ) )
         {
-            mAlarmStatePref.setSummary( R.string.pref_disable_nameday_off );
-            mAlarmStatePref.setChecked( false );           
+            disableNameDays.setSummary( R.string.pref_disable_nameday_off );
+            disableNameDays.setChecked( false );           
         }
         else
         {
-            mAlarmStatePref.setSummary( R.string.pref_disable_nameday_on );
-            mAlarmStatePref.setChecked( true );           
+            disableNameDays.setSummary( R.string.pref_disable_nameday_on );
+            disableNameDays.setChecked( true );           
         }
         disableNameDays.setOnPreferenceClickListener( new OnPreferenceClickListener()
         {
@@ -291,6 +291,8 @@ public class HappyContactsPreferences
                 return true;
             }
         });
+        root.addPreference( disableNameDays );
+       
 
         /* database category */
         PreferenceCategory databasePrefCat = new PreferenceCategory( this );
