@@ -165,5 +165,7 @@
 <string name="retrieving_events">Récupération des évènements à venir...</string>
 <string name="today">Aujourd\'hui</string>
 <string name="tomorrow">Demain</string>
-
+<string name="pref_disable_nameday">Désactiver les fêtes</string>
+<string name="pref_disable_nameday_on">Les éphémérides sont désactivées</string>
+<string name="pref_disable_nameday_off">Les éphémérides sont activées</string>
 </resources>
