@@ -36,13 +36,14 @@ public final class R {
         public static final int left_deco=0x7f020010;
         public static final int nophoto=0x7f020011;
         public static final int notif=0x7f020012;
-        public static final int right_deco=0x7f020013;
-        public static final int sad=0x7f020014;
-        public static final int smile=0x7f020015;
-        public static final int sync_ko=0x7f020016;
-        public static final int sync_not_found=0x7f020017;
-        public static final int sync_ok=0x7f020018;
-        public static final int umbrella=0x7f020019;
+        public static final int old_icon=0x7f020013;
+        public static final int right_deco=0x7f020014;
+        public static final int sad=0x7f020015;
+        public static final int smile=0x7f020016;
+        public static final int sync_ko=0x7f020017;
+        public static final int sync_not_found=0x7f020018;
+        public static final int sync_ok=0x7f020019;
+        public static final int umbrella=0x7f02001a;
     }
     public static final class id {
         public static final int Email=0x7f08000a;
