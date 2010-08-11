@@ -77,12 +77,28 @@ public class PickNameDayListActivity
         mEditText.addTextChangedListener( this );
 
         mDb = new DbAdapter( this );
+        
+        if ( Log.DEBUG )
+        {
+            Log.v( "PickNameDayListActivity: start onCreate" );
+        }
+    }
+    
+    @Override
+    protected void onResume()
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "PickNameDayListActivity: start onResume" );
+        }
+        super.onResume();
+
         mDb.open( false );
 
         fillList( null );
         if ( Log.DEBUG )
         {
-            Log.v( "PickNameDayListActivity: start onCreate" );
+            Log.v( "PickNameDayListActivity: end onResume" );
         }
     }
 
