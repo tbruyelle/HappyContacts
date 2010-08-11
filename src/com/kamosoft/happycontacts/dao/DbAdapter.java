@@ -33,7 +33,7 @@ public class DbAdapter
     private SQLiteDatabase mDb;
 
     private final Context mCtx;
-    
+
     /* use -1000 value for uid to distinguish from facebook sync result */
     public static final String GOOGLE_CONTACT_UID = "-1000";
 
@@ -527,8 +527,7 @@ public class DbAdapter
         for ( SocialNetworkUser user : users )
         {
             ContentValues initialValues = new ContentValues();
-            initialValues.put( HappyContactsDb.SyncResult.USER_ID, fromFaceBook ? user.uid
-                            : GOOGLE_CONTACT_UID );
+            initialValues.put( HappyContactsDb.SyncResult.USER_ID, fromFaceBook ? user.uid : GOOGLE_CONTACT_UID );
             initialValues.put( HappyContactsDb.SyncResult.USER_NAME, user.name );
             initialValues.put( HappyContactsDb.SyncResult.BIRTHDAY_DATE, user.birthday );
             initialValues.put( HappyContactsDb.SyncResult.CONTACT_ID, user.getContactId() );
@@ -790,7 +789,7 @@ public class DbAdapter
             Log.v( "DbAdapter: call fetchAllTimeBlackListed()" );
         }
         return mDb.query( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS,
-                          HappyContactsDb.BlackList.LAST_WISH_DATE + " = null", null, null, null, null );
+                          HappyContactsDb.BlackList.LAST_WISH_DATE + " is null", null, null, null, null );
     }
 
     public Cursor fetchBlackList( long contactId )
