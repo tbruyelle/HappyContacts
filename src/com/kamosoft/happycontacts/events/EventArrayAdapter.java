@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kamosoft.happycontacts.Constants;
+import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
 import com.kamosoft.happycontacts.contacts.ContactUtils;
 import com.kamosoft.happycontacts.model.ContactFeast;
@@ -55,8 +56,8 @@ public class EventArrayAdapter
         View view = convertView;
         if ( view == null )
         {
-            LayoutInflater layoutInflater = (LayoutInflater) mContext
-                .getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+            LayoutInflater layoutInflater =
+                (LayoutInflater) mContext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
             view = layoutInflater.inflate( R.layout.event_element, null );
         }
 
@@ -75,8 +76,7 @@ public class EventArrayAdapter
                 {
                     /* year is provided, we can calculate the age */
                     int birtdayYear = Integer.parseInt( user.getBirthdayYear() );
-                    eventType
-                        .setText( mContext.getString( R.string.age, Integer.valueOf( mCurrentYear - birtdayYear ) ) );
+                    eventType.setText( mContext.getString( R.string.age, Integer.valueOf( mCurrentYear - birtdayYear ) ) );
                 }
                 else
                 {
@@ -89,10 +89,17 @@ public class EventArrayAdapter
                 eventType.setText( mContext.getString( R.string.nameday, user.getNameDay() ) );
             }
             /* photo */
-            Bitmap photo = ContactUtils.loadContactPhoto( mContext, user.getContactId() );
-            ImageView imageView = (ImageView) view.findViewById( R.id.contact_photo );
-            imageView.setBackgroundResource( android.R.drawable.picture_frame );
-            imageView.setImageBitmap( photo );
+            try
+            {
+                Bitmap photo = ContactUtils.loadContactPhoto( mContext, user.getContactId() );
+                ImageView imageView = (ImageView) view.findViewById( R.id.contact_photo );
+                imageView.setBackgroundResource( android.R.drawable.picture_frame );
+                imageView.setImageBitmap( photo );
+            }
+            catch ( Exception e )
+            {
+                Log.e( "impossible de charger la photo de " + user.toString() );
+            }
         }
         return view;
     }
