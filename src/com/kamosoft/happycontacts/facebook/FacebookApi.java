@@ -1,23 +1,23 @@
 //
-//    FacebookUsers.java is part of SyncMyPix
+// FacebookUsers.java is part of SyncMyPix
 //
-//    Authors:
-//        Neil Loknath <neil.loknath@gmail.com>
+// Authors:
+// Neil Loknath <neil.loknath@gmail.com>
 //
-//    Copyright (c) 2009 Neil Loknath
+// Copyright (c) 2009 Neil Loknath
 //
-//    SyncMyPix is free software: you can redistribute it and/or modify
-//    it under the terms of the GNU General Public License as published by
-//    the Free Software Foundation, either version 3 of the License, or
-//    (at your option) any later version.
+// SyncMyPix is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 //
-//    SyncMyPix is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU General Public License for more details.
+// SyncMyPix is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
 //
-//    You should have received a copy of the GNU General Public License
-//    along with SyncMyPix.  If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License
+// along with SyncMyPix. If not, see <http://www.gnu.org/licenses/>.
 //
 
 package com.kamosoft.happycontacts.facebook;
@@ -119,18 +119,17 @@ public class FacebookApi
             fbUser.firstName = user.getString( "first_name" );
             fbUser.lastName = user.getString( "last_name" );
             fbUser.name = user.getString( "name" );
-            fbUser.picUrl =
-                ( user.getString( "pic" ).equals( "null" ) || user.getString( "pic" ) == "" ) ? null
-                                : user.getString( "pic" );
-            fbUser.birthday =
-                user.getString( "birthday" ).equals( "null" ) || user.getString( "birthday" ) == "" ? null
-                                : user.getString( "birthday" );
-
-            String birthdayDate = user.getString( "birthday_date" );
+            fbUser.picUrl = ( user.getString( "pic" ).equals( "null" ) || user.getString( "pic" ) == "" ) ? null : user
+                .getString( "pic" );
+            fbUser.birthday = user.getString( "birthday_date" ).equals( "null" )
+                || user.getString( "birthday_date" ) == "" ? null : user.getString( "birthday_date" );
+            
+            fbUser.displayed_birthday = user.getString( "birthday" ).equals( "null" )
+            || user.getString( "birthday" ) == "" ? null : user.getString( "birthday" );
 
             if ( Log.DEBUG )
             {
-                Log.d( "found FB user " + fbUser.name + ", " + fbUser.birthday + ", birthday_date=" + birthdayDate );
+                Log.d( "found FB user " + fbUser.name + ", " + fbUser.birthday );
             }
 
             list.add( fbUser );

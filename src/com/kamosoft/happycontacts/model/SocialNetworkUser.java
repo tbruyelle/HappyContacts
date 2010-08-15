@@ -27,6 +27,8 @@ public final class SocialNetworkUser
     public String picUrl;
 
     public String birthday;
+    
+    public String displayed_birthday;
 
     private Long contactId;
 

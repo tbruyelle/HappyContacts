@@ -4,8 +4,10 @@
 package com.kamosoft.happycontacts.sync;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -31,6 +33,15 @@ public class StoreAsyncTask
     extends AsyncTask<Void, Integer, Void>
     implements Constants, DateFormatConstants
 {
+    public static final SimpleDateFormat FB_birthdayFull = new SimpleDateFormat( "MM/dd/yyyy", Locale.ENGLISH );
+
+    public static final SimpleDateFormat FB_birthdaySmall = new SimpleDateFormat( "MM/dd", Locale.ENGLISH );
+
+    public static final SimpleDateFormat GoogleContact_birthdayFull = new SimpleDateFormat( "yyyy-MM-dd",
+                                                                                            Locale.ENGLISH );
+
+    public static final SimpleDateFormat GoogleContact_birthdaySmall = new SimpleDateFormat( "--MM-dd", Locale.ENGLISH );
+
     private int counter;
 
     private boolean update;
@@ -80,7 +91,7 @@ public class StoreAsyncTask
             String birthday = null, birthyear = null;
             if ( mFromFacebook )
             {
-                /* facebook birthday date has format MMMM dd, yyyy or MMMM dd */
+                /* facebook birthday date has format MM/dd/YYYY or MM/dd */
                 try
                 {
                     Date date = FB_birthdayFull.parse( user.birthday );
@@ -160,7 +171,8 @@ public class StoreAsyncTask
     protected void onPostExecute( Void voids )
     {
         mProgressDialog.dismiss();
-        Toast.makeText( mContext, mContext.getString( R.string.inserting_birthdays_done, counter ), Toast.LENGTH_SHORT ).show();
+        Toast.makeText( mContext, mContext.getString( R.string.inserting_birthdays_done, counter ), Toast.LENGTH_SHORT )
+            .show();
         Intent intent = new Intent( mContext, BirthdayActivity.class );
         intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
         mContext.startActivity( intent );

@@ -48,8 +48,8 @@ public class SocialUserArrayAdapter
         View view = convertView;
         if ( view == null )
         {
-            LayoutInflater layoutInflater =
-                (LayoutInflater) mContext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+            LayoutInflater layoutInflater = (LayoutInflater) mContext
+                .getSystemService( Context.LAYOUT_INFLATER_SERVICE );
             view = layoutInflater.inflate( R.layout.socialnetworkuser, null );
         }
 
@@ -59,11 +59,11 @@ public class SocialUserArrayAdapter
             TextView userNameText = (TextView) view.findViewById( R.id.user_name );
             userNameText.setText( user.name );
 
-//            if ( user.getContactName() != null )
-//            {
-//                TextView contactNameText = (TextView) view.findViewById( R.id.contact_name );
-//                contactNameText.setText( user.getContactName() );
-//            }
+            //            if ( user.getContactName() != null )
+            //            {
+            //                TextView contactNameText = (TextView) view.findViewById( R.id.contact_name );
+            //                contactNameText.setText( user.getContactName() );
+            //            }
 
             TextView birthdayText = (TextView) view.findViewById( R.id.birthday_date );
             ImageView iconSync = (ImageView) view.findViewById( R.id.icon_sync );
@@ -74,8 +74,15 @@ public class SocialUserArrayAdapter
             }
             else
             {
-                birthdayText.setText( user.birthday );
-
+                if ( user.displayed_birthday != null )
+                {
+                    birthdayText.setText( user.displayed_birthday );
+                }
+                else
+                {
+                    birthdayText.setText( user.birthday );
+                }
+                
                 if ( user.getContactName() != null )
                 {
                     iconSync.setImageResource( R.drawable.sync_ok );
