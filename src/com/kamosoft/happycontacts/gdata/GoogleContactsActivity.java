@@ -121,10 +121,18 @@ public class GoogleContactsActivity
         Intent intent = getIntent();
         if ( Intent.ACTION_SEND.equals( intent.getAction() ) )
         {
+            if ( Log.DEBUG )
+            {
+                Log.v( "Intent.ACTION_SEND.equals( intent.getAction() )" );
+            }
             sendData = new SendData( intent, getContentResolver() );
         }
         else if ( Intent.ACTION_MAIN.equals( intent.getAction() ) )
         {
+            if ( Log.DEBUG )
+            {
+                Log.v( "Intent.ACTION_MAIN.equals( intent.getAction() )" );
+            }
             sendData = null;
         }
         gotAccount( false );
@@ -172,11 +180,19 @@ public class GoogleContactsActivity
                     boolean isViewAction = Intent.ACTION_VIEW.equals( getIntent().getAction() );
                     if ( tokenExpired && !isTemporary && credentials != null )
                     {
+                        if ( Log.DEBUG )
+                        {
+                            Log.v( "( tokenExpired && !isTemporary && credentials != null )" );
+                        }
                         GoogleOAuthGetAccessToken.revokeAccessToken( createOAuthParameters() );
                         credentials = null;
                     }
                     if ( tokenExpired || !isViewAction && ( isTemporary || credentials == null ) )
                     {
+                        if ( Log.DEBUG )
+                        {
+                            Log.v( "( tokenExpired || !isViewAction && ( isTemporary || credentials == null ) )" );
+                        }
                         GoogleOAuthGetTemporaryToken temporaryToken = new GoogleOAuthGetTemporaryToken();
                         temporaryToken.signer = createOAuthSigner();
                         temporaryToken.consumerKey = "anonymous";
@@ -197,7 +213,15 @@ public class GoogleContactsActivity
                     {
                         if ( isViewAction )
                         {
+                            if ( Log.DEBUG )
+                            {
+                                Log.v( "isViewAction" );
+                            }
                             Uri uri = this.getIntent().getData();
+                            if ( Log.DEBUG )
+                            {
+                                Log.v( "intent uri=" + uri.toString() );
+                            }
                             OAuthCallbackUrl callbackUrl = new OAuthCallbackUrl( uri.toString() );
                             GoogleOAuthGetAccessToken accessToken = new GoogleOAuthGetAccessToken();
                             accessToken.temporaryToken = callbackUrl.token;
@@ -205,7 +229,15 @@ public class GoogleContactsActivity
                             accessToken.signer = createOAuthSigner();
                             accessToken.consumerKey = "anonymous";
                             isTemporary = false;
+                            if ( Log.DEBUG )
+                            {
+                                Log.v( "accessToken = " + accessToken.toString() );
+                            }
                             credentials = accessToken.execute();
+                            if ( Log.DEBUG )
+                            {
+                                Log.v( "credentials = " + credentials.toString() );
+                            }
                             createOAuthParameters().signRequestsUsingAuthorizationHeader( transport );
                         }
                         authenticated();
@@ -213,6 +245,7 @@ public class GoogleContactsActivity
                 }
                 catch ( IOException e )
                 {
+                    Log.e( "IOException during gotAccount " + e.getMessage(), e );
                     handleException( e );
                 }
                 return;
@@ -252,6 +285,10 @@ public class GoogleContactsActivity
 
     private void authenticated()
     {
+        if ( Log.DEBUG )
+        {
+            Log.v( "start authenticated" );
+        }
         if ( sendData != null )
         {
             try
@@ -290,16 +327,28 @@ public class GoogleContactsActivity
             fileList();
         }
         fillList();
+        if ( Log.DEBUG )
+        {
+            Log.v( "end authenticated" );
+        }
     }
 
     private void handleException( Exception e )
     {
+        if ( Log.DEBUG )
+        {
+            Log.v( "start handleException e=" + e.getMessage() );
+        }
         e.printStackTrace();
         if ( e instanceof HttpResponseException )
         {
             int statusCode = ( (HttpResponseException) e ).response.statusCode;
             if ( statusCode == 401 || statusCode == 403 )
             {
+                if ( Log.DEBUG )
+                {
+                    Log.v( "handleException : restart gotAccount" );
+                }
                 gotAccount( true );
             }
             return;
