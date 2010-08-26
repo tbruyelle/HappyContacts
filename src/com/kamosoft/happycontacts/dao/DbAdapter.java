@@ -110,31 +110,61 @@ public class DbAdapter
         @Override
         public void onUpgrade( SQLiteDatabase db, int oldVersion, int newVersion )
         {
-            Log.v( "Upgrading database from version " + oldVersion + " to " + newVersion
-                + ", which will destroy all old data" );
-            try
+            if ( newVersion - oldVersion > 1 )
             {
-                /* get file content */
-                String sqlCode = AndroidUtils.getFileContent( mContext.getResources(), R.raw.db_update );
-                /* execute code */
-                for ( String sqlStatements : sqlCode.split( ";" ) )
+                Log.v( "Upgrading database from version " + oldVersion + " to " + newVersion
+                    + ", which will destroy all old data" );
+                try
                 {
-                    db.execSQL( sqlStatements );
+                    /* get file content */
+                    String sqlCode = AndroidUtils.getFileContent( mContext.getResources(), R.raw.db_update );
+                    /* execute code */
+                    for ( String sqlStatements : sqlCode.split( ";" ) )
+                    {
+                        db.execSQL( sqlStatements );
+                    }
+                    Log.v( "Updating database done." );
                 }
-                Log.v( "Updating database done." );
+                catch ( IOException e )
+                {
+                    // Should never happen!
+                    Log.e( "Error reading sql file " + e.getMessage() );
+                    throw new RuntimeException( e );
+                }
+                catch ( SQLException e )
+                {
+                    Log.e( "Error executing sql code " + e.getMessage() );
+                    throw new RuntimeException( e );
+                }
+                onCreate( db );
             }
-            catch ( IOException e )
+            else
             {
-                // Should never happen!
-                Log.e( "Error reading sql file " + e.getMessage() );
-                throw new RuntimeException( e );
+                Log.v( "Upgrading database from version " + oldVersion + " to " + newVersion
+                    + ", which only apply some fixes" );
+                try
+                {
+                    /* get file content */
+                    String sqlCode = AndroidUtils.getFileContent( mContext.getResources(), R.raw.db_fixes );
+                    /* execute code */
+                    for ( String sqlStatements : sqlCode.split( ";" ) )
+                    {
+                        db.execSQL( sqlStatements );
+                    }
+                    Log.v( "Fixing database done." );
+                }
+                catch ( IOException e )
+                {
+                    // Should never happen!
+                    Log.e( "Error reading sql file " + e.getMessage() );
+                    throw new RuntimeException( e );
+                }
+                catch ( SQLException e )
+                {
+                    Log.e( "Error executing sql code " + e.getMessage() );
+                    throw new RuntimeException( e );
+                }
             }
-            catch ( SQLException e )
-            {
-                Log.e( "Error executing sql code " + e.getMessage() );
-                throw new RuntimeException( e );
-            }
-            onCreate( db );
         }
     }
 
@@ -180,11 +210,6 @@ public class DbAdapter
         return this;
     }
 
-    public boolean needUpgrade()
-    {
-        return mDbHelper.needUpgrade();
-    }
-
     public void close()
     {
         mDbHelper.close();
@@ -201,9 +226,8 @@ public class DbAdapter
             Log.v( "DbAdapter: start fetchAllBirthdays()" );
         }
         /* use order by name */
-        Cursor cursor =
-            mDb.query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS, null, null, null, null,
-                       HappyContactsDb.Birthday.CONTACT_NAME );
+        Cursor cursor = mDb.query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS, null, null,
+                                   null, null, HappyContactsDb.Birthday.CONTACT_NAME );
 
         if ( Log.DEBUG )
         {
@@ -224,10 +248,9 @@ public class DbAdapter
             Log.v( "DbAdapter: start fetchBirthdayForDay(" + day + ")" );
         }
         /* use order by name */
-        Cursor cursor =
-            mDb.query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS,
-                       HappyContactsDb.Birthday.BIRTHDAY_DATE + "='" + day + "'", null, null, null,
-                       HappyContactsDb.Birthday.CONTACT_NAME );
+        Cursor cursor = mDb.query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS,
+                                   HappyContactsDb.Birthday.BIRTHDAY_DATE + "='" + day + "'", null, null, null,
+                                   HappyContactsDb.Birthday.CONTACT_NAME );
 
         if ( Log.DEBUG )
         {
@@ -246,9 +269,9 @@ public class DbAdapter
         {
             Log.v( "DbAdapter: start hasBirthday(" + contactId + ")" );
         }
-        Cursor cursor =
-            mDb.query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS,
-                       HappyContactsDb.Birthday.CONTACT_ID + "='" + contactId + "'", null, null, null, null );
+        Cursor cursor = mDb
+            .query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS,
+                    HappyContactsDb.Birthday.CONTACT_ID + "='" + contactId + "'", null, null, null, null );
         boolean hasBirhtday = cursor.getCount() > 0;
         cursor.close();
         return hasBirhtday;
@@ -260,9 +283,9 @@ public class DbAdapter
         {
             Log.v( "DbAdapter: start getBirthday(" + contactId + ")" );
         }
-        Cursor cursor =
-            mDb.query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS,
-                       HappyContactsDb.Birthday.CONTACT_ID + "='" + contactId + "'", null, null, null, null );
+        Cursor cursor = mDb
+            .query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS,
+                    HappyContactsDb.Birthday.CONTACT_ID + "='" + contactId + "'", null, null, null, null );
         String day, year;
         if ( cursor.getCount() > 0 )
         {
@@ -426,9 +449,8 @@ public class DbAdapter
             Log.v( "DbAdapter: start fetchAllSyncResult()" );
         }
         /* use order by name */
-        Cursor cursor =
-            mDb.query( HappyContactsDb.SyncResult.TABLE_NAME, HappyContactsDb.SyncResult.COLUMNS, whereClause, null,
-                       null, null, HappyContactsDb.SyncResult.USER_NAME );
+        Cursor cursor = mDb.query( HappyContactsDb.SyncResult.TABLE_NAME, HappyContactsDb.SyncResult.COLUMNS,
+                                   whereClause, null, null, null, HappyContactsDb.SyncResult.USER_NAME );
 
         int userIdColumnId = cursor.getColumnIndexOrThrow( HappyContactsDb.SyncResult.USER_ID );
         int userNameColumnId = cursor.getColumnIndexOrThrow( HappyContactsDb.SyncResult.USER_NAME );
@@ -559,9 +581,9 @@ public class DbAdapter
             Log.v( "DbAdapter: start fetchAllNameDay()" );
         }
         /* use order by name */
-        Cursor cursor =
-            mDb.query( HappyContactsDb.NameDay.TABLE_NAME, new String[] { HappyContactsDb.NameDay.ID,
-                HappyContactsDb.NameDay.NAME_DAY }, null, null, null, null, HappyContactsDb.NameDay.NAME_DAY );
+        Cursor cursor = mDb.query( HappyContactsDb.NameDay.TABLE_NAME, new String[] {
+            HappyContactsDb.NameDay.ID,
+            HappyContactsDb.NameDay.NAME_DAY }, null, null, null, null, HappyContactsDb.NameDay.NAME_DAY );
 
         if ( Log.DEBUG )
         {
@@ -577,10 +599,10 @@ public class DbAdapter
             Log.v( "DbAdapter: start fetchNameDayLike()" );
         }
         /* use order by name */
-        Cursor cursor =
-            mDb.query( HappyContactsDb.NameDay.TABLE_NAME, new String[] { HappyContactsDb.NameDay.ID,
-                HappyContactsDb.NameDay.NAME_DAY }, HappyContactsDb.NameDay.NAME_DAY + " like \"" + constraint + "%\"",
-                       null, null, null, HappyContactsDb.NameDay.NAME_DAY );
+        Cursor cursor = mDb.query( HappyContactsDb.NameDay.TABLE_NAME, new String[] {
+            HappyContactsDb.NameDay.ID,
+            HappyContactsDb.NameDay.NAME_DAY }, HappyContactsDb.NameDay.NAME_DAY + " like \"" + constraint + "%\"",
+                                   null, null, null, HappyContactsDb.NameDay.NAME_DAY );
 
         if ( Log.DEBUG )
         {
@@ -601,10 +623,10 @@ public class DbAdapter
             Log.v( "DbAdapter: start fetchNameForDay()" );
         }
         /* use order by name */
-        Cursor cursor =
-            mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID,
-                HappyContactsDb.Feast.NAME }, HappyContactsDb.Feast.DAY + "='" + day + "'", null, null, null,
-                       HappyContactsDb.Feast.NAME );
+        Cursor cursor = mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] {
+            HappyContactsDb.Feast.ID,
+            HappyContactsDb.Feast.NAME }, HappyContactsDb.Feast.DAY + "='" + day + "'", null, null, null,
+                                   HappyContactsDb.Feast.NAME );
 
         if ( Log.DEBUG )
         {
@@ -628,10 +650,11 @@ public class DbAdapter
          * order by date 
          * tips use substr() to have month then day
          */
-        Cursor cursor =
-            mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID,
-                HappyContactsDb.Feast.DAY }, HappyContactsDb.Feast.NAME + " like '" + name + "'", null, null, null,
-                       "substr(" + HappyContactsDb.Feast.DAY + ",4,2)||substr(" + HappyContactsDb.Feast.DAY + ",1,2)" );
+        Cursor cursor = mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] {
+            HappyContactsDb.Feast.ID,
+            HappyContactsDb.Feast.DAY }, HappyContactsDb.Feast.NAME + " like '" + name + "'", null, null, null,
+                                   "substr(" + HappyContactsDb.Feast.DAY + ",4,2)||substr(" + HappyContactsDb.Feast.DAY
+                                       + ",1,2)" );
         if ( Log.DEBUG )
         {
             Log.v( "DbAdapter: end fetchDayForName()" );
@@ -799,9 +822,9 @@ public class DbAdapter
         {
             Log.v( "DbAdapter: start fetchBlackList()" );
         }
-        Cursor mCursor =
-            mDb.query( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS,
-                       HappyContactsDb.BlackList.CONTACT_ID + "=" + contactId, null, null, null, null, null );
+        Cursor mCursor = mDb.query( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS,
+                                    HappyContactsDb.BlackList.CONTACT_ID + "=" + contactId, null, null, null, null,
+                                    null );
         if ( mCursor != null )
         {
             mCursor.moveToFirst();

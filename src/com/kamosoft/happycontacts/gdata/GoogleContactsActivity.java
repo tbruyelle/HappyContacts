@@ -74,8 +74,7 @@ public class GoogleContactsActivity
 
     private ProgressDialog mProgressDialog;
 
-    enum AuthType
-    {
+    enum AuthType {
         OAUTH, ACCOUNT_MANAGER, CLIENT_LOGIN
     }
 
@@ -172,6 +171,10 @@ public class GoogleContactsActivity
 
     private void gotAccount( boolean tokenExpired )
     {
+        if ( Log.DEBUG )
+        {
+            Log.v( "GoogleContactsActivity:  gotAccount( " + tokenExpired + " ) start" );
+        }
         switch ( AUTH_TYPE )
         {
             case OAUTH:
@@ -201,8 +204,7 @@ public class GoogleContactsActivity
                         temporaryToken.callback = "happycontacts:///";
                         isTemporary = true;
                         credentials = temporaryToken.execute();
-                        GoogleOAuthAuthorizeTemporaryTokenUrl authorizeUrl =
-                            new GoogleOAuthAuthorizeTemporaryTokenUrl();
+                        GoogleOAuthAuthorizeTemporaryTokenUrl authorizeUrl = new GoogleOAuthAuthorizeTemporaryTokenUrl();
                         authorizeUrl.temporaryToken = credentials.token;
                         Intent webIntent = new Intent( Intent.ACTION_VIEW );
                         webIntent.setData( Uri.parse( authorizeUrl.build() ) );
@@ -247,6 +249,10 @@ public class GoogleContactsActivity
                 {
                     Log.e( "IOException during gotAccount " + e.getMessage(), e );
                     handleException( e );
+                }
+                if ( Log.DEBUG )
+                {
+                    Log.v( "GoogleContactsActivity:  gotAccount( " + tokenExpired + " ) stop" );
                 }
                 return;
         }
@@ -462,9 +468,8 @@ public class GoogleContactsActivity
             case DELETEALL_DIALOG_ID:
                 AlertDialog.Builder builder = new AlertDialog.Builder( this );
                 builder.setMessage( R.string.confirm_deleteall ).setCancelable( false ).setPositiveButton( R.string.ok,
-                                                                                                           this ).setNegativeButton(
-                                                                                                                                     R.string.cancel,
-                                                                                                                                     this );
+                                                                                                           this )
+                    .setNegativeButton( R.string.cancel, this );
                 return builder.create();
 
             case CONFIRM_STORE_DIALOG_ID:

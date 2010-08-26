@@ -5874,7 +5874,7 @@ insert into feast (name, day, source) values ("Thélo", "25/11", "ephemeride.name
 insert into feast (name, day, source) values ("Delphine", "26/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Bellin", "26/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Camiho", "26/11", "ephemeride.name");
-insert into feast (name, day, source) values ("Camille", "26/11", "ephemeride.name");
+insert into feast (name, day, source) values ("Camille", "14/07", "ephemeride.name");
 insert into feast (name, day, source) values ("Conrad", "26/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Conradin", "26/11", "ephemeride.name");
 insert into feast (name, day, source) values ("Dauphine", "26/11", "ephemeride.name");
