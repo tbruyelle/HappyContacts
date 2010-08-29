@@ -196,7 +196,7 @@ public class FacebookLoginActivity
         requestWindowFeature( Window.FEATURE_INDETERMINATE_PROGRESS );
         setContentView( R.layout.facebook_login );
 
-        login.setAPIKey( Constants.FACEBOOK_API_KEY );
+        login.setAPIKey( "toto" );
 
         webview = (WebView) findViewById( R.id.webview );
         webview.setWebChromeClient( new ChromeClient( this ) );

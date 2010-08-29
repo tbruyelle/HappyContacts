@@ -28,4 +28,14 @@ public class Log
     {
         android.util.Log.e( LOGTAG, msg, tr );
     }
+
+    public static void w( String msg )
+    {
+        android.util.Log.w( LOGTAG, msg );
+    }
+
+    public static void w( String msg, Throwable tr )
+    {
+        android.util.Log.w( LOGTAG, msg, tr );
+    }
 }

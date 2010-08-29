@@ -12,12 +12,6 @@ package com.kamosoft.happycontacts;
  */
 public interface Constants
 {
-    public static final String FACEBOOK_API_KEY = "8e9a98e18c9e1c174e6c8904d9ed350e";
-
-    public static final String FAsCEBOOK_SECRET_API_KEY = "6ad543258350e403b907878a8f4b5308";
-
-    public static final String FACEBOOK_API_NAME = "HappyContacts";
-
     public static final String APP_NAME = "com.tsoft.HappyContacts";
 
     /** default alarm to 9AM */

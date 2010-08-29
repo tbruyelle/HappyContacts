@@ -13,10 +13,9 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,10 +23,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.android.AsyncFacebookRunner;
+import com.facebook.android.DialogError;
+import com.facebook.android.Facebook;
+import com.facebook.android.FacebookError;
+import com.facebook.android.Facebook.DialogListener;
 import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
 import com.kamosoft.happycontacts.dao.DbAdapter;
+import com.kamosoft.happycontacts.facebook.SessionEvents.AuthListener;
+import com.kamosoft.happycontacts.facebook.SessionEvents.LogoutListener;
 import com.kamosoft.happycontacts.model.SocialNetworkUser;
 import com.kamosoft.happycontacts.sync.StoreAsyncTask;
 import com.kamosoft.happycontacts.sync.SyncStorer;
@@ -42,6 +48,12 @@ public class FacebookActivity
     extends ListActivity
     implements Constants, android.content.DialogInterface.OnClickListener, SyncStorer
 {
+    private static final String FACEBOOK_API_KEY = "8e9a98e18c9e1c174e6c8904d9ed350e";
+
+    private static final String FAsCEBOOK_SECRET_API_KEY = "6ad543258350e403b907878a8f4b5308";
+
+    private static final String FACEBOOK_API_NAME = "HappyContacts";
+
     private static final int START_SYNC_MENU_ID = Menu.FIRST;
 
     private static final int LOGOUT_MENU_ID = START_SYNC_MENU_ID + 1;
@@ -71,6 +83,12 @@ public class FacebookActivity
     private int mCurrentPosition;
 
     private TextView mSyncCounter;
+
+    private Facebook mFacebook;
+
+    private Handler mHandler;
+
+    private String[] mPermissions = new String[] { "friends_birthday" };
 
     /**
      * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -106,11 +124,18 @@ public class FacebookActivity
 
         mDb.open( false );
 
-        if ( isLoggedIn() )
+        mFacebook = new Facebook();
+        mHandler = new Handler();
+
+        SessionStore.restore( mFacebook, this );
+        SessionEvents.addAuthListener( new SampleAuthListener() );
+        SessionEvents.addLogoutListener( new SampleLogoutListener() );
+
+        if ( mFacebook.isSessionValid() )
         {
             if ( Log.DEBUG )
             {
-                Log.v( "FaceBookActivity: onCreate user logged" );
+                Log.v( "FaceBookActivity: onResume user logged" );
             }
             fillList();
         }
@@ -118,9 +143,9 @@ public class FacebookActivity
         {
             if ( Log.DEBUG )
             {
-                Log.v( "FaceBookActivity: onCreate start login" );
+                Log.v( "FaceBookActivity: onResume start login" );
             }
-            startActivityForResult( new Intent( this, FacebookLoginActivity.class ), LOGIN_ACTIVITY_RESULT );
+            mFacebook.authorize( this, FACEBOOK_API_KEY, mPermissions, new LoginDialogListener() );
         }
         if ( Log.DEBUG )
         {
@@ -191,11 +216,16 @@ public class FacebookActivity
             case PICK_CONTACT_ACTIVITY_RESULT:
                 Toast.makeText(
                                 this,
-                                getString( R.string.link_contact_done, mCurrentUser.name,
-                                           data.getStringExtra( CONTACTNAME_INTENT_KEY ) ), Toast.LENGTH_LONG ).show();
+                                getString( R.string.link_contact_done, mCurrentUser.name, data
+                                    .getStringExtra( CONTACTNAME_INTENT_KEY ) ), Toast.LENGTH_LONG ).show();
                 setIntent( data );
                 break;
         }
+    }
+
+    public Facebook getFacebook()
+    {
+        return mFacebook;
     }
 
     /**
@@ -279,19 +309,6 @@ public class FacebookActivity
     }
 
     /**
-     * @return
-     */
-    private boolean isLoggedIn()
-    {
-        SharedPreferences settings = this.getSharedPreferences( APP_NAME, 0 );
-        String session_key = settings.getString( "session_key", null );
-        String secret = settings.getString( "secret", null );
-        String uid = settings.getString( "uid", null );
-
-        return session_key != null && secret != null && uid != null;
-    }
-
-    /**
      * @see com.kamosoft.happycontacts.sync.SyncStorer#store(boolean)
      */
     public void store( boolean update )
@@ -354,20 +371,9 @@ public class FacebookActivity
      */
     private void logout()
     {
-        if ( isLoggedIn() )
-        {
-            SharedPreferences settings = this.getSharedPreferences( APP_NAME, 0 );
-            Editor editor = settings.edit();
-            editor.remove( "session_key" );
-            editor.remove( "secret" );
-            editor.remove( "uid" );
-            editor.commit();
-            Toast.makeText( this, R.string.logout_ok, Toast.LENGTH_SHORT ).show();
-        }
-        else
-        {
-            Toast.makeText( this, R.string.logout_ko, Toast.LENGTH_SHORT ).show();
-        }
+        SessionEvents.onLogoutBegin();
+        AsyncFacebookRunner asyncRunner = new AsyncFacebookRunner( mFacebook );
+        asyncRunner.logout( this, new LogoutRequestListener() );
         this.finish();
     }
 
@@ -382,9 +388,8 @@ public class FacebookActivity
             case DELETEALL_DIALOG_ID:
                 AlertDialog.Builder builder = new AlertDialog.Builder( this );
                 builder.setMessage( R.string.confirm_deleteall ).setCancelable( false ).setPositiveButton( R.string.ok,
-                                                                                                           this ).setNegativeButton(
-                                                                                                                                     R.string.cancel,
-                                                                                                                                     this );
+                                                                                                           this )
+                    .setNegativeButton( R.string.cancel, this );
                 return builder.create();
 
             case CONFIRM_STORE_DIALOG_ID:
@@ -410,4 +415,78 @@ public class FacebookActivity
                 return;
         }
     }
+
+    public class SampleAuthListener
+        implements AuthListener
+    {
+
+        public void onAuthSucceed()
+        {
+            Log.d( "You have logged in! " );
+        }
+
+        public void onAuthFail( String error )
+        {
+            Log.e( "Login Failed: " + error );
+        }
+    }
+
+    public class SampleLogoutListener
+        implements LogoutListener
+    {
+        public void onLogoutBegin()
+        {
+            Log.d( "Logging out..." );
+        }
+
+        public void onLogoutFinish()
+        {
+            Log.d( "You have logged out! " );
+        }
+    }
+
+    private class LogoutRequestListener
+        extends BaseRequestListener
+    {
+
+        public void onComplete( String response )
+        {
+            // callback should be run in the original thread, 
+            // not the background thread
+            mHandler.post( new Runnable()
+            {
+                public void run()
+                {
+                    SessionEvents.onLogoutFinish();
+                }
+            } );
+        }
+    }
+
+    private final class LoginDialogListener
+        implements DialogListener
+    {
+        public void onComplete( Bundle values )
+        {
+            SessionEvents.onLoginSuccess();
+            SessionStore.save( mFacebook, FacebookActivity.this );
+            fillList();
+        }
+
+        public void onFacebookError( FacebookError error )
+        {
+            SessionEvents.onLoginError( error.getMessage() );
+        }
+
+        public void onError( DialogError error )
+        {
+            SessionEvents.onLoginError( error.getMessage() );
+        }
+
+        public void onCancel()
+        {
+            SessionEvents.onLoginError( "Action Canceled" );
+        }
+    }
+
 }

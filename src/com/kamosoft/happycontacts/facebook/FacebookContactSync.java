@@ -3,12 +3,20 @@
  */
 package com.kamosoft.happycontacts.facebook;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import android.os.AsyncTask;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import android.os.AsyncTask;
+import android.os.Bundle;
+
+import com.facebook.android.FacebookError;
+import com.facebook.android.Util;
 import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
@@ -16,7 +24,6 @@ import com.kamosoft.happycontacts.contacts.ContactUtils;
 import com.kamosoft.happycontacts.contacts.PhoneContact;
 import com.kamosoft.happycontacts.model.SocialNetworkUser;
 import com.kamosoft.utils.AndroidUtils;
-import com.nloko.simplyfacebook.net.FacebookRestClient;
 
 /**
  * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
@@ -28,11 +35,11 @@ public class FacebookContactSync
     extends AsyncTask<Void, String, List<SocialNetworkUser>>
     implements Constants
 {
-    private FacebookActivity mContext;
+    private FacebookActivity mFacebookActivity;
 
     public FacebookContactSync( FacebookActivity context )
     {
-        mContext = context;
+        mFacebookActivity = context;
     }
 
     /**
@@ -43,31 +50,61 @@ public class FacebookContactSync
     {
         if ( Log.DEBUG )
         {
-            Log.v( "FacebookContactSync: Start getUserInfo" );
+            Log.v( "FacebookContactSync: Start doInBackground" );
         }
-        FacebookRestClient client =
-            new FacebookRestClient( FACEBOOK_API_KEY, mContext.getSharedPreferences( APP_NAME, 0 ).getString( "uid",
-                                                                                                              null ),
-                                    mContext.getSharedPreferences( APP_NAME, 0 ).getString( "session_key", null ),
-                                    mContext.getSharedPreferences( APP_NAME, 0 ).getString( "secret", null ) );
-
-        FacebookApi api = new FacebookApi( client );
-
-        ArrayList<SocialNetworkUser> users;
+        ArrayList<SocialNetworkUser> users = new ArrayList<SocialNetworkUser>();
         try
         {
-            users = api.getUserInfo( api.getFriends() );
+            Bundle parameters = new Bundle();
+            parameters.putString( "fields", "id,name,birthday" );
+
+            String response = mFacebookActivity.getFacebook().request( "me/friends", parameters );
+
+            Log.d( "Response: " + response.toString() );
+            JSONObject json = Util.parseJson( response );
+
+            JSONArray data = json.getJSONArray( "data" );
+
+            for ( int i = 0, size = data.length(); i < size; i++ )
+            {
+                JSONObject friend = data.getJSONObject( i );
+                SocialNetworkUser user = new SocialNetworkUser();
+                user.uid = friend.getString( "id" );
+                user.name = friend.getString( "name" );
+                if ( friend.has( "birthday" ) )
+                {
+                    user.birthday = friend.getString( "birthday" );
+                }
+                users.add( user );
+            }
+
+            if ( Log.DEBUG )
+            {
+                Log.v( "FacebookContactSync: End getUserInfo" );
+            }
         }
-        catch ( Exception e )
+        catch ( JSONException e1 )
         {
-            Log.e( "FacebookContactSync: Error during sync : " + e.getMessage() == null ? e.getClass().getName()
-                            : e.getMessage() );
-            return Collections.<SocialNetworkUser> emptyList();
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
         }
-        if ( Log.DEBUG )
+        catch ( FacebookError e1 )
         {
-            Log.v( "FacebookContactSync: End getUserInfo" );
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+
         }
+        catch ( MalformedURLException e1 )
+        {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        catch ( IOException e1 )
+        {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+
         if ( users == null || users.isEmpty() )
         {
             Log.e( "FacebookContactSync: no facebook friends found" );
@@ -78,7 +115,7 @@ public class FacebookContactSync
         {
             Log.v( "FacebookContactSync: Start loading contacts phones" );
         }
-        ArrayList<PhoneContact> phoneContacts = ContactUtils.loadPhoneContacts( mContext );
+        ArrayList<PhoneContact> phoneContacts = ContactUtils.loadPhoneContacts( mFacebookActivity );
         if ( Log.DEBUG )
         {
             Log.v( "FacebookContactSync: end loading contacts phones" );
@@ -110,7 +147,7 @@ public class FacebookContactSync
             {
                 Log.d( "FacebookContactSync: searching contact for user " + user.name );
             }
-            publishProgress( mContext.getString( R.string.sync_friends, user.name ) );
+            publishProgress( mFacebookActivity.getString( R.string.sync_friends, user.name ) );
 
             String friendName = AndroidUtils.replaceAccents( user.name );
             for ( PhoneContact phoneContact : phoneContacts )
@@ -136,7 +173,7 @@ public class FacebookContactSync
         {
             Log.v( "FacebookContactSync: Stop matching with contacts" );
         }
-        publishProgress( mContext.getString( R.string.inserting_results ) );
+        publishProgress( mFacebookActivity.getString( R.string.inserting_results ) );
         return users;
     }
 
@@ -146,7 +183,7 @@ public class FacebookContactSync
     @Override
     protected void onPostExecute( List<SocialNetworkUser> result )
     {
-        mContext.finishSync( result );
+        mFacebookActivity.finishSync( result );
     }
 
     /**
@@ -159,7 +196,7 @@ public class FacebookContactSync
         {
             Log.v( "FacebookContactSync: " + values[0] );
         }
-        mContext.getProgressDialog().setMessage( values[0] );
+        mFacebookActivity.getProgressDialog().setMessage( values[0] );
     }
 
     private boolean nameMatch( String contactName, String userName )
