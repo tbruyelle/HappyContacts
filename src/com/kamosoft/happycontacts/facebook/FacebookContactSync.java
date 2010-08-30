@@ -83,26 +83,21 @@ public class FacebookContactSync
                 Log.v( "FacebookContactSync: End getUserInfo" );
             }
         }
-        catch ( JSONException e1 )
+        catch ( JSONException e )
         {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
+            Log.e( e.getMessage(), e );
         }
-        catch ( FacebookError e1 )
+        catch ( FacebookError e )
         {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-
+            Log.e( e.getMessage(), e );
         }
-        catch ( MalformedURLException e1 )
+        catch ( MalformedURLException e )
         {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
+            Log.e( e.getMessage(), e );
         }
-        catch ( IOException e1 )
+        catch ( IOException e )
         {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
+            Log.e( e.getMessage(), e );
         }
 
         if ( users == null || users.isEmpty() )

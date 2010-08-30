@@ -50,8 +50,10 @@ public class FacebookActivity
 {
     private static final String FACEBOOK_API_KEY = "8e9a98e18c9e1c174e6c8904d9ed350e";
 
+    @SuppressWarnings("unused")
     private static final String FAsCEBOOK_SECRET_API_KEY = "6ad543258350e403b907878a8f4b5308";
 
+    @SuppressWarnings("unused")
     private static final String FACEBOOK_API_NAME = "HappyContacts";
 
     private static final int START_SYNC_MENU_ID = Menu.FIRST;
@@ -371,10 +373,17 @@ public class FacebookActivity
      */
     private void logout()
     {
+        if ( Log.DEBUG )
+        {
+            Log.d( "Start logout" );
+        }
         SessionEvents.onLogoutBegin();
         AsyncFacebookRunner asyncRunner = new AsyncFacebookRunner( mFacebook );
         asyncRunner.logout( this, new LogoutRequestListener() );
-        this.finish();
+        if ( Log.DEBUG )
+        {
+            Log.d( "end logout" );
+        }
     }
 
     /**
@@ -437,11 +446,17 @@ public class FacebookActivity
         public void onLogoutBegin()
         {
             Log.d( "Logging out..." );
+            FacebookActivity.this.mProgressDialog = ProgressDialog.show( FacebookActivity.this, "",
+                                                                         FacebookActivity.this
+                                                                             .getString( R.string.logging_out ), true );
         }
 
         public void onLogoutFinish()
         {
             Log.d( "You have logged out! " );
+            SessionStore.clear( FacebookActivity.this );
+            FacebookActivity.this.mProgressDialog.dismiss();
+            FacebookActivity.this.finish();
         }
     }
 

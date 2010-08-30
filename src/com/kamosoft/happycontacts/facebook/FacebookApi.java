@@ -37,6 +37,10 @@ import com.kamosoft.happycontacts.model.SocialNetworkUser;
 import com.nloko.simplyfacebook.net.FacebookJSONResponse;
 import com.nloko.simplyfacebook.net.FacebookRestClient;
 
+/**
+ * @deprecated
+ *
+ */
 public class FacebookApi
 {
     protected FacebookApi()

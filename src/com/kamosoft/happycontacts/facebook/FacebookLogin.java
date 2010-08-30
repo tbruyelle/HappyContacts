@@ -31,6 +31,11 @@ import org.json.JSONObject;
 import com.nloko.simplyfacebook.net.*;
 import com.nloko.simplyfacebook.util.*;
 
+/**
+ * @deprecated
+ * @author tom
+ *
+ */
 public class FacebookLogin extends FacebookRequest {
 
 	public FacebookLogin ()

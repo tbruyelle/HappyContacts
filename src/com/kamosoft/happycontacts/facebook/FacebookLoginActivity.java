@@ -25,6 +25,7 @@ import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
 
 /**
+ * @deprecated
  * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
  *
  * @since 26 mars 2010
