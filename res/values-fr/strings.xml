@@ -168,4 +168,6 @@
 <string name="pref_disable_nameday">Désactiver les fêtes</string>
 <string name="pref_disable_nameday_on">Les éphémérides sont désactivées</string>
 <string name="pref_disable_nameday_off">Les éphémérides sont activées</string>
+<string name="login_ko">Désolé, impossible de se connecter à votre compte Facebook</string>
+<string name="logging_out">Déconnexion de Facebook...</string>
 </resources>

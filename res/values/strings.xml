@@ -147,7 +147,6 @@
 <string name="birthday_counter">birthday(s) recorded</string>
 <string name="sync_counter">friend(s) retrieved from Facebook</string>
 <string name="logout">Logout from Facebook</string>
-<string name="logging_out">Logging out from Facebook...</string>
 <string name="logout_ok">Logout from your Facebook account completed !</string>
 <string name="logout_ko">You\'re not logged to a Facebook account</string>
 <string name="linked_to">linked to contact %s</string>
@@ -173,4 +172,5 @@
 <string name="pref_disable_nameday_on">Namedays are disabled</string>
 <string name="pref_disable_nameday_off">Namedays are enabled</string>
 <string name="login_ko">Sorry, unable to log to your facebook account</string>
+<string name="logging_out">Logging out from Facebook...</string>
 </resources>
