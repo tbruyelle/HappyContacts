@@ -432,11 +432,15 @@ public class FacebookActivity
         public void onAuthSucceed()
         {
             Log.d( "You have logged in! " );
+            Toast.makeText( FacebookActivity.this, FacebookActivity.this.getText( R.string.login_thankyou ),
+                            Toast.LENGTH_SHORT ).show();
         }
 
         public void onAuthFail( String error )
         {
             Log.e( "Login Failed: " + error );
+            Toast.makeText( FacebookActivity.this, FacebookActivity.this.getText( R.string.login_ko ),
+                            Toast.LENGTH_SHORT ).show();
         }
     }
 
@@ -448,7 +452,7 @@ public class FacebookActivity
             Log.d( "Logging out..." );
             FacebookActivity.this.mProgressDialog = ProgressDialog.show( FacebookActivity.this, "",
                                                                          FacebookActivity.this
-                                                                             .getString( R.string.logging_out ), true );
+                                                                             .getText( R.string.logging_out ), true );
         }
 
         public void onLogoutFinish()
@@ -457,6 +461,8 @@ public class FacebookActivity
             SessionStore.clear( FacebookActivity.this );
             FacebookActivity.this.mProgressDialog.dismiss();
             FacebookActivity.this.finish();
+            Toast.makeText( FacebookActivity.this, FacebookActivity.this.getText( R.string.logout_ok ),
+                            Toast.LENGTH_SHORT ).show();
         }
     }
 
@@ -485,6 +491,7 @@ public class FacebookActivity
         {
             SessionEvents.onLoginSuccess();
             SessionStore.save( mFacebook, FacebookActivity.this );
+
             fillList();
         }
 

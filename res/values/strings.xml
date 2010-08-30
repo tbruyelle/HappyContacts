@@ -172,4 +172,5 @@
 <string name="pref_disable_nameday">Disable namedays</string>
 <string name="pref_disable_nameday_on">Namedays are disabled</string>
 <string name="pref_disable_nameday_off">Namedays are enabled</string>
+<string name="login_ko">Sorry, unable to log to your facebook account</string>
 </resources>

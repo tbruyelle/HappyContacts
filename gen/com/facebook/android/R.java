@@ -216,6 +216,7 @@ public final class R {
         public static final int loading_googlecontacts=0x7f06009b;
         public static final int logging_out=0x7f06008f;
         public static final int login_authorization=0x7f06005e;
+        public static final int login_ko=0x7f0600a8;
         public static final int login_thankyou=0x7f06005c;
         public static final int logout=0x7f06008e;
         public static final int logout_ko=0x7f060091;
