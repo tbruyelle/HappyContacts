@@ -110,11 +110,15 @@ public abstract class DateNameListOptionsMenu
     {
         switch ( id )
         {
-            case NAME_FORM_DIALOG_ID:
-                return new EnterNameDialog( this );
+//            case NAME_FORM_DIALOG_ID:
+//                return new EnterNameDialog( this );
 
             case DATE_FORM_DIALOG_ID:
-                DatePickerDialog datePickerDialog = new DatePickerDialog( this, this, 0, 0, 0 );
+                Calendar c = Calendar.getInstance();
+                int cyear = c.get( Calendar.YEAR );
+                int cmonth = c.get( Calendar.MONTH );
+                int cday = c.get( Calendar.DAY_OF_MONTH );
+                DatePickerDialog datePickerDialog = new DatePickerDialog( this, this, cyear, cmonth, cday );
                 datePickerDialog.setTitle( R.string.enter_date );
                 return datePickerDialog;
         }
