@@ -11,7 +11,35 @@ public final class HappyContactsDb
 {
     public static String DATABASE_NAME = "happy_contacts";
 
-    public static int DATABASE_VERSION = 45;
+    public static int DATABASE_VERSION = 46;
+
+    public static final class NextEvents
+    {
+        public static String TABLE_NAME = "nextEvents";
+
+        public static String ID = "_id";
+
+        public static String CONTACT_ID = "contactId";
+
+        public static String CONTACT_NAME = "contactName";
+
+        public static String NAMEDAY = "nameDay";
+
+        public static String BIRTHDAY_YEAR = "birthdayYear";
+
+        public static String EVENT_WHEN = "eventWhen";
+
+        public static String CHECKED_DATE = "checkedDate";
+
+        public static String[] COLUMNS = {
+            ID,
+            CONTACT_ID,
+            CONTACT_NAME,
+            NAMEDAY,
+            BIRTHDAY_YEAR,
+            EVENT_WHEN,
+            CHECKED_DATE };
+    }
 
     public static final class SyncResult
     {

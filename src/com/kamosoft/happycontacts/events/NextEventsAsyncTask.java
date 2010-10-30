@@ -84,6 +84,8 @@ public class NextEventsAsyncTask
             eventsPerDate.put( DateFormat.getDateFormat( mActivity ).format( date ), contactFeasts );
             calendar.add( Calendar.DAY_OF_YEAR, 1 );
         }
+        /* recording results in database */
+        mDb.insertNextEvents( eventsPerDate );
         return eventsPerDate;
     }
 

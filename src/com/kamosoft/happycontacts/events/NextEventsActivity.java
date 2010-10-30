@@ -38,7 +38,7 @@ public class NextEventsActivity
 
     private TextView mEventCounter;
 
-    private LinkedHashMap<String, ContactFeasts> mEventsPerDate;
+    private Map<String, ContactFeasts> mEventsPerDate;
 
     /** Called when the activity is first created. */
     @Override
@@ -71,14 +71,17 @@ public class NextEventsActivity
         }
         super.onResume();
         mDb.open( true );
-        if ( mSectionedAdapter == null )
+
+        mEventsPerDate = mDb.fetchNextEvents();
+        if ( mEventsPerDate == null || mEventsPerDate.isEmpty() )
         {
             new NextEventsAsyncTask( this, dayLimit, mDb ).execute();
         }
         else
         {
-            setListAdapter( mSectionedAdapter );
+            displayEvents();
         }
+
         if ( Log.DEBUG )
         {
             Log.v( "NextEventsActivity: end onResume" );

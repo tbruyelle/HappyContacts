@@ -5,7 +5,10 @@ package com.kamosoft.happycontacts.dao;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -13,10 +16,13 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.format.DateFormat;
 
 import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
+import com.kamosoft.happycontacts.model.ContactFeast;
+import com.kamosoft.happycontacts.model.ContactFeasts;
 import com.kamosoft.happycontacts.model.SocialNetworkUser;
 import com.kamosoft.utils.AndroidUtils;
 import com.kamosoft.utils.ProgressDialogHandler;
@@ -110,7 +116,7 @@ public class DbAdapter
         @Override
         public void onUpgrade( SQLiteDatabase db, int oldVersion, int newVersion )
         {
-            if ( newVersion - oldVersion > 1 )
+            if ( oldVersion != 45 )
             {
                 Log.v( "Upgrading database from version " + oldVersion + " to " + newVersion
                     + ", which will destroy all old data" );
@@ -520,6 +526,111 @@ public class DbAdapter
             + "=" + user.uid + "", null ) > 0;
     }
 
+    public boolean insertNextEvents( LinkedHashMap<String, ContactFeasts> nexEvents )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start insertNextEvents" );
+        }
+        /* delete before, events are only corrects for the current date */
+        deleteNextEvents();
+
+        String today = DateFormat.getDateFormat( mCtx ).format( new Date() );
+        boolean res = false;
+        for ( Map.Entry<String, ContactFeasts> entry : nexEvents.entrySet() )
+        {
+            String date = entry.getKey();
+            ContactFeasts contactFeasts = entry.getValue();
+            for ( Map.Entry<Long, ContactFeast> entry2 : contactFeasts.getContactList().entrySet() )
+            {
+                ContactFeast user = entry2.getValue();
+                ContentValues initialValues = new ContentValues();
+                initialValues.put( HappyContactsDb.NextEvents.CONTACT_ID, user.getContactId() );
+                initialValues.put( HappyContactsDb.NextEvents.CONTACT_NAME, user.getContactName() );
+                initialValues.put( HappyContactsDb.NextEvents.BIRTHDAY_YEAR, user.getBirthdayYear() );
+                initialValues.put( HappyContactsDb.NextEvents.NAMEDAY, user.getNameDay() );
+                initialValues.put( HappyContactsDb.NextEvents.EVENT_WHEN, date );
+                initialValues.put( HappyContactsDb.NextEvents.CHECKED_DATE, today );
+
+                res = mDb.insert( HappyContactsDb.NextEvents.TABLE_NAME, null, initialValues ) > 0;
+                if ( !res )
+                {
+                    Log.e( "Error while insert nexEvents for user " + user.toString() );
+                    return res;
+                }
+            }
+        }
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: end insertNextEvents" );
+        }
+        return true;
+    }
+
+    /**
+     * Return the nextEvents
+     * @param day format dd/MM
+     * @return
+     */
+    public Map<String, ContactFeasts> fetchNextEvents()
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start fetchNexEventsForDay" );
+        }
+        String today = DateFormat.getDateFormat( mCtx ).format( new Date() );
+        Cursor cursor = mDb.query( HappyContactsDb.NextEvents.TABLE_NAME, HappyContactsDb.NextEvents.COLUMNS,
+                                   HappyContactsDb.NextEvents.CHECKED_DATE + "='" + today + "'", null, null, null,
+                                   HappyContactsDb.NextEvents.EVENT_WHEN );
+
+        Map<String, ContactFeasts> events = new LinkedHashMap<String, ContactFeasts>();
+        if ( cursor.getCount() > 0 )
+        {
+            int contactIdColumnId = cursor.getColumnIndexOrThrow( HappyContactsDb.NextEvents.CONTACT_ID );
+            int contactNameColumnId = cursor.getColumnIndexOrThrow( HappyContactsDb.NextEvents.CONTACT_NAME );
+            int birthdayYearColumnId = cursor.getColumnIndexOrThrow( HappyContactsDb.NextEvents.BIRTHDAY_YEAR );
+            int eventWhenColumnId = cursor.getColumnIndexOrThrow( HappyContactsDb.NextEvents.EVENT_WHEN );
+            int nameDayColumnId = cursor.getColumnIndexOrThrow( HappyContactsDb.NextEvents.NAMEDAY );
+
+            while ( cursor.moveToNext() )
+            {
+                Long contactId = cursor.getLong( contactIdColumnId );
+                String contactName = cursor.getString( contactNameColumnId );
+                String birthdayYear = cursor.getString( birthdayYearColumnId );
+                String eventWhen = cursor.getString( eventWhenColumnId );
+                String nameDay = cursor.getString( nameDayColumnId );
+                ContactFeast contactFeast = new ContactFeast( nameDay, contactName );
+                contactFeast.setContactId( contactId );
+                contactFeast.setBirthdayYear( birthdayYear );
+                if ( events.containsKey( eventWhen ) )
+                {
+                    events.get( eventWhen ).addContact( contactId, contactFeast );
+                }
+                else
+                {
+                    ContactFeasts contactFeasts = new ContactFeasts();
+                    contactFeasts.addContact( contactId, contactFeast );
+                    events.put( eventWhen, contactFeasts );
+                }
+            }
+        }
+        cursor.close();
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: end fetchNexEventsForDay()" );
+        }
+        return events;
+    }
+
+    public boolean deleteNextEvents()
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: call deleteNextEvents()" );
+        }
+        return mDb.delete( HappyContactsDb.NextEvents.TABLE_NAME, null, null ) > 0;
+    }
+
     public boolean insertFacebookSyncResults( List<SocialNetworkUser> users )
     {
         return insertSyncResults( users, true );
@@ -600,8 +711,9 @@ public class DbAdapter
         }
         /* use order by name */
         Cursor cursor = mDb.query( HappyContactsDb.NameDay.TABLE_NAME, new String[] {
-            HappyContactsDb.NameDay.ID,
-            HappyContactsDb.NameDay.NAME_DAY }, HappyContactsDb.NameDay.NAME_DAY + " like \"" + constraint + "%\"",
+                                       HappyContactsDb.NameDay.ID,
+                                       HappyContactsDb.NameDay.NAME_DAY }, HappyContactsDb.NameDay.NAME_DAY
+                                       + " like \"" + constraint + "%\"",
                                    null, null, null, HappyContactsDb.NameDay.NAME_DAY );
 
         if ( Log.DEBUG )
@@ -624,8 +736,9 @@ public class DbAdapter
         }
         /* use order by name */
         Cursor cursor = mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] {
-            HappyContactsDb.Feast.ID,
-            HappyContactsDb.Feast.NAME }, HappyContactsDb.Feast.DAY + "='" + day + "'", null, null, null,
+                                       HappyContactsDb.Feast.ID,
+                                       HappyContactsDb.Feast.NAME }, HappyContactsDb.Feast.DAY + "='" + day + "'",
+                                   null, null, null,
                                    HappyContactsDb.Feast.NAME );
 
         if ( Log.DEBUG )
@@ -651,8 +764,9 @@ public class DbAdapter
          * tips use substr() to have month then day
          */
         Cursor cursor = mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] {
-            HappyContactsDb.Feast.ID,
-            HappyContactsDb.Feast.DAY }, HappyContactsDb.Feast.NAME + " like '" + name + "'", null, null, null,
+                                       HappyContactsDb.Feast.ID,
+                                       HappyContactsDb.Feast.DAY },
+                                   HappyContactsDb.Feast.NAME + " like '" + name + "'", null, null, null,
                                    "substr(" + HappyContactsDb.Feast.DAY + ",4,2)||substr(" + HappyContactsDb.Feast.DAY
                                        + ",1,2)" );
         if ( Log.DEBUG )

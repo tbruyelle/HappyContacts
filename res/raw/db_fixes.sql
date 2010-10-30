@@ -1,2 +1,8 @@
-delete from feast where name="Camille" and day="26/11";
-insert into feast (name, day, source) values ("Camille", "14/07", "ephemeride.name")
+create table nextEvents (
+	_id integer primary key autoincrement,
+	contactId integer not null,
+  	contactName text not null,
+  	nameDay text not null,
+  	birthdayYear text not null,
+  	eventWhen text not null,
+  	checkedDate text not null);

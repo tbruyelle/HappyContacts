@@ -34,6 +34,15 @@ create table birthday (
   birthdayYear text null,
   contactId integer not null,
   contactName text not null);
+  
+create table nextEvents (
+	_id integer primary key autoincrement,
+	contactId integer not null,
+  	contactName text not null,
+  	nameDay text not null,
+  	birthdayYear text not null,
+  	eventWhen text not null,
+  	checkedDate text not null);
  
 create index idx_feast_day on feast (day);
 create index idx_feast_name on feast (name);
