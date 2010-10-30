@@ -3,8 +3,11 @@
  */
 package com.kamosoft.happycontacts.events;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import android.app.ListActivity;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -14,6 +17,8 @@ import com.kamosoft.happycontacts.DateFormatConstants;
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
 import com.kamosoft.happycontacts.dao.DbAdapter;
+import com.kamosoft.happycontacts.model.ContactFeast;
+import com.kamosoft.happycontacts.model.ContactFeasts;
 
 /**
  * Display the upcoming events for the next 30 days
@@ -31,9 +36,9 @@ public class NextEventsActivity
 
     private SectionedAdapter mSectionedAdapter;
 
-    private ProgressDialog mProgressDialog;
-
     private TextView mEventCounter;
+
+    private LinkedHashMap<String, ContactFeasts> mEventsPerDate;
 
     /** Called when the activity is first created. */
     @Override
@@ -68,7 +73,6 @@ public class NextEventsActivity
         mDb.open( true );
         if ( mSectionedAdapter == null )
         {
-            getProgressDialog().show();
             new NextEventsAsyncTask( this, dayLimit, mDb ).execute();
         }
         else
@@ -81,19 +85,41 @@ public class NextEventsActivity
         }
     }
 
-    public void finishRetrieveNextEvents( EventSectionedAdapter adapter )
-    {       
-        mEventCounter.setText( String.valueOf( adapter.getNbEvents() ) );
-        setListAdapter( adapter );
-        getProgressDialog().dismiss();
+    private void displayEvents()
+    {
+        mSectionedAdapter = new EventSectionedAdapter( this );
+        int nbEvents = 0;
+        if ( mEventsPerDate != null && !mEventsPerDate.isEmpty() )
+        {
+            for ( Map.Entry<String, ContactFeasts> entry : mEventsPerDate.entrySet() )
+            {
+                String date = entry.getKey();
+                ContactFeasts contactFeasts = entry.getValue();
+                ArrayList<ContactFeast> contacts = new ArrayList<ContactFeast>();
+                for ( Map.Entry<Long, ContactFeast> contactEntry : contactFeasts.getContactList().entrySet() )
+                {
+                    if ( Log.DEBUG )
+                    {
+                        Log.d( "Event retrieved " + entry.toString() );
+                    }
+                    contacts.add( contactEntry.getValue() );
+                }
+                if ( !contacts.isEmpty() )
+                {
+                    nbEvents += contacts.size();
+                    EventArrayAdapter eventArrayAdapter = new EventArrayAdapter( this, R.layout.event_element, contacts );
+                    mSectionedAdapter.addSection( date, eventArrayAdapter );
+                }
+            }
+        }
+        mEventCounter.setText( String.valueOf( nbEvents ) );
+        setListAdapter( mSectionedAdapter );
     }
 
-    public ProgressDialog getProgressDialog()
+    public void finishRetrieveNextEvents( LinkedHashMap<String, ContactFeasts> results )
     {
-        if ( mProgressDialog == null )
-        {
-            mProgressDialog = ProgressDialog.show( this, "", getString( R.string.retrieving_events, 0 ), true );
-        }
-        return mProgressDialog;
+        mEventsPerDate = results;
+        displayEvents();
     }
+
 }
