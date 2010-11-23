@@ -572,11 +572,11 @@ public class DbAdapter
      * @param day format dd/MM
      * @return
      */
-    public Map<String, ContactFeasts> fetchNextEvents()
+    public Map<String, ContactFeasts> fetchTodayNextEvents()
     {
         if ( Log.DEBUG )
         {
-            Log.v( "DbAdapter: start fetchNexEventsForDay" );
+            Log.v( "DbAdapter: start fetchTodayNextEvents" );
         }
         String today = DateFormat.getDateFormat( mCtx ).format( new Date() );
         Cursor cursor = mDb.query( HappyContactsDb.NextEvents.TABLE_NAME, HappyContactsDb.NextEvents.COLUMNS,
@@ -617,7 +617,7 @@ public class DbAdapter
         cursor.close();
         if ( Log.DEBUG )
         {
-            Log.v( "DbAdapter: end fetchNexEventsForDay()" );
+            Log.v( "DbAdapter: end fetchTodayNextEvents()" );
         }
         return events;
     }

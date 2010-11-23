@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.text.format.DateFormat;
 
@@ -26,37 +27,40 @@ public class NextEventsAsyncTask
     extends AsyncTask<Void, String, LinkedHashMap<String, ContactFeasts>>
     implements DateFormatConstants
 {
-    private NextEventsActivity mActivity;
+    private NextEventsHandler mHandler;
+
+    private Context mContext;
 
     private int mDayLimit;
 
-    private DbAdapter mDb;
+    private final ProgressDialog mDialog;
 
-    private final ProgressDialog dialog;
-
-    public NextEventsAsyncTask( NextEventsActivity activity, int dayLimit, DbAdapter db )
+    public NextEventsAsyncTask( NextEventsHandler handler, Context context, int dayLimit )
     {
-        mActivity = activity;
+        mHandler = handler;
+        mContext = context;
         mDayLimit = dayLimit;
-        mDb = db;
-        dialog = new ProgressDialog( mActivity );
+        mDialog = new ProgressDialog( mContext );
     }
 
     @Override
     protected void onPreExecute()
     {
-        dialog.setMessage( mActivity.getString( R.string.retrieving_events, 0 ) );
-        dialog.show();
+        if ( mDialog != null )
+        {
+            mDialog.setMessage( mContext.getString( R.string.retrieving_events, 0 ) );
+            mDialog.show();
+        }
     }
 
     @Override
     protected void onPostExecute( LinkedHashMap<String, ContactFeasts> result )
     {
-        if ( dialog.isShowing() )
+        if ( mDialog != null && mDialog.isShowing() )
         {
-            dialog.dismiss();
+            mDialog.dismiss();
         }
-        mActivity.finishRetrieveNextEvents( result );
+        mHandler.finishRetrieveNextEvents( result );
     }
 
     /**
@@ -65,10 +69,22 @@ public class NextEventsAsyncTask
     @Override
     protected LinkedHashMap<String, ContactFeasts> doInBackground( Void... params )
     {
+
+        return lookForNextEvents( mContext, mDayLimit );
+    }
+
+    public static LinkedHashMap<String, ContactFeasts> lookForNextEvents( Context context, int dayLimit )
+    {
+        /*
+         * init and open database
+         */
+        DbAdapter db = new DbAdapter( context );
+        db.open( true );
+
         LinkedHashMap<String, ContactFeasts> eventsPerDate = new LinkedHashMap<String, ContactFeasts>();
         Calendar calendar = Calendar.getInstance();
         int inc = 0;
-        while ( inc++ < mDayLimit )
+        while ( inc++ < dayLimit )
         {
             ContactFeasts contactFeasts = new ContactFeasts();
             Date date = calendar.getTime();
@@ -78,14 +94,18 @@ public class NextEventsAsyncTask
                 Log.d( "Retrieving events for " + fullDate );
             }
 
-            DayMatcherService.checkNameDays( mActivity, mDb, contactFeasts, dayDate, fullDate );
-            DayMatcherService.checkBirthdays( mActivity, mDb, contactFeasts, dayDate, fullDate );
-
-            eventsPerDate.put( DateFormat.getDateFormat( mActivity ).format( date ), contactFeasts );
+            DayMatcherService.checkNameDays( context, db, contactFeasts, dayDate, fullDate );
+            DayMatcherService.checkBirthdays( context, db, contactFeasts, dayDate, fullDate );
+            if ( Log.DEBUG )
+            {
+                Log.d( "Found " + contactFeasts.getContactList().size() + " events to wish for " + dayDate );
+            }
+            eventsPerDate.put( DateFormat.getDateFormat( context ).format( date ), contactFeasts );
             calendar.add( Calendar.DAY_OF_YEAR, 1 );
         }
         /* recording results in database */
-        mDb.insertNextEvents( eventsPerDate );
+        db.insertNextEvents( eventsPerDate );
+        db.close();
         return eventsPerDate;
     }
 

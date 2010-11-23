@@ -3,16 +3,8 @@
 	android:layout_width="fill_parent" android:layout_height="fill_parent"
 	android:orientation="vertical">
 
-	<LinearLayout android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:orientation="horizontal">
-		<TextView android:text="0" android:id="@+id/nextevents_counter"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:textSize="20dip" android:paddingRight="10dip"
-			android:paddingLeft="10dip" android:textColor="#FFFFFF" />
-		<TextView android:text="@string/nextevents_counter"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:textSize="16dip" />
-	</LinearLayout>
+  <include layout="@layout/nextevents_counter" />
+
 	<TextView android:text="@string/nexteventslist"
 		android:layout_height="wrap_content" android:layout_width="fill_parent"
 		android:textStyle="bold" android:textColor="#DDDDDD"

@@ -28,7 +28,7 @@ import com.kamosoft.happycontacts.model.ContactFeasts;
  */
 public class NextEventsActivity
     extends ListActivity
-    implements DateFormatConstants, Constants
+    implements DateFormatConstants, Constants, NextEventsHandler
 {
     private static final int dayLimit = 15;
 
@@ -72,10 +72,10 @@ public class NextEventsActivity
         super.onResume();
         mDb.open( true );
 
-        mEventsPerDate = mDb.fetchNextEvents();
+        mEventsPerDate = mDb.fetchTodayNextEvents();
         if ( mEventsPerDate == null || mEventsPerDate.isEmpty() )
         {
-            new NextEventsAsyncTask( this, dayLimit, mDb ).execute();
+            new NextEventsAsyncTask( this, this, dayLimit ).execute();
         }
         else
         {
@@ -119,6 +119,9 @@ public class NextEventsActivity
         setListAdapter( mSectionedAdapter );
     }
 
+    /**
+     * @see com.kamosoft.happycontacts.events.NextEventsHandler#finishRetrieveNextEvents(java.util.LinkedHashMap)
+     */
     public void finishRetrieveNextEvents( LinkedHashMap<String, ContactFeasts> results )
     {
         mEventsPerDate = results;

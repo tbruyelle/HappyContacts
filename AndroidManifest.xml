@@ -60,6 +60,15 @@
       </intent-filter>
     </activity>
   <activity android:name=".events.NextEventsActivity"></activity>
+  <!-- the widget -->
+  <receiver android:name=".widget.HappyContactsWidget" >
+    <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+    </intent-filter>
+    <meta-data android:name="android.appwidget.provider"
+               android:resource="@xml/appwidget_info" />
+</receiver>
+<service android:name=".widget.HappyContactsWidget$UpdateService" />
 </application>
 
   <uses-sdk android:minSdkVersion="3" />

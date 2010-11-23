@@ -185,7 +185,7 @@ public class DayMatcherService
             }
             if ( Log.DEBUG )
             {
-                Log.v( "DayMatcher: adding birthday for " + contactName );
+                Log.d( "DayMatcher: adding birthday for " + contactName );
             }
             ContactFeast contactFeast = new ContactFeast( BDAY_HINT, contactName );
             contactFeast.setBirthdayDate( cursor.getString( cursor
@@ -320,7 +320,7 @@ public class DayMatcherService
                         /* find one !! */
                         if ( Log.DEBUG )
                         {
-                            Log.v( "DayMatcher: day contact feast found for \"" + phoneContact.name + "\", id=\""
+                            Log.d( "DayMatcher: day contact feast found for \"" + phoneContact.name + "\", id=\""
                                 + phoneContact.id + "\"" );
                         }
                         ContactFeast contactFeast = names.get( subName );
