@@ -3,11 +3,10 @@
  */
 package com.kamosoft.happycontacts;
 
-
 /**
  * @author tom
  *
- * @since 29 déc. 2009
+ * @since 29 dï¿½c. 2009
  * @version $Id$
  */
 public interface Constants
@@ -38,8 +37,8 @@ public interface Constants
     public static final String PREF_MAIL_BIRTHDAY_BODY_TEMPLATE = "mailBirthdayBodyTemplate";
 
     public static final String PREF_SMS_BIRTHDAY_BODY_TEMPLATE = "smsBirthdaySubjectTemplate";
-    
-    public static final String PREF_DISABLE_NAMEDAY="nameDayStatus";
+
+    public static final String PREF_DISABLE_NAMEDAY = "nameDayStatus";
 
     public static final String BDAY_HINT = "BDAY";
 
@@ -68,4 +67,6 @@ public interface Constants
     public static final int EMAIL_ITEM_INDEX = 2;
 
     public static final String CONTACTFEAST_INTENT_KEY = "ContactFeasts";
+
+    public static final int MAX_DAY_EVENTS = 15;
 }

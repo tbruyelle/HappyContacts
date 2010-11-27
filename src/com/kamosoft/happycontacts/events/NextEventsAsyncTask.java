@@ -12,6 +12,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.text.format.DateFormat;
 
+import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.DateFormatConstants;
 import com.kamosoft.happycontacts.DayMatcherService;
 import com.kamosoft.happycontacts.Log;
@@ -31,15 +32,12 @@ public class NextEventsAsyncTask
 
     private Context mContext;
 
-    private int mDayLimit;
-
     private final ProgressDialog mDialog;
 
-    public NextEventsAsyncTask( NextEventsHandler handler, Context context, int dayLimit )
+    public NextEventsAsyncTask( NextEventsHandler handler, Context context )
     {
         mHandler = handler;
         mContext = context;
-        mDayLimit = dayLimit;
         mDialog = new ProgressDialog( mContext );
     }
 
@@ -70,10 +68,10 @@ public class NextEventsAsyncTask
     protected LinkedHashMap<String, ContactFeasts> doInBackground( Void... params )
     {
 
-        return lookForNextEvents( mContext, mDayLimit );
+        return lookForNextEvents( mContext );
     }
 
-    public static LinkedHashMap<String, ContactFeasts> lookForNextEvents( Context context, int dayLimit )
+    public static LinkedHashMap<String, ContactFeasts> lookForNextEvents( Context context )
     {
         /*
          * init and open database
@@ -84,7 +82,7 @@ public class NextEventsAsyncTask
         LinkedHashMap<String, ContactFeasts> eventsPerDate = new LinkedHashMap<String, ContactFeasts>();
         Calendar calendar = Calendar.getInstance();
         int inc = 0;
-        while ( inc++ < dayLimit )
+        while ( inc++ < Constants.MAX_DAY_EVENTS )
         {
             ContactFeasts contactFeasts = new ContactFeasts();
             Date date = calendar.getTime();

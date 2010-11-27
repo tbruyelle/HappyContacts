@@ -30,15 +30,13 @@ public class NextEventsActivity
     extends ListActivity
     implements DateFormatConstants, Constants, NextEventsHandler
 {
-    private static final int dayLimit = 15;
-
     private DbAdapter mDb;
 
     private SectionedAdapter mSectionedAdapter;
 
     private TextView mEventCounter;
 
-    private Map<String, ContactFeasts> mEventsPerDate;
+    private LinkedHashMap<String, ContactFeasts> mEventsPerDate;
 
     /** Called when the activity is first created. */
     @Override
@@ -73,9 +71,9 @@ public class NextEventsActivity
         mDb.open( true );
 
         mEventsPerDate = mDb.fetchTodayNextEvents();
-        if ( mEventsPerDate == null || mEventsPerDate.isEmpty() )
+        if ( mEventsPerDate == null )
         {
-            new NextEventsAsyncTask( this, this, dayLimit ).execute();
+            new NextEventsAsyncTask( this, this ).execute();
         }
         else
         {

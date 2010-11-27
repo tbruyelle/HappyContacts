@@ -3,10 +3,12 @@
  */
 package com.kamosoft.happycontacts.events;
 
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
 import android.app.Activity;
+import android.content.Context;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,25 +48,8 @@ public class EventSectionedAdapter
         }
         try
         {
-            Date date = DateFormat.getDateFormat( mActivity ).parse( caption );
-            Calendar calendarToday = Calendar.getInstance();
-            Calendar calendarCaption = Calendar.getInstance();
-            calendarCaption.setTime( date );
-            int nbDay = calendarCaption.get( Calendar.DAY_OF_YEAR ) - calendarToday.get( Calendar.DAY_OF_YEAR );
-            if ( nbDay == 0 )
-            {
-                result.setText( mActivity.getString( R.string.today ) );
-            }
-            else if ( nbDay == 1 )
-            {
-                result.setText( mActivity.getString( R.string.tomorrow ) );
-            }
-            else
-            {
-                result.setText( caption );
-            }
+            result.setText( getDateLabel( mActivity, caption ) );
         }
-
         catch ( java.text.ParseException e )
         {
             Log.e( "Unable to parse date " + caption );
@@ -72,6 +57,28 @@ public class EventSectionedAdapter
         }
 
         return ( result );
+    }
+
+    public static String getDateLabel( Context context, String dateString )
+        throws ParseException
+    {
+        Date date = DateFormat.getDateFormat( context ).parse( dateString );
+        Calendar calendarToday = Calendar.getInstance();
+        Calendar calendarCaption = Calendar.getInstance();
+        calendarCaption.setTime( date );
+        int nbDay = calendarCaption.get( Calendar.DAY_OF_YEAR ) - calendarToday.get( Calendar.DAY_OF_YEAR );
+        if ( nbDay == 0 )
+        {
+            return context.getString( R.string.today );
+        }
+        else if ( nbDay == 1 )
+        {
+            return context.getString( R.string.tomorrow );
+        }
+        else
+        {
+            return dateString;
+        }
     }
 
     /**

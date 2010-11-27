@@ -3,7 +3,9 @@
  */
 package com.kamosoft.happycontacts.widget;
 
+import java.text.ParseException;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
@@ -12,10 +14,15 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.view.View;
 import android.widget.RemoteViews;
 
+import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
+import com.kamosoft.happycontacts.dao.DbAdapter;
+import com.kamosoft.happycontacts.events.EventSectionedAdapter;
 import com.kamosoft.happycontacts.events.NextEventsAsyncTask;
+import com.kamosoft.happycontacts.model.ContactFeast;
 import com.kamosoft.happycontacts.model.ContactFeasts;
 
 /**
@@ -47,11 +54,66 @@ public class HappyContactsWidget
         public void onStart( Intent intent, int startId )
         {
             super.onStart( intent, startId );
-            LinkedHashMap<String, ContactFeasts> eventsPerDate = NextEventsAsyncTask.lookForNextEvents( this, 5 );
+            /*
+             * init and open database
+             */
+            DbAdapter db = new DbAdapter( this );
+            db.open( true );
+
+            LinkedHashMap<String, ContactFeasts> eventsPerDate = db.fetchTodayNextEvents();
+            if ( eventsPerDate == null )
+            {
+                eventsPerDate = NextEventsAsyncTask.lookForNextEvents( this );
+            }
+            Log.d( "Events looked" );
             // Get the layout for the App Widget and attach an on-click listener to the button
             RemoteViews views = new RemoteViews( this.getPackageName(), R.layout.appwidget );
-            views.setTextViewText( R.id.nextevents_counter, String.valueOf( eventsPerDate.size() ) );
-            
+
+            //display the events number
+            //views.setTextViewText( R.id.nextevents_counter, String.valueOf( eventsPerDate.size() ) );
+
+            // get the sooner events
+            boolean eventFound = false;
+            for ( Map.Entry<String, ContactFeasts> entry : eventsPerDate.entrySet() )
+            {
+                ContactFeasts contactFeasts = entry.getValue();
+                if ( contactFeasts != null && contactFeasts.getContactList().isEmpty() )
+                {
+                    continue;
+                }
+                eventFound = true;
+                String eventDate = entry.getKey();
+                Log.d( "Events found at " + eventDate );
+                views.setViewVisibility( R.id.sooner_event_date, View.VISIBLE );
+                try
+                {
+                    views
+                        .setTextViewText( R.id.sooner_event_date, EventSectionedAdapter.getDateLabel( this, eventDate ) );
+                }
+                catch ( ParseException e )
+                {
+                    Log.e( "Error parsing date " + eventDate );
+                    views.setTextViewText( R.id.sooner_event_date, eventDate );
+                }
+                StringBuilder sb = new StringBuilder();
+                for ( Map.Entry<Long, ContactFeast> entry2 : contactFeasts.getContactList().entrySet() )
+                {
+                    if ( sb.length() > 0 )
+                    {
+                        sb.append( ", " );
+                    }
+                    sb.append( entry2.getValue().getContactName() );
+                }
+                views.setTextViewText( R.id.sooner_events, sb.toString() );
+                break;
+            }
+            if ( !eventFound )
+            {
+                views.setViewVisibility( R.id.sooner_event_date, View.INVISIBLE );
+                views.setTextViewText( R.id.sooner_event_date, null );
+                views.setTextViewText( R.id.sooner_events, getString( R.string.no_nextevents ) );
+            }
+
             // Push update for this widget to the home screen
             ComponentName thisWidget = new ComponentName( this, HappyContactsWidget.class );
             AppWidgetManager manager = AppWidgetManager.getInstance( this );

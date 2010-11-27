@@ -541,22 +541,43 @@ public class DbAdapter
         {
             String date = entry.getKey();
             ContactFeasts contactFeasts = entry.getValue();
-            for ( Map.Entry<Long, ContactFeast> entry2 : contactFeasts.getContactList().entrySet() )
+            if ( contactFeasts.getContactList().isEmpty() )
             {
-                ContactFeast user = entry2.getValue();
+                /* special characters for telling there is no events */
                 ContentValues initialValues = new ContentValues();
-                initialValues.put( HappyContactsDb.NextEvents.CONTACT_ID, user.getContactId() );
-                initialValues.put( HappyContactsDb.NextEvents.CONTACT_NAME, user.getContactName() );
-                initialValues.put( HappyContactsDb.NextEvents.BIRTHDAY_YEAR, user.getBirthdayYear() );
-                initialValues.put( HappyContactsDb.NextEvents.NAMEDAY, user.getNameDay() );
+                initialValues.put( HappyContactsDb.NextEvents.CONTACT_ID, "$$$" );
+                initialValues.put( HappyContactsDb.NextEvents.CONTACT_NAME, "$$$" );
+                initialValues.put( HappyContactsDb.NextEvents.BIRTHDAY_YEAR, "$$$" );
+                initialValues.put( HappyContactsDb.NextEvents.NAMEDAY, "$$$" );
                 initialValues.put( HappyContactsDb.NextEvents.EVENT_WHEN, date );
                 initialValues.put( HappyContactsDb.NextEvents.CHECKED_DATE, today );
 
                 res = mDb.insert( HappyContactsDb.NextEvents.TABLE_NAME, null, initialValues ) > 0;
                 if ( !res )
                 {
-                    Log.e( "Error while insert nexEvents for user " + user.toString() );
+                    Log.e( "Error while insert nexEvents for empty user" );
                     return res;
+                }
+            }
+            else
+            {
+                for ( Map.Entry<Long, ContactFeast> entry2 : contactFeasts.getContactList().entrySet() )
+                {
+                    ContactFeast user = entry2.getValue();
+                    ContentValues initialValues = new ContentValues();
+                    initialValues.put( HappyContactsDb.NextEvents.CONTACT_ID, user.getContactId() );
+                    initialValues.put( HappyContactsDb.NextEvents.CONTACT_NAME, user.getContactName() );
+                    initialValues.put( HappyContactsDb.NextEvents.BIRTHDAY_YEAR, user.getBirthdayYear() );
+                    initialValues.put( HappyContactsDb.NextEvents.NAMEDAY, user.getNameDay() );
+                    initialValues.put( HappyContactsDb.NextEvents.EVENT_WHEN, date );
+                    initialValues.put( HappyContactsDb.NextEvents.CHECKED_DATE, today );
+
+                    res = mDb.insert( HappyContactsDb.NextEvents.TABLE_NAME, null, initialValues ) > 0;
+                    if ( !res )
+                    {
+                        Log.e( "Error while insert nexEvents for user " + user.toString() );
+                        return res;
+                    }
                 }
             }
         }
@@ -572,7 +593,7 @@ public class DbAdapter
      * @param day format dd/MM
      * @return
      */
-    public Map<String, ContactFeasts> fetchTodayNextEvents()
+    public LinkedHashMap<String, ContactFeasts> fetchTodayNextEvents()
     {
         if ( Log.DEBUG )
         {
@@ -583,9 +604,10 @@ public class DbAdapter
                                    HappyContactsDb.NextEvents.CHECKED_DATE + "='" + today + "'", null, null, null,
                                    HappyContactsDb.NextEvents.EVENT_WHEN );
 
-        Map<String, ContactFeasts> events = new LinkedHashMap<String, ContactFeasts>();
+        LinkedHashMap<String, ContactFeasts> events = null;
         if ( cursor.getCount() > 0 )
         {
+            events = new LinkedHashMap<String, ContactFeasts>();
             int contactIdColumnId = cursor.getColumnIndexOrThrow( HappyContactsDb.NextEvents.CONTACT_ID );
             int contactNameColumnId = cursor.getColumnIndexOrThrow( HappyContactsDb.NextEvents.CONTACT_NAME );
             int birthdayYearColumnId = cursor.getColumnIndexOrThrow( HappyContactsDb.NextEvents.BIRTHDAY_YEAR );
@@ -594,9 +616,11 @@ public class DbAdapter
 
             while ( cursor.moveToNext() )
             {
+                String birthdayYear = cursor.getString( birthdayYearColumnId );
+
                 Long contactId = cursor.getLong( contactIdColumnId );
                 String contactName = cursor.getString( contactNameColumnId );
-                String birthdayYear = cursor.getString( birthdayYearColumnId );
+
                 String eventWhen = cursor.getString( eventWhenColumnId );
                 String nameDay = cursor.getString( nameDayColumnId );
                 ContactFeast contactFeast = new ContactFeast( nameDay, contactName );
@@ -604,12 +628,20 @@ public class DbAdapter
                 contactFeast.setBirthdayYear( birthdayYear );
                 if ( events.containsKey( eventWhen ) )
                 {
-                    events.get( eventWhen ).addContact( contactId, contactFeast );
+                    /* check if its a real event */
+                    if ( birthdayYear == null || !birthdayYear.equals( "$$$" ) )
+                    {
+                        events.get( eventWhen ).addContact( contactId, contactFeast );
+                    }
                 }
                 else
                 {
                     ContactFeasts contactFeasts = new ContactFeasts();
-                    contactFeasts.addContact( contactId, contactFeast );
+                    /* check if its a real event */
+                    if ( birthdayYear == null || !birthdayYear.equals( "$$$" ) )
+                    {
+                        contactFeasts.addContact( contactId, contactFeast );
+                    }
                     events.put( eventWhen, contactFeasts );
                 }
             }
