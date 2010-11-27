@@ -9,6 +9,8 @@ import java.util.Map;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.commonsware.android.listview.SectionedAdapter;
@@ -30,6 +32,8 @@ public class NextEventsActivity
     extends ListActivity
     implements DateFormatConstants, Constants, NextEventsHandler
 {
+    private static final int REFRESH_MENU_ID = Menu.FIRST;
+
     private DbAdapter mDb;
 
     private SectionedAdapter mSectionedAdapter;
@@ -126,4 +130,24 @@ public class NextEventsActivity
         displayEvents();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu )
+    {
+        super.onCreateOptionsMenu( menu );
+        menu.add( 0, REFRESH_MENU_ID, 0, R.string.refresh ).setIcon( R.drawable.ic_menu_today );
+        return true;
+    }
+
+    @Override
+    public boolean onMenuItemSelected( int featureId, MenuItem item )
+    {
+        switch ( item.getItemId() )
+        {
+            case REFRESH_MENU_ID:
+                new NextEventsAsyncTask( this, this ).execute();
+                return true;
+
+        }
+        return super.onMenuItemSelected( featureId, item );
+    }
 }

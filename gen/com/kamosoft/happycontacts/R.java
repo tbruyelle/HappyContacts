@@ -290,6 +290,7 @@ public final class R {
         public static final int pref_time_summary=0x7f07001d;
         public static final int pref_whitelist=0x7f07004c;
         public static final int pref_whitelist_summary=0x7f07004d;
+        public static final int refresh=0x7f0700a9;
         public static final int reset_button=0x7f07003d;
         public static final int retrieving_events=0x7f0700a1;
         public static final int sendmail=0x7f070047;
