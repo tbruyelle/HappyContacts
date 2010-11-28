@@ -4,19 +4,14 @@
   style="@style/WidgetBackground" android:orientation="horizontal">
 
   <ImageView android:src="@drawable/icon"
-    android:layout_width="wrap_content" android:layout_height="fill_parent"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
     android:maxWidth="16dip" android:maxHeight="16dip"
-    android:scaleType="fitCenter" android:padding="8dip" />
+    android:scaleType="fitCenter" android:padding="6dip" />
 
   <LinearLayout android:layout_width="fill_parent"
-    android:layout_height="fill_parent" android:orientation="vertical">
-    <TextView android:layout_width="fill_parent"
-      android:layout_height="wrap_content" android:id="@+id/sooner_event_date"
-      android:text="tomorow" android:gravity="center"
-      android:textStyle="bold" />
-    <TextView android:layout_width="wrap_content"
-      android:layout_height="wrap_content" android:id="@+id/sooner_events"
-      android:text="bill's birthday" />
-  </LinearLayout>
+    android:id="@+id/widget.events.list" android:layout_height="fill_parent"
+    android:orientation="vertical">
+    
+    </LinearLayout>
 
 </LinearLayout>

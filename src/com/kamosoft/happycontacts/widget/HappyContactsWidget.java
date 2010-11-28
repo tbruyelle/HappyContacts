@@ -46,6 +46,8 @@ public class HappyContactsWidget
         extends Service
     {
 
+        private static final short MAX_EVENT_DISPLAYED = 3;
+
         /**
          * @see android.app.Service#onStart(android.content.Intent, int)
          */
@@ -66,13 +68,10 @@ public class HappyContactsWidget
             }
             Log.d( "Events looked" );
             // Get the layout for the App Widget and attach an on-click listener to the button
-            RemoteViews views = new RemoteViews( this.getPackageName(), R.layout.appwidget );
-
-            //display the events number
-            //views.setTextViewText( R.id.nextevents_counter, String.valueOf( eventsPerDate.size() ) );
+            RemoteViews rootViews = new RemoteViews( this.getPackageName(), R.layout.appwidget );
 
             // get the sooner events
-            boolean eventFound = false;
+            short eventDisplayed = 0;
             for ( Map.Entry<String, ContactFeasts> entry : eventsPerDate.entrySet() )
             {
                 ContactFeasts contactFeasts = entry.getValue();
@@ -80,18 +79,28 @@ public class HappyContactsWidget
                 {
                     continue;
                 }
-                eventFound = true;
+                eventDisplayed++;
                 String eventDate = entry.getKey();
-                Log.d( "Events found at " + eventDate );                
+                Log.d( "Events found at " + eventDate );
+
+                if ( eventDisplayed > 1 )
+                {
+                    /* add a divider */
+                    RemoteViews divider = new RemoteViews( this.getPackageName(), R.layout.divider );
+                    rootViews.addView( R.id.widget_events_list, divider );
+                }
+
+                //View eventElementLayout = layoutInflater.inflate( R.layout.event_element, null );
+                RemoteViews eventElementLayout = new RemoteViews( this.getPackageName(), R.layout.widget_events_element );
                 try
                 {
-                    views
-                        .setTextViewText( R.id.sooner_event_date, EventSectionedAdapter.getDateLabel( this, eventDate ) );
+                    eventElementLayout.setTextViewText( R.id.sooner_event_date,
+                                                        EventSectionedAdapter.getDateLabel( this, eventDate ) );
                 }
                 catch ( ParseException e )
                 {
                     Log.e( "Error parsing date " + eventDate );
-                    views.setTextViewText( R.id.sooner_event_date, eventDate );
+                    rootViews.setTextViewText( R.id.sooner_event_date, eventDate );
                 }
                 StringBuilder sb = new StringBuilder();
                 for ( Map.Entry<Long, ContactFeast> entry2 : contactFeasts.getContactList().entrySet() )
@@ -102,19 +111,26 @@ public class HappyContactsWidget
                     }
                     sb.append( entry2.getValue().getContactName() );
                 }
-                views.setTextViewText( R.id.sooner_events, sb.toString() );
-                break;
+                eventElementLayout.setTextViewText( R.id.sooner_events, sb.toString() );
+                rootViews.addView( R.id.widget_events_list, eventElementLayout );
+
+                if ( eventDisplayed > MAX_EVENT_DISPLAYED )
+                {
+                    break;
+                }
             }
-            if ( !eventFound )
+            if ( eventDisplayed == 0 )
             {
-                views.setTextViewText( R.id.sooner_event_date,getString( R.string.no_nextevents ));
-                views.setTextViewText( R.id.sooner_events, null );                
+                RemoteViews eventElementLayout = new RemoteViews( this.getPackageName(), R.layout.widget_events_element );
+                eventElementLayout.setTextViewText( R.id.sooner_event_date, getString( R.string.no_nextevents ) );
+                eventElementLayout.setTextViewText( R.id.sooner_events, null );
+                rootViews.addView( R.id.widget_events_list, eventElementLayout );
             }
 
             // Push update for this widget to the home screen
             ComponentName thisWidget = new ComponentName( this, HappyContactsWidget.class );
             AppWidgetManager manager = AppWidgetManager.getInstance( this );
-            manager.updateAppWidget( thisWidget, views );
+            manager.updateAppWidget( thisWidget, rootViews );
         }
 
         /**
