@@ -14,7 +14,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
-import android.view.View;
 import android.widget.RemoteViews;
 
 import com.kamosoft.happycontacts.Log;
@@ -83,8 +82,7 @@ public class HappyContactsWidget
                 }
                 eventFound = true;
                 String eventDate = entry.getKey();
-                Log.d( "Events found at " + eventDate );
-                views.setViewVisibility( R.id.sooner_event_date, View.VISIBLE );
+                Log.d( "Events found at " + eventDate );                
                 try
                 {
                     views
@@ -109,9 +107,8 @@ public class HappyContactsWidget
             }
             if ( !eventFound )
             {
-                views.setViewVisibility( R.id.sooner_event_date, View.INVISIBLE );
-                views.setTextViewText( R.id.sooner_event_date, null );
-                views.setTextViewText( R.id.sooner_events, getString( R.string.no_nextevents ) );
+                views.setTextViewText( R.id.sooner_event_date,getString( R.string.no_nextevents ));
+                views.setTextViewText( R.id.sooner_events, null );                
             }
 
             // Push update for this widget to the home screen
