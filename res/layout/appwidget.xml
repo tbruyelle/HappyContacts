@@ -4,14 +4,17 @@
   style="@style/WidgetBackground" android:orientation="horizontal">
 
   <ImageView android:src="@drawable/icon"
-    android:layout_width="wrap_content" android:layout_height="wrap_content"
-    android:maxWidth="16dip" android:maxHeight="16dip"
-    android:scaleType="fitCenter" android:padding="6dip" />
+    android:layout_gravity="center" android:layout_width="wrap_content"
+    android:layout_height="wrap_content" android:scaleType="fitCenter"
+    android:padding="4dp" />
 
   <LinearLayout android:layout_width="fill_parent"
-    android:id="@+id/widget.events.list" android:layout_height="fill_parent"
-    android:orientation="vertical">
-    
-    </LinearLayout>
+    android:layout_height="fill_parent" android:id="@+id/widget.events.list"
+    android:orientation="vertical" android:gravity="center">
+    <!--  test text, put a loading icon here in the service -->
+    <TextView android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="toto est content" />
+  </LinearLayout>
 
 </LinearLayout>

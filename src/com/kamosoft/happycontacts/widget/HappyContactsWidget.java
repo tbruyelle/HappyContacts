@@ -69,7 +69,10 @@ public class HappyContactsWidget
             Log.d( "Events looked" );
             // Get the layout for the App Widget and attach an on-click listener to the button
             RemoteViews rootViews = new RemoteViews( this.getPackageName(), R.layout.appwidget );
-
+            
+            // remove old views from previous call
+            rootViews.removeAllViews( R.id.widget_events_list );
+            
             // get the sooner events
             short eventDisplayed = 0;
             for ( Map.Entry<String, ContactFeasts> entry : eventsPerDate.entrySet() )

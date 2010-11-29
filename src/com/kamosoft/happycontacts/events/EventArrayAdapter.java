@@ -93,7 +93,7 @@ public class EventArrayAdapter
             {
                 Bitmap photo = ContactUtils.loadContactPhoto( mContext, user.getContactId() );
                 ImageView imageView = (ImageView) view.findViewById( R.id.contact_photo );
-                imageView.setBackgroundResource( android.R.drawable.picture_frame );
+                //imageView.setBackgroundResource( android.R.drawable.picture_frame );
                 imageView.setImageBitmap( photo );
             }
             catch ( Exception e )
