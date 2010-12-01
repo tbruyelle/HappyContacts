@@ -4,10 +4,10 @@
   android:orientation="horizontal" android:layout_gravity="center_vertical|center_horizontal">
   <TextView android:layout_width="wrap_content"
     android:layout_height="wrap_content" android:id="@+id/sooner_event_date"
-    android:text="tomorow" android:textStyle="bold"
+    android:text="tomorow" android:textStyle="bold" android:textColor="@color/white"
     android:layout_alignParentLeft="true" android:paddingLeft="6dp"/>
   <TextView android:layout_width="wrap_content"
     android:gravity="center" android:layout_height="wrap_content"
-    android:id="@+id/sooner_events" android:text="bill's birthday"
+    android:id="@+id/sooner_events" android:text="bill's birthday" android:textColor="@color/white"
     android:layout_alignParentRight="true" android:paddingRight="6dp" />
 </RelativeLayout>

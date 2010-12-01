@@ -3,7 +3,7 @@
   package="com.kamosoft.happycontacts" android:versionCode="18"
   android:versionName="2.9">
 
-  <application android:icon="@drawable/icon"
+  <application android:icon="@drawable/icon" android:theme="@style/Theme.HappyContacts"
     android:label="@string/app_name" android:debuggable="true">
     <activity android:name=".HappyContactsPreferences"
       android:label="@string/app_name">
