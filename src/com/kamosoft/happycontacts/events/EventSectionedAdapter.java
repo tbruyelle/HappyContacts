@@ -77,7 +77,7 @@ public class EventSectionedAdapter
         }
         else
         {
-            return dateString;
+            return context.getString( R.string.in_x_days, String.valueOf( nbDay ) );
         }
     }
 

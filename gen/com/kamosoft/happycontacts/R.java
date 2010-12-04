@@ -218,6 +218,7 @@ public final class R {
         public static final int happyfeast=0x7f070009;
         public static final int happyfeast_name=0x7f070041;
         public static final int ignore_birthyear=0x7f070092;
+        public static final int in_x_days=0x7f0700ab;
         public static final int inserting_birthdays=0x7f070079;
         public static final int inserting_birthdays_done=0x7f070093;
         public static final int inserting_results=0x7f070078;

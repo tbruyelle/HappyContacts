@@ -5,6 +5,5 @@
 	</style>
 	<style name="WidgetNotification" parent="@android:style/TextAppearance.Small">
 		<item name="android:textSize">10sp</item>
-		<item name="android:textStyle">normal</item>
 	</style>
 </resources>

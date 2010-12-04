@@ -175,4 +175,5 @@
 <string name="logging_out">Logging out from Facebook...</string>
 <string name="refresh">Refresh</string>
 <string name="widget_event_counter">+%s more</string>
+<string name="in_x_days">In %s days</string>
 </resources>

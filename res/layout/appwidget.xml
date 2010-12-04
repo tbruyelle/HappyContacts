@@ -1,28 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="match_parent" android:layout_height="wrap_content" style="@style/WidgetBackground"
-  android:orientation="vertical" android:id="@+id/widget_root">
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	style="@style/WidgetBackground" android:orientation="vertical"
+	android:id="@+id/widget_root">
 
-  <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
-    <ImageView android:src="@drawable/smile" android:layout_alignParentLeft="true"
-      android:id="@+id/widget_icon" android:layout_width="24dp" android:layout_height="24dp"
-      android:scaleType="fitXY" android:padding="4dp" />
-    <TextView android:text="@string/app_name" android:layout_height="wrap_content"
-      android:layout_toRightOf="@id/widget_icon" android:layout_width="wrap_content"
-      android:paddingLeft="3dp" android:textStyle="bold" android:paddingTop="2dp" />
-    <TextView android:id="@+id/widget_event_counter" android:layout_alignParentRight="true"
-      android:layout_height="wrap_content" android:layout_width="wrap_content"
-      android:paddingTop="3dp" android:paddingRight="6dp" android:textStyle="italic"
-      style="@style/WidgetNotification" />
-  </RelativeLayout>
+	<RelativeLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<ImageView android:src="@drawable/smile"
+			android:layout_alignParentLeft="true" android:id="@+id/widget_icon"
+			android:layout_width="24dp" android:layout_height="24dp"
+			android:scaleType="fitXY" android:padding="4dp" />
+		<TextView android:text="@string/app_name"
+			android:layout_height="wrap_content" android:layout_toRightOf="@id/widget_icon"
+			android:layout_width="wrap_content" android:paddingLeft="3dp"
+			android:textStyle="bold" android:paddingTop="2dp" />
+		<TextView android:id="@+id/widget_event_counter"
+			android:layout_alignParentRight="true" android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:paddingTop="3dp"
+			android:paddingRight="6dp" style="@style/WidgetNotification" />
+	</RelativeLayout>
 
-  <ImageView xmlns:android="http://schemas.android.com/apk/res/android" android:src="@android:drawable/divider_horizontal_dark"
-    android:layout_width="fill_parent" android:layout_height="wrap_content" android:scaleType="fitXY" />
+	<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+		android:src="@android:drawable/divider_horizontal_dark"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:scaleType="fitXY" />
 
-  <LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
-    android:id="@+id/widget.events.list" android:orientation="vertical" android:paddingLeft="6dp"
-    android:paddingRight="6dp" android:layout_gravity="center_horizontal|center_vertical">
-    <!--  put a loading icon here in the service -->
-  </LinearLayout>
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:id="@+id/widget.events.list"
+		android:orientation="vertical" android:paddingLeft="6dp"
+		android:paddingRight="6dp" android:layout_gravity="center_vertical">
+		<!-- put a loading icon here in the service -->
+	</LinearLayout>
 
 </LinearLayout>

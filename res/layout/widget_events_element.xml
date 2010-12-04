@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout  xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent"
-	android:layout_height="wrap_content">
-	<TableRow >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content">
 
-		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:id="@+id/sooner_event_date"
-			android:text="tomorow" android:textStyle="bold" android:textColor="@color/white"
-			android:paddingLeft="6dp" android:maxLines="1" />
+	<TextView android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:id="@+id/sooner_event_date"
+		android:text="tomorow" android:textStyle="bold" android:textColor="@color/white"
+		android:paddingLeft="6dp" android:paddingRight="6dp" android:maxLines="1"
+		android:gravity="left" />
 
-		<TextView android:layout_width="wrap_content"
-			android:gravity="center" android:layout_height="wrap_content"
-			android:id="@+id/sooner_events"
-			android:text="bill's birthday it was a veryyyyyyyyyyyyyyy great day, super fun and great dat"
-			android:textColor="@color/white" android:paddingRight="6dp"
-			android:ellipsize="start" android:maxLines="1" />
+	<TextView android:layout_width="fill_parent" android:gravity="center"
+		android:layout_height="wrap_content" android:id="@+id/sooner_events"
+		android:text="bill's birthday it was a veryyyyyyyyyyyyyyy great day, super funandgreat dat"
+		android:textColor="@color/white" android:paddingRight="6dp"
+		android:ellipsize="end" android:lines="1"
+		android:scrollHorizontally="true" />
 
-	</TableRow>
-</TableLayout>
+</LinearLayout>
