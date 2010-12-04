@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <style name="WidgetBackground">
-    <item name="android:background">@drawable/appwidget_bg</item>
-  </style>
-  <style name="WidgetNotification" parent="@android:style/TextAppearance.Small">
-    <item name="android:textSize">12sp</item>
-    <item name="android:textStyle">italic</item>
-  </style>
+	<style name="WidgetBackground">
+		<item name="android:background">@drawable/appwidget_bg</item>
+	</style>
+	<style name="WidgetNotification" parent="@android:style/TextAppearance.Small">
+		<item name="android:textSize">10sp</item>
+		<item name="android:textStyle">normal</item>
+	</style>
 </resources>

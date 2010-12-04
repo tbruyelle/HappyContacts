@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -20,6 +21,7 @@ import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
 import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.events.EventSectionedAdapter;
+import com.kamosoft.happycontacts.events.NextEventsActivity;
 import com.kamosoft.happycontacts.events.NextEventsAsyncTask;
 import com.kamosoft.happycontacts.model.ContactFeast;
 import com.kamosoft.happycontacts.model.ContactFeasts;
@@ -39,6 +41,7 @@ public class HappyContactsWidget
     @Override
     public void onUpdate( Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds )
     {
+
         context.startService( new Intent( context, UpdateService.class ) );
     }
 
@@ -73,9 +76,15 @@ public class HappyContactsWidget
             // remove old views from previous call
             rootViews.removeAllViews( R.id.widget_events_list );
 
+            // Create an Intent to launch NextEventsActivity
+            Intent widgetIntent = new Intent( this, NextEventsActivity.class );
+            PendingIntent pendingIntent = PendingIntent.getActivity( this, 0, widgetIntent, 0 );
+            // attach an on-click listener          
+            rootViews.setOnClickPendingIntent( R.id.widget_root, pendingIntent );
+
             // get the sooner events
             short dayDisplayed = 0;
-            short eventCounter = 0;
+            short eventsMoreThanMax = 0;
             for ( Map.Entry<String, ContactFeasts> entry : eventsPerDate.entrySet() )
             {
                 ContactFeasts contactFeasts = entry.getValue();
@@ -84,9 +93,9 @@ public class HappyContactsWidget
                     continue;
                 }
 
-                eventCounter += contactFeasts.getContactList().size();
-                if ( dayDisplayed > MAX_DAY_DISPLAYED )
+                if ( dayDisplayed >= MAX_DAY_DISPLAYED )
                 {
+                    eventsMoreThanMax += contactFeasts.getContactList().size();
                     continue;
                 }
                 dayDisplayed++;
@@ -132,9 +141,12 @@ public class HappyContactsWidget
                 eventElementLayout.setTextViewText( R.id.sooner_events, null );
                 rootViews.addView( R.id.widget_events_list, eventElementLayout );
             }
-            rootViews.setTextViewText( R.id.widget_event_counter,
-                                       getString( R.string.widget_event_counter, String.valueOf( eventCounter ) ) );
-
+            if ( eventsMoreThanMax > 0 )
+            {
+                rootViews
+                    .setTextViewText( R.id.widget_event_counter,
+                                      getString( R.string.widget_event_counter, String.valueOf( eventsMoreThanMax ) ) );
+            }
             // Push update for this widget to the home screen
             ComponentName thisWidget = new ComponentName( this, HappyContactsWidget.class );
             AppWidgetManager manager = AppWidgetManager.getInstance( this );
