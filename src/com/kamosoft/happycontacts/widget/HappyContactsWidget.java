@@ -111,7 +111,7 @@ public class HappyContactsWidget
                 }
 
                 //View eventElementLayout = layoutInflater.inflate( R.layout.event_element, null );
-                RemoteViews eventElementLayout = new RemoteViews( this.getPackageName(), R.layout.widget_events_element );
+                RemoteViews eventElementLayout = new RemoteViews( this.getPackageName(), R.layout.appwidget_element );
                 try
                 {
                     eventElementLayout.setTextViewText( R.id.sooner_event_date,
@@ -136,7 +136,7 @@ public class HappyContactsWidget
             }
             if ( dayDisplayed == 0 )
             {
-                RemoteViews eventElementLayout = new RemoteViews( this.getPackageName(), R.layout.widget_events_element );
+                RemoteViews eventElementLayout = new RemoteViews( this.getPackageName(), R.layout.appwidget_element );
                 eventElementLayout.setTextViewText( R.id.sooner_event_date, getString( R.string.no_nextevents ) );
                 eventElementLayout.setTextViewText( R.id.sooner_events, null );
                 rootViews.addView( R.id.widget_events_list, eventElementLayout );

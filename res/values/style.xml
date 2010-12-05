@@ -1,9 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<style name="WidgetBackground">
+	<!-- Widget styles -->
+	<style name="WidgetLayout">
 		<item name="android:background">@drawable/appwidget_bg</item>
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">fill_parent</item>
+		<item name="android:orientation">vertical</item>
 	</style>
-	<style name="WidgetNotification" parent="@android:style/TextAppearance.Small">
+
+	<style name="WidgetIcon">
+		<item name="android:layout_width">24dp</item>
+		<item name="android:layout_height">24dp</item>
+		<item name="android:scaleType">fitXY</item>
+		<item name="android:paddingRight">4dp</item>
+		<item name="android:paddingBottom">4dp</item>
+		<item name="android:paddingTop">5dp</item>
+		<item name="android:paddingLeft">6dp</item>
+	</style>
+
+	<style name="WidgetTitle" parent="@android:style/Widget.TextView">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:paddingLeft">3dp</item>
+		<item name="android:paddingTop">2dp</item>
+	</style>
+
+	<style name="WidgetNotification" parent="@android:style/Widget.TextView">
 		<item name="android:textSize">10sp</item>
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:paddingRight">6dp</item>
+		<item name="android:paddingTop">3dp</item>
+	</style>
+
+	<style name="WidgetContentDay" parent="@android:style/Widget.TextView">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textColor">#ffff</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:paddingLeft">6dp</item>
+		<item name="android:paddingRight">6dp</item>
+		<item name="android:gravity">left</item>
+	</style>
+	<style name="WidgetContentNames" parent="@android:style/Widget.TextView">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textColor">#ffff</item>
+		<item name="android:lines">1</item>
+		<item name="android:ellipsize">end</item>
+		<item name="android:scrollHorizontally">true</item>
+		<item name="android:paddingRight">6dp</item>
+		<item name="android:gravity">center</item>
 	</style>
 </resources>

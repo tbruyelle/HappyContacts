@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+	<TextView android:id="@+id/sooner_event_date" android:text="tomorow"
+		style="@style/WidgetContentDay" />
+
+	<TextView android:id="@+id/sooner_events"
+		android:text="bill's birthday it was a veryyyyyyyyyyyyyyy great day, super funandgreat dat"
+		style="@style/WidgetContentNames" />
+
+</LinearLayout>
