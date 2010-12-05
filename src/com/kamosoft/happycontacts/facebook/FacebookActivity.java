@@ -19,6 +19,7 @@ import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,8 +27,8 @@ import android.widget.Toast;
 import com.facebook.android.AsyncFacebookRunner;
 import com.facebook.android.DialogError;
 import com.facebook.android.Facebook;
-import com.facebook.android.FacebookError;
 import com.facebook.android.Facebook.DialogListener;
+import com.facebook.android.FacebookError;
 import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
@@ -129,6 +130,15 @@ public class FacebookActivity
         mFacebook = new Facebook();
         mHandler = new Handler();
 
+        Button syncButton = (Button) findViewById( R.id.start_sync_button );
+        syncButton.setOnClickListener( new View.OnClickListener()
+        {
+            public void onClick( View v )
+            {
+                sync();
+            }
+        } );
+
         SessionStore.restore( mFacebook, this );
         SessionEvents.addAuthListener( new SampleAuthListener() );
         SessionEvents.addLogoutListener( new SampleLogoutListener() );
@@ -216,10 +226,9 @@ public class FacebookActivity
                 break;
 
             case PICK_CONTACT_ACTIVITY_RESULT:
-                Toast.makeText(
-                                this,
-                                getString( R.string.link_contact_done, mCurrentUser.name, data
-                                    .getStringExtra( CONTACTNAME_INTENT_KEY ) ), Toast.LENGTH_LONG ).show();
+                Toast.makeText( this,
+                                getString( R.string.link_contact_done, mCurrentUser.name,
+                                           data.getStringExtra( CONTACTNAME_INTENT_KEY ) ), Toast.LENGTH_LONG ).show();
                 setIntent( data );
                 break;
         }
@@ -396,9 +405,8 @@ public class FacebookActivity
         {
             case DELETEALL_DIALOG_ID:
                 AlertDialog.Builder builder = new AlertDialog.Builder( this );
-                builder.setMessage( R.string.confirm_deleteall ).setCancelable( false ).setPositiveButton( R.string.ok,
-                                                                                                           this )
-                    .setNegativeButton( R.string.cancel, this );
+                builder.setMessage( R.string.confirm_deleteall ).setCancelable( false )
+                    .setPositiveButton( R.string.ok, this ).setNegativeButton( R.string.cancel, this );
                 return builder.create();
 
             case CONFIRM_STORE_DIALOG_ID:

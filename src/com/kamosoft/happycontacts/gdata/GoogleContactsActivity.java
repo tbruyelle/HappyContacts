@@ -20,7 +20,9 @@ import android.os.Bundle;
 import android.provider.MediaStore.Images;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -107,6 +109,15 @@ public class GoogleContactsActivity
         super.onCreate( savedInstanceState );
         setContentView( R.layout.gcontactlist );
         mSyncCounter = (TextView) findViewById( R.id.sync_google_counter );
+
+        Button syncButton = (Button) findViewById( R.id.start_sync_button );
+        syncButton.setOnClickListener( new View.OnClickListener()
+        {
+            public void onClick( View v )
+            {
+                sync();
+            }
+        } );
 
         mDb = new DbAdapter( this );
         mDb.open( false );
@@ -467,9 +478,8 @@ public class GoogleContactsActivity
         {
             case DELETEALL_DIALOG_ID:
                 AlertDialog.Builder builder = new AlertDialog.Builder( this );
-                builder.setMessage( R.string.confirm_deleteall ).setCancelable( false ).setPositiveButton( R.string.ok,
-                                                                                                           this )
-                    .setNegativeButton( R.string.cancel, this );
+                builder.setMessage( R.string.confirm_deleteall ).setCancelable( false )
+                    .setPositiveButton( R.string.ok, this ).setNegativeButton( R.string.cancel, this );
                 return builder.create();
 
             case CONFIRM_STORE_DIALOG_ID:
