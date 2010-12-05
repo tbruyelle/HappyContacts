@@ -332,15 +332,14 @@ public final class R {
         public static final int yes=0x7f070081;
     }
     public static final class style {
-        public static final int Theme_HappyContacts=0x7f090007;
-        public static final int WidgetContentDay=0x7f090005;
-        public static final int WidgetContentNames=0x7f090006;
+        public static final int Theme_HappyContacts=0x7f090006;
+        public static final int WidgetContentDay=0x7f090004;
+        public static final int WidgetContentNames=0x7f090005;
         public static final int WidgetIcon=0x7f090001;
         /**  Widget styles 
          */
         public static final int WidgetLayout=0x7f090000;
-        public static final int WidgetLoading=0x7f090003;
-        public static final int WidgetNotification=0x7f090004;
+        public static final int WidgetNotification=0x7f090003;
         public static final int WidgetTitle=0x7f090002;
     }
     public static final class xml {
