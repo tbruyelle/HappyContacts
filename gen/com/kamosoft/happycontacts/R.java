@@ -37,23 +37,15 @@ public final class R {
         public static final int ic_menu_save=0x7f020010;
         public static final int ic_menu_today=0x7f020011;
         public static final int icon=0x7f020012;
-        public static final int icon_tiny=0x7f020013;
-        public static final int icon_tom=0x7f020014;
-        public static final int left_deco=0x7f020015;
-        public static final int nophoto=0x7f020016;
-        public static final int notif=0x7f020017;
-        public static final int old_icon=0x7f020018;
-        public static final int right_deco=0x7f020019;
-        public static final int sad=0x7f02001a;
-        public static final int sync_ko=0x7f02001b;
-        public static final int sync_not_found=0x7f02001c;
-        public static final int sync_ok=0x7f02001d;
-        public static final int umbrella=0x7f02001e;
-        public static final int widget_bg=0x7f02001f;
-        public static final int widget_bg_hc=0x7f020020;
-        public static final int widget_bg_normal=0x7f020021;
-        public static final int widget_bg_pressed=0x7f020022;
-        public static final int widget_bg_selected=0x7f020023;
+        public static final int left_deco=0x7f020013;
+        public static final int nophoto=0x7f020014;
+        public static final int notif=0x7f020015;
+        public static final int right_deco=0x7f020016;
+        public static final int sad=0x7f020017;
+        public static final int sync_ko=0x7f020018;
+        public static final int sync_not_found=0x7f020019;
+        public static final int sync_ok=0x7f02001a;
+        public static final int umbrella=0x7f02001b;
     }
     public static final class id {
         public static final int Email=0x7f0a0010;
