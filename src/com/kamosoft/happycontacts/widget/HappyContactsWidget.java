@@ -151,6 +151,7 @@ public class HappyContactsWidget
             ComponentName thisWidget = new ComponentName( this, HappyContactsWidget.class );
             AppWidgetManager manager = AppWidgetManager.getInstance( this );
             manager.updateAppWidget( thisWidget, rootViews );
+            db.close();
         }
 
         /**
