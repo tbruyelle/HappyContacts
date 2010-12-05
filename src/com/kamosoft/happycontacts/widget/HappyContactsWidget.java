@@ -58,6 +58,15 @@ public class HappyContactsWidget
         public void onStart( Intent intent, int startId )
         {
             super.onStart( intent, startId );
+
+            // Get the layout for the App Widget and attach an on-click listener to the button
+            RemoteViews rootViews = new RemoteViews( this.getPackageName(), R.layout.appwidget );
+
+            // remove old views from previous call
+            rootViews.removeAllViews( R.id.widget_events_list );
+            // add the loading message
+            rootViews.setTextViewText( R.id.widget_event_counter, getString( R.string.loading ) );
+
             /*
              * init and open database
              */
@@ -70,11 +79,6 @@ public class HappyContactsWidget
                 eventsPerDate = NextEventsAsyncTask.lookForNextEvents( this );
             }
             Log.d( "Events looked" );
-            // Get the layout for the App Widget and attach an on-click listener to the button
-            RemoteViews rootViews = new RemoteViews( this.getPackageName(), R.layout.appwidget );
-
-            // remove old views from previous call
-            rootViews.removeAllViews( R.id.widget_events_list );
 
             // Create an Intent to launch NextEventsActivity
             Intent widgetIntent = new Intent( this, NextEventsActivity.class );
@@ -146,6 +150,11 @@ public class HappyContactsWidget
                 rootViews
                     .setTextViewText( R.id.widget_event_counter,
                                       getString( R.string.widget_event_counter, String.valueOf( eventsMoreThanMax ) ) );
+            }
+            else
+            {
+                // to hide the loading message
+                rootViews.setTextViewText( R.id.widget_event_counter, null );
             }
             // Push update for this widget to the home screen
             ComponentName thisWidget = new ComponentName( this, HappyContactsWidget.class );
