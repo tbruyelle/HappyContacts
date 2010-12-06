@@ -90,6 +90,16 @@ public class NextEventsActivity
         }
     }
 
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        if ( mDb != null )
+        {
+            mDb.close();
+        }
+    }
+
     private void displayEvents()
     {
         mSectionedAdapter = new EventSectionedAdapter( this );
