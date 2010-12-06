@@ -68,7 +68,7 @@
 <string name="reset_button">default</string>
 <string name="toast_mail_template_saved">Email templates saved</string>
 <string name="toast_sms_template_saved">SMS templates saved</string>
-<string name="feast_counter">%d/%d</string>
+<string name="feast_counter">%1$d/%2$d</string>
 <string name="happyfeast_name">It\'s his/her name day :</string>
 <string name="pref_check_name_days">Check today events</string>
 <string name="pref_check_name_days_summary">Perform a manual check of the day\'s events</string>
@@ -86,13 +86,13 @@
 <string name="whitelist_added">%s has been added to white list</string>
 <string name="pick_contact_nickname">1. Pick a contact with a nickname</string>
 <string name="pick_nameday">2. Pick a name day for %s</string>
-<string name="confirm_delete_whitelist">Are you sure you want to delete link between %s and %s ?</string>
+<string name="confirm_delete_whitelist">Are you sure you want to delete link between %1$s and %2$s ?</string>
 <string name="confirm_delete_blacklist">Are you sure you want to delete %s from blacklist ?</string>
 <string name="deleteall">Delete all</string>
 <string name="confirm_deleteall">Do you really want to delete all ?</string>
 <string name="type_to_filter">Type to filter</string>
 <string name="add_whitelist">Link a contact to a name-day</string>
-<string name="can_match_normally">%s can already be matched to name-day %s, so it\'s useless to add this link to the white list.</string>
+<string name="can_match_normally">%1$s can already be matched to name-day %2$s, so it\'s useless to add this link to the white list.</string>
 <string name="link_other">Link an other</string>
 <string name="pref_birthday">Birthdays</string>
 <string name="pref_birthday_summary">Retrieve all your friends\' birthday from Google Contacts or Facebook</string>
@@ -131,8 +131,8 @@
 <string name="facebook_login_error">Sorry, unable to login to Facebook</string>
 <string name="link_contact">Link to a contact</string>
 <string name="unlink_contact">Unlink this contact</string>
-<string name="link_contact_alert">%s is already linked to %s, are you sure to link to another contact ?</string>
-<string name="link_contact_done">%s is now linked to %s</string>
+<string name="link_contact_alert">%1$s is already linked to %2$s, are you sure to link to another contact ?</string>
+<string name="link_contact_done">%1$s is now linked to %2$s</string>
 <string name="yes">Yes</string>
 <string name="no">No</string>
 <string name="unlink_contact_useless">This friend has no linked contact, no need to unlink</string>

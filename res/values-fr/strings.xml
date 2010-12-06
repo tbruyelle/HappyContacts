@@ -67,7 +67,7 @@
 <string name="reset_button">Par défaut</string>
 <string name="toast_mail_template_saved">Modèles d\'email sauvegardés</string>
 <string name="toast_sms_template_saved">Modèles de SMS sauvegardés</string>
-<string name="feast_counter">%d/%d</string>
+<string name="feast_counter">%1$d/%2$d</string>
 <string name="happyfeast_name">C\'est la fête de</string>
 <string name="pref_check_name_days">Vérifier les évènements</string>
 <string name="pref_check_name_days_summary">Effectuer une vérification manuelle des évènements du jour</string>
@@ -81,14 +81,14 @@
 <string name="empty_name">Veuillez entrer un prénom</string>
 <string name="whitelist_added">%s ajouté à la liste blanche</string>
 <string name="pick_nameday">2. Choissisez le prénom pour %s</string>
-<string name="confirm_delete_whitelist">Etes-vous sûr de vouloir supprimer le lien entre %s et %s ?</string>
+<string name="confirm_delete_whitelist">Etes-vous sûr de vouloir supprimer le lien entre %1$s et %2$s ?</string>
 <string name="confirm_delete_blacklist">Etes-vous sûr de vouloir supprimer %s de la liste noire ?</string>
 <string name="deleteall">Supprimer tout</string>
 <string name="confirm_deleteall">Voulez-vous vraiment tout supprimer ?</string>
 <string name="pick_contact_nickname">1. Choississez un contact avec un surnom</string>
 <string name="type_to_filter">Tapez pour filtrer</string>
 <string name="add_whitelist">Associer un contact avec un prénom</string>
-<string name="can_match_normally">%s peut déjà correspondre au prénom %s, il est donc inutile de l\'ajouter à la liste blanche.</string>
+<string name="can_match_normally">%1$s peut déjà correspondre au prénom %2$s, il est donc inutile de l\'ajouter à la liste blanche.</string>
 <string name="link_other">Associer un autre</string>
 
 <string name="pref_birthday">Anniversaires</string>
@@ -128,8 +128,8 @@
 <string name="facebook_login_error">Désolé, impossible de se connecter à Facebook</string>
 <string name="link_contact">Associer à un contact</string>
 <string name="unlink_contact">Dissocier du contact</string>
-<string name="link_contact_alert">%s est déjà associé à %s, êtes-vous sûr de vouloir l\'associer à un autre contact ?</string>
-<string name="link_contact_done">%s est maintenant associé à %s</string>
+<string name="link_contact_alert">%1$s est déjà associé à %2$s, êtes-vous sûr de vouloir l\'associer à un autre contact ?</string>
+<string name="link_contact_done">%1$s est maintenant associé à %2$s</string>
 <string name="yes">Oui</string>
 <string name="no">Non</string>
 <string name="unlink_contact_useless">Cet ami n\'a pas de contact associé, inutile de le dissocier</string>
