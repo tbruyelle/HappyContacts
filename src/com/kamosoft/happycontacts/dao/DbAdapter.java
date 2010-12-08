@@ -216,6 +216,22 @@ public class DbAdapter
         return this;
     }
 
+    public void resetDbConnection()
+    {
+        Log.i( "resetting database connection (close and re-open)." );
+        cleanup();
+        mDb = SQLiteDatabase.openDatabase( "/data/data/com.kamosoft.happycontacts/databases/happy_contacts.db", null,
+                                           SQLiteDatabase.OPEN_READWRITE );
+    }
+
+    public void cleanup()
+    {
+        if ( ( mDb != null ) && mDb.isOpen() )
+        {
+            mDb.close();
+        }
+    }
+
     public void close()
     {
         mDbHelper.close();

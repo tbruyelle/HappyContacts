@@ -24,6 +24,11 @@ public class Log
         android.util.Log.e( LOGTAG, msg );
     }
 
+    public static void i( String msg )
+    {
+        android.util.Log.i( LOGTAG, msg );
+    }
+
     public static void e( String msg, Throwable tr )
     {
         android.util.Log.e( LOGTAG, msg, tr );

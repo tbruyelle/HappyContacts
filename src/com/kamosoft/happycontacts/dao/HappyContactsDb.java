@@ -9,6 +9,7 @@ package com.kamosoft.happycontacts.dao;
  */
 public final class HappyContactsDb
 {
+    
     public static String DATABASE_NAME = "happy_contacts";
 
     public static int DATABASE_VERSION = 46;

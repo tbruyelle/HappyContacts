@@ -177,4 +177,6 @@
 <string name="widget_event_counter">+%s more</string>
 <string name="in_x_days">In %s days</string>
 <string name="loading">Loading...</string>
+<string name="backupDb">Backup Database to SD card</string>
+<string name="restoreDb">Restore Database from SD card</string>
 </resources>
