@@ -42,7 +42,6 @@ public class HappyContactsWidget
     @Override
     public void onUpdate( Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds )
     {
-
         context.startService( new Intent( context, UpdateService.class ) );
     }
 
@@ -154,6 +153,8 @@ public class HappyContactsWidget
             AppWidgetManager manager = AppWidgetManager.getInstance( this );
             manager.updateAppWidget( thisWidget, rootViews );
             db.close();
+            /* stop the service */
+            this.stopSelf();
         }
 
         /**
