@@ -58,6 +58,7 @@
 			</intent-filter>
 		</activity>
 		<activity android:name=".events.NextEventsActivity"></activity>
+    <activity android:name=".dao.DataManager" />
 		<!-- the widget -->
 		<receiver android:name=".widget.HappyContactsWidget">
 			<intent-filter>

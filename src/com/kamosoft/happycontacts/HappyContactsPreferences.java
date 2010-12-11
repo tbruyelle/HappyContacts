@@ -24,6 +24,7 @@ import android.widget.TimePicker;
 import com.kamosoft.happycontacts.alarm.AlarmController;
 import com.kamosoft.happycontacts.birthday.BirthdayActivity;
 import com.kamosoft.happycontacts.blacklist.BlackListActivity;
+import com.kamosoft.happycontacts.dao.DataManager;
 import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.events.NextEventsActivity;
 import com.kamosoft.happycontacts.template.MailTemplateActivity;
@@ -104,8 +105,8 @@ public class HappyContactsPreferences
         switch ( id )
         {
             case TIME_DIALOG_ID:
-                dialog = new TimePickerDialog( HappyContactsPreferences.this, this, 0, 0, DateFormat
-                    .is24HourFormat( this ) );
+                dialog = new TimePickerDialog( HappyContactsPreferences.this, this, 0, 0,
+                                               DateFormat.is24HourFormat( this ) );
                 break;
             default:
                 dialog = null;
@@ -255,20 +256,20 @@ public class HappyContactsPreferences
         nextEvents.setSummary( R.string.pref_nextevents_summary );
         nextEvents.setIntent( new Intent( this, NextEventsActivity.class ) );
         root.addPreference( nextEvents );
-        
+
         /* disable name days checkbox */
-        CheckBoxPreference disableNameDays=new CheckBoxPreference( this );     
+        CheckBoxPreference disableNameDays = new CheckBoxPreference( this );
         disableNameDays.setTitle( R.string.pref_disable_nameday );
 
         if ( !mPrefs.getBoolean( PREF_DISABLE_NAMEDAY, false ) )
         {
             disableNameDays.setSummary( R.string.pref_disable_nameday_off );
-            disableNameDays.setChecked( false );           
+            disableNameDays.setChecked( false );
         }
         else
         {
             disableNameDays.setSummary( R.string.pref_disable_nameday_on );
-            disableNameDays.setChecked( true );           
+            disableNameDays.setChecked( true );
         }
         disableNameDays.setOnPreferenceClickListener( new OnPreferenceClickListener()
         {
@@ -290,9 +291,8 @@ public class HappyContactsPreferences
                 }
                 return true;
             }
-        });
+        } );
         root.addPreference( disableNameDays );
-       
 
         /* database category */
         PreferenceCategory databasePrefCat = new PreferenceCategory( this );
@@ -322,12 +322,19 @@ public class HappyContactsPreferences
         whiteListPref.setIntent( new Intent( this, WhiteListActivity.class ) );
         databasePrefCat.addPreference( whiteListPref );
 
-        // blacklist
+        /* blacklist */
         Preference blackListPref = new Preference( this );
         blackListPref.setTitle( R.string.pref_blacklist );
         blackListPref.setSummary( R.string.pref_blacklist_summary );
         blackListPref.setIntent( new Intent( this, BlackListActivity.class ) );
         databasePrefCat.addPreference( blackListPref );
+
+        /* backup/restore */
+        Preference bkpRestorePref = new Preference( this );
+        bkpRestorePref.setTitle( R.string.pref_backup_restore );
+        bkpRestorePref.setSummary( R.string.pref_backup_restore_summary );
+        bkpRestorePref.setIntent( new Intent( this, DataManager.class ) );
+        databasePrefCat.addPreference( bkpRestorePref );
 
         /* templates */
         PreferenceCategory templatesPrefCat = new PreferenceCategory( this );

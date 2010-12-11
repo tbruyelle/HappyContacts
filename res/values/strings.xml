@@ -179,4 +179,6 @@
 <string name="loading">Loading...</string>
 <string name="backupDb">Backup Database to SD card</string>
 <string name="restoreDb">Restore Database from SD card</string>
+<string name="pref_backup_restore">Backup or Restore</string>
+<string name="pref_backup_restore_summary">Perform a backup of the database to the SD card, or restore it</string>
 </resources>

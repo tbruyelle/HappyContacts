@@ -275,6 +275,8 @@ public final class R {
         public static final int pref_alarm=0x7f070019;
         public static final int pref_alarm_off=0x7f07001b;
         public static final int pref_alarm_on=0x7f07001a;
+        public static final int pref_backup_restore=0x7f0700af;
+        public static final int pref_backup_restore_summary=0x7f0700b0;
         public static final int pref_birthday=0x7f07005a;
         public static final int pref_birthday_summary=0x7f07005b;
         public static final int pref_blacklist=0x7f070017;

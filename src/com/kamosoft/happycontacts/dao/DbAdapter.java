@@ -16,6 +16,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 import android.text.format.DateFormat;
 
 import com.kamosoft.happycontacts.Constants;
@@ -220,7 +221,7 @@ public class DbAdapter
     {
         Log.i( "resetting database connection (close and re-open)." );
         cleanup();
-        mDb = SQLiteDatabase.openDatabase( "/data/data/com.kamosoft.happycontacts/databases/happy_contacts.db", null,
+        mDb = SQLiteDatabase.openDatabase( Environment.getDataDirectory() + DataManager.dbPath, null,
                                            SQLiteDatabase.OPEN_READWRITE );
     }
 

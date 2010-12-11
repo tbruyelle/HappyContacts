@@ -28,6 +28,8 @@ public class DataManager
 
     private Button restoreDbButton;
 
+    public static final String dbPath = "/data/com.kamosoft.happycontacts/databases/happy_contacts";
+
     @Override
     public void onCreate( final Bundle savedInstanceState )
     {
@@ -130,15 +132,15 @@ public class DataManager
         protected Boolean doInBackground( final Void... args )
         {
 
-            File dbFile = new File( Environment.getDataDirectory() + "/data/com.totsp.database/databases/sample.db" );
+            File dbFile = new File( Environment.getDataDirectory() + dbPath );
 
-            File exportDir = new File( Environment.getExternalStorageDirectory(), "databasedata" );
+            File exportDir = new File( Environment.getExternalStorageDirectory(), "happycontacts_db_backup" );
             if ( !exportDir.exists() )
             {
                 exportDir.mkdirs();
             }
             File file = new File( exportDir, dbFile.getName() );
-
+            Log.i( "Starting copy " + dbFile.getPath() + " to " + file.getPath() );
             try
             {
                 file.createNewFile();
@@ -188,7 +190,8 @@ public class DataManager
         protected String doInBackground( final Void... args )
         {
 
-            File dbBackupFile = new File( Environment.getExternalStorageDirectory() + "/databasedata/sample.db" );
+            File dbBackupFile = new File( Environment.getExternalStorageDirectory()
+                + "/happycontacts_db_backup/happy_contacts" );
             if ( !dbBackupFile.exists() )
             {
                 return "Database backup file does not exist, cannot import.";
@@ -198,7 +201,7 @@ public class DataManager
                 return "Database backup file exists, but is not readable, cannot import.";
             }
 
-            File dbFile = new File( Environment.getDataDirectory() + "/data/com.totsp.database/databases/sample.db" );
+            File dbFile = new File( Environment.getDataDirectory() + dbPath );
             if ( dbFile.exists() )
             {
                 dbFile.delete();
@@ -208,7 +211,9 @@ public class DataManager
             {
                 dbFile.createNewFile();
                 FileUtil.copyFile( dbBackupFile, dbFile );
-                //FIXME DataManager.this.application.getDataHelper().resetDbConnection();
+                DbAdapter db = new DbAdapter( DataManager.this );
+                db.resetDbConnection();
+
                 return null;
             }
             catch ( IOException e )

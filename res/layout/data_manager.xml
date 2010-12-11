@@ -4,12 +4,12 @@
 	android:layout_height="fill_parent">
 
 	<Button android:id="@+id/backupDb"
-		android:layout_width="200dp" android:layout_height="wrap_content"
+		android:layout_width="300dp" android:layout_height="80dp"
 		android:layout_marginTop="60dp" android:layout_gravity="center_horizontal"
 		android:text="@string/backupDb" />
 
 	<Button android:id="@+id/restoreDb"
-		android:layout_width="200dp" android:layout_height="wrap_content"
+		android:layout_width="300dp" android:layout_height="80dp"
 		android:layout_marginTop="60dp" android:layout_gravity="center_horizontal"
 		android:text="@string/restoreDb" />
 
