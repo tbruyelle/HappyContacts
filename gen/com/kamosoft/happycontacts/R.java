@@ -193,6 +193,17 @@ public final class R {
         public static final int contact_method_not_supported=0x7f070032;
         public static final int contact_not_found=0x7f070060;
         public static final int contactlist=0x7f070089;
+        public static final int data_backup_check=0x7f0700b1;
+        public static final int data_backup_ko=0x7f0700bb;
+        public static final int data_backup_ok=0x7f0700ba;
+        public static final int data_backupfile_notfound=0x7f0700b6;
+        public static final int data_backupfile_notreadable=0x7f0700b7;
+        public static final int data_exporting=0x7f0700b4;
+        public static final int data_external_unavailable=0x7f0700b2;
+        public static final int data_restore_check=0x7f0700b3;
+        public static final int data_restore_ko=0x7f0700b9;
+        public static final int data_restore_ok=0x7f0700b8;
+        public static final int data_restoring=0x7f0700b5;
         public static final int date_list_title=0x7f07000e;
         public static final int dateback=0x7f070048;
         public static final int datenext=0x7f070049;

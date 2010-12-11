@@ -43,9 +43,8 @@ public class DataManager
             public void onClick( final View v )
             {
                 Log.i( "exporting database to external storage" );
-                new AlertDialog.Builder( DataManager.this )
-                    .setMessage( "Are you sure (this will overwrite any existing backup data)?" )
-                    .setPositiveButton( "Yes", new DialogInterface.OnClickListener()
+                new AlertDialog.Builder( DataManager.this ).setMessage( R.string.data_backup_check )
+                    .setPositiveButton( R.string.yes, new DialogInterface.OnClickListener()
                     {
                         public void onClick( DialogInterface arg0, int arg1 )
                         {
@@ -58,12 +57,11 @@ public class DataManager
                             }
                             else
                             {
-                                Toast.makeText( DataManager.this,
-                                                "External storage is not available, unable to export data.",
+                                Toast.makeText( DataManager.this, R.string.data_external_unavailable,
                                                 Toast.LENGTH_SHORT ).show();
                             }
                         }
-                    } ).setNegativeButton( "No", new DialogInterface.OnClickListener()
+                    } ).setNegativeButton( R.string.no, new DialogInterface.OnClickListener()
                     {
                         public void onClick( DialogInterface arg0, int arg1 )
                         {
@@ -77,9 +75,8 @@ public class DataManager
         {
             public void onClick( final View v )
             {
-                new AlertDialog.Builder( DataManager.this )
-                    .setMessage( "Are you sure (this will overwrite existing current data)?" )
-                    .setPositiveButton( "Yes", new DialogInterface.OnClickListener()
+                new AlertDialog.Builder( DataManager.this ).setMessage( R.string.data_restore_check )
+                    .setPositiveButton( R.string.yes, new DialogInterface.OnClickListener()
                     {
                         public void onClick( DialogInterface arg0, int arg1 )
                         {
@@ -94,12 +91,11 @@ public class DataManager
                             }
                             else
                             {
-                                Toast.makeText( DataManager.this,
-                                                "External storage is not available, unable to export data.",
+                                Toast.makeText( DataManager.this, R.string.data_external_unavailable,
                                                 Toast.LENGTH_SHORT ).show();
                             }
                         }
-                    } ).setNegativeButton( "No", new DialogInterface.OnClickListener()
+                    } ).setNegativeButton( R.string.no, new DialogInterface.OnClickListener()
                     {
                         public void onClick( DialogInterface arg0, int arg1 )
                         {
@@ -123,7 +119,7 @@ public class DataManager
         @Override
         protected void onPreExecute()
         {
-            dialog.setMessage( "Exporting database..." );
+            dialog.setMessage( getString( R.string.data_exporting ) );
             dialog.show();
         }
 
@@ -164,11 +160,11 @@ public class DataManager
             }
             if ( success )
             {
-                Toast.makeText( DataManager.this, "Export successful!", Toast.LENGTH_SHORT ).show();
+                Toast.makeText( DataManager.this, R.string.data_backup_ok, Toast.LENGTH_SHORT ).show();
             }
             else
             {
-                Toast.makeText( DataManager.this, "Export failed", Toast.LENGTH_SHORT ).show();
+                Toast.makeText( DataManager.this, R.string.data_backup_ko, Toast.LENGTH_SHORT ).show();
             }
         }
     }
@@ -181,7 +177,7 @@ public class DataManager
         @Override
         protected void onPreExecute()
         {
-            dialog.setMessage( "Importing database..." );
+            dialog.setMessage( getString( R.string.data_restoring ) );
             dialog.show();
         }
 
@@ -194,11 +190,11 @@ public class DataManager
                 + "/happycontacts_db_backup/happy_contacts" );
             if ( !dbBackupFile.exists() )
             {
-                return "Database backup file does not exist, cannot import.";
+                return getString( R.string.data_backupfile_notfound );
             }
             else if ( !dbBackupFile.canRead() )
             {
-                return "Database backup file exists, but is not readable, cannot import.";
+                return getString( R.string.data_backupfile_notreadable );
             }
 
             File dbFile = new File( Environment.getDataDirectory() + dbPath );
@@ -232,11 +228,12 @@ public class DataManager
             }
             if ( errMsg == null )
             {
-                Toast.makeText( DataManager.this, "Import successful!", Toast.LENGTH_SHORT ).show();
+                Toast.makeText( DataManager.this, R.string.data_restore_ok, Toast.LENGTH_SHORT ).show();
             }
             else
             {
-                Toast.makeText( DataManager.this, "Import failed - " + errMsg, Toast.LENGTH_SHORT ).show();
+                Toast.makeText( DataManager.this, getString( R.string.data_restore_ok, errMsg ), Toast.LENGTH_SHORT )
+                    .show();
             }
         }
     }

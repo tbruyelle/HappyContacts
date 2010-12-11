@@ -181,4 +181,15 @@
 <string name="restoreDb">Restore Database from SD card</string>
 <string name="pref_backup_restore">Backup or Restore</string>
 <string name="pref_backup_restore_summary">Perform a backup of the database to the SD card, or restore it</string>
+<string name="data_backup_check">Are you sure (this will overwrite any existing backup data) ?</string>
+<string name="data_external_unavailable">External storage is not available, unable to export data.</string>
+<string name="data_restore_check">Are you sure (this will overwrite existing current data)?</string>
+<string name="data_exporting">Exporting database...</string>
+<string name="data_restoring">Importing database...</string>
+<string name="data_backupfile_notfound">Database backup file does not exist, cannot import.</string>
+<string name="data_backupfile_notreadable">Database backup file exists, but is not readable, cannot import.</string>
+<string name="data_restore_ok">Restore successful !</string>
+<string name="data_restore_ko">Restore failed - %s</string>
+<string name="data_backup_ok">Backup successful !</string>
+<string name="data_backup_ko">Backup failed !</string>
 </resources>
