@@ -917,7 +917,7 @@ public class DbAdapter
             Log.v( "DbAdapter: call fetchAllBlackList()" );
         }
         return mDb.query( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS, null, null, null,
-                          null, null );
+                          null, HappyContactsDb.BlackList.CONTACT_NAME );
     }
 
     public Cursor fetchWhiteListForNameDay( String nameDay )
@@ -975,7 +975,8 @@ public class DbAdapter
             Log.v( "DbAdapter: call fetchAllTimeBlackListed()" );
         }
         return mDb.query( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS,
-                          HappyContactsDb.BlackList.LAST_WISH_DATE + " is null", null, null, null, null );
+                          HappyContactsDb.BlackList.LAST_WISH_DATE + " is null", null, null, null,
+                          HappyContactsDb.BlackList.CONTACT_NAME );
     }
 
     public Cursor fetchBlackList( long contactId )
