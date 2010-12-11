@@ -2,20 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/HappyContacts.Widget.Layout"
   android:id="@+id/widget_root">
 
-  <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
-    <TextView android:text="@string/nexteventslist" style="@style/HappyContacts.Widget.Title"
-      android:layout_alignParentLeft="true" />
-    <TextView android:id="@+id/widget_event_counter" style="@style/HappyContacts.Widget.Notification"
-      android:layout_alignParentRight="true" />
-  </RelativeLayout>
-
-  <ImageView xmlns:android="http://schemas.android.com/apk/res/android" android:src="@android:drawable/divider_horizontal_dark"
-    android:layout_width="fill_parent" android:layout_height="wrap_content" android:scaleType="fitXY" />
+  <TextView android:id="@+id/widget_event_counter" style="@style/HappyContacts.Widget.Notification"
+    android:text="@string/loading" />
 
   <LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
-    android:id="@+id/widget.events.list" android:orientation="vertical" android:paddingLeft="6dp"
-    android:paddingRight="6dp" android:layout_gravity="center_vertical">
-
+    android:id="@+id/widget_events_list" android:orientation="vertical" android:gravity="center_vertical">       
   </LinearLayout>
 
 </LinearLayout>

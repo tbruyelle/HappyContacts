@@ -111,8 +111,8 @@ public final class R {
         public static final int unlink_contact=0x7f0a003d;
         public static final int user_name=0x7f0a0039;
         public static final int webview=0x7f0a001d;
-        public static final int widget_events_list=0x7f0a0005;
         public static final int widget_event_counter=0x7f0a0004;
+        public static final int widget_events_list=0x7f0a0005;
         public static final int widget_root=0x7f0a0003;
     }
     public static final class layout {

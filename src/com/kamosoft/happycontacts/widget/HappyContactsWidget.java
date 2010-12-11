@@ -15,6 +15,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.view.View;
 import android.widget.RemoteViews;
 
 import com.kamosoft.happycontacts.Log;
@@ -49,7 +50,7 @@ public class HappyContactsWidget
         extends Service
     {
 
-        private static final short MAX_DAY_DISPLAYED = 2;
+        private static final short MAX_DAY_DISPLAYED = 3;
 
         /**
          * @see android.app.Service#onStart(android.content.Intent, int)
@@ -65,6 +66,7 @@ public class HappyContactsWidget
             // remove old views from previous call
             rootViews.removeAllViews( R.id.widget_events_list );
             // add the loading message
+            rootViews.setViewVisibility( R.id.widget_event_counter, View.VISIBLE );
             rootViews.setTextViewText( R.id.widget_event_counter, getString( R.string.loading ) );
 
             /*
@@ -110,7 +112,7 @@ public class HappyContactsWidget
                 if ( dayDisplayed > 1 )
                 {
                     /* add a divider */
-                    RemoteViews divider = new RemoteViews( this.getPackageName(), R.layout.divider );
+                    RemoteViews divider = new RemoteViews( this.getPackageName(), R.layout.divider_dark );
                     rootViews.addView( R.id.widget_events_list, divider );
                 }
 
@@ -145,17 +147,8 @@ public class HappyContactsWidget
                 eventElementLayout.setTextViewText( R.id.sooner_events, null );
                 rootViews.addView( R.id.widget_events_list, eventElementLayout );
             }
-            if ( eventsMoreThanMax > 0 )
-            {
-                rootViews
-                    .setTextViewText( R.id.widget_event_counter,
-                                      getString( R.string.widget_event_counter, String.valueOf( eventsMoreThanMax ) ) );
-            }
-            else
-            {
-                // to hide the loading message
-                rootViews.setTextViewText( R.id.widget_event_counter, null );
-            }
+            //           
+            rootViews.setViewVisibility( R.id.widget_event_counter, View.GONE );
             // Push update for this widget to the home screen
             ComponentName thisWidget = new ComponentName( this, HappyContactsWidget.class );
             AppWidgetManager manager = AppWidgetManager.getInstance( this );
