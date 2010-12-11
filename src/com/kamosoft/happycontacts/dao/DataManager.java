@@ -208,7 +208,7 @@ public class DataManager
             {
                 dbFile.createNewFile();
                 FileUtil.copyFile( dbBackupFile, dbFile );
-                DataManager.this.application.getDataHelper().resetDbConnection();
+                //FIXME DataManager.this.application.getDataHelper().resetDbConnection();
                 return null;
             }
             catch ( IOException e )
