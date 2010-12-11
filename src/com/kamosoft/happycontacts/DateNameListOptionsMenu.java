@@ -31,7 +31,7 @@ public abstract class DateNameListOptionsMenu
 
     protected static final int NAME_MENU_ID = DAY_MENU_ID + 1;
 
-    private static final int NAME_FORM_DIALOG_ID = 1;
+    //private static final int NAME_FORM_DIALOG_ID = 1;
 
     private static final int DATE_FORM_DIALOG_ID = 2;
 
@@ -91,7 +91,7 @@ public abstract class DateNameListOptionsMenu
                 return true;
 
             case NAME_MENU_ID:
-                /* in order to resolve accent issue, we start PickNameDayActivity instead of EnterNameDialog */
+                /* in order to resolve accent issue, I start PickNameDayActivity instead of EnterNameDialog */
                 //showDialog( NAME_FORM_DIALOG_ID );
                 Intent intent2 = new Intent( this, PickNameDayListActivity.class );
                 intent2.putExtra( NEXT_ACTIVITY_INTENT_KEY, DateListActivity.class );

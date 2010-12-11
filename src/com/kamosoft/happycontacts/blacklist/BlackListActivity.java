@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,8 +15,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
+import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.Log;
+import com.kamosoft.happycontacts.PickContactsListActivity;
 import com.kamosoft.happycontacts.R;
 import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.dao.HappyContactsDb;
@@ -26,11 +30,15 @@ import com.kamosoft.happycontacts.dao.HappyContactsDb;
  */
 public class BlackListActivity
     extends ListActivity
-    implements DialogInterface.OnClickListener
+    implements DialogInterface.OnClickListener, Constants
 {
     private static final int DELETEALL_MENU_ID = Menu.FIRST;
 
+    private static final int ADD_CONTACT_MENU_ID = DELETEALL_MENU_ID + 1;
+
     private static final int DELETEALL_DIALOG_ID = 1;
+
+    public static final int PICK_CONTACT_ACTIVITY_RESULT = 1;
 
     private DbAdapter mDb;
 
@@ -91,10 +99,9 @@ public class BlackListActivity
         else
         {
             mCursorBlakListed = mDb.fetchAllTimeBlackListed();
-        }       
+        }
         startManagingCursor( mCursorBlakListed );
-        String[] from =
-            new String[] { HappyContactsDb.BlackList.CONTACT_NAME, HappyContactsDb.BlackList.LAST_WISH_DATE };
+        String[] from = new String[] { HappyContactsDb.BlackList.CONTACT_NAME, HappyContactsDb.BlackList.LAST_WISH_DATE };
         int[] to = { R.id.contact_name, R.id.last_wish_date };
         setListAdapter( new SimpleCursorAdapter( this, R.layout.blacklist_element, mCursorBlakListed, from, to ) );
     }
@@ -103,16 +110,13 @@ public class BlackListActivity
     protected void onListItemClick( ListView l, View v, int position, long id )
     {
         super.onListItemClick( l, v, position, id );
-        mBlackListId =
-            mCursorBlakListed.getLong( mCursorBlakListed.getColumnIndexOrThrow( HappyContactsDb.BlackList.ID ) );
-        String name =
-            mCursorBlakListed.getString( mCursorBlakListed.getColumnIndexOrThrow( HappyContactsDb.BlackList.CONTACT_NAME ) );
+        mBlackListId = mCursorBlakListed.getLong( mCursorBlakListed
+            .getColumnIndexOrThrow( HappyContactsDb.BlackList.ID ) );
+        String name = mCursorBlakListed.getString( mCursorBlakListed
+            .getColumnIndexOrThrow( HappyContactsDb.BlackList.CONTACT_NAME ) );
         AlertDialog.Builder builder = new AlertDialog.Builder( this );
-        builder.setMessage( getString( R.string.confirm_delete_blacklist, name ) ).setCancelable( false ).setPositiveButton(
-                                                                                                                             R.string.ok,
-                                                                                                                             this ).setNegativeButton(
-                                                                                                                                                       R.string.cancel,
-                                                                                                                                                       this );
+        builder.setMessage( getString( R.string.confirm_delete_blacklist, name ) ).setCancelable( false )
+            .setPositiveButton( R.string.ok, this ).setNegativeButton( R.string.cancel, this );
         builder.create().show();
 
     }
@@ -143,6 +147,7 @@ public class BlackListActivity
     {
         super.onCreateOptionsMenu( menu );
         menu.add( 0, DELETEALL_MENU_ID, 0, R.string.deleteall ).setIcon( R.drawable.ic_menu_delete );
+        menu.add( 0, ADD_CONTACT_MENU_ID, 0, R.string.add ).setIcon( R.drawable.ic_menu_add );
         return true;
     }
 
@@ -154,9 +159,60 @@ public class BlackListActivity
             case DELETEALL_MENU_ID:
                 showDialog( DELETEALL_DIALOG_ID );
                 return true;
-
+            case ADD_CONTACT_MENU_ID:
+                Intent intent = new Intent( this, PickContactsListActivity.class );
+                intent.putExtra( NEXT_ACTIVITY_INTENT_KEY, BlackListActivity.class );
+                intent.putExtra( PICK_CONTACT_LABEL_INTENT_KEY, getString( R.string.pick_contact_nickname ) );
+                intent.putExtra( CALLED_FOR_RESULT_INTENT_KEY, true );
+                startActivityForResult( intent, PICK_CONTACT_ACTIVITY_RESULT );
+                return true;
         }
         return super.onMenuItemSelected( featureId, item );
+    }
+
+    /**
+     * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
+     */
+    @Override
+    protected void onActivityResult( int requestCode, int resultCode, Intent data )
+    {
+        super.onActivityResult( requestCode, resultCode, data );
+
+        if ( mDb == null )
+        {
+            mDb = new DbAdapter( this );
+        }
+        if ( !mDb.isOpen() )
+        {
+            mDb.open( false );
+        }
+
+        switch ( requestCode )
+        {
+            case PICK_CONTACT_ACTIVITY_RESULT:
+                long contactId = data.getLongExtra( CONTACTID_INTENT_KEY, -1 );
+                if ( contactId == -1 )
+                {
+                    Toast.makeText( this, R.string.error_select_contact, Toast.LENGTH_SHORT ).show();
+                    return;
+                }
+                String contactName = data.getStringExtra( CONTACTNAME_INTENT_KEY );
+                if ( mDb.isBlackListed( contactId, null ) )
+                {
+                    Toast.makeText( this, getString( R.string.already_blacklisted, contactName ), Toast.LENGTH_SHORT )
+                        .show();
+                    return;
+                }
+
+                if ( !mDb.insertBlackList( contactId, contactName, null ) )
+                {
+                    Toast.makeText( this, R.string.error_db, Toast.LENGTH_SHORT ).show();
+                    return;
+                }
+                Toast.makeText( this, getString( R.string.toast_blacklisted, contactName ), Toast.LENGTH_LONG ).show();
+                setIntent( data );
+                break;
+        }
     }
 
     /**
@@ -169,10 +225,8 @@ public class BlackListActivity
         {
             case DELETEALL_DIALOG_ID:
                 AlertDialog.Builder builder = new AlertDialog.Builder( this );
-                builder.setMessage( R.string.confirm_deleteall ).setCancelable( false ).setNeutralButton( R.string.ok,
-                                                                                                          this ).setNegativeButton(
-                                                                                                                                    R.string.cancel,
-                                                                                                                                    this );
+                builder.setMessage( R.string.confirm_deleteall ).setCancelable( false )
+                    .setNeutralButton( R.string.ok, this ).setNegativeButton( R.string.cancel, this );
                 return builder.create();
         }
         return null;

@@ -233,6 +233,11 @@ public class DbAdapter
         }
     }
 
+    public boolean isOpen()
+    {
+        return mDb == null ? false : mDb.isOpen();
+    }
+
     public void close()
     {
         mDbHelper.close();
@@ -867,8 +872,12 @@ public class DbAdapter
      * @param date
      * @return
      */
-    private boolean insertBlackList( long contactId, String contactName, String date )
+    public boolean insertBlackList( long contactId, String contactName, String date )
     {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: call insertBlackList()" );
+        }
         ContentValues initialValues = new ContentValues();
         initialValues.put( HappyContactsDb.BlackList.CONTACT_ID, contactId );
         initialValues.put( HappyContactsDb.BlackList.CONTACT_NAME, contactName );
@@ -876,8 +885,12 @@ public class DbAdapter
         {
             initialValues.put( HappyContactsDb.BlackList.LAST_WISH_DATE, date );
         }
-
-        return mDb.insert( HappyContactsDb.BlackList.TABLE_NAME, null, initialValues ) > 0;
+        long result = mDb.insert( HappyContactsDb.BlackList.TABLE_NAME, null, initialValues );
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: end insertBlackList() row inserted=" + result );
+        }
+        return result > 0;
     }
 
     public boolean deleteBlackList( long id )

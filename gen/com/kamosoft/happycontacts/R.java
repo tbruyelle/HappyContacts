@@ -170,6 +170,7 @@ public final class R {
         public static final int add_whitelist=0x7f070057;
         public static final int age=0x7f07007a;
         public static final int age_unknow=0x7f07007b;
+        public static final int already_blacklisted=0x7f0700be;
         public static final int app_name=0x7f070001;
         public static final int back_to_main=0x7f070039;
         public static final int backupDb=0x7f0700ad;
@@ -219,6 +220,8 @@ public final class R {
         public static final int end_sync=0x7f070077;
         public static final int enter_date=0x7f070025;
         public static final int enter_name=0x7f07002c;
+        public static final int error_db=0x7f0700bd;
+        public static final int error_select_contact=0x7f0700bc;
         public static final int exit=0x7f070003;
         public static final int facebook_login_error=0x7f07007c;
         public static final int facebooklogin=0x7f07005f;
