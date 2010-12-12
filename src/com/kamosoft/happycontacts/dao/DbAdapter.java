@@ -893,6 +893,16 @@ public class DbAdapter
         return result > 0;
     }
 
+    public boolean deleteNextEvent( long contactId )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: call deleteEvent()" );
+        }
+        return mDb.delete( HappyContactsDb.NextEvents.TABLE_NAME, HappyContactsDb.NextEvents.CONTACT_ID + "="
+            + contactId, null ) > 0;
+    }
+
     public boolean deleteBlackList( long id )
     {
         if ( Log.DEBUG )

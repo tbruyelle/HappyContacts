@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.facebook.android;
+package net.londatiga.android;
 
 public final class R {
     public static final class anim {

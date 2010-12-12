@@ -202,4 +202,6 @@
   <string name="error_select_contact">Bad contact id !</string>
 <string name="error_db">Database error ! Sorry...</string>
 <string name="already_blacklisted">%s is already blacklisted !</string>
+<string name="action.displayContact">Display contact information</string>
+<string name="action.addToBlackList">Add to black list</string>
 </resources>
