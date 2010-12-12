@@ -24,9 +24,9 @@ public class ContactFeast
 
     private Long contactId;
 
-    private ArrayList<String> phones;
+    private ArrayList<String> phones=new ArrayList<String>();
 
-    private ArrayList<String> emails;
+    private ArrayList<String> emails=new ArrayList<String>();
 
     /** for birthday only */
     private String birthdayDate;
@@ -65,19 +65,11 @@ public class ContactFeast
 
     public void addPhone( String phone )
     {
-        if ( phones == null )
-        {
-            phones = new ArrayList<String>();
-        }
         phones.add( phone );
     }
 
     public void addEmail( String email )
     {
-        if ( emails == null )
-        {
-            emails = new ArrayList<String>();
-        }
         emails.add( email );
     }
 
