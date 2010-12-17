@@ -2,11 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent" android:layout_height="wrap_content">
 
-  <TextView android:id="@+id/sooner_event_date" android:text="tomorow"
-    style="@style/HappyContacts.Widget.ContentDay" />
+  <TextView android:id="@+id/sooner_event_date" style="@style/HappyContacts.Widget.ContentDay" />
 
-  <TextView android:id="@+id/sooner_events"
-    android:text="bill's birthday it was a veryyyyyyyyyyyyyyy great day, super funandgreat dat"
-    style="@style/HappyContacts.Widget.ContentNames" />
+  <TextView android:id="@+id/sooner_events" style="@style/HappyContacts.Widget.ContentNames" />
 
 </LinearLayout>
