@@ -6,14 +6,16 @@ package com.kamosoft.happycontacts;
 import java.util.Calendar;
 
 import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.app.ListActivity;
-import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Intent;
 import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.DatePicker;
+
+import com.kamosoft.happycontacts.dao.DataManager;
 
 /**
  * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
@@ -81,9 +83,7 @@ public abstract class DateNameListOptionsMenu
         switch ( item.getItemId() )
         {
             case BACK_MENU_ID:
-                Intent intent = new Intent( this, HappyContactsPreferences.class );
-                intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
-                startActivity( intent );
+                HappyContactsPreferences.backToMain( this );
                 break;
 
             case DAY_MENU_ID:
@@ -110,8 +110,8 @@ public abstract class DateNameListOptionsMenu
     {
         switch ( id )
         {
-//            case NAME_FORM_DIALOG_ID:
-//                return new EnterNameDialog( this );
+            //            case NAME_FORM_DIALOG_ID:
+            //                return new EnterNameDialog( this );
 
             case DATE_FORM_DIALOG_ID:
                 Calendar c = Calendar.getInstance();

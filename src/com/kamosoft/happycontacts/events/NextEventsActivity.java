@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import com.commonsware.android.listview.SectionedAdapter;
 import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.DateFormatConstants;
+import com.kamosoft.happycontacts.HappyContactsPreferences;
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
 import com.kamosoft.happycontacts.contacts.ContactUtils;
@@ -225,5 +227,29 @@ public class NextEventsActivity
 
         }
         return super.onOptionsItemSelected( item );
+    }
+
+    @Override
+    public boolean onKeyDown( int keyCode, KeyEvent event )
+    {
+        if ( android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.ECLAIR
+            && keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0 )
+        {
+            // Take care of calling this method on earlier versions of
+            // the platform where it doesn't exist.
+            onBackPressed();
+        }
+
+        return super.onKeyDown( keyCode, event );
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        // This will be called either automatically for you on 2.0
+        // or later, or by the code above on earlier versions of the
+        // platform.
+        HappyContactsPreferences.backToMain( this );
+        return;
     }
 }

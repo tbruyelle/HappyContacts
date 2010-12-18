@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -52,8 +51,7 @@ public class DataManager
                             {
                                 Log.i( "importing database from external storage, and resetting database" );
                                 new ExportDatabaseTask().execute();
-                                DataManager.this.startActivity( new Intent( DataManager.this,
-                                                                            HappyContactsPreferences.class ) );
+                                HappyContactsPreferences.backToMain( DataManager.this );
                             }
                             else
                             {
@@ -86,8 +84,7 @@ public class DataManager
                                 new ImportDatabaseTask().execute();
                                 // sleep momentarily so that database reset stuff has time to take place (else Main reloads too fast)
                                 SystemClock.sleep( 500 );
-                                DataManager.this.startActivity( new Intent( DataManager.this,
-                                                                            HappyContactsPreferences.class ) );
+                                HappyContactsPreferences.backToMain( DataManager.this );
                             }
                             else
                             {

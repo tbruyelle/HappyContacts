@@ -8,17 +8,19 @@ import java.util.Date;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
-import android.preference.Preference.OnPreferenceClickListener;
 import android.text.format.DateFormat;
+import android.view.KeyEvent;
 import android.widget.TimePicker;
 
 import com.kamosoft.happycontacts.alarm.AlarmController;
@@ -372,5 +374,34 @@ public class HappyContactsPreferences
         } );
 
         return root;
+    }
+
+    @Override
+    public boolean onKeyDown( int keyCode, KeyEvent event )
+    {
+        if ( android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.ECLAIR
+            && keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0 )
+        {
+            // Take care of calling this method on earlier versions of
+            // the platform where it doesn't exist.
+            onBackPressed();
+        }
+
+        return super.onKeyDown( keyCode, event );
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        // This will be called either automatically for you on 2.0
+        // or later, or by the code above on earlier versions of the
+        // platform.
+        moveTaskToBack( true );
+        return;
+    }
+
+    public static void backToMain( Context context )
+    {
+        context.startActivity( new Intent( context, HappyContactsPreferences.class ) );
     }
 }
