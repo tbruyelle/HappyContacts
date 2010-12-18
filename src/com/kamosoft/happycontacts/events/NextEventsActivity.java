@@ -148,8 +148,10 @@ public class NextEventsActivity
                 fillList();
                 Toast.makeText( NextEventsActivity.this, getString( R.string.toast_blacklisted, contactName ),
                                 Toast.LENGTH_LONG ).show();
-
+                /* return to the nearest position */
+                getListView().setSelection( info.position > 0 ? info.position - 1 : 0 );
                 return true;
+                
             default:
                 return super.onContextItemSelected( item );
         }
