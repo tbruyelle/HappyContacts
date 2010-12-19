@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/home_root" android:orientation="vertical" android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+
+  <LinearLayout android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="wrap_content" android:layout_weight="1" android:padding="6dip">
+
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
+      android:layout_height="wrap_content" android:layout_weight="1">
+      <Button android:id="@+id/home_btn_alarm" style="@style/HomeButton" android:onClick="onAlarmClick"
+        android:text="Alarm" android:drawableTop="@drawable/dash_clock" />
+      <Button android:id="@+id/home_btn_database" style="@style/HomeButton"
+        android:onClick="onAlarmClick" android:text="Alarm" android:drawableTop="@drawable/dash_clock" />
+    </LinearLayout>
+
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
+      android:layout_height="wrap_content" android:layout_weight="1">
+      <Button android:id="@+id/home_btn_alarm2" style="@style/HomeButton"
+        android:onClick="onAlarmClick" android:text="Alarm" android:drawableTop="@drawable/dash_clock" />
+      <Button android:id="@+id/home_btn_alarm3" style="@style/HomeButton"
+        android:onClick="onAlarmClick" android:text="Alarm" android:drawableTop="@drawable/dash_clock" />
+    </LinearLayout>
+
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
+      android:layout_height="wrap_content" android:layout_weight="1">
+      <Button android:id="@+id/home_btn_alarm4" style="@style/HomeButton"
+        android:onClick="onAlarmClick" android:text="Alarm" android:drawableTop="@drawable/dash_clock" />
+      <Button android:id="@+id/home_btn_alarm5" style="@style/HomeButton"
+        android:onClick="onAlarmClick" android:text="Alarm" android:drawableTop="@drawable/dash_clock" />
+    </LinearLayout>
+
+  </LinearLayout>
+</LinearLayout>

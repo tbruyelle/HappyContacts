@@ -2,15 +2,27 @@
 <resources>
 
 
-	<style name="Theme.HappyContacts" parent="@style/Theme.GreenDroid.NoTitleBar">
-		<item name="android:windowBackground">@android:color/white</item>
-		<item name="android:colorBackground">@android:color/white</item>
-		<item name="gdActionBarTitleColor">@android:color/white</item>
-		<item name="gdActionBarBackground">@drawable/action_bar_background</item>
-		<item name="gdActionBarDividerDrawable">@drawable/action_bar_divider</item>
-		<item name="gdActionBarDividerWidth">2px</item>
-		<item name="gdActionBarApplicationDrawable">@drawable/hc_app_logo</item>
-	</style>
+  <style name="Theme.HappyContacts" parent="@style/Theme.GreenDroid.NoTitleBar">
+    <item name="android:windowBackground">@android:color/white</item>
+    <item name="android:colorBackground">@android:color/white</item>
+    <item name="gdActionBarTitleColor">@android:color/white</item>
+    <item name="gdActionBarBackground">@drawable/action_bar_background</item>
+    <item name="gdActionBarDividerDrawable">@drawable/action_bar_divider</item>
+    <item name="gdActionBarDividerWidth">2px</item>
+    <item name="gdActionBarApplicationDrawable">@drawable/hc_app_logo</item>
+  </style>
+
+  <style name="HomeButton">
+    <item name="android:layout_gravity">center_vertical</item>
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_weight">1</item>
+    <item name="android:gravity">center_horizontal</item>
+    <item name="android:textSize">@dimen/text_size_medium</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:textColor">@color/orange_dark</item>
+    <item name="android:background">@null</item>
+  </style>
 
 	<!-- <style name="Theme.GDCatalog.TweakedItems" parent="@style/Theme.GDCatalog"> 
 		<item name="gdTextAppearanceLarge">@style/TextAppearanceLarge</item> <item 
