@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.facebook.android;
+package com.cyrilmottier.android.greendroid;
 
 public final class R {
     public static final class anim {

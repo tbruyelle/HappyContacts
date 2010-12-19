@@ -8,113 +8,687 @@
 package com.kamosoft.happycontacts;
 
 public final class R {
+    public static final class anim {
+        public static final int gd_grow_from_bottom=0x7f040000;
+        public static final int gd_grow_from_bottomleft_to_topright=0x7f040001;
+        public static final int gd_grow_from_bottomright_to_topleft=0x7f040002;
+        public static final int gd_grow_from_top=0x7f040003;
+        public static final int gd_grow_from_topleft_to_bottomright=0x7f040004;
+        public static final int gd_grow_from_topright_to_bottomleft=0x7f040005;
+        public static final int gd_rack=0x7f040006;
+        public static final int gd_shrink_from_bottom=0x7f040007;
+        public static final int gd_shrink_from_bottomleft_to_topright=0x7f040008;
+        public static final int gd_shrink_from_bottomright_to_topleft=0x7f040009;
+        public static final int gd_shrink_from_top=0x7f04000a;
+        public static final int gd_shrink_from_topleft_to_bottomright=0x7f04000b;
+        public static final int gd_shrink_from_topright_to_bottomleft=0x7f04000c;
+    }
     public static final class array {
-        public static final int contactmethods_items=0x7f080000;
+        public static final int contactmethods_items=0x7f0c0000;
     }
     public static final class attr {
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int dividerDrawable=0x7f010042;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int dividerWidth=0x7f010043;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int drawable=0x7f01003e;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int enabled=0x7f01003b;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdActionBarApplicationDrawable=0x7f01002e;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdActionBarBackground=0x7f01002a;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdActionBarDividerDrawable=0x7f01002c;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdActionBarDividerStyle=0x7f010032;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int gdActionBarDividerWidth=0x7f01002d;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdActionBarHomeDrawable=0x7f01002f;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdActionBarItemBackground=0x7f01002b;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdActionBarItemStyle=0x7f010033;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdActionBarStyle=0x7f010030;
+        /**  ActionBar related attributes 
+         <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int gdActionBarTitleColor=0x7f010029;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdActionBarTitleStyle=0x7f010031;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdDescriptionItemViewStyle=0x7f010011;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int gdDrawableHeight=0x7f010006;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdDrawableItemViewStyle=0x7f010016;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdDrawableItemViewStyleDrawable=0x7f010018;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdDrawableItemViewStyleText=0x7f010017;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int gdDrawableMargin=0x7f010007;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int gdDrawableWidth=0x7f010005;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int gdItemViewPreferredHalfHeight=0x7f01000c;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int gdItemViewPreferredHeight=0x7f01000b;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int gdItemViewPreferredPaddingLeft=0x7f01000d;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdLongTextItemViewStyle=0x7f010010;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int gdProgressBarHeight=0x7f010009;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int gdProgressBarMargin=0x7f01000a;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int gdProgressBarWidth=0x7f010008;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int gdProgressItemViewStyle=0x7f010013;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int gdProgressItemViewStyleProgressBar=0x7f010015;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int gdProgressItemViewStyleText=0x7f010014;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdQuickActionBarItemStyle=0x7f010038;
+        /**  QuickAction related attributes 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdQuickActionBarStyle=0x7f010037;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdQuickActionGridItemStyle=0x7f01003a;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdQuickActionGridStyle=0x7f010039;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdSegmentBackground=0x7f010025;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdSegmentCheckmark=0x7f010026;
+        /**  SegmentedBar related attributes 
+         <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int gdSegmentTextColor=0x7f010023;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int gdSegmentTextSize=0x7f010024;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdSegmentedBarStyle=0x7f010027;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdSegmentedHostStyle=0x7f010028;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int gdSeparatorItemViewPreferredHeight=0x7f01000e;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdSeparatorItemViewStyle=0x7f010012;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdSubtextItemViewStyle=0x7f01001c;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdSubtextItemViewStyleSubtext=0x7f01001e;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdSubtextItemViewStyleText=0x7f01001d;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdSubtitleItemViewStyle=0x7f010019;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdSubtitleItemViewStyleSubtitle=0x7f01001b;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdSubtitleItemViewStyleText=0x7f01001a;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdTabIndicatorBackground=0x7f010036;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int gdTabIndicatorHeight=0x7f010034;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdTabIndicatorTextAppearance=0x7f010035;
+        /**  Item-based lists related attributes 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdTextAppearance=0x7f010000;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdTextAppearanceLarge=0x7f010001;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdTextAppearanceMedium=0x7f010002;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdTextAppearanceSeparator=0x7f010004;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdTextAppearanceSmall=0x7f010003;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdTextItemViewStyle=0x7f01000f;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdThumbnailItemViewStyle=0x7f01001f;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdThumbnailItemViewStyleSubtitle=0x7f010021;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdThumbnailItemViewStyleText=0x7f010020;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int gdThumbnailItemViewStyleThumbnail=0x7f010022;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int homeDrawable=0x7f010048;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int isInProgress=0x7f01003d;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int segmentedBar=0x7f010044;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int segmentedContentView=0x7f010045;
+        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int subtext=0x7f010040;
+        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int subtitle=0x7f01003f;
+        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int text=0x7f01003c;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int thumbnail=0x7f010041;
+        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int title=0x7f010046;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>normal</code></td><td>0</td><td></td></tr>
+<tr><td><code>dashboard</code></td><td>1</td><td></td></tr>
+</table>
+         */
+        public static final int type=0x7f010047;
     }
     public static final class color {
-        public static final int black=0x7f060001;
-        public static final int white=0x7f060000;
+        public static final int black=0x7f080003;
+        public static final int gd_action_bar_divider_tint=0x7f080001;
+        public static final int gd_action_bar_tint=0x7f080000;
+        public static final int white=0x7f080002;
+    }
+    public static final class dimen {
+        public static final int gd_action_bar_height=0x7f09000b;
+        public static final int gd_arrow_offset=0x7f09000c;
+        public static final int gd_drawable_height=0x7f090006;
+        public static final int gd_drawable_margin=0x7f090007;
+        public static final int gd_drawable_width=0x7f090005;
+        public static final int gd_item_view_half_height=0x7f090003;
+        public static final int gd_item_view_height=0x7f090002;
+        public static final int gd_item_view_padding_left=0x7f090004;
+        public static final int gd_progress_bar_height=0x7f090009;
+        public static final int gd_progress_bar_margin=0x7f09000a;
+        public static final int gd_progress_bar_width=0x7f090008;
+        public static final int gd_separator_item_view_height=0x7f090000;
+        public static final int gd_separator_item_view_padding_left=0x7f090001;
     }
     public static final class drawable {
-        public static final int clock=0x7f020000;
-        public static final int cloud=0x7f020001;
-        public static final int facebook_icon=0x7f020002;
-        public static final int fb=0x7f020003;
-        public static final int googlecontacts=0x7f020004;
-        public static final int happy=0x7f020005;
-        public static final int hc_widget_bg=0x7f020006;
-        public static final int hc_widget_bg_pressed=0x7f020007;
-        public static final int ic_button_contacts=0x7f020008;
-        public static final int ic_menu_add=0x7f020009;
-        public static final int ic_menu_allfriends=0x7f02000a;
-        public static final int ic_menu_close_clear_cancel=0x7f02000b;
-        public static final int ic_menu_delete=0x7f02000c;
-        public static final int ic_menu_edit=0x7f02000d;
-        public static final int ic_menu_forward=0x7f02000e;
-        public static final int ic_menu_home=0x7f02000f;
-        public static final int ic_menu_refresh=0x7f020010;
-        public static final int ic_menu_reminder=0x7f020011;
-        public static final int ic_menu_save=0x7f020012;
-        public static final int ic_menu_today=0x7f020013;
-        public static final int icon=0x7f020014;
-        public static final int left_deco=0x7f020015;
-        public static final int nophoto=0x7f020016;
-        public static final int notif=0x7f020017;
-        public static final int right_deco=0x7f020018;
-        public static final int sad=0x7f020019;
-        public static final int sync_ko=0x7f02001a;
-        public static final int sync_not_found=0x7f02001b;
-        public static final int sync_ok=0x7f02001c;
-        public static final int umbrella=0x7f02001d;
-        public static final int widget_bg=0x7f02001e;
+        public static final int action_bar_background=0x7f020000;
+        public static final int action_bar_divider=0x7f020001;
+        public static final int class1=0x7f020002;
+        public static final int class2=0x7f020003;
+        public static final int class3=0x7f020004;
+        public static final int class4=0x7f020005;
+        public static final int class5=0x7f020006;
+        public static final int clock=0x7f020007;
+        public static final int cloud=0x7f020008;
+        public static final int facebook_icon=0x7f020009;
+        public static final int fb=0x7f02000a;
+        public static final int gd_action_bar_add_alt=0x7f02000b;
+        public static final int gd_action_bar_add_normal=0x7f02000c;
+        public static final int gd_action_bar_compose_alt=0x7f02000d;
+        public static final int gd_action_bar_compose_normal=0x7f02000e;
+        public static final int gd_action_bar_edit_alt=0x7f02000f;
+        public static final int gd_action_bar_edit_normal=0x7f020010;
+        public static final int gd_action_bar_export_alt=0x7f020011;
+        public static final int gd_action_bar_export_normal=0x7f020012;
+        public static final int gd_action_bar_home=0x7f020013;
+        public static final int gd_action_bar_home_alt=0x7f020014;
+        public static final int gd_action_bar_home_normal=0x7f020015;
+        public static final int gd_action_bar_item=0x7f020016;
+        public static final int gd_action_bar_item_focused=0x7f020017;
+        public static final int gd_action_bar_item_pressed=0x7f020018;
+        public static final int gd_action_bar_locate_alt=0x7f020019;
+        public static final int gd_action_bar_locate_myself_alt=0x7f02001a;
+        public static final int gd_action_bar_locate_myself_normal=0x7f02001b;
+        public static final int gd_action_bar_locate_normal=0x7f02001c;
+        public static final int gd_action_bar_refresh_alt=0x7f02001d;
+        public static final int gd_action_bar_refresh_normal=0x7f02001e;
+        public static final int gd_action_bar_search_alt=0x7f02001f;
+        public static final int gd_action_bar_search_normal=0x7f020020;
+        public static final int gd_action_bar_share_alt=0x7f020021;
+        public static final int gd_action_bar_share_normal=0x7f020022;
+        public static final int gd_action_bar_sort_by_size_alt=0x7f020023;
+        public static final int gd_action_bar_sort_by_size_normal=0x7f020024;
+        public static final int gd_action_bar_star_alt=0x7f020025;
+        public static final int gd_action_bar_star_normal=0x7f020026;
+        public static final int gd_action_bar_take_photo_alt=0x7f020027;
+        public static final int gd_action_bar_take_photo_normal=0x7f020028;
+        public static final int gd_action_bar_talk_alt=0x7f020029;
+        public static final int gd_action_bar_talk_normal=0x7f02002a;
+        public static final int gd_quick_action_arrow_up=0x7f02002b;
+        public static final int gd_quick_action_bar_arrow_down=0x7f02002c;
+        public static final int gd_quick_action_bar_background=0x7f02002d;
+        public static final int gd_quick_action_bar_bottom_frame=0x7f02002e;
+        public static final int gd_quick_action_bar_grip_left=0x7f02002f;
+        public static final int gd_quick_action_bar_grip_right=0x7f020030;
+        public static final int gd_quick_action_bar_item=0x7f020031;
+        public static final int gd_quick_action_bar_item_normal=0x7f020032;
+        public static final int gd_quick_action_bar_item_pressed=0x7f020033;
+        public static final int gd_quick_action_bar_item_selected=0x7f020034;
+        public static final int gd_quick_action_grid_arrow_down=0x7f020035;
+        public static final int gd_quick_action_grid_bg=0x7f020036;
+        public static final int gd_quick_action_grid_bottom_frame=0x7f020037;
+        public static final int gd_quick_action_grid_selector=0x7f020038;
+        public static final int gd_quick_action_grid_selector_focused=0x7f020039;
+        public static final int gd_quick_action_grid_selector_pressed=0x7f02003a;
+        public static final int gd_quick_action_top_frame=0x7f02003b;
+        public static final int gd_segment_checkmark=0x7f02003c;
+        public static final int gd_segment_checkmark_off=0x7f02003d;
+        public static final int gd_segment_checkmark_on=0x7f02003e;
+        public static final int gd_segment_divider=0x7f02003f;
+        public static final int gd_segment_label=0x7f020040;
+        public static final int gd_segment_label_focused=0x7f020041;
+        public static final int gd_segment_label_normal=0x7f020042;
+        public static final int gd_segment_label_pressed=0x7f020043;
+        public static final int gd_shadow_bottom=0x7f020044;
+        public static final int gd_shadow_top=0x7f020045;
+        public static final int gd_tab_indicator=0x7f020046;
+        public static final int gd_tab_indicator_normal=0x7f020047;
+        public static final int gd_tab_indicator_pressed=0x7f020048;
+        public static final int gd_tab_indicator_selected=0x7f020049;
+        public static final int gd_tab_indicator_unselected=0x7f02004a;
+        public static final int googlecontacts=0x7f02004b;
+        public static final int greendroid_icon=0x7f02004c;
+        public static final int happy=0x7f02004d;
+        public static final int hc_app_logo=0x7f02004e;
+        public static final int hc_widget_bg=0x7f02004f;
+        public static final int hc_widget_bg_pressed=0x7f020050;
+        public static final int header_bg=0x7f020051;
+        public static final int ic_button_contacts=0x7f020052;
+        public static final int ic_menu_add=0x7f020053;
+        public static final int ic_menu_allfriends=0x7f020054;
+        public static final int ic_menu_close_clear_cancel=0x7f020055;
+        public static final int ic_menu_delete=0x7f020056;
+        public static final int ic_menu_edit=0x7f020057;
+        public static final int ic_menu_forward=0x7f020058;
+        public static final int ic_menu_home=0x7f020059;
+        public static final int ic_menu_refresh=0x7f02005a;
+        public static final int ic_menu_reminder=0x7f02005b;
+        public static final int ic_menu_save=0x7f02005c;
+        public static final int ic_menu_today=0x7f02005d;
+        public static final int ic_title_export_alt=0x7f02005e;
+        public static final int ic_title_export_default=0x7f02005f;
+        public static final int icon=0x7f020060;
+        public static final int left_deco=0x7f020061;
+        public static final int nophoto=0x7f020062;
+        public static final int notif=0x7f020063;
+        public static final int right_deco=0x7f020064;
+        public static final int sad=0x7f020065;
+        public static final int sync_ko=0x7f020066;
+        public static final int sync_not_found=0x7f020067;
+        public static final int sync_ok=0x7f020068;
+        public static final int umbrella=0x7f020069;
+        public static final int widget_bg=0x7f02006a;
     }
     public static final class id {
-        public static final int Email=0x7f0a000f;
-        public static final int LinearLayout01=0x7f0a000e;
-        public static final int Password=0x7f0a0010;
-        public static final int SignIn=0x7f0a0011;
-        public static final int about_content=0x7f0a0001;
-        public static final int add_whitelist=0x7f0a003e;
-        public static final int autocomplete=0x7f0a0013;
-        public static final int backupDb=0x7f0a0014;
-        public static final int birthday_birthday_date=0x7f0a0009;
-        public static final int birthday_birthday_year=0x7f0a000a;
-        public static final int birthday_contact_name=0x7f0a0008;
-        public static final int birthday_counter=0x7f0a000b;
-        public static final int birthday_date=0x7f0a003a;
-        public static final int birthday_picker=0x7f0a002e;
-        public static final int button_name_cancel=0x7f0a001a;
-        public static final int button_name_ok=0x7f0a0019;
-        public static final int call_button=0x7f0a0031;
-        public static final int cancel_button=0x7f0a002c;
-        public static final int contact_name=0x7f0a000c;
-        public static final int contact_photo=0x7f0a001b;
-        public static final int dateback=0x7f0a0028;
-        public static final int datenext=0x7f0a0029;
-        public static final int edittext_name=0x7f0a0018;
-        public static final int element=0x7f0a0016;
-        public static final int event_type=0x7f0a001c;
-        public static final int fb_connect=0x7f0a001f;
-        public static final int feast_counter=0x7f0a0020;
-        public static final int happyfeast_name=0x7f0a0035;
-        public static final int icon_sync=0x7f0a0038;
-        public static final int ignore_birthyear=0x7f0a002f;
-        public static final int last_wish_date=0x7f0a000d;
-        public static final int later_button=0x7f0a0033;
-        public static final int layout_root=0x7f0a0000;
-        public static final int link_contact=0x7f0a003c;
-        public static final int linked_to=0x7f0a003b;
-        public static final int mail_birthday_template_body=0x7f0a0025;
-        public static final int mail_birthday_template_subject=0x7f0a0024;
-        public static final int mail_template_body=0x7f0a0023;
-        public static final int mail_template_subject=0x7f0a0022;
-        public static final int nameday=0x7f0a003f;
-        public static final int nameday_title=0x7f0a0026;
-        public static final int never_button=0x7f0a0034;
-        public static final int nextevents_counter=0x7f0a002a;
-        public static final int nottoday_button=0x7f0a0032;
-        public static final int ok=0x7f0a0030;
-        public static final int ok_button=0x7f0a0002;
-        public static final int pick_birthday_label=0x7f0a002d;
-        public static final int pick_contact_label=0x7f0a0012;
-        public static final int pick_nameday=0x7f0a0027;
-        public static final int reset_button=0x7f0a002b;
-        public static final int restoreDb=0x7f0a0015;
-        public static final int sms_birthday_template_content=0x7f0a0037;
-        public static final int sms_template_content=0x7f0a0036;
-        public static final int sooner_event_date=0x7f0a0006;
-        public static final int sooner_events=0x7f0a0007;
-        public static final int start_sync_button=0x7f0a0017;
-        public static final int sync_counter=0x7f0a001e;
-        public static final int sync_google_counter=0x7f0a0021;
-        public static final int unlink_contact=0x7f0a003d;
-        public static final int user_name=0x7f0a0039;
-        public static final int webview=0x7f0a001d;
-        public static final int widget_event_counter=0x7f0a0004;
-        public static final int widget_events_list=0x7f0a0005;
-        public static final int widget_root=0x7f0a0003;
+        public static final int Email=0x7f070016;
+        public static final int LinearLayout01=0x7f070015;
+        public static final int Password=0x7f070017;
+        public static final int SignIn=0x7f070018;
+        public static final int about_content=0x7f070008;
+        public static final int add_whitelist=0x7f070059;
+        public static final int autocomplete=0x7f07001a;
+        public static final int backupDb=0x7f07001b;
+        public static final int birthday_birthday_date=0x7f070010;
+        public static final int birthday_birthday_year=0x7f070011;
+        public static final int birthday_contact_name=0x7f07000f;
+        public static final int birthday_counter=0x7f070012;
+        public static final int birthday_date=0x7f070055;
+        public static final int birthday_picker=0x7f070049;
+        public static final int button_name_cancel=0x7f070021;
+        public static final int button_name_ok=0x7f070020;
+        public static final int call_button=0x7f07004c;
+        public static final int cancel_button=0x7f070047;
+        public static final int contact_name=0x7f070013;
+        public static final int contact_photo=0x7f070022;
+        public static final int dashboard=0x7f070001;
+        public static final int dateback=0x7f070043;
+        public static final int datenext=0x7f070044;
+        public static final int edittext_name=0x7f07001f;
+        public static final int element=0x7f07001d;
+        public static final int event_type=0x7f070023;
+        public static final int fb_connect=0x7f070026;
+        public static final int feast_counter=0x7f070027;
+        public static final int gd_action_bar=0x7f070004;
+        public static final int gd_action_bar_content_view=0x7f070006;
+        public static final int gd_action_bar_home_item=0x7f070029;
+        public static final int gd_action_bar_host=0x7f070005;
+        public static final int gd_action_bar_item=0x7f07002a;
+        public static final int gd_action_bar_item_progress_bar=0x7f07002b;
+        public static final int gd_action_bar_title=0x7f07002c;
+        public static final int gd_description=0x7f07002d;
+        public static final int gd_drawable=0x7f07002e;
+        public static final int gd_progress_bar=0x7f070030;
+        public static final int gd_segmented_bar=0x7f070002;
+        public static final int gd_segmented_content_view=0x7f070003;
+        public static final int gd_separator_text=0x7f070039;
+        public static final int gd_subtext=0x7f07003a;
+        public static final int gd_subtitle=0x7f07003b;
+        public static final int gd_text=0x7f07002f;
+        public static final int gd_thumbnail=0x7f07003c;
+        public static final int gdi_arrow_down=0x7f070037;
+        public static final int gdi_arrow_up=0x7f070032;
+        public static final int gdi_footer=0x7f070036;
+        public static final int gdi_grid=0x7f070038;
+        public static final int gdi_header=0x7f070031;
+        public static final int gdi_quick_action_items=0x7f070035;
+        public static final int gdi_rack=0x7f070034;
+        public static final int gdi_scroll=0x7f070033;
+        public static final int happyfeast_name=0x7f070050;
+        public static final int icon_sync=0x7f070053;
+        public static final int ignore_birthyear=0x7f07004a;
+        public static final int last_wish_date=0x7f070014;
+        public static final int later_button=0x7f07004e;
+        public static final int layout_root=0x7f070007;
+        public static final int link_contact=0x7f070057;
+        public static final int linked_to=0x7f070056;
+        public static final int mail_birthday_template_body=0x7f070040;
+        public static final int mail_birthday_template_subject=0x7f07003f;
+        public static final int mail_template_body=0x7f07003e;
+        public static final int mail_template_subject=0x7f07003d;
+        public static final int nameday=0x7f07005a;
+        public static final int nameday_title=0x7f070041;
+        public static final int never_button=0x7f07004f;
+        public static final int nextevents_counter=0x7f070045;
+        public static final int normal=0x7f070000;
+        public static final int nottoday_button=0x7f07004d;
+        public static final int ok=0x7f07004b;
+        public static final int ok_button=0x7f070009;
+        public static final int pick_birthday_label=0x7f070048;
+        public static final int pick_contact_label=0x7f070019;
+        public static final int pick_nameday=0x7f070042;
+        public static final int reset_button=0x7f070046;
+        public static final int restoreDb=0x7f07001c;
+        public static final int sms_birthday_template_content=0x7f070052;
+        public static final int sms_template_content=0x7f070051;
+        public static final int sooner_event_date=0x7f07000d;
+        public static final int sooner_events=0x7f07000e;
+        public static final int start_sync_button=0x7f07001e;
+        public static final int sync_counter=0x7f070025;
+        public static final int sync_google_counter=0x7f070028;
+        public static final int unlink_contact=0x7f070058;
+        public static final int user_name=0x7f070054;
+        public static final int webview=0x7f070024;
+        public static final int widget_event_counter=0x7f07000b;
+        public static final int widget_events_list=0x7f07000c;
+        public static final int widget_root=0x7f07000a;
     }
     public static final class layout {
         public static final int about=0x7f030000;
@@ -140,237 +714,716 @@ public final class R {
         public static final int fb_connect=0x7f030014;
         public static final int feast_counter=0x7f030015;
         public static final int gcontactlist=0x7f030016;
-        public static final int mail_template=0x7f030017;
-        public static final int nameday=0x7f030018;
-        public static final int namedaylist=0x7f030019;
-        public static final int namelist=0x7f03001a;
-        public static final int nextevents=0x7f03001b;
-        public static final int nextevents_counter=0x7f03001c;
-        public static final int okcancel_buttons=0x7f03001d;
-        public static final int pickbirthday=0x7f03001e;
-        public static final int reminder=0x7f03001f;
-        public static final int reminder_header=0x7f030020;
-        public static final int sms_template=0x7f030021;
-        public static final int socialnetworkuser=0x7f030022;
-        public static final int socialuserdialog=0x7f030023;
-        public static final int testapp=0x7f030024;
-        public static final int testapp_element=0x7f030025;
-        public static final int whitelist=0x7f030026;
-        public static final int whitelist_element=0x7f030027;
+        public static final int gd_action_bar_dashboard=0x7f030017;
+        public static final int gd_action_bar_item_base=0x7f030018;
+        public static final int gd_action_bar_item_loader=0x7f030019;
+        public static final int gd_action_bar_normal=0x7f03001a;
+        public static final int gd_content_dashboard=0x7f03001b;
+        public static final int gd_content_normal=0x7f03001c;
+        public static final int gd_description_item_view=0x7f03001d;
+        public static final int gd_drawable_item_view=0x7f03001e;
+        public static final int gd_list_content=0x7f03001f;
+        public static final int gd_long_text_item_view=0x7f030020;
+        public static final int gd_progress_item_view=0x7f030021;
+        public static final int gd_quick_action_bar=0x7f030022;
+        public static final int gd_quick_action_bar_item=0x7f030023;
+        public static final int gd_quick_action_grid=0x7f030024;
+        public static final int gd_quick_action_grid_item=0x7f030025;
+        public static final int gd_segment=0x7f030026;
+        public static final int gd_separator_item_view=0x7f030027;
+        public static final int gd_subtext_item_view=0x7f030028;
+        public static final int gd_subtitle_item_view=0x7f030029;
+        public static final int gd_tab_content=0x7f03002a;
+        public static final int gd_tab_indicator=0x7f03002b;
+        public static final int gd_text_item_view=0x7f03002c;
+        public static final int gd_thumbnail_item_view=0x7f03002d;
+        public static final int mail_template=0x7f03002e;
+        public static final int nameday=0x7f03002f;
+        public static final int namedaylist=0x7f030030;
+        public static final int namelist=0x7f030031;
+        public static final int nextevents=0x7f030032;
+        public static final int nextevents_counter=0x7f030033;
+        public static final int okcancel_buttons=0x7f030034;
+        public static final int pickbirthday=0x7f030035;
+        public static final int reminder=0x7f030036;
+        public static final int reminder_header=0x7f030037;
+        public static final int sms_template=0x7f030038;
+        public static final int socialnetworkuser=0x7f030039;
+        public static final int socialuserdialog=0x7f03003a;
+        public static final int testapp=0x7f03003b;
+        public static final int testapp_element=0x7f03003c;
+        public static final int whitelist=0x7f03003d;
+        public static final int whitelist_element=0x7f03003e;
     }
     public static final class raw {
-        public static final int db_create=0x7f050000;
-        public static final int db_fixes=0x7f050001;
-        public static final int db_update=0x7f050002;
+        public static final int db_create=0x7f060000;
+        public static final int db_fixes=0x7f060001;
+        public static final int db_update=0x7f060002;
     }
     public static final class string {
-        public static final int about=0x7f070046;
-        public static final int about_content=0x7f070045;
-        public static final int action_addToBlackList=0x7f0700c0;
-        public static final int action_displayContact=0x7f0700bf;
-        public static final int add=0x7f07004a;
-        public static final int add_birthday=0x7f070062;
-        public static final int add_whitelist=0x7f070057;
-        public static final int age=0x7f07007a;
-        public static final int age_unknow=0x7f07007b;
-        public static final int already_blacklisted=0x7f0700be;
-        public static final int app_name=0x7f070001;
-        public static final int back_to_main=0x7f070039;
-        public static final int backupDb=0x7f0700ad;
-        public static final int birthday_added=0x7f07006a;
-        public static final int birthday_counter=0x7f07008c;
-        public static final int birthday_deleted=0x7f07006e;
-        public static final int birthday_updated=0x7f07006d;
-        public static final int birthdaylist=0x7f070086;
-        public static final int blacklist=0x7f070088;
-        public static final int blacklist_label=0x7f07000b;
-        public static final int call=0x7f070006;
-        public static final int can_match_normally=0x7f070058;
-        public static final int cancel=0x7f07002e;
-        public static final int check_contacts=0x7f070026;
-        public static final int confirm_delete_birthday=0x7f070067;
-        public static final int confirm_delete_blacklist=0x7f070053;
-        public static final int confirm_delete_whitelist=0x7f070052;
-        public static final int confirm_deleteall=0x7f070055;
-        public static final int confirm_store_question=0x7f070094;
-        public static final int contact_method_dialog_title=0x7f070031;
-        public static final int contact_method_not_supported=0x7f070032;
-        public static final int contact_not_found=0x7f070060;
-        public static final int contactlist=0x7f070089;
-        public static final int data_backup_check=0x7f0700b1;
-        public static final int data_backup_ko=0x7f0700bb;
-        public static final int data_backup_ok=0x7f0700ba;
-        public static final int data_backupfile_notfound=0x7f0700b6;
-        public static final int data_backupfile_notreadable=0x7f0700b7;
-        public static final int data_exporting=0x7f0700b4;
-        public static final int data_external_unavailable=0x7f0700b2;
-        public static final int data_restore_check=0x7f0700b3;
-        public static final int data_restore_ko=0x7f0700b9;
-        public static final int data_restore_ok=0x7f0700b8;
-        public static final int data_restoring=0x7f0700b5;
-        public static final int date_list_title=0x7f07000e;
-        public static final int dateback=0x7f070048;
-        public static final int datenext=0x7f070049;
-        public static final int default_mail_birthday_body_template=0x7f070037;
-        public static final int default_mail_birthday_subject_template=0x7f070036;
-        public static final int default_mail_body_template=0x7f070034;
-        public static final int default_mail_subject_tempate=0x7f070033;
-        public static final int default_sms_birthday_body_template=0x7f070038;
-        public static final int default_sms_body_template=0x7f070035;
-        public static final int delete=0x7f07006f;
-        public static final int deleteall=0x7f070054;
-        public static final int empty_name=0x7f07004e;
-        public static final int end_sync=0x7f070077;
-        public static final int enter_date=0x7f070025;
-        public static final int enter_name=0x7f07002c;
-        public static final int error_db=0x7f0700bd;
-        public static final int error_select_contact=0x7f0700bc;
-        public static final int exit=0x7f070003;
-        public static final int facebook_login_error=0x7f07007c;
-        public static final int facebooklogin=0x7f07005f;
-        public static final int facebooklogin_urlError=0x7f07005d;
-        public static final int feast_counter=0x7f070040;
-        public static final int friend_no_birthday=0x7f070087;
-        public static final int google_birthdaylist=0x7f070099;
-        public static final int happybirthday_name=0x7f070072;
-        public static final int happyfeast=0x7f070009;
-        public static final int happyfeast_name=0x7f070041;
-        public static final int ignore_birthyear=0x7f070092;
-        public static final int in_x_days=0x7f0700ab;
-        public static final int inserting_birthdays=0x7f070079;
-        public static final int inserting_birthdays_done=0x7f070093;
-        public static final int inserting_results=0x7f070078;
-        public static final int last_wish_date=0x7f07000c;
-        public static final int later=0x7f070007;
-        public static final int link_contact=0x7f07007d;
-        public static final int link_contact_alert=0x7f07007f;
-        public static final int link_contact_done=0x7f070080;
-        public static final int link_other=0x7f070059;
-        public static final int linked_to=0x7f070091;
-        public static final int loading=0x7f0700ac;
-        public static final int loading_data=0x7f070027;
-        public static final int loading_friends=0x7f070075;
-        public static final int loading_googlecontacts=0x7f07009a;
-        public static final int logging_out=0x7f0700a8;
-        public static final int login_authorization=0x7f07005e;
-        public static final int login_ko=0x7f0700a7;
-        public static final int login_thankyou=0x7f07005c;
-        public static final int logout=0x7f07008e;
-        public static final int logout_ko=0x7f070090;
-        public static final int logout_ok=0x7f07008f;
-        public static final int mail_birthday_template_text=0x7f070073;
-        public static final int mail_template_subject=0x7f07003b;
-        public static final int mail_template_text=0x7f07003c;
-        public static final int name_list_title=0x7f07000d;
-        public static final int nameday=0x7f07009e;
-        public static final int namedaylist=0x7f07008a;
-        public static final int never=0x7f070008;
-        public static final int next=0x7f070004;
-        public static final int nextevents_counter=0x7f07009b;
-        public static final int nexteventslist=0x7f07009c;
-        public static final int no=0x7f070082;
-        public static final int no_birthday=0x7f070061;
-        public static final int no_contacts=0x7f070002;
-        public static final int no_feast=0x7f070010;
-        public static final int no_feast_for_name=0x7f07002f;
-        public static final int no_nextevents=0x7f07009d;
-        public static final int no_syncresults=0x7f070064;
-        public static final int no_whitelist=0x7f07004b;
-        public static final int notif_new_event=0x7f070029;
-        public static final int notif_new_event_multi=0x7f07002a;
-        public static final int notif_one_or_more=0x7f07002b;
-        public static final int nottoday=0x7f070005;
-        public static final int ok=0x7f07002d;
-        public static final int pick_birthday_label=0x7f070069;
-        public static final int pick_birthday_update_label=0x7f07006c;
-        public static final int pick_contact_birthday=0x7f07006b;
-        public static final int pick_contact_nickname=0x7f070050;
-        public static final int pick_contact_to_link=0x7f070084;
-        public static final int pick_nameday=0x7f070051;
-        public static final int pick_nameday_datelist=0x7f070071;
-        public static final int please_wait=0x7f070030;
-        public static final int pref_alarm=0x7f070019;
-        public static final int pref_alarm_off=0x7f07001b;
-        public static final int pref_alarm_on=0x7f07001a;
-        public static final int pref_backup_restore=0x7f0700af;
-        public static final int pref_backup_restore_summary=0x7f0700b0;
-        public static final int pref_birthday=0x7f07005a;
-        public static final int pref_birthday_summary=0x7f07005b;
-        public static final int pref_blacklist=0x7f070017;
-        public static final int pref_blacklist_summary=0x7f070018;
-        public static final int pref_check_name_days=0x7f070042;
-        public static final int pref_check_name_days_summary=0x7f070043;
-        public static final int pref_data_cat=0x7f070044;
-        public static final int pref_disable_nameday=0x7f0700a4;
-        public static final int pref_disable_nameday_off=0x7f0700a6;
-        public static final int pref_disable_nameday_on=0x7f0700a5;
-        public static final int pref_feast_list=0x7f07000f;
-        public static final int pref_feast_list_summary=0x7f070011;
-        public static final int pref_nextevents=0x7f07009f;
-        public static final int pref_nextevents_summary=0x7f0700a0;
-        public static final int pref_template_email=0x7f070015;
-        public static final int pref_template_email_dialog=0x7f07001f;
-        public static final int pref_template_email_summary=0x7f070016;
-        public static final int pref_template_sms=0x7f070013;
-        public static final int pref_template_sms_dialog=0x7f07001e;
-        public static final int pref_template_sms_summary=0x7f070014;
-        public static final int pref_templates_cat=0x7f070012;
-        public static final int pref_time=0x7f07001c;
-        public static final int pref_time_summary=0x7f07001d;
-        public static final int pref_whitelist=0x7f07004c;
-        public static final int pref_whitelist_summary=0x7f07004d;
-        public static final int refresh=0x7f0700a9;
-        public static final int reset_button=0x7f07003d;
-        public static final int restoreDb=0x7f0700ae;
-        public static final int retrieving_events=0x7f0700a1;
-        public static final int sendmail=0x7f070047;
-        public static final int sms_birthday_template_text=0x7f070074;
-        public static final int sms_template_text=0x7f07003a;
-        public static final int socialuserdialog_title=0x7f070095;
-        public static final int start_sync=0x7f070065;
-        public static final int store_birthdays=0x7f070066;
-        public static final int sync_counter=0x7f07008d;
-        public static final int sync_facebook=0x7f070063;
-        public static final int sync_friends=0x7f070076;
-        public static final int sync_google_counter=0x7f070098;
-        public static final int sync_googlecontacts=0x7f070097;
-        public static final int syncresults=0x7f070085;
-        public static final int toast_blacklisted=0x7f070021;
-        public static final int toast_contact_blacklisted=0x7f070020;
-        public static final int toast_events=0x7f070096;
-        public static final int toast_finish=0x7f070024;
-        public static final int toast_later=0x7f070022;
-        public static final int toast_mail_template_saved=0x7f07003e;
-        public static final int toast_no_events=0x7f070023;
-        public static final int toast_sms_template_saved=0x7f07003f;
-        public static final int today=0x7f0700a2;
-        public static final int tomorrow=0x7f0700a3;
-        public static final int type_to_filter=0x7f070056;
-        public static final int unknow_birthday=0x7f070068;
-        public static final int unlink_contact=0x7f07007e;
-        public static final int unlink_contact_useless=0x7f070083;
-        public static final int update=0x7f070070;
-        public static final int updating_data=0x7f070028;
-        public static final int version=0x7f070000;
-        public static final int whattodo=0x7f07000a;
-        public static final int whitelist=0x7f07008b;
-        public static final int whitelist_added=0x7f07004f;
-        public static final int widget_event_counter=0x7f0700aa;
-        public static final int yes=0x7f070081;
+        public static final int about=0x7f0a0055;
+        public static final int about_content=0x7f0a0054;
+        public static final int action_addToBlackList=0x7f0a00cf;
+        public static final int action_displayContact=0x7f0a00ce;
+        public static final int add=0x7f0a0059;
+        public static final int add_birthday=0x7f0a0071;
+        public static final int add_whitelist=0x7f0a0066;
+        public static final int age=0x7f0a0089;
+        public static final int age_unknow=0x7f0a008a;
+        public static final int already_blacklisted=0x7f0a00cd;
+        public static final int app_name=0x7f0a0010;
+        public static final int back_to_main=0x7f0a0048;
+        public static final int backupDb=0x7f0a00bc;
+        public static final int birthday_added=0x7f0a0079;
+        public static final int birthday_counter=0x7f0a009b;
+        public static final int birthday_deleted=0x7f0a007d;
+        public static final int birthday_updated=0x7f0a007c;
+        public static final int birthdaylist=0x7f0a0095;
+        public static final int blacklist=0x7f0a0097;
+        public static final int blacklist_label=0x7f0a001a;
+        public static final int call=0x7f0a0015;
+        public static final int can_match_normally=0x7f0a0067;
+        public static final int cancel=0x7f0a003d;
+        public static final int check_contacts=0x7f0a0035;
+        public static final int confirm_delete_birthday=0x7f0a0076;
+        public static final int confirm_delete_blacklist=0x7f0a0062;
+        public static final int confirm_delete_whitelist=0x7f0a0061;
+        public static final int confirm_deleteall=0x7f0a0064;
+        public static final int confirm_store_question=0x7f0a00a3;
+        public static final int contact_method_dialog_title=0x7f0a0040;
+        public static final int contact_method_not_supported=0x7f0a0041;
+        public static final int contact_not_found=0x7f0a006f;
+        public static final int contactlist=0x7f0a0098;
+        public static final int data_backup_check=0x7f0a00c0;
+        public static final int data_backup_ko=0x7f0a00ca;
+        public static final int data_backup_ok=0x7f0a00c9;
+        public static final int data_backupfile_notfound=0x7f0a00c5;
+        public static final int data_backupfile_notreadable=0x7f0a00c6;
+        public static final int data_exporting=0x7f0a00c3;
+        public static final int data_external_unavailable=0x7f0a00c1;
+        public static final int data_restore_check=0x7f0a00c2;
+        public static final int data_restore_ko=0x7f0a00c8;
+        public static final int data_restore_ok=0x7f0a00c7;
+        public static final int data_restoring=0x7f0a00c4;
+        public static final int date_list_title=0x7f0a001d;
+        public static final int dateback=0x7f0a0057;
+        public static final int datenext=0x7f0a0058;
+        public static final int default_mail_birthday_body_template=0x7f0a0046;
+        public static final int default_mail_birthday_subject_template=0x7f0a0045;
+        public static final int default_mail_body_template=0x7f0a0043;
+        public static final int default_mail_subject_tempate=0x7f0a0042;
+        public static final int default_sms_birthday_body_template=0x7f0a0047;
+        public static final int default_sms_body_template=0x7f0a0044;
+        public static final int delete=0x7f0a007e;
+        public static final int deleteall=0x7f0a0063;
+        public static final int empty_name=0x7f0a005d;
+        public static final int end_sync=0x7f0a0086;
+        public static final int enter_date=0x7f0a0034;
+        public static final int enter_name=0x7f0a003b;
+        public static final int error_db=0x7f0a00cc;
+        public static final int error_select_contact=0x7f0a00cb;
+        public static final int exit=0x7f0a0012;
+        public static final int facebook_login_error=0x7f0a008b;
+        public static final int facebooklogin=0x7f0a006e;
+        public static final int facebooklogin_urlError=0x7f0a006c;
+        public static final int feast_counter=0x7f0a004f;
+        public static final int friend_no_birthday=0x7f0a0096;
+        public static final int gd_add=0x7f0a000b;
+        public static final int gd_compose=0x7f0a0003;
+        public static final int gd_edit=0x7f0a000a;
+        public static final int gd_export=0x7f0a0004;
+        public static final int gd_go_home=0x7f0a0000;
+        public static final int gd_locate=0x7f0a0009;
+        public static final int gd_locate_myself=0x7f0a000e;
+        public static final int gd_pick_photo=0x7f0a0008;
+        public static final int gd_refresh=0x7f0a0006;
+        public static final int gd_search=0x7f0a0001;
+        public static final int gd_share=0x7f0a0005;
+        public static final int gd_sort_by_size=0x7f0a000d;
+        public static final int gd_star=0x7f0a000c;
+        public static final int gd_take_photo=0x7f0a0007;
+        public static final int gd_talk=0x7f0a0002;
+        public static final int google_birthdaylist=0x7f0a00a8;
+        public static final int happybirthday_name=0x7f0a0081;
+        public static final int happyfeast=0x7f0a0018;
+        public static final int happyfeast_name=0x7f0a0050;
+        public static final int ignore_birthyear=0x7f0a00a1;
+        public static final int in_x_days=0x7f0a00ba;
+        public static final int inserting_birthdays=0x7f0a0088;
+        public static final int inserting_birthdays_done=0x7f0a00a2;
+        public static final int inserting_results=0x7f0a0087;
+        public static final int last_wish_date=0x7f0a001b;
+        public static final int later=0x7f0a0016;
+        public static final int link_contact=0x7f0a008c;
+        public static final int link_contact_alert=0x7f0a008e;
+        public static final int link_contact_done=0x7f0a008f;
+        public static final int link_other=0x7f0a0068;
+        public static final int linked_to=0x7f0a00a0;
+        public static final int loading=0x7f0a00bb;
+        public static final int loading_data=0x7f0a0036;
+        public static final int loading_friends=0x7f0a0084;
+        public static final int loading_googlecontacts=0x7f0a00a9;
+        public static final int logging_out=0x7f0a00b7;
+        public static final int login_authorization=0x7f0a006d;
+        public static final int login_ko=0x7f0a00b6;
+        public static final int login_thankyou=0x7f0a006b;
+        public static final int logout=0x7f0a009d;
+        public static final int logout_ko=0x7f0a009f;
+        public static final int logout_ok=0x7f0a009e;
+        public static final int mail_birthday_template_text=0x7f0a0082;
+        public static final int mail_template_subject=0x7f0a004a;
+        public static final int mail_template_text=0x7f0a004b;
+        public static final int name_list_title=0x7f0a001c;
+        public static final int nameday=0x7f0a00ad;
+        public static final int namedaylist=0x7f0a0099;
+        public static final int never=0x7f0a0017;
+        public static final int next=0x7f0a0013;
+        public static final int nextevents_counter=0x7f0a00aa;
+        public static final int nexteventslist=0x7f0a00ab;
+        public static final int no=0x7f0a0091;
+        public static final int no_birthday=0x7f0a0070;
+        public static final int no_contacts=0x7f0a0011;
+        public static final int no_feast=0x7f0a001f;
+        public static final int no_feast_for_name=0x7f0a003e;
+        public static final int no_nextevents=0x7f0a00ac;
+        public static final int no_syncresults=0x7f0a0073;
+        public static final int no_whitelist=0x7f0a005a;
+        public static final int notif_new_event=0x7f0a0038;
+        public static final int notif_new_event_multi=0x7f0a0039;
+        public static final int notif_one_or_more=0x7f0a003a;
+        public static final int nottoday=0x7f0a0014;
+        public static final int ok=0x7f0a003c;
+        public static final int pick_birthday_label=0x7f0a0078;
+        public static final int pick_birthday_update_label=0x7f0a007b;
+        public static final int pick_contact_birthday=0x7f0a007a;
+        public static final int pick_contact_nickname=0x7f0a005f;
+        public static final int pick_contact_to_link=0x7f0a0093;
+        public static final int pick_nameday=0x7f0a0060;
+        public static final int pick_nameday_datelist=0x7f0a0080;
+        public static final int please_wait=0x7f0a003f;
+        public static final int pref_alarm=0x7f0a0028;
+        public static final int pref_alarm_off=0x7f0a002a;
+        public static final int pref_alarm_on=0x7f0a0029;
+        public static final int pref_backup_restore=0x7f0a00be;
+        public static final int pref_backup_restore_summary=0x7f0a00bf;
+        public static final int pref_birthday=0x7f0a0069;
+        public static final int pref_birthday_summary=0x7f0a006a;
+        public static final int pref_blacklist=0x7f0a0026;
+        public static final int pref_blacklist_summary=0x7f0a0027;
+        public static final int pref_check_name_days=0x7f0a0051;
+        public static final int pref_check_name_days_summary=0x7f0a0052;
+        public static final int pref_data_cat=0x7f0a0053;
+        public static final int pref_disable_nameday=0x7f0a00b3;
+        public static final int pref_disable_nameday_off=0x7f0a00b5;
+        public static final int pref_disable_nameday_on=0x7f0a00b4;
+        public static final int pref_feast_list=0x7f0a001e;
+        public static final int pref_feast_list_summary=0x7f0a0020;
+        public static final int pref_nextevents=0x7f0a00ae;
+        public static final int pref_nextevents_summary=0x7f0a00af;
+        public static final int pref_template_email=0x7f0a0024;
+        public static final int pref_template_email_dialog=0x7f0a002e;
+        public static final int pref_template_email_summary=0x7f0a0025;
+        public static final int pref_template_sms=0x7f0a0022;
+        public static final int pref_template_sms_dialog=0x7f0a002d;
+        public static final int pref_template_sms_summary=0x7f0a0023;
+        public static final int pref_templates_cat=0x7f0a0021;
+        public static final int pref_time=0x7f0a002b;
+        public static final int pref_time_summary=0x7f0a002c;
+        public static final int pref_whitelist=0x7f0a005b;
+        public static final int pref_whitelist_summary=0x7f0a005c;
+        public static final int refresh=0x7f0a00b8;
+        public static final int reset_button=0x7f0a004c;
+        public static final int restoreDb=0x7f0a00bd;
+        public static final int retrieving_events=0x7f0a00b0;
+        public static final int sendmail=0x7f0a0056;
+        public static final int sms_birthday_template_text=0x7f0a0083;
+        public static final int sms_template_text=0x7f0a0049;
+        public static final int socialuserdialog_title=0x7f0a00a4;
+        public static final int start_sync=0x7f0a0074;
+        public static final int store_birthdays=0x7f0a0075;
+        public static final int sync_counter=0x7f0a009c;
+        public static final int sync_facebook=0x7f0a0072;
+        public static final int sync_friends=0x7f0a0085;
+        public static final int sync_google_counter=0x7f0a00a7;
+        public static final int sync_googlecontacts=0x7f0a00a6;
+        public static final int syncresults=0x7f0a0094;
+        public static final int toast_blacklisted=0x7f0a0030;
+        public static final int toast_contact_blacklisted=0x7f0a002f;
+        public static final int toast_events=0x7f0a00a5;
+        public static final int toast_finish=0x7f0a0033;
+        public static final int toast_later=0x7f0a0031;
+        public static final int toast_mail_template_saved=0x7f0a004d;
+        public static final int toast_no_events=0x7f0a0032;
+        public static final int toast_sms_template_saved=0x7f0a004e;
+        public static final int today=0x7f0a00b1;
+        public static final int tomorrow=0x7f0a00b2;
+        public static final int type_to_filter=0x7f0a0065;
+        public static final int unknow_birthday=0x7f0a0077;
+        public static final int unlink_contact=0x7f0a008d;
+        public static final int unlink_contact_useless=0x7f0a0092;
+        public static final int update=0x7f0a007f;
+        public static final int updating_data=0x7f0a0037;
+        public static final int version=0x7f0a000f;
+        public static final int whattodo=0x7f0a0019;
+        public static final int whitelist=0x7f0a009a;
+        public static final int whitelist_added=0x7f0a005e;
+        public static final int widget_event_counter=0x7f0a00b9;
+        public static final int yes=0x7f0a0090;
     }
     public static final class style {
-        public static final int HappyContacts=0x7f090000;
+        public static final int GreenDroid=0x7f0b0006;
+        /**  PopDownMenu 
+         */
+        public static final int GreenDroid_Animation=0x7f0b0028;
+        public static final int GreenDroid_Animation_PopDown=0x7f0b0029;
+        public static final int GreenDroid_Animation_PopDown_Center=0x7f0b002c;
+        public static final int GreenDroid_Animation_PopDown_Left=0x7f0b002a;
+        public static final int GreenDroid_Animation_PopDown_Right=0x7f0b002b;
+        public static final int GreenDroid_Animation_PopUp=0x7f0b002d;
+        public static final int GreenDroid_Animation_PopUp_Center=0x7f0b0030;
+        public static final int GreenDroid_Animation_PopUp_Left=0x7f0b002e;
+        public static final int GreenDroid_Animation_PopUp_Right=0x7f0b002f;
+        /**  Styles for the DescriptionItemView 
+         */
+        public static final int GreenDroid_DescriptionItemView=0x7f0b000a;
+        /**  Styles for the DrawableItemView 
+         */
+        public static final int GreenDroid_DrawableItemView=0x7f0b000c;
+        public static final int GreenDroid_DrawableItemView_Drawable=0x7f0b000d;
+        public static final int GreenDroid_DrawableItemView_Text=0x7f0b000e;
+        /**  Styles for the LongTextItemView 
+         */
+        public static final int GreenDroid_LongTextItemView=0x7f0b0009;
+        /**  Styles for the ProgressItemView 
+         */
+        public static final int GreenDroid_ProgressItemView=0x7f0b000f;
+        public static final int GreenDroid_ProgressItemView_ProgressBar=0x7f0b0010;
+        public static final int GreenDroid_ProgressItemView_Text=0x7f0b0011;
+        public static final int GreenDroid_SegmentedBar=0x7f0b001c;
+        public static final int GreenDroid_SegmentedHost=0x7f0b001d;
+        /**  Styles for the SeparatorItemView 
+         */
+        public static final int GreenDroid_SeparatorItemView=0x7f0b000b;
+        /**  Styles for the SubtextItemView 
+         */
+        public static final int GreenDroid_SubtextItemView=0x7f0b0015;
+        public static final int GreenDroid_SubtextItemView_Subtext=0x7f0b0017;
+        public static final int GreenDroid_SubtextItemView_Text=0x7f0b0016;
+        /**  Styles for the SubtitleItemView 
+         */
+        public static final int GreenDroid_SubtitleItemView=0x7f0b0012;
+        public static final int GreenDroid_SubtitleItemView_Subtitle=0x7f0b0014;
+        public static final int GreenDroid_SubtitleItemView_Text=0x7f0b0013;
+        /**  Styles for the TextItemView 
+         */
+        public static final int GreenDroid_TextItemView=0x7f0b0008;
+        /**  Styles for the ThumbnailItemView 
+         */
+        public static final int GreenDroid_ThumbnailItemView=0x7f0b0018;
+        public static final int GreenDroid_ThumbnailItemView_Subtitle=0x7f0b001a;
+        public static final int GreenDroid_ThumbnailItemView_Text=0x7f0b0019;
+        public static final int GreenDroid_ThumbnailItemView_Thumbnail=0x7f0b001b;
+        public static final int GreenDroid_Widget=0x7f0b0007;
+        /**  ActionBar related styles 
+         */
+        public static final int GreenDroid_Widget_ActionBar=0x7f0b001e;
+        public static final int GreenDroid_Widget_ActionBar_Dashboard=0x7f0b001f;
+        public static final int GreenDroid_Widget_ActionBar_Item=0x7f0b0020;
+        public static final int GreenDroid_Widget_ActionBar_Title=0x7f0b0021;
+        public static final int GreenDroid_Widget_QuickAction=0x7f0b0022;
+        public static final int GreenDroid_Widget_QuickAction_Bar=0x7f0b0023;
+        public static final int GreenDroid_Widget_QuickAction_Bar_Item=0x7f0b0026;
+        /**  QuickAction related styles 
+         */
+        public static final int GreenDroid_Widget_QuickAction_Grid=0x7f0b0024;
+        public static final int GreenDroid_Widget_QuickAction_Grid_Item=0x7f0b0027;
+        public static final int GreenDroid_Widget_QuickAction_Item=0x7f0b0025;
+        public static final int HappyContacts=0x7f0b0033;
         /**  Widget styles 
          */
-        public static final int HappyContacts_Widget=0x7f090001;
-        public static final int HappyContacts_Widget_ContentDay=0x7f090005;
-        public static final int HappyContacts_Widget_ContentNames=0x7f090006;
-        public static final int HappyContacts_Widget_Layout=0x7f090002;
-        public static final int HappyContacts_Widget_Notification=0x7f090004;
-        public static final int HappyContacts_Widget_Title=0x7f090003;
-        public static final int Theme_HappyContacts=0x7f090007;
+        public static final int HappyContacts_Widget=0x7f0b0034;
+        public static final int HappyContacts_Widget_ContentDay=0x7f0b0038;
+        public static final int HappyContacts_Widget_ContentNames=0x7f0b0039;
+        public static final int HappyContacts_Widget_Layout=0x7f0b0035;
+        public static final int HappyContacts_Widget_Notification=0x7f0b0037;
+        public static final int HappyContacts_Widget_Title=0x7f0b0036;
+        public static final int TextAppearance=0x7f0b0000;
+        public static final int TextAppearance_Large=0x7f0b0001;
+        public static final int TextAppearance_Medium=0x7f0b0002;
+        public static final int TextAppearance_Separator=0x7f0b0004;
+        public static final int TextAppearance_Small=0x7f0b0003;
+        public static final int TextAppearance_TabIndicator=0x7f0b0005;
+        public static final int Theme_GreenDroid=0x7f0b0031;
+        public static final int Theme_GreenDroid_NoTitleBar=0x7f0b0032;
+        public static final int Theme_HappyContacts=0x7f0b003a;
     }
     public static final class xml {
-        public static final int appwidget_info=0x7f040000;
+        public static final int appwidget_info=0x7f050000;
     }
+    public static final class styleable {
+        /**  ActionBar related attributes 
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #ActionBar_dividerDrawable com.kamosoft.happycontacts:dividerDrawable}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_dividerWidth com.kamosoft.happycontacts:dividerWidth}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_homeDrawable com.kamosoft.happycontacts:homeDrawable}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_title com.kamosoft.happycontacts:title}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_type com.kamosoft.happycontacts:type}</code></td><td></td></tr>
+           </table>
+           @see #ActionBar_dividerDrawable
+           @see #ActionBar_dividerWidth
+           @see #ActionBar_homeDrawable
+           @see #ActionBar_title
+           @see #ActionBar_type
+         */
+        public static final int[] ActionBar = {
+            0x7f010042, 0x7f010043, 0x7f010046, 0x7f010047,
+            0x7f010048
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.kamosoft.happycontacts.R.attr#dividerDrawable}
+          attribute's value can be found in the {@link #ActionBar} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name android:dividerDrawable
+        */
+        public static final int ActionBar_dividerDrawable = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.kamosoft.happycontacts.R.attr#dividerWidth}
+          attribute's value can be found in the {@link #ActionBar} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:dividerWidth
+        */
+        public static final int ActionBar_dividerWidth = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.kamosoft.happycontacts.R.attr#homeDrawable}
+          attribute's value can be found in the {@link #ActionBar} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name android:homeDrawable
+        */
+        public static final int ActionBar_homeDrawable = 4;
+        /**
+          <p>This symbol is the offset where the {@link com.kamosoft.happycontacts.R.attr#title}
+          attribute's value can be found in the {@link #ActionBar} array.
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:title
+        */
+        public static final int ActionBar_title = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.kamosoft.happycontacts.R.attr#type}
+          attribute's value can be found in the {@link #ActionBar} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>normal</code></td><td>0</td><td></td></tr>
+<tr><td><code>dashboard</code></td><td>1</td><td></td></tr>
+</table>
+          @attr name android:type
+        */
+        public static final int ActionBar_type = 3;
+        /** Attributes that can be used with a DescriptionItem.
+         */
+        public static final int[] DescriptionItem = {
+            
+        };
+        /** Attributes that can be used with a DrawableItem.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #DrawableItem_drawable com.kamosoft.happycontacts:drawable}</code></td><td></td></tr>
+           </table>
+           @see #DrawableItem_drawable
+         */
+        public static final int[] DrawableItem = {
+            0x7f01003e
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.kamosoft.happycontacts.R.attr#drawable}
+          attribute's value can be found in the {@link #DrawableItem} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name android:drawable
+        */
+        public static final int DrawableItem_drawable = 0;
+        /**             
+ Styleables 
+            
+ List items related attributes 
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #Item_enabled com.kamosoft.happycontacts:enabled}</code></td><td></td></tr>
+           </table>
+           @see #Item_enabled
+         */
+        public static final int[] Item = {
+            0x7f01003b
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.kamosoft.happycontacts.R.attr#enabled}
+          attribute's value can be found in the {@link #Item} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:enabled
+        */
+        public static final int Item_enabled = 0;
+        /** Attributes that can be used with a LongTextItem.
+         */
+        public static final int[] LongTextItem = {
+            
+        };
+        /** Attributes that can be used with a ProgressItem.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #ProgressItem_isInProgress com.kamosoft.happycontacts:isInProgress}</code></td><td></td></tr>
+           </table>
+           @see #ProgressItem_isInProgress
+         */
+        public static final int[] ProgressItem = {
+            0x7f01003d
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.kamosoft.happycontacts.R.attr#isInProgress}
+          attribute's value can be found in the {@link #ProgressItem} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:isInProgress
+        */
+        public static final int ProgressItem_isInProgress = 0;
+        /**  SegmentedBar related attributes 
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #SegmentedBar_dividerDrawable com.kamosoft.happycontacts:dividerDrawable}</code></td><td></td></tr>
+           <tr><td><code>{@link #SegmentedBar_dividerWidth com.kamosoft.happycontacts:dividerWidth}</code></td><td></td></tr>
+           </table>
+           @see #SegmentedBar_dividerDrawable
+           @see #SegmentedBar_dividerWidth
+         */
+        public static final int[] SegmentedBar = {
+            0x7f010042, 0x7f010043
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.kamosoft.happycontacts.R.attr#dividerDrawable}
+          attribute's value can be found in the {@link #SegmentedBar} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name android:dividerDrawable
+        */
+        public static final int SegmentedBar_dividerDrawable = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.kamosoft.happycontacts.R.attr#dividerWidth}
+          attribute's value can be found in the {@link #SegmentedBar} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:dividerWidth
+        */
+        public static final int SegmentedBar_dividerWidth = 1;
+        /** Attributes that can be used with a SegmentedHost.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #SegmentedHost_segmentedBar com.kamosoft.happycontacts:segmentedBar}</code></td><td></td></tr>
+           <tr><td><code>{@link #SegmentedHost_segmentedContentView com.kamosoft.happycontacts:segmentedContentView}</code></td><td></td></tr>
+           </table>
+           @see #SegmentedHost_segmentedBar
+           @see #SegmentedHost_segmentedContentView
+         */
+        public static final int[] SegmentedHost = {
+            0x7f010044, 0x7f010045
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.kamosoft.happycontacts.R.attr#segmentedBar}
+          attribute's value can be found in the {@link #SegmentedHost} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name android:segmentedBar
+        */
+        public static final int SegmentedHost_segmentedBar = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.kamosoft.happycontacts.R.attr#segmentedContentView}
+          attribute's value can be found in the {@link #SegmentedHost} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name android:segmentedContentView
+        */
+        public static final int SegmentedHost_segmentedContentView = 1;
+        /** Attributes that can be used with a SeparatorItem.
+         */
+        public static final int[] SeparatorItem = {
+            
+        };
+        /** Attributes that can be used with a SubtextItem.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #SubtextItem_subtext com.kamosoft.happycontacts:subtext}</code></td><td></td></tr>
+           </table>
+           @see #SubtextItem_subtext
+         */
+        public static final int[] SubtextItem = {
+            0x7f010040
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.kamosoft.happycontacts.R.attr#subtext}
+          attribute's value can be found in the {@link #SubtextItem} array.
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:subtext
+        */
+        public static final int SubtextItem_subtext = 0;
+        /** Attributes that can be used with a SubtitleItem.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #SubtitleItem_subtitle com.kamosoft.happycontacts:subtitle}</code></td><td></td></tr>
+           </table>
+           @see #SubtitleItem_subtitle
+         */
+        public static final int[] SubtitleItem = {
+            0x7f01003f
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.kamosoft.happycontacts.R.attr#subtitle}
+          attribute's value can be found in the {@link #SubtitleItem} array.
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:subtitle
+        */
+        public static final int SubtitleItem_subtitle = 0;
+        /** Attributes that can be used with a TextItem.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #TextItem_text com.kamosoft.happycontacts:text}</code></td><td></td></tr>
+           </table>
+           @see #TextItem_text
+         */
+        public static final int[] TextItem = {
+            0x7f01003c
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.kamosoft.happycontacts.R.attr#text}
+          attribute's value can be found in the {@link #TextItem} array.
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:text
+        */
+        public static final int TextItem_text = 0;
+        /** Attributes that can be used with a ThumbnailItem.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #ThumbnailItem_thumbnail com.kamosoft.happycontacts:thumbnail}</code></td><td></td></tr>
+           </table>
+           @see #ThumbnailItem_thumbnail
+         */
+        public static final int[] ThumbnailItem = {
+            0x7f010041
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.kamosoft.happycontacts.R.attr#thumbnail}
+          attribute's value can be found in the {@link #ThumbnailItem} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name android:thumbnail
+        */
+        public static final int ThumbnailItem_thumbnail = 0;
+    };
 }

@@ -4,7 +4,16 @@
 	android:versionName="2.9" android:installLocation="internalOnly">
 
 	<application android:icon="@drawable/icon" android:theme="@style/Theme.HappyContacts"
-		android:label="@string/app_name">
+		android:label="@string/app_name" android:name=".HappyContactsApplication">
+		
+		<activity android:name=".HappyContacts"
+			android:label="@string/app_name">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity><!--
+		
 		<activity android:name=".HappyContactsPreferences"
 			android:label="@string/app_name">
 			<intent-filter>
@@ -12,7 +21,7 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".NameListActivity" />
+		--><activity android:name=".NameListActivity" />
 		<activity android:name=".DateListActivity" />
 		<!-- activity android:name="ContactsPopupActivity" android:theme="@android:style/Theme.Dialog" 
 			/ -->

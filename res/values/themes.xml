@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <style name="Theme.HappyContacts" parent="@android:style/Theme.Black">
-    
-  </style>
+
+
+	<style name="Theme.HappyContacts" parent="@style/Theme.GreenDroid.NoTitleBar">
+		<item name="android:windowBackground">@android:color/white</item>
+		<item name="android:colorBackground">@android:color/white</item>
+		<item name="gdActionBarTitleColor">@android:color/white</item>
+		<item name="gdActionBarBackground">@drawable/action_bar_background</item>
+		<item name="gdActionBarDividerDrawable">@drawable/action_bar_divider</item>
+		<item name="gdActionBarDividerWidth">2px</item>
+		<item name="gdActionBarApplicationDrawable">@drawable/hc_app_logo</item>
+	</style>
+
+	<!-- <style name="Theme.GDCatalog.TweakedItems" parent="@style/Theme.GDCatalog"> 
+		<item name="gdTextAppearanceLarge">@style/TextAppearanceLarge</item> <item 
+		name="gdItemViewPreferredHeight">45dp</item> <item name="gdSeparatorItemViewStyle">@style/SeparatorItemView</item> 
+		</style> -->
 </resources>
