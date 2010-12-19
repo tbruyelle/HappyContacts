@@ -100,9 +100,7 @@ insert into feast (name, day, source) values ("Télémaque", "01/01", "ephemeride.
 insert into feast (name, day, source) values ("Basile", "02/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Vassily", "02/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Séraphin", "02/01", "ephemeride.name");
-insert into feast (name, day, source) values ("Stéphanie", "02/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Etienne", "02/01", "ephemeride.name");
-insert into feast (name, day, source) values ("Stéphane", "02/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Fanny", "02/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Steve", "02/01", "ephemeride.name");
 insert into feast (name, day, source) values ("Steven", "02/01", "ephemeride.name");

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="version">2.9</string>
+  <string name="version">2.9.1</string>
   <string name="app_name">Happy Contacts</string>
   <string name="no_contacts">No contacts</string>
   <string name="exit">Exit</string>
