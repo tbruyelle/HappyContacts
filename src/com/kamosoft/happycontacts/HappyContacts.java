@@ -34,4 +34,13 @@ public class HappyContacts
     {
         Toast.makeText( this, "yeah", Toast.LENGTH_SHORT ).show();
     }
+
+    /**
+     * Handle Templates button click
+     * @param v
+     */
+    public void onTemplateClick( View v )
+    {
+        Toast.makeText( this, "Template", Toast.LENGTH_SHORT ).show();
+    }
 }

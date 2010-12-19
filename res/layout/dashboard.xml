@@ -10,7 +10,7 @@
       android:layout_height="wrap_content" android:layout_weight="1">
       <Button android:id="@+id/home_btn_alarm" style="@style/HomeButton" android:onClick="onAlarmClick"
         android:text="Alarm" android:drawableTop="@drawable/dash_clock" />
-      <Button android:id="@+id/home_btn_database" style="@style/HomeButton"
+      <Button android:id="@+id/dash_btn_database" style="@style/HomeButton"
         android:onClick="onAlarmClick" android:text="Alarm" android:drawableTop="@drawable/dash_clock" />
     </LinearLayout>
 
@@ -24,8 +24,8 @@
 
     <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
       android:layout_height="wrap_content" android:layout_weight="1">
-      <Button android:id="@+id/home_btn_alarm4" style="@style/HomeButton"
-        android:onClick="onAlarmClick" android:text="Alarm" android:drawableTop="@drawable/dash_clock" />
+      <Button android:id="@+id/home_btn_template" style="@style/HomeButton"
+        android:onClick="onTemplateClick" android:text="Template" android:drawableTop="@drawable/dash_template" />
       <Button android:id="@+id/home_btn_alarm5" style="@style/HomeButton"
         android:onClick="onAlarmClick" android:text="Alarm" android:drawableTop="@drawable/dash_clock" />
     </LinearLayout>
