@@ -3,7 +3,6 @@
  */
 package com.kamosoft.happycontacts.widget;
 
-import java.text.ParseException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -21,11 +20,11 @@ import android.widget.RemoteViews;
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
 import com.kamosoft.happycontacts.dao.DbAdapter;
-import com.kamosoft.happycontacts.events.EventSectionedAdapter;
 import com.kamosoft.happycontacts.events.NextEventsActivity;
 import com.kamosoft.happycontacts.events.NextEventsAsyncTask;
 import com.kamosoft.happycontacts.model.ContactFeast;
 import com.kamosoft.happycontacts.model.ContactFeasts;
+import com.kamosoft.utils.DateUtils;
 
 /**
  * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
@@ -77,6 +76,7 @@ public class HappyContactsWidget
             LinkedHashMap<String, ContactFeasts> eventsPerDate = db.fetchTodayNextEvents();
             if ( eventsPerDate == null )
             {
+                Log.d( "Events not found in db" );
                 eventsPerDate = NextEventsAsyncTask.lookForNextEvents( this );
             }
             Log.d( "Events looked" );
@@ -105,8 +105,8 @@ public class HappyContactsWidget
                 }
                 dayDisplayed++;
 
-                String eventDate = entry.getKey();
-                Log.d( "Events found at " + eventDate );
+                String eventWhen = entry.getKey();
+                Log.d( "Events found at " + eventWhen );
 
                 if ( dayDisplayed > 1 )
                 {
@@ -117,16 +117,9 @@ public class HappyContactsWidget
 
                 //View eventElementLayout = layoutInflater.inflate( R.layout.event_element, null );
                 RemoteViews eventElementLayout = new RemoteViews( this.getPackageName(), R.layout.appwidget_element );
-                try
-                {
-                    eventElementLayout.setTextViewText( R.id.sooner_event_date,
-                                                        EventSectionedAdapter.getDateLabel( this, eventDate ) );
-                }
-                catch ( ParseException e )
-                {
-                    Log.e( "Error parsing date " + eventDate );
-                    rootViews.setTextViewText( R.id.sooner_event_date, eventDate );
-                }
+
+                eventElementLayout.setTextViewText( R.id.sooner_event_date, DateUtils.getDateLabel( this, eventWhen ) );
+
                 StringBuilder sb = new StringBuilder();
                 for ( Map.Entry<Long, ContactFeast> entry2 : contactFeasts.getContactList().entrySet() )
                 {

@@ -10,7 +10,6 @@ import java.util.LinkedHashMap;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.text.format.DateFormat;
 
 import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.DateFormatConstants;
@@ -19,6 +18,7 @@ import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
 import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.model.ContactFeasts;
+import com.kamosoft.utils.DateUtils;
 
 /**
  * @author tom
@@ -98,7 +98,7 @@ public class NextEventsAsyncTask
             {
                 Log.d( "Found " + contactFeasts.getContactList().size() + " events to wish for " + dayDate );
             }
-            eventsPerDate.put( DateFormat.getDateFormat( context ).format( date ), contactFeasts );
+            eventsPerDate.put( String.valueOf( DateUtils.getTodayToDateDiff( date ) ), contactFeasts );
             calendar.add( Calendar.DAY_OF_YEAR, 1 );
         }
         /* recording results in database */

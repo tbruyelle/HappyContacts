@@ -5,7 +5,6 @@ package com.kamosoft.happycontacts.dao;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +16,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
-import android.text.format.DateFormat;
 
 import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.Log;
@@ -26,6 +24,7 @@ import com.kamosoft.happycontacts.model.ContactFeast;
 import com.kamosoft.happycontacts.model.ContactFeasts;
 import com.kamosoft.happycontacts.model.SocialNetworkUser;
 import com.kamosoft.utils.AndroidUtils;
+import com.kamosoft.utils.DateUtils;
 import com.kamosoft.utils.ProgressDialogHandler;
 
 /**
@@ -557,11 +556,11 @@ public class DbAdapter
         /* delete before, events are only corrects for the current date */
         deleteNextEvents();
 
-        String today = DateFormat.getDateFormat( mCtx ).format( new Date() );
+        String today = DateUtils.getToday( mCtx );
         boolean res = false;
         for ( Map.Entry<String, ContactFeasts> entry : nexEvents.entrySet() )
         {
-            String date = entry.getKey();
+            String when = entry.getKey();
             ContactFeasts contactFeasts = entry.getValue();
             if ( contactFeasts.getContactList().isEmpty() )
             {
@@ -571,7 +570,7 @@ public class DbAdapter
                 initialValues.put( HappyContactsDb.NextEvents.CONTACT_NAME, "$$$" );
                 initialValues.put( HappyContactsDb.NextEvents.BIRTHDAY_YEAR, "$$$" );
                 initialValues.put( HappyContactsDb.NextEvents.NAMEDAY, "$$$" );
-                initialValues.put( HappyContactsDb.NextEvents.EVENT_WHEN, date );
+                initialValues.put( HappyContactsDb.NextEvents.EVENT_WHEN, when );
                 initialValues.put( HappyContactsDb.NextEvents.CHECKED_DATE, today );
 
                 res = mDb.insert( HappyContactsDb.NextEvents.TABLE_NAME, null, initialValues ) > 0;
@@ -591,7 +590,7 @@ public class DbAdapter
                     initialValues.put( HappyContactsDb.NextEvents.CONTACT_NAME, user.getContactName() );
                     initialValues.put( HappyContactsDb.NextEvents.BIRTHDAY_YEAR, user.getBirthdayYear() );
                     initialValues.put( HappyContactsDb.NextEvents.NAMEDAY, user.getNameDay() );
-                    initialValues.put( HappyContactsDb.NextEvents.EVENT_WHEN, date );
+                    initialValues.put( HappyContactsDb.NextEvents.EVENT_WHEN, when );
                     initialValues.put( HappyContactsDb.NextEvents.CHECKED_DATE, today );
 
                     res = mDb.insert( HappyContactsDb.NextEvents.TABLE_NAME, null, initialValues ) > 0;
@@ -621,7 +620,7 @@ public class DbAdapter
         {
             Log.v( "DbAdapter: start fetchTodayNextEvents" );
         }
-        String today = DateFormat.getDateFormat( mCtx ).format( new Date() );
+        String today = DateUtils.getToday( mCtx );
         Cursor cursor = mDb.query( HappyContactsDb.NextEvents.TABLE_NAME, HappyContactsDb.NextEvents.COLUMNS,
                                    HappyContactsDb.NextEvents.CHECKED_DATE + "='" + today + "'", null, null, null,
                                    HappyContactsDb.NextEvents.EVENT_WHEN );
