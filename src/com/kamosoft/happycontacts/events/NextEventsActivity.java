@@ -33,6 +33,7 @@ import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.model.ContactFeast;
 import com.kamosoft.happycontacts.model.ContactFeasts;
 import com.kamosoft.happycontacts.widget.HappyContactsWidget;
+import com.kamosoft.utils.DateUtils;
 
 /**
  * Display the upcoming events for the next 30 days
@@ -151,7 +152,7 @@ public class NextEventsActivity
                 /* return to the nearest position */
                 getListView().setSelection( info.position > 0 ? info.position - 1 : 0 );
                 return true;
-                
+
             default:
                 return super.onContextItemSelected( item );
         }
@@ -175,7 +176,7 @@ public class NextEventsActivity
         {
             for ( Map.Entry<String, ContactFeasts> entry : mEventsPerDate.entrySet() )
             {
-                String date = entry.getKey();
+                String when = entry.getKey();
                 ContactFeasts contactFeasts = entry.getValue();
                 ArrayList<ContactFeast> contacts = new ArrayList<ContactFeast>();
                 for ( Map.Entry<Long, ContactFeast> contactEntry : contactFeasts.getContactList().entrySet() )
@@ -190,7 +191,7 @@ public class NextEventsActivity
                 {
                     nbEvents += contacts.size();
                     EventArrayAdapter eventArrayAdapter = new EventArrayAdapter( this, R.layout.event_element, contacts );
-                    mSectionedAdapter.addSection( date, eventArrayAdapter );
+                    mSectionedAdapter.addSection( DateUtils.getDateLabel( this, when ), eventArrayAdapter );
                 }
             }
         }

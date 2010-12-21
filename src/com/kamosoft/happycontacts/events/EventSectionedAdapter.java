@@ -3,19 +3,12 @@
  */
 package com.kamosoft.happycontacts.events;
 
-import java.text.ParseException;
-import java.util.Calendar;
-import java.util.Date;
-
 import android.app.Activity;
-import android.content.Context;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.commonsware.android.listview.SectionedAdapter;
-import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
 
 /**
@@ -46,39 +39,8 @@ public class EventSectionedAdapter
         {
             result = (TextView) mActivity.getLayoutInflater().inflate( R.layout.event_header, null );
         }
-        try
-        {
-            result.setText( getDateLabel( mActivity, caption ) );
-        }
-        catch ( java.text.ParseException e )
-        {
-            Log.e( "Unable to parse date " + caption );
-            result.setText( caption );
-        }
-
+        result.setText( caption );
         return ( result );
-    }
-
-    public static String getDateLabel( Context context, String dateString )
-        throws ParseException
-    {
-        Date date = DateFormat.getDateFormat( context ).parse( dateString );
-        Calendar calendarToday = Calendar.getInstance();
-        Calendar calendarCaption = Calendar.getInstance();
-        calendarCaption.setTime( date );
-        int nbDay = calendarCaption.get( Calendar.DAY_OF_YEAR ) - calendarToday.get( Calendar.DAY_OF_YEAR );
-        if ( nbDay == 0 )
-        {
-            return context.getString( R.string.today );
-        }
-        else if ( nbDay == 1 )
-        {
-            return context.getString( R.string.tomorrow );
-        }
-        else
-        {
-            return context.getString( R.string.in_x_days, String.valueOf( nbDay ) );
-        }
     }
 
     /**
