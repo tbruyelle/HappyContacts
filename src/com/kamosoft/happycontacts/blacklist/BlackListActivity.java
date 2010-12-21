@@ -3,6 +3,7 @@
  */
 package com.kamosoft.happycontacts.blacklist;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
@@ -177,6 +178,11 @@ public class BlackListActivity
     protected void onActivityResult( int requestCode, int resultCode, Intent data )
     {
         super.onActivityResult( requestCode, resultCode, data );
+        
+        if ( resultCode == Activity.RESULT_CANCELED )
+        {
+            return;
+        }
 
         if ( mDb == null )
         {
@@ -189,7 +195,7 @@ public class BlackListActivity
 
         switch ( requestCode )
         {
-            case PICK_CONTACT_ACTIVITY_RESULT:
+            case PICK_CONTACT_ACTIVITY_RESULT:               
                 long contactId = data.getLongExtra( CONTACTID_INTENT_KEY, -1 );
                 if ( contactId == -1 )
                 {
