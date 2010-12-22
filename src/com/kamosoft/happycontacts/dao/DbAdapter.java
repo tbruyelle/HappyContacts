@@ -623,7 +623,8 @@ public class DbAdapter
         String today = DateUtils.getToday( mCtx );
         Cursor cursor = mDb.query( HappyContactsDb.NextEvents.TABLE_NAME, HappyContactsDb.NextEvents.COLUMNS,
                                    HappyContactsDb.NextEvents.CHECKED_DATE + "='" + today + "'", null, null, null,
-                                   HappyContactsDb.NextEvents.EVENT_WHEN );
+                                   /* sort the text with its numeric value */
+                                   "cast("+HappyContactsDb.NextEvents.EVENT_WHEN+" as int)" );
 
         LinkedHashMap<String, ContactFeasts> events = null;
         if ( cursor.getCount() > 0 )
