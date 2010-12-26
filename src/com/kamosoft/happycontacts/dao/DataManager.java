@@ -56,7 +56,6 @@ public class DataManager
                             {
                                 Log.i( "importing database from external storage, and resetting database" );
                                 new ExportDatabaseTask().execute();
-                                HappyContactsPreferences.backToMain( DataManager.this );
                             }
                             else
                             {
@@ -87,9 +86,6 @@ public class DataManager
                             {
                                 Log.i( "importing database from external storage, and resetting database" );
                                 new ImportDatabaseTask().execute();
-                                // sleep momentarily so that database reset stuff has time to take place (else Main reloads too fast)
-                                SystemClock.sleep( 500 );
-                                HappyContactsPreferences.backToMain( DataManager.this );
                             }
                             else
                             {
@@ -156,10 +152,14 @@ public class DataManager
         @Override
         protected void onPostExecute( final Boolean success )
         {
+            // sleep momentarily so that database reset stuff has time to take place (else Main reloads too fast)
+            SystemClock.sleep( 500 );
             if ( dialog.isShowing() )
             {
                 dialog.dismiss();
             }
+            HappyContactsPreferences.backToMain( DataManager.this );
+
             if ( success )
             {
                 Toast.makeText( DataManager.this, R.string.data_backup_ok, Toast.LENGTH_SHORT ).show();
@@ -168,6 +168,7 @@ public class DataManager
             {
                 Toast.makeText( DataManager.this, R.string.data_backup_ko, Toast.LENGTH_SHORT ).show();
             }
+
         }
     }
 
@@ -227,10 +228,13 @@ public class DataManager
         @Override
         protected void onPostExecute( final String errMsg )
         {
+            // sleep momentarily so that database reset stuff has time to take place (else Main reloads too fast)
+            SystemClock.sleep( 500 );
             if ( dialog.isShowing() )
             {
                 dialog.dismiss();
             }
+            HappyContactsPreferences.backToMain( DataManager.this );
             if ( errMsg == null )
             {
                 Toast.makeText( DataManager.this, R.string.data_restore_ok, Toast.LENGTH_SHORT ).show();
@@ -272,18 +276,18 @@ public class DataManager
             if ( phoneContact == null )
             {
                 /* contact not in phone contacts!!, need to delete it */
-                Log.e( logTag + ": Contact " + contactName + " not found in contact phones, delete it !" );
+                Log.e( logTag + ": Contact " + contactName + ", id="+contactId+" not found in contact phones, delete it !" );
                 toBeDeleted.add( id );
                 continue;
             }
             if ( phoneContact.id.longValue() == contactId.longValue() )
             {
                 /* ids are the same it's OK */
-                Log.v( logTag + ": Contact id for " + contactName + " are OK both side" );
+                Log.v( logTag + ": Contact id="+contactId+" for " + contactName + " are OK both side" );
                 continue;
             }
             /* contacts ids are different, need to update the black list with the new id */
-            Log.v( logTag + ": " + contactName + " Contact ids are different, need to update" );
+            Log.v( logTag + ": " + contactName + " Contact ids are different: id="+contactId+", phoneId="+phoneContact.id+", need to update" );
             toBeUpdated.add( phoneContact );
         }
         cursor.close();

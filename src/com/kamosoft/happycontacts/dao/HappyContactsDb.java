@@ -12,7 +12,11 @@ public final class HappyContactsDb
     
     public static String DATABASE_NAME = "happy_contacts";
 
-    public static int DATABASE_VERSION = 46;
+    /**
+     * 46 (v2.9.2) -> 47 (v2.9.3): remove unique index on birthday table (cause problem on fixContactsID()
+     * after restoring the database).
+     */
+    public static int DATABASE_VERSION = 47;
 
     public static final class NextEvents
     {
