@@ -12,6 +12,7 @@ import java.util.Map;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -20,6 +21,7 @@ import android.os.Environment;
 import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
+import com.kamosoft.happycontacts.contacts.PhoneContact;
 import com.kamosoft.happycontacts.model.ContactFeast;
 import com.kamosoft.happycontacts.model.ContactFeasts;
 import com.kamosoft.happycontacts.model.SocialNetworkUser;
@@ -116,7 +118,7 @@ public class DbAdapter
         @Override
         public void onUpgrade( SQLiteDatabase db, int oldVersion, int newVersion )
         {
-            if ( oldVersion != 45 )
+            if ( oldVersion != 46 )
             {
                 Log.v( "Upgrading database from version " + oldVersion + " to " + newVersion
                     + ", which will destroy all old data" );
@@ -276,8 +278,8 @@ public class DbAdapter
         }
         /* use order by name */
         Cursor cursor = mDb.query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS,
-                                   HappyContactsDb.Birthday.BIRTHDAY_DATE + "='" + day + "'", null, null, null,
-                                   HappyContactsDb.Birthday.CONTACT_NAME );
+                                   HappyContactsDb.Birthday.BIRTHDAY_DATE + "=" + DatabaseUtils.sqlEscapeString( day ),
+                                   null, null, null, HappyContactsDb.Birthday.CONTACT_NAME );
 
         if ( Log.DEBUG )
         {
@@ -296,9 +298,8 @@ public class DbAdapter
         {
             Log.v( "DbAdapter: start hasBirthday(" + contactId + ")" );
         }
-        Cursor cursor = mDb
-            .query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS,
-                    HappyContactsDb.Birthday.CONTACT_ID + "='" + contactId + "'", null, null, null, null );
+        Cursor cursor = mDb.query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS,
+                                   HappyContactsDb.Birthday.CONTACT_ID + "=" + contactId, null, null, null, null );
         boolean hasBirhtday = cursor.getCount() > 0;
         cursor.close();
         return hasBirhtday;
@@ -310,9 +311,8 @@ public class DbAdapter
         {
             Log.v( "DbAdapter: start getBirthday(" + contactId + ")" );
         }
-        Cursor cursor = mDb
-            .query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS,
-                    HappyContactsDb.Birthday.CONTACT_ID + "='" + contactId + "'", null, null, null, null );
+        Cursor cursor = mDb.query( HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.COLUMNS,
+                                   HappyContactsDb.Birthday.CONTACT_ID + "=" + contactId, null, null, null, null );
         String day, year;
         if ( cursor.getCount() > 0 )
         {
@@ -416,6 +416,104 @@ public class DbAdapter
                            null ) > 0;
     }
 
+    public void fixBlackListId( PhoneContact phoneContact )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start fixBlackListsIds(" + phoneContact.id + ", " + phoneContact.name );
+        }
+        int res = fixId( phoneContact, HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.CONTACT_ID,
+                         HappyContactsDb.BlackList.CONTACT_NAME );
+        if ( res < 1 )
+        {
+            Log.e( "Error while fixing blacklist id for contact " + phoneContact.name + ", update return " + res );
+        }
+        else
+        {
+            Log.v( "blacklist Id Fixed for contact " + phoneContact.name );
+        }
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: end fixBlacklistIds" );
+        }
+    }
+
+    public void fixBirthdayId( PhoneContact phoneContact )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start fixBirthdayId(" + phoneContact.id + ", " + phoneContact.name );
+        }
+        int res = fixId( phoneContact, HappyContactsDb.Birthday.TABLE_NAME, HappyContactsDb.Birthday.CONTACT_ID,
+                         HappyContactsDb.Birthday.CONTACT_NAME );
+        if ( res != 1 )
+        {
+            Log.e( "Error while fixing Birthday id for contact " + phoneContact.name + ", update return " + res );
+        }
+        else
+        {
+            Log.v( "Birthday Id Fixed for contact " + phoneContact.name );
+        }
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: end fixBirthdayId" );
+        }
+    }
+
+    public int fixId( PhoneContact phoneContact, String tableName, String contactId, String ContactName )
+    {
+        ContentValues values = new ContentValues();
+        values.put( contactId, phoneContact.id );
+        return mDb.update( tableName, values, ContactName + "=" + DatabaseUtils.sqlEscapeString( phoneContact.name ),
+                           null );
+    }
+
+    public void fixWhiteListId( PhoneContact phoneContact )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start fixWhiteListIds(" + phoneContact.id + ", " + phoneContact.name );
+        }
+
+        int res = fixId( phoneContact, HappyContactsDb.WhiteList.TABLE_NAME, HappyContactsDb.WhiteList.CONTACT_ID,
+                         HappyContactsDb.WhiteList.CONTACT_NAME );
+        if ( res < 1 )
+        {
+            Log.e( "Error while fixing blacklist id for contact " + phoneContact.name + ", update return " + res );
+        }
+        else
+        {
+            Log.v( "whitelist Id Fixed for contact " + phoneContact.name );
+        }
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: end fixWhiteListIds" );
+        }
+    }
+
+    public void fixSyncResultId( PhoneContact phoneContact )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start fixSyncResultId(" + phoneContact.id + ", " + phoneContact.name );
+        }
+
+        int res = fixId( phoneContact, HappyContactsDb.SyncResult.TABLE_NAME, HappyContactsDb.SyncResult.CONTACT_ID,
+                         HappyContactsDb.SyncResult.CONTACT_NAME );
+        if ( res < 1 )
+        {
+            Log.e( "Error while fixing SyncResult id for contact " + phoneContact.name + ", update return " + res );
+        }
+        else
+        {
+            Log.v( "SyncResult Id Fixed for contact " + phoneContact.name );
+        }
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: end fixSyncResultId" );
+        }
+    }
+
     public boolean updateBirthday( Long contactId, String contactName, String birthday, String birthyear )
     {
         if ( Log.DEBUG )
@@ -463,6 +561,16 @@ public class DbAdapter
     public ArrayList<SocialNetworkUser> fetchGoogleSyncResults()
     {
         return fetchSyncResults( HappyContactsDb.SyncResult.USER_ID + "=" + GOOGLE_CONTACT_UID + "" );
+    }
+
+    public Cursor fetchAllSyncResults()
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: call fetchAllSyncResults()" );
+        }
+        return mDb.query( HappyContactsDb.SyncResult.TABLE_NAME, HappyContactsDb.SyncResult.COLUMNS, null, null, null,
+                          null, null );
     }
 
     /**
@@ -621,10 +729,12 @@ public class DbAdapter
             Log.v( "DbAdapter: start fetchTodayNextEvents" );
         }
         String today = DateUtils.getToday( mCtx );
-        Cursor cursor = mDb.query( HappyContactsDb.NextEvents.TABLE_NAME, HappyContactsDb.NextEvents.COLUMNS,
-                                   HappyContactsDb.NextEvents.CHECKED_DATE + "='" + today + "'", null, null, null,
+        Cursor cursor = mDb.query( HappyContactsDb.NextEvents.TABLE_NAME,
+                                   HappyContactsDb.NextEvents.COLUMNS,
+                                   HappyContactsDb.NextEvents.CHECKED_DATE + "="
+                                       + DatabaseUtils.sqlEscapeString( today ), null, null, null,
                                    /* sort the text with its numeric value */
-                                   "cast("+HappyContactsDb.NextEvents.EVENT_WHEN+" as int)" );
+                                   "cast(" + HappyContactsDb.NextEvents.EVENT_WHEN + " as int)" );
 
         LinkedHashMap<String, ContactFeasts> events = null;
         if ( cursor.getCount() > 0 )
@@ -791,9 +901,9 @@ public class DbAdapter
         /* use order by name */
         Cursor cursor = mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] {
                                        HappyContactsDb.Feast.ID,
-                                       HappyContactsDb.Feast.NAME }, HappyContactsDb.Feast.DAY + "='" + day + "'",
-                                   null, null, null,
-                                   HappyContactsDb.Feast.NAME );
+                                       HappyContactsDb.Feast.NAME },
+                                   HappyContactsDb.Feast.DAY + "=" + DatabaseUtils.sqlEscapeString( day ), null,
+                                   null, null, HappyContactsDb.Feast.NAME );
 
         if ( Log.DEBUG )
         {
@@ -819,10 +929,10 @@ public class DbAdapter
          */
         Cursor cursor = mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] {
                                        HappyContactsDb.Feast.ID,
-                                       HappyContactsDb.Feast.DAY },
-                                   HappyContactsDb.Feast.NAME + " like '" + name + "'", null, null, null,
-                                   "substr(" + HappyContactsDb.Feast.DAY + ",4,2)||substr(" + HappyContactsDb.Feast.DAY
-                                       + ",1,2)" );
+                                       HappyContactsDb.Feast.DAY }, HappyContactsDb.Feast.NAME + " like "
+                                       + DatabaseUtils.sqlEscapeString( name ),
+                                   null, null, null, "substr(" + HappyContactsDb.Feast.DAY + ",4,2)||substr("
+                                       + HappyContactsDb.Feast.DAY + ",1,2)" );
         if ( Log.DEBUG )
         {
             Log.v( "DbAdapter: end fetchDayForName()" );
@@ -912,6 +1022,15 @@ public class DbAdapter
         return mDb.delete( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.ID + "=" + id, null ) > 0;
     }
 
+    public boolean deleteSyncResult( long id )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: call deleteSyncResult()" );
+        }
+        return mDb.delete( HappyContactsDb.SyncResult.TABLE_NAME, HappyContactsDb.SyncResult.ID + "=" + id, null ) > 0;
+    }
+
     public boolean deleteAllBlackList()
     {
         if ( Log.DEBUG )
@@ -950,7 +1069,8 @@ public class DbAdapter
             Log.v( "DbAdapter: call fetchWhiteListForNameDay() " + nameDay );
         }
         return mDb.query( HappyContactsDb.WhiteList.TABLE_NAME, HappyContactsDb.WhiteList.COLUMNS,
-                          HappyContactsDb.WhiteList.NAME_DAY + " = \"" + nameDay + "\"", null, null, null, null );
+                          HappyContactsDb.WhiteList.NAME_DAY + " = " + DatabaseUtils.sqlEscapeString( nameDay ), null,
+                          null, null, null );
     }
 
     public boolean insertWhiteList( Long contactId, String contactName, String nameDay )
