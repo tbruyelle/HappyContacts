@@ -424,7 +424,7 @@ public class DbAdapter
         }
         int res = fixId( phoneContact, HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.CONTACT_ID,
                          HappyContactsDb.BlackList.CONTACT_NAME );
-        if ( res < 0 )
+        if ( res < 1 )
         {
             Log.e( "Error while fixing blacklist id for contact " + phoneContact.name + ", update return " + res );
         }
@@ -477,7 +477,7 @@ public class DbAdapter
 
         int res = fixId( phoneContact, HappyContactsDb.WhiteList.TABLE_NAME, HappyContactsDb.WhiteList.CONTACT_ID,
                          HappyContactsDb.WhiteList.CONTACT_NAME );
-        if ( res < 0 )
+        if ( res < 1 )
         {
             Log.e( "Error while fixing blacklist id for contact " + phoneContact.name + ", update return " + res );
         }
@@ -500,7 +500,7 @@ public class DbAdapter
 
         int res = fixId( phoneContact, HappyContactsDb.SyncResult.TABLE_NAME, HappyContactsDb.SyncResult.CONTACT_ID,
                          HappyContactsDb.SyncResult.CONTACT_NAME );
-        if ( res != 1 )
+        if ( res < 1 )
         {
             Log.e( "Error while fixing SyncResult id for contact " + phoneContact.name + ", update return " + res );
         }
