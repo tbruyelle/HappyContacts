@@ -156,8 +156,8 @@ public class ReminderPopupActivity
                                                * we direct launch the compose tel activity */
                                               if ( mCurrentContactFeast.getPhones().size() == 1 )
                                               {
-                                                  composeTel( mCurrentContactFeast.getPhones().get( 0 ) );
                                                   updateCurrentContactFeast();
+                                                  composeTel( mCurrentContactFeast.getPhones().get( 0 ) );
                                                   nextOrExit();
                                               }
                                               else
@@ -171,8 +171,8 @@ public class ReminderPopupActivity
                                                * we direct launch the compose sms activity */
                                               if ( mCurrentContactFeast.getPhones().size() == 1 )
                                               {
-                                                  composeSms( mCurrentContactFeast.getPhones().get( 0 ) );
                                                   updateCurrentContactFeast();
+                                                  composeSms( mCurrentContactFeast.getPhones().get( 0 ) );                                                  
                                                   nextOrExit();
                                               }
                                               else
@@ -186,8 +186,8 @@ public class ReminderPopupActivity
                                                * we direct launch the mail app */
                                               if ( mCurrentContactFeast.getEmails().size() == 1 )
                                               {
-                                                  composeMail( mCurrentContactFeast.getEmails().get( 0 ) );
                                                   updateCurrentContactFeast();
+                                                  composeMail( mCurrentContactFeast.getEmails().get( 0 ) );                                                  
                                                   nextOrExit();
                                               }
                                               else
@@ -207,8 +207,8 @@ public class ReminderPopupActivity
                                   {
                                       public void onClick( DialogInterface dialog, int item )
                                       {
-                                          composeTel( mCurrentContactFeast.getPhones().get( item ) );
                                           updateCurrentContactFeast();
+                                          composeTel( mCurrentContactFeast.getPhones().get( item ) );                                          
                                           nextOrExit();
                                       }
                                   } );
@@ -222,8 +222,8 @@ public class ReminderPopupActivity
                                   {
                                       public void onClick( DialogInterface dialog, int item )
                                       {
-                                          composeSms( mCurrentContactFeast.getPhones().get( item ) );
                                           updateCurrentContactFeast();
+                                          composeSms( mCurrentContactFeast.getPhones().get( item ) );
                                           nextOrExit();
                                       }
                                   } );
@@ -236,8 +236,8 @@ public class ReminderPopupActivity
                                   {
                                       public void onClick( DialogInterface dialog, int item )
                                       {
-                                          composeMail( mCurrentContactFeast.getEmails().get( item ) );
                                           updateCurrentContactFeast();
+                                          composeMail( mCurrentContactFeast.getEmails().get( item ) );
                                           nextOrExit();
                                       }
                                   } );
