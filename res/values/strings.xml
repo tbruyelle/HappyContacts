@@ -204,4 +204,9 @@
 <string name="already_blacklisted">%s is already blacklisted !</string>
 <string name="action.displayContact">Display contact</string>
 <string name="action.addToBlackList">Add to black list</string>
+<string name="done">Done</string>
+<string name="clear">X</string>
+<string name="blacklist_pick_contact_label">Check contacts then click the Done button to add them in the blacklist</string>
+<string name="blacklisted">%d contact(s) blacklisted</string>
+<string name="hide">&gt;</string>
 </resources>
