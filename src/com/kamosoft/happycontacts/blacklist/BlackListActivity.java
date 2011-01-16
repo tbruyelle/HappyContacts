@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.Log;
-import com.kamosoft.happycontacts.PickContactsListActivity;
 import com.kamosoft.happycontacts.R;
 import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.dao.HappyContactsDb;
@@ -161,11 +160,9 @@ public class BlackListActivity
                 showDialog( DELETEALL_DIALOG_ID );
                 return true;
             case ADD_CONTACT_MENU_ID:
-                Intent intent = new Intent( this, PickContactsListActivity.class );
-                intent.putExtra( NEXT_ACTIVITY_INTENT_KEY, BlackListActivity.class );
-                intent.putExtra( PICK_CONTACT_LABEL_INTENT_KEY, getString( R.string.pick_contact_nickname ) );
-                intent.putExtra( CALLED_FOR_RESULT_INTENT_KEY, true );
-                startActivityForResult( intent, PICK_CONTACT_ACTIVITY_RESULT );
+                startActivity( new Intent( this, PickContactsBlackListActivity.class ) );
+                //                startActivityForResult( new Intent( this, PickContactsBlackListActivity.class ),
+                //                                        PICK_CONTACT_ACTIVITY_RESULT );
                 return true;
         }
         return super.onMenuItemSelected( featureId, item );
@@ -178,7 +175,7 @@ public class BlackListActivity
     protected void onActivityResult( int requestCode, int resultCode, Intent data )
     {
         super.onActivityResult( requestCode, resultCode, data );
-        
+
         if ( resultCode == Activity.RESULT_CANCELED )
         {
             return;
@@ -195,7 +192,7 @@ public class BlackListActivity
 
         switch ( requestCode )
         {
-            case PICK_CONTACT_ACTIVITY_RESULT:               
+            case PICK_CONTACT_ACTIVITY_RESULT:
                 long contactId = data.getLongExtra( CONTACTID_INTENT_KEY, -1 );
                 if ( contactId == -1 )
                 {

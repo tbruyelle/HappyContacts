@@ -1143,6 +1143,29 @@ public class DbAdapter
         return mCursor;
     }
 
+    public boolean isReallyBlackListed( long contactId )
+        throws SQLException
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start isReallyBlackListed()" );
+        }
+        Cursor c = mDb.query( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS,
+                              HappyContactsDb.BlackList.CONTACT_ID + "=" + contactId + " and "
+                                  + HappyContactsDb.BlackList.LAST_WISH_DATE + " is null", null, null, null, null, null );
+        if ( c.getCount() == 0 )
+        {
+            c.close();
+            return false;
+        }
+        c.close();
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: end isReallyBlackListed()" );
+        }
+        return true;
+    }
+
     public boolean isBlackListed( long contactId, String date )
         throws SQLException
     {

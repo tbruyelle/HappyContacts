@@ -17,6 +17,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
@@ -27,6 +29,12 @@ import com.kamosoft.happycontacts.R;
  */
 public final class AndroidUtils
 {
+    public static void hideKeyboard( Context context, EditText editText )
+    {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService( Context.INPUT_METHOD_SERVICE );
+        imm.hideSoftInputFromWindow( editText.getWindowToken(), 0 );
+    }
+
     public static int determineOsVersion()
     {
         String version = Build.VERSION.SDK;

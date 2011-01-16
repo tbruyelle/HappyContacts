@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="version">2.9.3</string>
+  <string name="version">2.9.4</string>
   <string name="app_name">HappyContacts</string>
   <string name="no_contacts">No contacts</string>
   <string name="exit">Exit</string>
@@ -204,4 +204,9 @@
 <string name="already_blacklisted">%s is already blacklisted !</string>
 <string name="action.displayContact">Display contact</string>
 <string name="action.addToBlackList">Add to black list</string>
+<string name="done">Done</string>
+<string name="clear">X</string>
+<string name="blacklist_pick_contact_label">Check contacts then click the Done button to add them in the blacklist</string>
+<string name="blacklisted">%d contact(s) blacklisted</string>
+<string name="hide">&gt;</string>
 </resources>

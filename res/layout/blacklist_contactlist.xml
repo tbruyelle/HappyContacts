@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="vertical">
+  <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
+    android:text="@string/blacklist_pick_contact_label" android:padding="5sp" />
+  <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+    <EditText android:layout_width="fill_parent" android:id="@+id/autocomplete"
+      android:hint="@string/type_to_filter" android:inputType="textFilter" android:maxLines="1"
+      android:layout_height="wrap_content" android:layout_weight="1" />
+    <Button android:text="@string/hide" android:layout_height="wrap_content"
+      android:layout_width="fill_parent" android:layout_weight="3" android:onClick="onHide" />
+    <Button android:text="@string/clear" android:layout_height="wrap_content"
+      android:layout_width="fill_parent" android:layout_weight="3" android:onClick="onClear" />
+  </LinearLayout>
+  <Button android:text="@string/done" android:id="@+id/done_button" android:layout_width="fill_parent"
+    android:layout_height="wrap_content" android:onClick="onDone" />
+
+  <TextView android:text="@string/contactlist" android:layout_height="wrap_content"
+    android:layout_width="fill_parent" android:textStyle="bold" android:textColor="#DDDDDD"
+    android:background="#666666" android:padding="4dip" android:layout_marginTop="4dip" />
+  <ListView android:id="@android:id/list" android:layout_width="fill_parent"
+    android:layout_height="wrap_content" android:choiceMode="multipleChoice" />
+</LinearLayout>
