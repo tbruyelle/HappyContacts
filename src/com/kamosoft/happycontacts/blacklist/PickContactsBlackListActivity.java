@@ -3,6 +3,8 @@
  */
 package com.kamosoft.happycontacts.blacklist;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.ListActivity;
 import android.database.Cursor;
@@ -11,11 +13,14 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.kamosoft.happycontacts.Log;
 import com.kamosoft.happycontacts.R;
@@ -32,13 +37,15 @@ import com.kamosoft.utils.AndroidUtils;
  */
 public class PickContactsBlackListActivity
     extends ListActivity
-    implements TextWatcher
+    implements TextWatcher, OnItemClickListener
 {
     private Cursor mCursor;
 
     private EditText mEditText;
 
     private DbAdapter mDb;
+
+    private ArrayList<Long> checkedContacts;
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -51,7 +58,8 @@ public class PickContactsBlackListActivity
         setContentView( R.layout.blacklist_contactlist );
         mEditText = (EditText) findViewById( R.id.autocomplete );
         mEditText.addTextChangedListener( this );
-
+        getListView().setOnItemClickListener( this );
+        checkedContacts = new ArrayList<Long>();
         mDb = new DbAdapter( this );
         mDb.open( true );
 
@@ -88,10 +96,12 @@ public class PickContactsBlackListActivity
 
         startManagingCursor( mCursor );
         String[] from = { ContactUtils.getNameColumn() };
-        int[] to = { R.id.contact_name };
-        SimpleCursorAdapter simpleAdapter = new SimpleCursorAdapter( this, R.layout.blacklist_contact_element, mCursor,
-                                                                     from, to );
+        int[] to = { android.R.id.text1 };
+        SimpleCursorAdapter simpleAdapter = new SimpleCursorAdapter( this,
+                                                                     android.R.layout.simple_list_item_multiple_choice,
+                                                                     mCursor, from, to );
         setListAdapter( simpleAdapter );
+        preCheck();
     }
 
     private Cursor filterOnlyNotBlacklisted( Cursor contactCursor )
@@ -126,15 +136,20 @@ public class PickContactsBlackListActivity
 
     public void onDone( View view )
     {
+        if ( mEditText.getText().length() > 0 )
+        {
+            //clearing the editText to make the container contains all the items
+            mEditText.getText().clear();
+        }
+
         ListView lv = getListView();
-        int listItemCount = lv.getChildCount();
+        int listItemCount = lv.getAdapter().getCount();
         DbAdapter db = new DbAdapter( this );
         db.open( false );
         int blackListed = 0;
         for ( int i = 0; i < listItemCount; i++ )
         {
-            CheckBox cbox = (CheckBox) ( (View) lv.getChildAt( i ) ).findViewById( R.id.contact_checkbox );
-            if ( cbox.isChecked() )
+            if ( lv.isItemChecked( i ) )
             {
                 mCursor.moveToPosition( i );
                 Long contactId = mCursor.getLong( mCursor.getColumnIndex( ContactUtils.getIdColumn() ) );
@@ -156,6 +171,21 @@ public class PickContactsBlackListActivity
         }
         setResult( Activity.RESULT_OK );
         finish();
+    }
+
+    public void preCheck()
+    {
+        ListView lv = getListView();
+        int listItemCount = lv.getAdapter().getCount();
+        for ( int i = 0; i < listItemCount; i++ )
+        {
+            mCursor.moveToPosition( i );
+            Long contactId = mCursor.getLong( mCursor.getColumnIndex( ContactUtils.getIdColumn() ) );
+            if ( checkedContacts.contains( contactId ) )
+            {
+                lv.setItemChecked( i, true );
+            }
+        }
     }
 
     /**
@@ -181,6 +211,27 @@ public class PickContactsBlackListActivity
     {
         String text = mEditText.getText().toString();
         fillList( text );
+    }
+
+    /**
+     * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+     */
+    @Override
+    public void onItemClick( AdapterView<?> parent, View view, int position, long id )
+    {
+        mCursor.moveToPosition( position );
+
+        Long contactId = mCursor.getLong( mCursor.getColumnIndex( ContactUtils.getIdColumn() ) );
+        CheckedTextView cbox = (CheckedTextView) view;
+        if ( cbox.isChecked() )
+        {
+            checkedContacts.remove( contactId );
+        }
+        else
+        {
+            checkedContacts.add( contactId );
+        }
+
     }
 
 }
