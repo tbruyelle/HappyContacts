@@ -379,7 +379,7 @@ public class HappyContactsPreferences
     @Override
     public boolean onKeyDown( int keyCode, KeyEvent event )
     {
-        if ( android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.ECLAIR
+        if ( AndroidUtils.determineOsVersion() < 5 //android.os.Build.VERSION_CODES.ECLAIR
             && keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0 )
         {
             // Take care of calling this method on earlier versions of
