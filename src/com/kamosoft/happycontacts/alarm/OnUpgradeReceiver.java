@@ -6,7 +6,6 @@ package com.kamosoft.happycontacts.alarm;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 
 import com.kamosoft.happycontacts.Constants;
 import com.kamosoft.happycontacts.Log;
@@ -20,7 +19,7 @@ public class OnUpgradeReceiver
     extends BroadcastReceiver
     implements Constants
 {
-    
+
     /**
      * @see android.content.BroadcastReceiver#onReceive(android.content.Context, android.content.Intent)
      */
@@ -31,11 +30,7 @@ public class OnUpgradeReceiver
         {
             Log.v( "OnUpgradeReceiver: start onReceive()" );
         }
-        SharedPreferences prefs = context.getSharedPreferences( APP_NAME, 0 );
-        if ( prefs.getBoolean( PREF_ALARM_STATUS, true ) )
-        {
-            AlarmController.startAlarm( context );
-        }
+        AlarmService.start( context );
         if ( Log.DEBUG )
         {
             Log.v( "OnUpgradeReceiver: end onReceive()" );

@@ -24,6 +24,7 @@ import com.kamosoft.happycontacts.R;
 import com.kamosoft.happycontacts.contacts.ContactUtils;
 import com.kamosoft.happycontacts.contacts.PhoneContact;
 import com.kamosoft.happycontacts.model.SocialNetworkUser;
+import com.kamosoft.utils.AndroidUtils;
 
 /**
  * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
@@ -157,13 +158,15 @@ public class GoogleContactSync
                     }
                     continue;
                 }
-                if ( phoneContact.name.equals( user.name ) )
+                String phoneContactName = AndroidUtils.replaceAccents( phoneContact.name ).toUpperCase();
+                String userName = AndroidUtils.replaceAccents( user.name ).toUpperCase();
+                if ( phoneContactName.equals( userName ) )
                 {
                     if ( Log.DEBUG )
                     {
                         Log.d( "GoogleContactsActivity: *** " + phoneContact.name + " match with " + user.name + " ***" );
                     }
-                    /* user google trouvé dans les contacts */
+                    /* user google trouve dans les contacts */
                     user.setContactId( phoneContact.id );
                     user.setContactName( phoneContact.name );
                     break;

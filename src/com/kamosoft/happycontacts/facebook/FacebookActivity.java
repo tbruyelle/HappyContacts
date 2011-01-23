@@ -49,13 +49,13 @@ public class FacebookActivity
     extends ListActivity
     implements Constants, android.content.DialogInterface.OnClickListener, SyncStorer
 {
-    private static final String FACEBOOK_API_KEY = "8e9a98e18c9e1c174e6c8904d9ed350e";
+    private static final String FACEBOOK_APP_ID = "105507002814035";
 
-    @SuppressWarnings("unused")
-    private static final String FAsCEBOOK_SECRET_API_KEY = "6ad543258350e403b907878a8f4b5308";
-
-    @SuppressWarnings("unused")
-    private static final String FACEBOOK_API_NAME = "HappyContacts";
+    //    private static final String FACEBOOK_API_KEY = "8e9a98e18c9e1c174e6c8904d9ed350e";
+    //
+    //    private static final String FAsCEBOOK_SECRET_API_KEY = "6ad543258350e403b907878a8f4b5308";
+    //
+    //    private static final String FACEBOOK_API_NAME = "HappyContacts";
 
     private static final int START_SYNC_MENU_ID = Menu.FIRST;
 
@@ -108,26 +108,11 @@ public class FacebookActivity
 
         mDb = new DbAdapter( this );
 
-        if ( Log.DEBUG )
-        {
-            Log.v( "FaceBookActivity: onCreate() end" );
-        }
-    }
-
-    @Override
-    protected void onResume()
-    {
-        if ( Log.DEBUG )
-        {
-            Log.v( "FaceBookActivity: start onResume" );
-        }
-        super.onResume();
-
         mSyncCounter = (TextView) findViewById( R.id.sync_counter );
 
         mDb.open( false );
 
-        mFacebook = new Facebook();
+        mFacebook = new Facebook( FACEBOOK_APP_ID );
         mHandler = new Handler();
 
         Button syncButton = (Button) findViewById( R.id.start_sync_button );
@@ -140,8 +125,9 @@ public class FacebookActivity
         } );
 
         SessionStore.restore( mFacebook, this );
-        SessionEvents.addAuthListener( new SampleAuthListener() );
-        SessionEvents.addLogoutListener( new SampleLogoutListener() );
+        SessionListener sessionListener = new SessionListener();
+        SessionEvents.addAuthListener( sessionListener );
+        SessionEvents.addLogoutListener( sessionListener );
 
         if ( mFacebook.isSessionValid() )
         {
@@ -157,11 +143,12 @@ public class FacebookActivity
             {
                 Log.v( "FaceBookActivity: onResume start login" );
             }
-            mFacebook.authorize( this, FACEBOOK_API_KEY, mPermissions, new LoginDialogListener() );
+            mFacebook.authorize( this, mPermissions, new LoginDialogListener() );
         }
+
         if ( Log.DEBUG )
         {
-            Log.v( "FaceBookActivity: end onResume" );
+            Log.v( "FaceBookActivity: onCreate() end" );
         }
     }
 
@@ -184,28 +171,18 @@ public class FacebookActivity
         new SocialUserDialog( this, user, mDb ).show();
     }
 
-    //
-    //    private int getPositionFromUserId( String userId )
-    //    {
-    //        int position = 0;
-    //        for ( SocialNetworkUser user : mUserList )
-    //        {
-    //            if ( user.uid.equals( userId ) )
-    //            {
-    //                return position;
-    //            }
-    //            position++;
-    //        }
-    //        return 0;
-    //    }
-
     /**
      * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
      */
     @Override
     protected void onActivityResult( int requestCode, int resultCode, Intent data )
     {
+        if ( Log.DEBUG )
+        {
+            Log.v( "FaceBookActivity: start onActivityResult" );
+        }
         super.onActivityResult( requestCode, resultCode, data );
+        mFacebook.authorizeCallback( requestCode, resultCode, data );
 
         if ( resultCode == Activity.RESULT_CANCELED )
         {
@@ -231,6 +208,10 @@ public class FacebookActivity
                                            data.getStringExtra( CONTACTNAME_INTENT_KEY ) ), Toast.LENGTH_LONG ).show();
                 setIntent( data );
                 break;
+        }
+        if ( Log.DEBUG )
+        {
+            Log.v( "FaceBookActivity: end onActivityResult" );
         }
     }
 
@@ -433,15 +414,15 @@ public class FacebookActivity
         }
     }
 
-    public class SampleAuthListener
-        implements AuthListener
+    private class SessionListener
+        implements AuthListener, LogoutListener
     {
-
         public void onAuthSucceed()
         {
             Log.d( "You have logged in! " );
             Toast.makeText( FacebookActivity.this, FacebookActivity.this.getText( R.string.login_thankyou ),
                             Toast.LENGTH_SHORT ).show();
+            SessionStore.save( mFacebook, FacebookActivity.this );
         }
 
         public void onAuthFail( String error )
@@ -449,12 +430,9 @@ public class FacebookActivity
             Log.e( "Login Failed: " + error );
             Toast.makeText( FacebookActivity.this, FacebookActivity.this.getText( R.string.login_ko ),
                             Toast.LENGTH_SHORT ).show();
+            FacebookActivity.this.finish();
         }
-    }
 
-    public class SampleLogoutListener
-        implements LogoutListener
-    {
         public void onLogoutBegin()
         {
             Log.d( "Logging out..." );
@@ -498,8 +476,6 @@ public class FacebookActivity
         public void onComplete( Bundle values )
         {
             SessionEvents.onLoginSuccess();
-            SessionStore.save( mFacebook, FacebookActivity.this );
-
             fillList();
         }
 
@@ -518,5 +494,4 @@ public class FacebookActivity
             SessionEvents.onLoginError( "Action Canceled" );
         }
     }
-
 }
