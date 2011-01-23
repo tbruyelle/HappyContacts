@@ -157,7 +157,7 @@ public class FacebookContactSync
                     {
                         Log.d( "FacebookContactSync: *** " + phoneContact.name + " match with " + user.name + " ***" );
                     }
-                    /* user FB trouvé dans les contacts */
+                    /* user FB trouvï¿½ dans les contacts */
                     user.setContactId( phoneContact.id );
                     user.setContactName( phoneContact.name );
                     break;
