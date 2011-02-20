@@ -56,7 +56,7 @@ public final class R {
         public static final int Password=0x7f0a0012;
         public static final int SignIn=0x7f0a0013;
         public static final int about_content=0x7f0a0001;
-        public static final int add_whitelist=0x7f0a003f;
+        public static final int add_whitelist=0x7f0a0042;
         public static final int autocomplete=0x7f0a000c;
         public static final int backupDb=0x7f0a0015;
         public static final int birthday_birthday_date=0x7f0a0009;
@@ -71,6 +71,7 @@ public final class R {
         public static final int cancel_button=0x7f0a002d;
         public static final int contact_name=0x7f0a000e;
         public static final int contact_photo=0x7f0a001c;
+        public static final int date=0x7f0a0041;
         public static final int dateback=0x7f0a0029;
         public static final int datenext=0x7f0a002a;
         public static final int done_button=0x7f0a000d;
@@ -92,6 +93,7 @@ public final class R {
         public static final int mail_template_body=0x7f0a0024;
         public static final int mail_template_subject=0x7f0a0023;
         public static final int nameday=0x7f0a0040;
+        public static final int nameday_layout=0x7f0a003f;
         public static final int nameday_title=0x7f0a0027;
         public static final int never_button=0x7f0a0035;
         public static final int nextevents_counter=0x7f0a002b;
@@ -157,8 +159,9 @@ public final class R {
         public static final int socialuserdialog=0x7f030024;
         public static final int testapp=0x7f030025;
         public static final int testapp_element=0x7f030026;
-        public static final int whitelist=0x7f030027;
-        public static final int whitelist_element=0x7f030028;
+        public static final int updatenamedaydialog=0x7f030027;
+        public static final int whitelist=0x7f030028;
+        public static final int whitelist_element=0x7f030029;
     }
     public static final class raw {
         public static final int db_create=0x7f050000;
@@ -173,9 +176,11 @@ public final class R {
         public static final int add=0x7f07004a;
         public static final int add_birthday=0x7f070062;
         public static final int add_whitelist=0x7f070057;
+        public static final int addnameday=0x7f0700c9;
         public static final int age=0x7f07007a;
         public static final int age_unknow=0x7f07007b;
         public static final int already_blacklisted=0x7f0700be;
+        public static final int already_exists=0x7f0700d1;
         public static final int app_name=0x7f070001;
         public static final int back_to_main=0x7f070039;
         public static final int backupDb=0x7f0700ad;
@@ -193,6 +198,8 @@ public final class R {
         public static final int cancel=0x7f07002e;
         public static final int check_contacts=0x7f070026;
         public static final int clear=0x7f0700c2;
+        public static final int clone_nameday=0x7f0700d3;
+        public static final int confirm_delete=0x7f0700d6;
         public static final int confirm_delete_birthday=0x7f070067;
         public static final int confirm_delete_blacklist=0x7f070053;
         public static final int confirm_delete_whitelist=0x7f070052;
@@ -216,6 +223,7 @@ public final class R {
         public static final int date_list_title=0x7f07000e;
         public static final int dateback=0x7f070048;
         public static final int datenext=0x7f070049;
+        public static final int day=0x7f0700c6;
         public static final int default_mail_birthday_body_template=0x7f070037;
         public static final int default_mail_birthday_subject_template=0x7f070036;
         public static final int default_mail_body_template=0x7f070034;
@@ -223,19 +231,25 @@ public final class R {
         public static final int default_sms_birthday_body_template=0x7f070038;
         public static final int default_sms_body_template=0x7f070035;
         public static final int delete=0x7f07006f;
+        public static final int delete_nameday=0x7f0700d4;
         public static final int deleteall=0x7f070054;
         public static final int done=0x7f0700c1;
         public static final int empty_name=0x7f07004e;
         public static final int end_sync=0x7f070077;
         public static final int enter_date=0x7f070025;
         public static final int enter_name=0x7f07002c;
+        public static final int enter_nameday=0x7f0700d5;
+        public static final int error_add_nameday=0x7f0700cd;
         public static final int error_db=0x7f0700bd;
+        public static final int error_delete_nameday=0x7f0700cf;
         public static final int error_select_contact=0x7f0700bc;
+        public static final int error_update_nameday=0x7f0700cb;
         public static final int exit=0x7f070003;
         public static final int facebook_login_error=0x7f07007c;
         public static final int facebooklogin=0x7f07005f;
         public static final int facebooklogin_urlError=0x7f07005d;
         public static final int feast_counter=0x7f070040;
+        public static final int fix_nameday=0x7f0700d2;
         public static final int friend_no_birthday=0x7f070087;
         public static final int google_birthdaylist=0x7f070099;
         public static final int happybirthday_name=0x7f070072;
@@ -243,6 +257,7 @@ public final class R {
         public static final int happyfeast_name=0x7f070041;
         public static final int hide=0x7f0700c5;
         public static final int ignore_birthyear=0x7f070092;
+        public static final int ignore_year_field=0x7f0700ca;
         public static final int in_x_days=0x7f0700ab;
         public static final int inserting_birthdays=0x7f070079;
         public static final int inserting_birthdays_done=0x7f070093;
@@ -268,6 +283,7 @@ public final class R {
         public static final int mail_birthday_template_text=0x7f070073;
         public static final int mail_template_subject=0x7f07003b;
         public static final int mail_template_text=0x7f07003c;
+        public static final int month=0x7f0700c7;
         public static final int name_list_title=0x7f07000d;
         public static final int nameday=0x7f07009e;
         public static final int namedaylist=0x7f07008a;
@@ -336,6 +352,9 @@ public final class R {
         public static final int socialuserdialog_title=0x7f070095;
         public static final int start_sync=0x7f070065;
         public static final int store_birthdays=0x7f070066;
+        public static final int success_add_nameday=0x7f0700ce;
+        public static final int success_delete_nameday=0x7f0700d0;
+        public static final int success_update_nameday=0x7f0700cc;
         public static final int sync_counter=0x7f07008d;
         public static final int sync_facebook=0x7f070063;
         public static final int sync_friends=0x7f070076;
@@ -357,6 +376,7 @@ public final class R {
         public static final int unlink_contact=0x7f07007e;
         public static final int unlink_contact_useless=0x7f070083;
         public static final int update=0x7f070070;
+        public static final int updatenameday=0x7f0700c8;
         public static final int updating_data=0x7f070028;
         public static final int version=0x7f070000;
         public static final int whattodo=0x7f07000a;

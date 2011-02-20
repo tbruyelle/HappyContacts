@@ -1150,9 +1150,10 @@ public class DbAdapter
         {
             Log.v( "DbAdapter: start isReallyBlackListed()" );
         }
-        Cursor c = mDb.query( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS,
-                              HappyContactsDb.BlackList.CONTACT_ID + "=" + contactId + " and "
-                                  + HappyContactsDb.BlackList.LAST_WISH_DATE + " is null", null, null, null, null, null );
+        Cursor c = mDb
+            .query( HappyContactsDb.BlackList.TABLE_NAME, HappyContactsDb.BlackList.COLUMNS,
+                    HappyContactsDb.BlackList.CONTACT_ID + "=" + contactId + " and "
+                        + HappyContactsDb.BlackList.LAST_WISH_DATE + " is null", null, null, null, null, null );
         if ( c.getCount() == 0 )
         {
             c.close();
@@ -1215,5 +1216,71 @@ public class DbAdapter
         {
             return insertBlackList( contactId, contactName, date );
         }
+    }
+
+    /**
+     * @param mNameDayId
+     * @param date
+     */
+    public boolean updateNameDay( long id, String date )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "Dbadapter: call updateNameDay for nameDay " + id + " with date " + date );
+        }
+        ContentValues args = new ContentValues();
+        args.put( HappyContactsDb.Feast.DAY, date );
+        args.put( HappyContactsDb.Feast.SOURCE, "custom" );
+        return mDb.update( HappyContactsDb.Feast.TABLE_NAME, args, HappyContactsDb.Feast.ID + "=" + id, null ) == 1;
+    }
+
+    /**
+     * @param id
+     */
+    public boolean deleteNameDay( long id )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "Dbadapter: call deleteNameDay for nameDay " + id );
+        }
+        return mDb.delete( HappyContactsDb.Feast.TABLE_NAME, HappyContactsDb.Feast.ID + "=" + id, null ) == 1;
+    }
+
+    public boolean insertNameDay( String nameDay, String date )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "Dbadapter: call insertNameDay for nameDay " + nameDay + " with date " + date );
+        }
+        ContentValues args = new ContentValues();
+        args.put( HappyContactsDb.Feast.DAY, date );
+        args.put( HappyContactsDb.Feast.NAME, nameDay );
+        args.put( HappyContactsDb.Feast.SOURCE, "custom" );
+        return mDb.insert( HappyContactsDb.Feast.TABLE_NAME, null, args ) > 1;
+    }
+
+    /**
+     * Return the names for a given day
+     * @param day format dd/MM
+     * @return
+     */
+    public boolean existsNameDay( String name, String day )
+    {
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: start ifExistsNamesForDay()" );
+        }
+        /* use order by name */
+        Cursor cursor = mDb.query( HappyContactsDb.Feast.TABLE_NAME, new String[] { HappyContactsDb.Feast.ID },
+                                   HappyContactsDb.Feast.DAY + "=" + DatabaseUtils.sqlEscapeString( day ) + " and "
+                                       + HappyContactsDb.Feast.NAME + "=" + DatabaseUtils.sqlEscapeString( name ),
+                                   null, null, null, null );
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        if ( Log.DEBUG )
+        {
+            Log.v( "DbAdapter: end fetchNameForDay()" );
+        }
+        return exists;
     }
 }

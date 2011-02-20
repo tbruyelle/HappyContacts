@@ -15,8 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.DatePicker;
 
-import com.kamosoft.happycontacts.dao.DataManager;
-
 /**
  * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
  *
@@ -77,8 +75,11 @@ public abstract class DateNameListOptionsMenu
         return true;
     }
 
+    /**
+     * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+     */
     @Override
-    public boolean onMenuItemSelected( int featureId, MenuItem item )
+    public boolean onOptionsItemSelected( MenuItem item )
     {
         switch ( item.getItemId() )
         {
@@ -99,8 +100,8 @@ public abstract class DateNameListOptionsMenu
                 startActivity( intent2 );
                 return true;
         }
-        return super.onMenuItemSelected( featureId, item );
-    }
+        return super.onOptionsItemSelected( item );
+    }   
 
     /**
      * @see android.app.Activity#onCreateDialog(int)

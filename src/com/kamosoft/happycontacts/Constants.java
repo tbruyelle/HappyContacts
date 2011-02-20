@@ -58,6 +58,10 @@ public interface Constants
     public static final String PICK_NAMEDAY_LABEL_INTENT_KEY = "pickNameDayLabel";
 
     public static final String CALLED_FOR_RESULT_INTENT_KEY = "calledForResult";
+    
+    public static final String NAMEDAY_INTENT_KEY = "nameDay";
+
+    public static final String NAMEDAYID_INTENT_KEY = "nameDayId";
 
     /* contact methods in the string array 'contactmethods_items' */
     public static final int CALL_ITEM_INDEX = 0;

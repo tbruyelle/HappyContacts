@@ -15,9 +15,9 @@
   <string name="last_wish_date">Dernière date souhaitée : %s</string>
   <string name="name_list_title">Liste des fêtes du %s</string>
   <string name="date_list_title">Jour(s) de fête pour %s</string>
-  <string name="pref_feast_list">Parcourir les fêtes</string>
+  <string name="pref_feast_list">Parcourir/Modifier les fêtes</string>
   <string name="no_feast">Pas de fête pour ce jour.</string>
-  <string name="pref_feast_list_summary">Afficher les fêtes par jour et par prénom</string>
+  <string name="pref_feast_list_summary">Afficher ou modifier les fêtes par jour et par prénom</string>
   <string name="pref_templates_cat">Modèles</string>
   <string name="pref_template_sms">Modèles SMS</string>
   <string name="pref_template_sms_summary">Contenu du SMS à envoyer</string>
@@ -216,4 +216,21 @@
   <string name="blacklist_pick_contact_label">Cocher les contacts puis cliquer sur Terminé pour les ajouter à la liste noire</string>
   <string name="blacklisted">%d contact(s) ajouté(s) à la liste noire</string>
   <string name="hide">&gt;</string>
+  <string name="day">Day</string>
+  <string name="month">Month</string>
+  <string name="updatenameday">Corriger le jour de fête de %s</string>
+  <string name="addnameday">Ajouter une nouvelle fête</string>
+  <string name="ignore_year_field">Inutile d\'utiliser le champs des années</string>
+  <string name="error_update_nameday">Erreur pendant la mise à jour de la fête</string>
+  <string name="success_update_nameday">Fête mise à jour avec succès</string>
+  <string name="error_add_nameday">Erreur pendant l\'ajout d\'une fête</string>
+  <string name="success_add_nameday">Fête ajoutée avec succès</string>
+  <string name="error_delete_nameday">Erreur pendant la suppression d\'une fête</string>
+  <string name="success_delete_nameday">Fête supprimée avec succès</string>
+  <string name="already_exists">Cette fête existe déjà !</string>
+  <string name="fix_nameday">Corriger</string>
+  <string name="clone_nameday">Cloner</string>
+  <string name="delete_nameday">Supprimer</string>
+  <string name="enter_nameday">Fête : </string>
+  <string name="confirm_delete">Confirmer la suppression ?</string>
 </resources>
