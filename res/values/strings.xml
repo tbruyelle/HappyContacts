@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="version">2.9.4</string>
+  <string name="version">2.9.6</string>
   <string name="app_name">HappyContacts</string>
   <string name="no_contacts">No contacts</string>
   <string name="exit">Exit</string>
@@ -15,9 +15,9 @@
   <string name="last_wish_date">Last wished date : %s</string>
   <string name="name_list_title">Name days list on %s</string>
   <string name="date_list_title">Name day(s) for %s</string>
-  <string name="pref_feast_list">Browse name days</string>
+  <string name="pref_feast_list">Browse/Edit name days</string>
   <string name="no_feast">No name day this day</string>
-  <string name="pref_feast_list_summary">Display the name days per name or per day</string>
+  <string name="pref_feast_list_summary">Display or edit the name days per name or per day</string>
   <string name="pref_templates_cat">Templates</string>
   <string name="pref_template_sms">SMS templates</string>
   <string name="pref_template_sms_summary">SMS body to send</string>
@@ -200,13 +200,31 @@
   <string name="data_backup_ok">Backup successful !</string>
   <string name="data_backup_ko">Backup failed !</string>
   <string name="error_select_contact">Bad contact id !</string>
-<string name="error_db">Database error ! Sorry...</string>
-<string name="already_blacklisted">%s is already blacklisted !</string>
-<string name="action.displayContact">Display contact</string>
-<string name="action.addToBlackList">Add to black list</string>
-<string name="done">Done</string>
-<string name="clear">X</string>
-<string name="blacklist_pick_contact_label">Check contacts then click the Done button to add them in the blacklist</string>
-<string name="blacklisted">%d contact(s) blacklisted</string>
-<string name="hide">&gt;</string>
+  <string name="error_db">Database error ! Sorry...</string>
+  <string name="already_blacklisted">%s is already blacklisted !</string>
+  <string name="action.displayContact">Display contact</string>
+  <string name="action.addToBlackList">Add to black list</string>
+  <string name="done">Done</string>
+  <string name="clear">X</string>
+  <string name="blacklist_pick_contact_label">Check contacts then click the Done button to add them in the blacklist
+  </string>
+  <string name="blacklisted">%d contact(s) blacklisted</string>
+  <string name="hide">&gt;</string>
+  <string name="day">Day</string>
+  <string name="month">Month</string>
+  <string name="updatenameday">Update %s name day date</string>
+  <string name="addnameday">Add a new name day</string>
+  <string name="ignore_year_field">you don\'t need to use the year field</string>
+  <string name="error_update_nameday">Error while updating name day</string>
+  <string name="success_update_nameday">Name day successfully updated</string>
+  <string name="error_add_nameday">Error while adding name day</string>
+  <string name="success_add_nameday">Name day successfully added</string>
+  <string name="error_delete_nameday">Error while deleting name day</string>
+  <string name="success_delete_nameday">Name day successfully deleted</string>
+  <string name="already_exists">This name day already exists</string>
+  <string name="fix_nameday">Fix</string>
+  <string name="clone_nameday">Clone</string>
+  <string name="delete_nameday">Delete</string>
+  <string name="enter_nameday">Name day : </string>
+  <string name="confirm_delete">Confirm delete ?</string>
 </resources>

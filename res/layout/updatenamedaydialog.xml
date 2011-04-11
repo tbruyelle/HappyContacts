@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical"
+  android:gravity="center">
+
+  <LinearLayout android:id="@+id/nameday_layout" android:orientation="horizontal"
+    android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="0dp"
+    android:paddingTop="5dp" android:paddingRight="0dp" android:gravity="center"
+    android:padding="5dip">
+    <TextView android:text="@string/enter_nameday" android:layout_height="wrap_content"
+      android:layout_width="wrap_content" />
+    <EditText android:id="@+id/nameday" android:layout_height="wrap_content"
+      android:layout_width="fill_parent" android:paddingLeft="5dip" />
+  </LinearLayout>
+
+  <TextView android:text="@string/ignore_year_field" android:layout_gravity="center_horizontal"
+    android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+  <DatePicker android:id="@+id/date" android:layout_height="wrap_content"
+    android:layout_width="wrap_content" android:paddingBottom="5dip" android:paddingTop="2dip" />
+
+ 
+  <!-- <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
+    android:layout_height="wrap_content" android:paddingLeft="0dp" android:paddingTop="5dp"
+    android:paddingRight="0dp" android:gravity="center">
+    <TextView android:text="@string/month" android:layout_height="wrap_content"
+      android:layout_width="wrap_content" android:paddingRight="5dip" />
+    <EditText android:id="@+id/month" android:layout_height="wrap_content"
+      android:layout_width="50dip" />
+  </LinearLayout>
+  -->
+  <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
+    android:layout_height="wrap_content" android:paddingLeft="0dp" android:paddingTop="5dp"
+    android:paddingRight="0dp" android:background="@android:color/darker_gray">
+    <Button android:text="@string/ok" android:layout_width="wrap_content"
+      android:layout_height="wrap_content" android:layout_weight="1" android:id="@+id/ok_button" />
+    <Button android:text="@string/cancel" android:layout_width="wrap_content"
+      android:layout_height="wrap_content" android:layout_weight="1" android:id="@+id/cancel_button" />
+  </LinearLayout>
+</LinearLayout>

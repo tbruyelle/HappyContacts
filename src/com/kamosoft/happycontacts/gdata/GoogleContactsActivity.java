@@ -518,4 +518,14 @@ public class GoogleContactsActivity
         }
     }
 
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        if ( mDb != null )
+        {
+            mDb.close();
+        }
+    }
+
 }

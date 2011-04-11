@@ -455,10 +455,13 @@ public class FacebookActivity
     private class LogoutRequestListener
         extends BaseRequestListener
     {
-
-        public void onComplete( String response )
+        /* (non-Javadoc)
+         * @see com.facebook.android.AsyncFacebookRunner.RequestListener#onComplete(java.lang.String, java.lang.Object)
+         */
+        @Override
+        public void onComplete( String response, Object state )
         {
-            // callback should be run in the original thread, 
+         // callback should be run in the original thread, 
             // not the background thread
             mHandler.post( new Runnable()
             {
