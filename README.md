@@ -1,5 +1,5 @@
-Dependecies
-=======
+Dependencies
+==========
 
 * libs directory
 * facebook for android : you need to clone the repo https://github.com/facebook/facebook-android-sdk/tree/master/facebook
