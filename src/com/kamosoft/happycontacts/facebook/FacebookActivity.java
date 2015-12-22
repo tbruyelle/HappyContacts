@@ -40,8 +40,6 @@ import com.kamosoft.happycontacts.sync.StoreAsyncTask;
 import com.kamosoft.happycontacts.sync.SyncStorer;
 
 /**
- * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
- *
  * @since 26 mars 2010
  * @version $Id$
  */

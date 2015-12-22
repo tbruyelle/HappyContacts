@@ -1,6 +1,3 @@
-/**
- * Copyright - Accor - All Rights Reserved www.accorhotels.com
- */
 package com.kamosoft.utils;
 
 import java.util.Calendar;
@@ -13,7 +10,6 @@ import android.text.format.DateFormat;
 import com.kamosoft.happycontacts.R;
 
 /**
- * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
  * created 21 déc. 2010
  * @since 
  * @version $Id$

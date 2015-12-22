@@ -18,8 +18,6 @@ import com.kamosoft.happycontacts.dao.HappyContactsDb;
 
 /**
  * used to display the date according to the used locale
- * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
- *
  * @since 22 janv. 2010
  * @version $Id$
  */

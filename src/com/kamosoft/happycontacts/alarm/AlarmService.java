@@ -1,6 +1,3 @@
-/**
- * Copyright - Accor - All Rights Reserved www.accorhotels.com
- */
 package com.kamosoft.happycontacts.alarm;
 
 import android.app.Service;
@@ -12,7 +9,6 @@ import android.os.IBinder;
 import com.kamosoft.happycontacts.Constants;
 
 /**
- * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
  * created 18 janv. 2011
  * @since 
  * @version $Id$

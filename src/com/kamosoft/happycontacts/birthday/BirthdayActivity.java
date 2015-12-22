@@ -30,8 +30,6 @@ import com.kamosoft.happycontacts.facebook.FacebookActivity;
 import com.kamosoft.happycontacts.gdata.GoogleContactsActivity;
 
 /**
- * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
- *
  * @since 23 avr. 2010
  * @version $Id$
  */

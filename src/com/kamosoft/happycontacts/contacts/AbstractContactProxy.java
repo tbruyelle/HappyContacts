@@ -9,8 +9,6 @@ import android.content.Context;
 import android.database.Cursor;
 
 /**
- * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
- *
  * @since 12 juil. 2010
  * @version $Id$
  */

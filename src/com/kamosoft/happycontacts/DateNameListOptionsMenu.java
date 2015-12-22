@@ -16,8 +16,6 @@ import android.view.MenuItem;
 import android.widget.DatePicker;
 
 /**
- * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
- *
  * @since 8 janv. 2010
  * @version $Id$
  */

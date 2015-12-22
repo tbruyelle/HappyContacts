@@ -18,8 +18,6 @@ import com.kamosoft.happycontacts.dao.DbAdapter;
 import com.kamosoft.happycontacts.model.SocialNetworkUser;
 
 /**
- * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
- *
  * @since 10 mai 2010
  * @version $Id$
  */

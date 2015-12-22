@@ -23,8 +23,6 @@ import com.kamosoft.happycontacts.dao.HappyContactsDb;
 
 /**
  * List of contacts linked with a nameday (usefull for contact with nickname)
- * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
- *
  * @since 9 mars 2010
  * @version $Id$
  */

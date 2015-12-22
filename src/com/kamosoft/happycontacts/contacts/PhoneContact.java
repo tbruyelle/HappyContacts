@@ -4,8 +4,6 @@
 package com.kamosoft.happycontacts.contacts;
 
 /**
- * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
- *
  * @since 3 mai 2010
  * @version $Id$
  */

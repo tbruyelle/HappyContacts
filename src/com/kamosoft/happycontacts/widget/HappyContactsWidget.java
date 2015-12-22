@@ -1,6 +1,3 @@
-/**
- * Copyright - Accor - All Rights Reserved www.accorhotels.com
- */
 package com.kamosoft.happycontacts.widget;
 
 import java.util.LinkedHashMap;
@@ -27,7 +24,6 @@ import com.kamosoft.happycontacts.model.ContactFeasts;
 import com.kamosoft.utils.DateUtils;
 
 /**
- * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
  * created 21 nov. 2010
  * @since 
  * @version $Id$

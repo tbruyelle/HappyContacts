@@ -11,8 +11,6 @@ import com.kamosoft.happycontacts.R;
 import com.kamosoft.happycontacts.sync.SyncStorer;
 
 /**
- * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
- *
  * @since 20 mai 2010
  * @version $Id$
  */

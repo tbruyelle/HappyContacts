@@ -1,13 +1,9 @@
-/**
- * Copyright - Accor - All Rights Reserved www.accorhotels.com
- */
 package com.kamosoft.happycontacts.blacklist;
 
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
 /**
- * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
  * created 26 déc. 2010
  * @since 
  * @version $Id$

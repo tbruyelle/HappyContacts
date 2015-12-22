@@ -6,8 +6,6 @@ package com.kamosoft.happycontacts.model;
 import java.io.Serializable;
 
 /**
- * @author <a href="mailto:thomas.bruyelle@accor.com">tbruyelle</a>
- *
  * @since 21 avr. 2010
  * @version $Id$
  */
